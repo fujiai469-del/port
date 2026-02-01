@@ -145,6 +145,13 @@
       color: var(--primary-teal);
     }
 
+    .data-timestamp {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
     /* Main Content */
     .main-content {
       max-width: 1400px;
@@ -191,9 +198,25 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 6px 0;
+      padding: 6px 8px;
       font-size: 12px;
       color: var(--primary-teal);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .sector-legend-item:hover {
+      background: rgba(38, 70, 83, 0.05);
+    }
+
+    .sector-legend-item.active {
+      background: var(--accent-gold);
+      font-weight: 600;
+    }
+
+    .sector-legend-item.dimmed {
+      opacity: 0.4;
     }
 
     .sector-legend-dot {
@@ -434,6 +457,218 @@
       text-align: right;
     }
 
+    /* Ranking View */
+    .ranking-table-container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(38, 70, 83, 0.08);
+      overflow: hidden;
+    }
+
+    .ranking-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .ranking-table th {
+      background: var(--primary-teal);
+      color: #fff;
+      padding: 16px 20px;
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .ranking-table td {
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(38, 70, 83, 0.08);
+      background: #fff;
+      font-size: 13px;
+    }
+
+    .ranking-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .ranking-table tr:hover td {
+      background: rgba(233, 196, 106, 0.1);
+    }
+
+    .ranking-rank {
+      font-weight: 700;
+      color: var(--primary-teal);
+      font-size: 14px;
+    }
+
+    .ranking-rank.top3 {
+      color: var(--accent-gold);
+    }
+
+    .weight-cell {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .weight-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: rgba(38, 70, 83, 0.1);
+      border-radius: 0 4px 4px 0;
+      transition: width 0.5s ease;
+    }
+
+    .weight-bar.accent {
+      background: rgba(42, 157, 143, 0.15);
+    }
+
+    .weight-value {
+      position: relative;
+      z-index: 1;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .ranking-funds-count {
+      font-size: 11px;
+      color: var(--teal-light);
+      background: rgba(42, 157, 143, 0.1);
+      padding: 3px 8px;
+      border-radius: 10px;
+    }
+
+    .ranking-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--primary-teal);
+      margin-bottom: 20px;
+    }
+
+    /* Overlap Analysis */
+    .overlap-controls {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .overlap-select-group {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .overlap-select-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary-teal);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .overlap-select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid rgba(38, 70, 83, 0.15);
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary-teal);
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.3s;
+      outline: none;
+    }
+
+    .overlap-select:focus {
+      border-color: var(--teal-light);
+      box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.1);
+    }
+
+    .overlap-vs {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      padding-top: 20px;
+    }
+
+    .overlap-result {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 16px rgba(38, 70, 83, 0.08);
+    }
+
+    .overlap-summary {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .overlap-stat {
+      background: var(--bg-sand);
+      border-radius: 12px;
+      padding: 16px 24px;
+      text-align: center;
+    }
+
+    .overlap-stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary-teal);
+    }
+
+    .overlap-stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--teal-light);
+      margin-top: 4px;
+    }
+
+    .overlap-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .overlap-table th {
+      background: var(--primary-teal);
+      color: #fff;
+      padding: 14px 16px;
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .overlap-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(38, 70, 83, 0.08);
+      font-size: 13px;
+    }
+
+    .overlap-table tr:hover td {
+      background: rgba(233, 196, 106, 0.1);
+    }
+
+    .overlap-empty {
+      text-align: center;
+      padding: 40px;
+      color: var(--primary-teal);
+      opacity: 0.5;
+      font-size: 14px;
+    }
+
     /* Empty State */
     .empty-state {
       display: flex;
@@ -548,6 +783,8 @@
   <script type="text/babel">
     const FUNDS_DATA = [{"name":"Sharp Capital","holdings":[{"ticker":"NU","name":"Nu Holdings Ltd.","percent":69.2},{"ticker":"INTR","name":"Inter & Co, Inc.","percent":15.9},{"ticker":"STNE","name":"StoneCo Ltd.","percent":14.9}]},{"name":"Nelson Peltz (Trian Fund Management)","holdings":[{"ticker":"JHG","name":"Janus Henderson Group","percent":34.5},{"ticker":"GE","name":"General Electric","percent":29.5},{"ticker":"SOLV","name":"Solventum Corp","percent":15.0},{"ticker":"IVZ","name":"Invesco Ltd.","percent":8.2},{"ticker":"WEN","name":"The Wendy's Co","percent":6.8},{"ticker":"FERG","name":"Ferguson Enterprises","percent":5.8},{"ticker":"GEHC","name":"GE HealthCare","percent":0.0}]},{"name":"Cabot-Wellington","holdings":[{"ticker":"VTI","name":"Vanguard Total Stock","percent":91.0},{"ticker":"IEMG","name":"iShares Core MSCI Emerging","percent":8.3},{"ticker":"VB","name":"Vanguard Small-Cap","percent":0.6},{"ticker":"VT","name":"Vanguard Total World","percent":0.1}]},{"name":"Windacre Partnership","holdings":[{"ticker":"FNF","name":"Fidelity National Financial","percent":15.9},{"ticker":"TDG","name":"TransDigm Group","percent":11.2},{"ticker":"TSM","name":"Taiwan Semiconductor","percent":11.0},{"ticker":"EXPE","name":"Expedia Group","percent":10.9},{"ticker":"AMZN","name":"Amazon.com","percent":10.7},{"ticker":"GOOGL","name":"Alphabet Inc.","percent":10.6},{"ticker":"SAP","name":"SAP SE","percent":8.7},{"ticker":"MCO","name":"Moody's Corp","percent":7.7},{"ticker":"PRM","name":"Perimeter Solutions","percent":6.8},{"ticker":"NVDA","name":"NVIDIA Corp","percent":6.6}]},{"name":"Oaktop Capital","holdings":[{"ticker":"LRCX","name":"Lam Research","percent":32.7},{"ticker":"KLAC","name":"KLA Corp","percent":32.2},{"ticker":"AVGO","name":"Broadcom Inc.","percent":10.9},{"ticker":"ADI","name":"Analog Devices","percent":10.4},{"ticker":"ASPN","name":"Aspen Aerogels","percent":2.8},{"ticker":"EGAN","name":"eGain Corp","percent":2.1},{"ticker":"PRGS","name":"Progress Software","percent":2.0},{"ticker":"BMY","name":"Bristol-Myers Squibb","percent":2.0},{"ticker":"DELL","name":"Dell Technologies","percent":1.7},{"ticker":"GRMN","name":"Garmin Ltd.","percent":1.1},{"ticker":"CEVA","name":"CEVA, Inc.","percent":1.1},{"ticker":"PINS","name":"Pinterest","percent":1.0},{"ticker":"PETS","name":"PetMed Express","percent":0.1},{"ticker":"INTC","name":"Intel Corp","percent":0.1}]},{"name":"Oakcliff Capital","holdings":[{"ticker":"IBKR","name":"Interactive Brokers","percent":30.6},{"ticker":"GIL","name":"Gildan Activewear","percent":17.0},{"ticker":"TDG","name":"TransDigm Group","percent":13.7},{"ticker":"GOOG","name":"Alphabet Inc.","percent":12.4},{"ticker":"NRP","name":"Natural Resource Partners","percent":7.7}]},{"name":"Lansdowne Partners (UK) Llp","holdings":[{"ticker":"TSM","name":"Taiwan Semiconductor","percent":36.2},{"ticker":"LIN","name":"Linde plc","percent":15.8},{"ticker":"DAL","name":"Delta Air Lines","percent":11.8},{"ticker":"UAL","name":"United Airlines","percent":9.7},{"ticker":"SW","name":"Smurfit Westrock","percent":5.0},{"ticker":"GOLF","name":"Acushnet Holdings","percent":3.8},{"ticker":"IONQ","name":"IonQ, Inc.","percent":3.6},{"ticker":"ADI","name":"Analog Devices","percent":3.4},{"ticker":"AMZN","name":"Amazon.com","percent":3.4},{"ticker":"TECK","name":"Teck Resources","percent":2.9},{"ticker":"PRTC","name":"PureTech Health","percent":1.7},{"ticker":"ROK","name":"Rockwell Automation","percent":0.9},{"ticker":"ARM","name":"Arm Holdings","percent":0.8},{"ticker":"TXN","name":"Texas Instruments","percent":0.6},{"ticker":"FTV","name":"Fortive Corp","percent":0.2},{"ticker":"RAL","name":"Raliant Corp","percent":0.1},{"ticker":"AEM","name":"Agnico Eagle Mines","percent":0.1}]},{"name":"Kohlberg Kravis Roberts & Co. L.p.","holdings":[{"ticker":"BTSG","name":"BrightSpring Health","percent":43.3},{"ticker":"HSIC","name":"Henry Schein","percent":19.7},{"ticker":"BBIO","name":"BridgeBio Pharma","percent":13.1},{"ticker":"NIQ","name":"NIQ Global Intelligence","percent":8.9},{"ticker":"BV","name":"BrightView Holdings","percent":5.5},{"ticker":"CRGY","name":"Crescent Energy","percent":4.5},{"ticker":"KREF","name":"KKR Real Estate Finance","percent":1.7},{"ticker":"MSGS","name":"Madison Square Garden","percent":1.3},{"ticker":"BHC","name":"Bausch Health","percent":0.6},{"ticker":"DEC","name":"Diversified Energy","percent":0.4},{"ticker":"NCLH","name":"Norwegian Cruise Line","percent":0.3},{"ticker":"FSK","name":"FS KKR Capital","percent":0.3},{"ticker":"TEM","name":"Tempus AI","percent":0.2}]},{"name":"First Sabrepoint Capital Management Lp","holdings":[{"ticker":"TPB","name":"Turning Point Brands","percent":16.0},{"ticker":"FCFS","name":"FirstCash Holdings","percent":12.8},{"ticker":"LAUR","name":"Laureate Education","percent":10.2},{"ticker":"CVCO","name":"Cavco Industries","percent":8.2},{"ticker":"MSFT","name":"Microsoft Corp","percent":7.3},{"ticker":"BTI","name":"British American Tobacco","percent":6.6},{"ticker":"STRL","name":"Sterling Infrastructure","percent":5.8},{"ticker":"AMRZ","name":"Amrize AG","percent":5.3},{"ticker":"HAS","name":"Hasbro, Inc.","percent":4.3},{"ticker":"WD","name":"Walker & Dunlop","percent":4.1},{"ticker":"AZO","name":"AutoZone","percent":3.2},{"ticker":"MAA","name":"Mid-America Apartment","percent":3.1},{"ticker":"EGY","name":"VAALCO Energy","percent":3.1},{"ticker":"PGNY","name":"Progyny, Inc.","percent":3.0},{"ticker":"LOPE","name":"Grand Canyon Education","percent":2.7},{"ticker":"GRBK","name":"Green Brick Partners","percent":2.1},{"ticker":"BLD","name":"TopBuild Corp","percent":1.3},{"ticker":"OPRA","name":"Opera Limited","percent":1.1}]},{"name":"Washington State Investment Board","holdings":[{"ticker":"FTAI","name":"FTAI Aviation","percent":82.3},{"ticker":"FIP","name":"FTAI Infrastructure","percent":17.7}]},{"name":"Vk Services, Llc","holdings":[{"ticker":"RKLB","name":"Rocket Lab","percent":98.6},{"ticker":"RBOT","name":"Vicarious Surgical","percent":1.3}]},{"name":"Vitol Holding b.v.","holdings":[{"ticker":"CME","name":"CME Group","percent":74.7},{"ticker":"ADES","name":"PT Akasha Wira","percent":25.3}]},{"name":"Washington University","holdings":[{"ticker":"NU","name":"Nu Holdings","percent":89.4},{"ticker":"MAZE","name":"Maze Therapeutics","percent":5.9},{"ticker":"MRNA","name":"Moderna","percent":2.2},{"ticker":"RBRK","name":"Rubrik","percent":2.0},{"ticker":"FIG","name":"Figma","percent":0.5}]},{"name":"Trybe Capital","holdings":[{"ticker":"NVDA","name":"NVIDIA Corp","percent":34.4},{"ticker":"MSFT","name":"Microsoft Corp","percent":20.1},{"ticker":"GOOGL","name":"Alphabet Inc.","percent":14.6},{"ticker":"LRCX","name":"Lam Research","percent":8.5},{"ticker":"TSM","name":"Taiwan Semiconductor","percent":7.5},{"ticker":"AMZN","name":"Amazon.com","percent":6.5},{"ticker":"META","name":"Meta Platforms","percent":6.3},{"ticker":"ASML","name":"ASML Holding","percent":1.9}]},{"name":"Trustees of Dartmouth College","holdings":[{"ticker":"SPY","name":"SPDR S&P 500","percent":57.9},{"ticker":"IEMG","name":"iShares MSCI Emerging","percent":12.7},{"ticker":"QLTY","name":"GMO U.S. Quality ETF","percent":10.7},{"ticker":"VTV","name":"Vanguard Value","percent":8.9},{"ticker":"IJR","name":"iShares S&P Small-Cap","percent":5.3},{"ticker":"IBIT","name":"iShares Bitcoin Trust","percent":2.5},{"ticker":"ETH","name":"Grayscale Ethereum","percent":1.3},{"ticker":"XOM","name":"Exxon Mobil","percent":0.5},{"ticker":"XLK","name":"Tech Select Sector","percent":0.1}]},{"name":"Tri Locum Partners","holdings":[{"ticker":"JNJ","name":"Johnson & Johnson","percent":12.9},{"ticker":"UTHR","name":"United Therapeutics","percent":11.8},{"ticker":"MRK","name":"Merck & Co.","percent":8.6},{"ticker":"AXSM","name":"Axsome Therapeutics","percent":8.2},{"ticker":"ASND","name":"Ascendis Pharma","percent":8.0},{"ticker":"VERA","name":"Vera Therapeutics","percent":8.0},{"ticker":"ARGX","name":"argenx SE","percent":7.4},{"ticker":"MDGL","name":"Madrigal Pharma","percent":7.1},{"ticker":"SLNO","name":"Soleno Therapeutics","percent":7.0},{"ticker":"ABBV","name":"AbbVie Inc.","percent":4.8},{"ticker":"KRRO","name":"Korro Bio","percent":3.7},{"ticker":"XENE","name":"Xenon Pharma","percent":3.4},{"ticker":"AVDL","name":"Avadel Pharma","percent":2.5},{"ticker":"STVN","name":"Stevanato Group","percent":2.0},{"ticker":"DNTH","name":"Dianthus Therapeutics","percent":1.7},{"ticker":"TARS","name":"Tarsus Pharma","percent":1.6},{"ticker":"PRAX","name":"Praxis Precision","percent":0.9},{"ticker":"BHVN","name":"Biohaven Ltd.","percent":0.5}]},{"name":"Vantage Consulting","holdings":[{"ticker":"BW","name":"Babcock & Wilcox","percent":62.5},{"ticker":"ADCT","name":"ADC Therapeutics","percent":24.4},{"ticker":"CBUS","name":"Cibus, Inc.","percent":13.2}]},{"name":"Technology Crossover Management X, Ltd.","holdings":[{"ticker":"NU","name":"Nu Holdings","percent":75.2},{"ticker":"KLAR","name":"Klarna Group","percent":11.9},{"ticker":"RKT","name":"Rocket Companies","percent":7.3},{"ticker":"PTON","name":"Peloton Interactive","percent":1.8},{"ticker":"TOST","name":"Toast, Inc.","percent":1.8},{"ticker":"GTLB","name":"GitLab Inc.","percent":1.2},{"ticker":"GDRX","name":"GoodRx Holdings","percent":0.8}]},{"name":"Snow Phipps Group","holdings":[{"ticker":"VEL","name":"Velocity Financial","percent":79.0},{"ticker":"LAUR","name":"Laureate Education","percent":21.0}]},{"name":"Pivotal Bioventure","holdings":[{"ticker":"PCVX","name":"Vaxcyte, Inc.","percent":28.6},{"ticker":"OCS","name":"Oculis Holding","percent":23.4},{"ticker":"ARQT","name":"Arcutis Biotherapeutics","percent":23.1},{"ticker":"ZBIO","name":"Zenas BioPharma","percent":10.0},{"ticker":"TRVI","name":"Trevi Therapeutics","percent":6.6},{"ticker":"IMNM","name":"Immunome, Inc.","percent":3.4},{"ticker":"BIOA","name":"BioAge Labs","percent":2.2},{"ticker":"RXRX","name":"Recursion Pharma","percent":1.7},{"ticker":"RLYB","name":"Rallybio Corp","percent":0.7},{"ticker":"BOLT","name":"Bolt Biotherapeutics","percent":0.3}]},{"name":"Oaktree Fund (Oaktree Fund Advisors, LLC)","holdings":[{"ticker":"AU","name":"AngloGold Ashanti","percent":28.8},{"ticker":"ITUB","name":"Itaú Unibanco","percent":11.6},{"ticker":"HDB","name":"HDFC Bank","percent":9.8},{"ticker":"GRAB","name":"Grab Holdings","percent":8.8},{"ticker":"NU","name":"Nu Holdings","percent":8.0},{"ticker":"FCX","name":"Freeport-McMoRan","percent":6.5},{"ticker":"YMM","name":"Full Truck Alliance","percent":6.0},{"ticker":"XP","name":"XP Inc.","percent":4.6},{"ticker":"BZ","name":"Kanzhun Limited","percent":4.6},{"ticker":"TX","name":"Ternium S.A.","percent":3.8},{"ticker":"SE","name":"Sea Limited","percent":3.1},{"ticker":"JBS","name":"JBS N.V.","percent":2.8},{"ticker":"ALVO","name":"Alvotech","percent":1.3},{"ticker":"BTAI","name":"BioXcel Therapeutics","percent":0.2}]},{"name":"Newgen Asset Management Ltd","holdings":[{"ticker":"USAS","name":"Americas Gold and Silver","percent":26.8},{"ticker":"B","name":"Barrick Mining","percent":10.1},{"ticker":"BB","name":"BlackBerry Ltd","percent":9.9},{"ticker":"CCJ","name":"Cameco Corp","percent":9.6},{"ticker":"SLSR","name":"Solaris Resources","percent":7.9},{"ticker":"IAG","name":"IAMGOLD Corp","percent":6.6},{"ticker":"EFXT","name":"Enerflex Ltd.","percent":6.5},{"ticker":"BEP","name":"Brookfield Renewable","percent":5.3},{"ticker":"PPTA","name":"Perpetua Resources","percent":4.3},{"ticker":"NOA","name":"North American Const.","percent":3.4},{"ticker":"ENB","name":"Enbridge Inc.","percent":3.1},{"ticker":"BAM","name":"Brookfield Asset Mgmt","percent":2.9},{"ticker":"NTSK","name":"Netskope, Inc.","percent":2.6},{"ticker":"ASTL","name":"Algoma Steel","percent":0.7},{"ticker":"POET","name":"POET Technologies","percent":0.1},{"ticker":"ANNA","name":"AleAnna, Inc.","percent":0.1}]},{"name":"Moon Capital Management Lp","holdings":[{"ticker":"IAU","name":"iShares Gold Trust","percent":84.0},{"ticker":"GDX","name":"VanEck Gold Miners","percent":3.3},{"ticker":"GDXJ","name":"VanEck Junior Gold","percent":3.0},{"ticker":"IAUX","name":"i-80 Gold Corp","percent":2.1},{"ticker":"GM","name":"General Motors","percent":1.9},{"ticker":"LAD","name":"Lithia Motors","percent":1.8},{"ticker":"BWA","name":"BorgWarner Inc.","percent":1.4},{"ticker":"LEA","name":"Lear Corp","percent":1.3},{"ticker":"EWZ","name":"iShares MSCI Brazil","percent":0.7},{"ticker":"ABG","name":"Asbury Automotive","percent":0.4}]},{"name":"i.g.y. Ltd","holdings":[{"ticker":"AMZN","name":"Amazon.com","percent":42.3},{"ticker":"COST","name":"Costco Wholesale","percent":37.1},{"ticker":"BRK.A","name":"Berkshire Hathaway","percent":20.5}]},{"name":"Hpc Germany Gmbh & Co. Kg","holdings":[{"ticker":"DB","name":"Deutsche Bank","percent":100.0}]},{"name":"Helikon Investments","holdings":[{"ticker":"SKE","name":"Skeena Resources","percent":24.5},{"ticker":"AAUC","name":"Allied Gold","percent":20.3},{"ticker":"CAAP","name":"Corp América Airports","percent":18.2},{"ticker":"MGM","name":"MGM Resorts","percent":9.5},{"ticker":"TGS","name":"Gas del Sur","percent":4.8},{"ticker":"IAC","name":"IAC Inc.","percent":3.6},{"ticker":"SLSR","name":"Solaris Resources","percent":3.4},{"ticker":"PAM","name":"Pampa Energía","percent":3.3},{"ticker":"IRS","name":"IRSA","percent":3.2},{"ticker":"IFS","name":"Intercorp Financial","percent":3.0},{"ticker":"IHS","name":"IHS Holding","percent":2.6},{"ticker":"EDN","name":"Edenor","percent":2.2},{"ticker":"CRES.Y","name":"Cresud","percent":0.3},{"ticker":"LOMA","name":"Loma Negra","percent":0.1}]},{"name":"Foresite Capital Management V, Llc","holdings":[{"ticker":"CGON","name":"CG Oncology","percent":37.2},{"ticker":"ALMS","name":"Alumis Inc.","percent":21.2},{"ticker":"IRON","name":"Disc Medicine","percent":18.2},{"ticker":"HIMS","name":"Hims & Hers Health","percent":14.2},{"ticker":"LYEL","name":"Lyell Immunopharma","percent":7.1},{"ticker":"MAZE","name":"Maze Therapeutics","percent":2.1}]},{"name":"Engine No. 1 Llc","holdings":[{"ticker":"POWL","name":"Powell Industries","percent":40.9},{"ticker":"VRT","name":"Vertiv Holdings","percent":27.2},{"ticker":"FSLR","name":"First Solar","percent":11.9},{"ticker":"HRI","name":"Herc Holdings","percent":8.7},{"ticker":"GLD","name":"SPDR Gold Shares","percent":5.3},{"ticker":"HUBB","name":"Hubbell Inc.","percent":4.9}]},{"name":"Elemental Capital Partners Llc","holdings":[{"ticker":"BE","name":"Bloom Energy","percent":54.2},{"ticker":"INDI","name":"indie Semiconductor","percent":14.8},{"ticker":"CRDO","name":"Credo Technology","percent":14.7},{"ticker":"MRVL","name":"Marvell Technology","percent":9.0},{"ticker":"LRCX","name":"Lam Research","percent":4.7},{"ticker":"NVDA","name":"NVIDIA Corp","percent":2.5}]},{"name":"Warren Buffett (Berkshire Hathaway)","holdings":[{"ticker":"AAPL","name":"Apple Inc.","percent":22.7},{"ticker":"AXP","name":"American Express","percent":18.8},{"ticker":"BAC","name":"Bank of America","percent":11.0},{"ticker":"KO","name":"The Coca-Cola Co","percent":9.9},{"ticker":"CVX","name":"Chevron Corp","percent":7.1},{"ticker":"OXY","name":"Occidental Petroleum","percent":4.7},{"ticker":"MCO","name":"Moody's Corp","percent":4.4},{"ticker":"CB","name":"Chubb Limited","percent":3.3},{"ticker":"KHC","name":"Kraft Heinz","percent":3.2},{"ticker":"GOOGL","name":"Alphabet Inc.","percent":1.6},{"ticker":"DVA","name":"DaVita Inc.","percent":1.6},{"ticker":"KR","name":"The Kroger Co.","percent":1.3},{"ticker":"SIRI","name":"Sirius XM","percent":1.1},{"ticker":"V","name":"Visa Inc.","percent":1.1},{"ticker":"VRSN","name":"VeriSign","percent":0.9},{"ticker":"MA","name":"Mastercard","percent":0.8},{"ticker":"AMZN","name":"Amazon.com","percent":0.8},{"ticker":"STZ","name":"Constellation Brands","percent":0.7},{"ticker":"UNH","name":"UnitedHealth","percent":0.7},{"ticker":"COF","name":"Capital One","percent":0.6},{"ticker":"AON","name":"Aon plc","percent":0.5},{"ticker":"DPZ","name":"Domino's Pizza","percent":0.5},{"ticker":"ALLY","name":"Ally Financial","percent":0.4},{"ticker":"POOL","name":"Pool Corp","percent":0.4},{"ticker":"LLYV.K","name":"Liberty Live","percent":0.4}]},{"name":"Bill Gates (Bill & Melinda Gates Foundation Trust)","holdings":[{"ticker":"BRK.B","name":"Berkshire Hathaway","percent":30.6},{"ticker":"WM","name":"Waste Management","percent":17.9},{"ticker":"CNI","name":"Canadian National Ry","percent":13.7},{"ticker":"MSFT","name":"Microsoft Corp","percent":13.3},{"ticker":"CAT","name":"Caterpillar","percent":8.5},{"ticker":"DE","name":"Deere & Company","percent":4.6},{"ticker":"ECL","name":"Ecolab Inc.","percent":4.0},{"ticker":"FDX","name":"FedEx Corp","percent":1.6},{"ticker":"KOF","name":"Coca-Cola FEMSA","percent":1.4},{"ticker":"WCN","name":"Waste Connections","percent":1.0},{"ticker":"CPNG","name":"Coupang, Inc.","percent":0.8},{"ticker":"SDGR","name":"Schrödinger","percent":0.4},{"ticker":"MSGS","name":"Madison Square Garden","percent":0.4},{"ticker":"WST","name":"West Pharma","percent":0.3},{"ticker":"MCD","name":"McDonald's","percent":0.3},{"ticker":"BUD","name":"Anheuser-Busch","percent":0.3},{"ticker":"PCAR","name":"PACCAR Inc","percent":0.3},{"ticker":"DHR","name":"Danaher Corp","percent":0.2},{"ticker":"KHC","name":"Kraft Heinz","percent":0.2},{"ticker":"HRL","name":"Hormel Foods","percent":0.1},{"ticker":"ONON","name":"On Holding AG","percent":0.1},{"ticker":"VLTO","name":"Veralto Corp","percent":0.0}]}];
 
+    const DATA_AS_OF = '2024-12-31';
+
     // Sector colors
     const SECTOR_COLORS = {
       'Financial': '#E9C46A',
@@ -591,6 +828,25 @@
         company: 'Company',
         sector: 'Sector',
         allocation: 'Allocation',
+        ranking: 'Ranking',
+        rankingTitle: 'Top Holdings Ranking',
+        rank: '#',
+        avgWeight: 'Avg Weight',
+        totalWeight: 'Total Weight',
+        funds: 'Funds',
+        overlap: 'Overlap',
+        overlapTitle: 'Fund Overlap Analysis',
+        fundA: 'Fund A',
+        fundB: 'Fund B',
+        selectFundPlaceholder: '-- Select a fund --',
+        commonHoldings: 'Common Holdings',
+        onlyInA: 'Only in Fund A',
+        onlyInB: 'Only in Fund B',
+        weightInA: 'Weight (A)',
+        weightInB: 'Weight (B)',
+        selectBothFunds: 'Select two funds to compare their holdings',
+        noOverlap: 'No common holdings found',
+        dataAsOf: 'Data as of',
         sectorLegend: 'Sectors',
         Financial: 'Financial',
         Technology: 'Technology',
@@ -616,6 +872,25 @@
         company: '企業名',
         sector: 'セクター',
         allocation: '配分',
+        ranking: 'ランキング',
+        rankingTitle: '保有銘柄ランキング',
+        rank: '#',
+        avgWeight: '平均比率',
+        totalWeight: '合計比率',
+        funds: 'ファンド数',
+        overlap: '重複分析',
+        overlapTitle: 'ファンド重複分析',
+        fundA: 'ファンドA',
+        fundB: 'ファンドB',
+        selectFundPlaceholder: '-- ファンドを選択 --',
+        commonHoldings: '共通銘柄',
+        onlyInA: 'Aのみ',
+        onlyInB: 'Bのみ',
+        weightInA: '比率 (A)',
+        weightInB: '比率 (B)',
+        selectBothFunds: '2つのファンドを選んで保有銘柄を比較',
+        noOverlap: '共通銘柄がありません',
+        dataAsOf: 'データ基準日',
         sectorLegend: 'セクター',
         Financial: '金融',
         Technology: 'テクノロジー',
@@ -717,19 +992,25 @@
     // Language context
     const LangContext = React.createContext('en');
 
-    function SectorLegend() {
+    function SectorLegend({ activeSector, onSectorClick }) {
       const lang = React.useContext(LangContext);
       const t = I18N[lang];
       const sectors = Object.keys(SECTOR_COLORS);
       return (
         <div className="sector-legend">
           <div className="sector-legend-title">{t.sectorLegend}</div>
-          {sectors.map(s => (
-            <div key={s} className="sector-legend-item">
-              <div className="sector-legend-dot" style={{ background: SECTOR_COLORS[s] }}></div>
-              <span className="sector-legend-label">{t[s] || s}</span>
-            </div>
-          ))}
+          {sectors.map(s => {
+            const isActive = activeSector === s;
+            const isDimmed = activeSector && !isActive;
+            return (
+              <div key={s}
+                className={`sector-legend-item ${isActive ? 'active' : ''} ${isDimmed ? 'dimmed' : ''}`}
+                onClick={() => onSectorClick ? onSectorClick(isActive ? null : s) : null}>
+                <div className="sector-legend-dot" style={{ background: SECTOR_COLORS[s] }}></div>
+                <span className="sector-legend-label">{t[s] || s}</span>
+              </div>
+            );
+          })}
         </div>
       );
     }
@@ -765,9 +1046,12 @@
                 <div className="tabs">
                   <button className={`tab ${tab === 'home' || tab === 'detail' ? 'active' : ''}`} onClick={() => { setTab('home'); setSelected(null); }}>{t.home}</button>
                   <button className={`tab ${tab === 'list' ? 'active' : ''}`} onClick={() => setTab('list')}>{t.list}</button>
+                  <button className={`tab ${tab === 'ranking' ? 'active' : ''}`} onClick={() => setTab('ranking')}>{t.ranking}</button>
+                  <button className={`tab ${tab === 'overlap' ? 'active' : ''}`} onClick={() => setTab('overlap')}>{t.overlap}</button>
                 </div>
                 <div className="header-right">
                   <input type="text" className="search-box" placeholder={t.searchPlaceholder} value={search} onChange={e => setSearch(e.target.value)} />
+                  <div className="data-timestamp">{t.dataAsOf}: {DATA_AS_OF}</div>
                   <div className="lang-toggle">
                     <button className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => setLang('en')}>EN</button>
                     <button className={`lang-btn ${lang === 'ja' ? 'active' : ''}`} onClick={() => setLang('ja')}>JP</button>
@@ -779,6 +1063,8 @@
               {tab === 'home' && <HomeView funds={filtered} onSelect={handleSelectFund} />}
               {tab === 'detail' && selected && <DetailView fund={selected} onBack={handleBack} />}
               {tab === 'list' && <ListView funds={filtered} selected={selected} onSelect={setSelected} />}
+              {tab === 'ranking' && <RankingView />}
+              {tab === 'overlap' && <OverlapView />}
             </main>
           </div>
         </LangContext.Provider>
@@ -786,12 +1072,23 @@
     }
 
     function HomeView({ funds, onSelect }) {
+      const [activeSector, setActiveSector] = React.useState(null);
+
+      const sortedFunds = React.useMemo(() => {
+        if (!activeSector) return funds;
+        return [...funds].sort((a, b) => {
+          const aWeight = a.holdings.reduce((sum, h) => getSector(h.ticker) === activeSector ? sum + h.percent : sum, 0);
+          const bWeight = b.holdings.reduce((sum, h) => getSector(h.ticker) === activeSector ? sum + h.percent : sum, 0);
+          return bWeight - aWeight;
+        });
+      }, [funds, activeSector]);
+
       return (
         <div className="home-layout">
           <div className="funds-grid">
-            {funds.map((fund, i) => <FundCard key={i} fund={fund} onClick={() => onSelect(fund)} />)}
+            {sortedFunds.map((fund, i) => <FundCard key={fund.name} fund={fund} onClick={() => onSelect(fund)} />)}
           </div>
-          <SectorLegend />
+          <SectorLegend activeSector={activeSector} onSectorClick={setActiveSector} />
         </div>
       );
     }
@@ -910,6 +1207,196 @@
                       <td>{h.name}</td>
                       <td><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
                       <td><div className="percent-bar"><div className="percent-bar-bg"><div className={`percent-bar-fill ${i === 0 ? 'top' : ''}`} style={{ width: `${h.percent}%` }}></div></div><span className="percent-value">{h.percent.toFixed(1)}%</span></div></td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      );
+    }
+
+    function OverlapView() {
+      const lang = React.useContext(LangContext);
+      const t = I18N[lang];
+      const [fundAIndex, setFundAIndex] = React.useState('');
+      const [fundBIndex, setFundBIndex] = React.useState('');
+
+      const fundA = fundAIndex !== '' ? FUNDS_DATA[parseInt(fundAIndex)] : null;
+      const fundB = fundBIndex !== '' ? FUNDS_DATA[parseInt(fundBIndex)] : null;
+
+      const analysis = React.useMemo(() => {
+        if (!fundA || !fundB) return null;
+        const holdingsA = {};
+        fundA.holdings.forEach(h => { holdingsA[h.ticker] = h; });
+        const holdingsB = {};
+        fundB.holdings.forEach(h => { holdingsB[h.ticker] = h; });
+
+        const common = [];
+        const onlyA = [];
+        const onlyB = [];
+
+        Object.keys(holdingsA).forEach(ticker => {
+          if (holdingsB[ticker]) {
+            common.push({ ticker, name: holdingsA[ticker].name, weightA: holdingsA[ticker].percent, weightB: holdingsB[ticker].percent });
+          } else {
+            onlyA.push(holdingsA[ticker]);
+          }
+        });
+        Object.keys(holdingsB).forEach(ticker => {
+          if (!holdingsA[ticker]) onlyB.push(holdingsB[ticker]);
+        });
+
+        common.sort((a, b) => (b.weightA + b.weightB) - (a.weightA + a.weightB));
+        return { common, onlyA, onlyB };
+      }, [fundA, fundB]);
+
+      return (
+        <div>
+          <div className="ranking-section-title">{t.overlapTitle}</div>
+          <div className="overlap-controls">
+            <div className="overlap-select-group">
+              <label className="overlap-select-label">{t.fundA}</label>
+              <select className="overlap-select" value={fundAIndex} onChange={e => setFundAIndex(e.target.value)}>
+                <option value="">{t.selectFundPlaceholder}</option>
+                {FUNDS_DATA.map((f, i) => <option key={i} value={i}>{f.name}</option>)}
+              </select>
+            </div>
+            <div className="overlap-vs">VS</div>
+            <div className="overlap-select-group">
+              <label className="overlap-select-label">{t.fundB}</label>
+              <select className="overlap-select" value={fundBIndex} onChange={e => setFundBIndex(e.target.value)}>
+                <option value="">{t.selectFundPlaceholder}</option>
+                {FUNDS_DATA.map((f, i) => <option key={i} value={i}>{f.name}</option>)}
+              </select>
+            </div>
+          </div>
+
+          {!analysis && (
+            <div className="overlap-result">
+              <div className="overlap-empty">{t.selectBothFunds}</div>
+            </div>
+          )}
+
+          {analysis && (
+            <div className="overlap-result">
+              <div className="overlap-summary">
+                <div className="overlap-stat">
+                  <div className="overlap-stat-value">{analysis.common.length}</div>
+                  <div className="overlap-stat-label">{t.commonHoldings}</div>
+                </div>
+                <div className="overlap-stat">
+                  <div className="overlap-stat-value">{analysis.onlyA.length}</div>
+                  <div className="overlap-stat-label">{t.onlyInA}</div>
+                </div>
+                <div className="overlap-stat">
+                  <div className="overlap-stat-value">{analysis.onlyB.length}</div>
+                  <div className="overlap-stat-label">{t.onlyInB}</div>
+                </div>
+              </div>
+
+              {analysis.common.length > 0 ? (
+                <div style={{ borderRadius: '12px', overflow: 'hidden' }}>
+                  <table className="overlap-table">
+                    <thead>
+                      <tr>
+                        <th>{t.ticker}</th>
+                        <th>{t.company}</th>
+                        <th>{t.sector}</th>
+                        <th>{t.weightInA}</th>
+                        <th>{t.weightInB}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {analysis.common.map(item => {
+                        const sector = getSector(item.ticker);
+                        const sectorLabel = lang === 'ja' ? (SECTOR_NAMES_JP[sector] || sector) : sector;
+                        return (
+                          <tr key={item.ticker}>
+                            <td><span className="ticker">{item.ticker}</span></td>
+                            <td>{item.name}</td>
+                            <td><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
+                            <td style={{ fontWeight: 600 }}>{item.weightA.toFixed(1)}%</td>
+                            <td style={{ fontWeight: 600 }}>{item.weightB.toFixed(1)}%</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <div className="overlap-empty">{t.noOverlap}</div>
+              )}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    function RankingView() {
+      const lang = React.useContext(LangContext);
+      const t = I18N[lang];
+
+      const rankingData = React.useMemo(() => {
+        const tickerMap = {};
+        FUNDS_DATA.forEach(fund => {
+          fund.holdings.forEach(h => {
+            if (!tickerMap[h.ticker]) {
+              tickerMap[h.ticker] = { ticker: h.ticker, name: h.name, totalWeight: 0, fundCount: 0 };
+            }
+            tickerMap[h.ticker].totalWeight += h.percent;
+            tickerMap[h.ticker].fundCount += 1;
+          });
+        });
+        const list = Object.values(tickerMap).map(item => ({
+          ...item,
+          avgWeight: item.totalWeight / item.fundCount
+        }));
+        list.sort((a, b) => b.totalWeight - a.totalWeight);
+        return list.slice(0, 30);
+      }, []);
+
+      const maxTotal = rankingData.length > 0 ? rankingData[0].totalWeight : 1;
+      const maxAvg = rankingData.length > 0 ? Math.max(...rankingData.map(d => d.avgWeight)) : 1;
+
+      return (
+        <div>
+          <div className="ranking-section-title">{t.rankingTitle}</div>
+          <div className="ranking-table-container">
+            <table className="ranking-table">
+              <thead>
+                <tr>
+                  <th>{t.rank}</th>
+                  <th>{t.ticker}</th>
+                  <th>{t.company}</th>
+                  <th>{t.sector}</th>
+                  <th>{t.avgWeight}</th>
+                  <th>{t.totalWeight}</th>
+                  <th>{t.funds}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rankingData.map((item, i) => {
+                  const sector = getSector(item.ticker);
+                  const sectorLabel = lang === 'ja' ? (SECTOR_NAMES_JP[sector] || sector) : sector;
+                  const totalBarWidth = (item.totalWeight / maxTotal) * 100;
+                  const avgBarWidth = (item.avgWeight / maxAvg) * 100;
+                  return (
+                    <tr key={item.ticker}>
+                      <td><span className={`ranking-rank ${i < 3 ? 'top3' : ''}`}>{i + 1}</span></td>
+                      <td><span className="ticker">{item.ticker}</span></td>
+                      <td>{item.name}</td>
+                      <td><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
+                      <td className="weight-cell">
+                        <div className="weight-bar" style={{ width: avgBarWidth + '%' }}></div>
+                        <span className="weight-value">{item.avgWeight.toFixed(1)}%</span>
+                      </td>
+                      <td className="weight-cell">
+                        <div className="weight-bar accent" style={{ width: totalBarWidth + '%' }}></div>
+                        <span className="weight-value">{item.totalWeight.toFixed(1)}%</span>
+                      </td>
+                      <td><span className="ranking-funds-count">{item.fundCount}</span></td>
                     </tr>
                   );
                 })}
