@@ -450,6 +450,93 @@
       margin-bottom: 20px;
     }
 
+    /* Ranking View */
+    .ranking-view {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 4px 16px rgba(38, 70, 83, 0.08);
+    }
+
+    .ranking-title {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--primary-teal);
+    }
+
+    .ranking-subtitle {
+      color: var(--teal-light);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .ranking-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .ranking-table th {
+      background: var(--primary-teal);
+      color: #fff;
+      padding: 14px 16px;
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .ranking-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(38, 70, 83, 0.1);
+      background: #fff;
+      font-size: 13px;
+    }
+
+    .ranking-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .ranking-table tr:hover td {
+      background: rgba(233, 196, 106, 0.1);
+    }
+
+    .rank-number {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--primary-teal);
+      min-width: 32px;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .rank-number.top3 {
+      background: var(--accent-gold);
+      color: var(--primary-teal);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+    }
+
+    .rank-funds-count {
+      font-weight: 700;
+      color: var(--primary-teal);
+      background: rgba(42, 157, 143, 0.12);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      display: inline-block;
+    }
+
+    .rank-weight {
+      font-weight: 600;
+      color: var(--primary-teal);
+    }
+
     /* Mobile */
     @media (max-width: 900px) {
       .header {
@@ -539,6 +626,25 @@
         font-size: 18px;
         letter-spacing: 2px;
       }
+
+      .ranking-view {
+        padding: 24px;
+      }
+
+      .ranking-title {
+        font-size: 18px;
+        letter-spacing: 2px;
+      }
+
+      .ranking-table th,
+      .ranking-table td {
+        padding: 10px 8px;
+        font-size: 11px;
+      }
+
+      .ranking-table .hide-mobile {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -581,6 +687,7 @@
       en: {
         home: 'Home',
         list: 'List',
+        ranking: 'Ranking',
         searchPlaceholder: 'Search funds or tickers...',
         holdings: 'holdings',
         top: 'Top',
@@ -592,6 +699,15 @@
         sector: 'Sector',
         allocation: 'Allocation',
         sectorLegend: 'Sectors',
+        rankingTitle: 'Top Holdings Ranking',
+        rankingDesc: 'Most widely held stocks across all funds',
+        rankRank: '#',
+        rankTicker: 'Ticker',
+        rankCompany: 'Company',
+        rankSector: 'Sector',
+        rankFunds: 'Funds',
+        rankAvgWeight: 'Avg Weight',
+        rankTotalWeight: 'Total Weight',
         Financial: 'Financial',
         Technology: 'Technology',
         Healthcare: 'Healthcare',
@@ -606,6 +722,7 @@
       ja: {
         home: 'ホーム',
         list: 'リスト',
+        ranking: 'ランキング',
         searchPlaceholder: 'ファンド名・ティッカーで検索...',
         holdings: '銘柄',
         top: 'Top',
@@ -617,6 +734,15 @@
         sector: 'セクター',
         allocation: '配分',
         sectorLegend: 'セクター',
+        rankingTitle: '保有銘柄ランキング',
+        rankingDesc: '全ファンドで最も多く保有されている銘柄',
+        rankRank: '#',
+        rankTicker: 'ティッカー',
+        rankCompany: '企業名',
+        rankSector: 'セクター',
+        rankFunds: 'ファンド数',
+        rankAvgWeight: '平均比率',
+        rankTotalWeight: '合計比率',
         Financial: '金融',
         Technology: 'テクノロジー',
         Healthcare: 'ヘルスケア',
@@ -765,6 +891,7 @@
                 <div className="tabs">
                   <button className={`tab ${tab === 'home' || tab === 'detail' ? 'active' : ''}`} onClick={() => { setTab('home'); setSelected(null); }}>{t.home}</button>
                   <button className={`tab ${tab === 'list' ? 'active' : ''}`} onClick={() => setTab('list')}>{t.list}</button>
+                  <button className={`tab ${tab === 'ranking' ? 'active' : ''}`} onClick={() => setTab('ranking')}>{t.ranking}</button>
                 </div>
                 <div className="header-right">
                   <input type="text" className="search-box" placeholder={t.searchPlaceholder} value={search} onChange={e => setSearch(e.target.value)} />
@@ -779,6 +906,7 @@
               {tab === 'home' && <HomeView funds={filtered} onSelect={handleSelectFund} />}
               {tab === 'detail' && selected && <DetailView fund={selected} onBack={handleBack} />}
               {tab === 'list' && <ListView funds={filtered} selected={selected} onSelect={setSelected} />}
+              {tab === 'ranking' && <RankingView />}
             </main>
           </div>
         </LangContext.Provider>
@@ -910,6 +1038,67 @@
                       <td>{h.name}</td>
                       <td><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
                       <td><div className="percent-bar"><div className="percent-bar-bg"><div className={`percent-bar-fill ${i === 0 ? 'top' : ''}`} style={{ width: `${h.percent}%` }}></div></div><span className="percent-value">{h.percent.toFixed(1)}%</span></div></td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      );
+    }
+
+    function RankingView() {
+      const lang = React.useContext(LangContext);
+      const t = I18N[lang];
+
+      const rankings = React.useMemo(() => {
+        const tickerMap = {};
+        FUNDS_DATA.forEach(fund => {
+          fund.holdings.forEach(h => {
+            if (!tickerMap[h.ticker]) {
+              tickerMap[h.ticker] = { ticker: h.ticker, name: h.name, fundCount: 0, totalWeight: 0 };
+            }
+            tickerMap[h.ticker].fundCount += 1;
+            tickerMap[h.ticker].totalWeight += h.percent;
+          });
+        });
+        const list = Object.values(tickerMap);
+        list.forEach(item => { item.avgWeight = item.totalWeight / item.fundCount; });
+        list.sort((a, b) => b.fundCount - a.fundCount || b.totalWeight - a.totalWeight);
+        return list.slice(0, 20);
+      }, []);
+
+      return (
+        <div className="ranking-view">
+          <h1 className="ranking-title">{t.rankingTitle}</h1>
+          <p className="ranking-subtitle">{t.rankingDesc}</p>
+          <div className="table-container">
+            <table className="ranking-table">
+              <thead>
+                <tr>
+                  <th>{t.rankRank}</th>
+                  <th>{t.rankTicker}</th>
+                  <th>{t.rankCompany}</th>
+                  <th className="hide-mobile">{t.rankSector}</th>
+                  <th>{t.rankFunds}</th>
+                  <th className="hide-mobile">{t.rankAvgWeight}</th>
+                  <th>{t.rankTotalWeight}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rankings.map((item, i) => {
+                  const sector = getSector(item.ticker);
+                  const sectorLabel = lang === 'ja' ? (SECTOR_NAMES_JP[sector] || sector) : sector;
+                  return (
+                    <tr key={item.ticker}>
+                      <td><span className={`rank-number ${i < 3 ? 'top3' : ''}`}>{i + 1}</span></td>
+                      <td><span className="ticker">{item.ticker}</span></td>
+                      <td>{item.name}</td>
+                      <td className="hide-mobile"><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
+                      <td><span className="rank-funds-count">{item.fundCount}</span></td>
+                      <td className="hide-mobile"><span className="rank-weight">{item.avgWeight.toFixed(1)}%</span></td>
+                      <td><span className="rank-weight">{item.totalWeight.toFixed(1)}%</span></td>
                     </tr>
                   );
                 })}
