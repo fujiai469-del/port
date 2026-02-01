@@ -1054,9 +1054,12 @@
         noOverlap: 'No common holdings found',
         flow: 'Flow',
         flowTitle: 'Smart Money Flow',
-        flowSubtitle: 'Institutional capital allocation by sector — size by weight, color by QoQ change',
-        qoqChange: 'QoQ Change',
-        totalWeightLabel: 'Total Weight',
+        flowSubtitle: 'Size = number of holding funds, Color = diffusion index (buyers vs sellers)',
+        heldBy: 'Held by',
+        fundsUnit: 'Funds',
+        sentiment: 'Sentiment',
+        buys: 'Buys',
+        sells: 'Sells',
         netBuy: 'Net Buy',
         netSell: 'Net Sell',
         neutral: 'Neutral',
@@ -1109,9 +1112,12 @@
         noOverlap: '共通銘柄がありません',
         flow: 'フロー',
         flowTitle: 'スマートマネーフロー',
-        flowSubtitle: '機関投資家のセクター別資金配分 — サイズ: 比率、色: 前四半期比',
-        qoqChange: '前四半期比',
-        totalWeightLabel: '合計比率',
+        flowSubtitle: 'サイズ = 保有ファンド数、色 = DI（買い越し vs 売り越しファンド数）',
+        heldBy: '保有',
+        fundsUnit: 'ファンド',
+        sentiment: 'センチメント',
+        buys: '買い',
+        sells: '売り',
         netBuy: '買い越し',
         netSell: '売り越し',
         neutral: '中立',
@@ -1667,86 +1673,99 @@
       );
     }
 
-    // Mock Money Flow Data (QoQ change %)
+    // Mock Money Flow Data — Breadth-based (holder count + diffusion index)
+    // holders: number of funds holding this ticker
+    // buyers: funds that increased position QoQ (or new position)
+    // sellers: funds that decreased position QoQ (or exited)
     const MOCK_MONEY_FLOW = [
       { name: 'Technology', children: [
-        { name: 'NVDA', fullName: 'NVIDIA Corp', size: 43.5, change: 25.5 },
-        { name: 'MSFT', fullName: 'Microsoft Corp', size: 40.7, change: -5.2 },
-        { name: 'GOOGL', fullName: 'Alphabet Inc.', size: 26.8, change: 8.3 },
-        { name: 'TSM', fullName: 'Taiwan Semiconductor', size: 54.7, change: 12.1 },
-        { name: 'LRCX', fullName: 'Lam Research', size: 45.9, change: -2.8 },
-        { name: 'AVGO', fullName: 'Broadcom Inc.', size: 10.9, change: 18.7 },
-        { name: 'META', fullName: 'Meta Platforms', size: 6.3, change: -11.4 },
-        { name: 'ASML', fullName: 'ASML Holding', size: 1.9, change: 3.1 },
-        { name: 'KLAC', fullName: 'KLA Corp', size: 32.2, change: -7.6 },
-        { name: 'ADI', fullName: 'Analog Devices', size: 13.8, change: 1.2 },
-        { name: 'INTC', fullName: 'Intel Corp', size: 0.1, change: -22.3 },
-        { name: 'ARM', fullName: 'Arm Holdings', size: 0.8, change: 35.0 },
-        { name: 'IONQ', fullName: 'IonQ, Inc.', size: 3.6, change: 42.0 },
-        { name: 'RKLB', fullName: 'Rocket Lab', size: 98.6, change: 55.2 },
+        { name: 'NVDA', fullName: 'NVIDIA Corp', holders: 3, buyers: 2, sellers: 0 },
+        { name: 'MSFT', fullName: 'Microsoft Corp', holders: 3, buyers: 1, sellers: 1 },
+        { name: 'GOOGL', fullName: 'Alphabet Inc.', holders: 3, buyers: 2, sellers: 1 },
+        { name: 'TSM', fullName: 'Taiwan Semiconductor', holders: 3, buyers: 2, sellers: 0 },
+        { name: 'LRCX', fullName: 'Lam Research', holders: 3, buyers: 0, sellers: 2 },
+        { name: 'AVGO', fullName: 'Broadcom Inc.', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'META', fullName: 'Meta Platforms', holders: 1, buyers: 0, sellers: 1 },
+        { name: 'ASML', fullName: 'ASML Holding', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'KLAC', fullName: 'KLA Corp', holders: 1, buyers: 0, sellers: 1 },
+        { name: 'ADI', fullName: 'Analog Devices', holders: 2, buyers: 1, sellers: 1 },
+        { name: 'INTC', fullName: 'Intel Corp', holders: 1, buyers: 0, sellers: 1 },
+        { name: 'ARM', fullName: 'Arm Holdings', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'IONQ', fullName: 'IonQ, Inc.', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'RKLB', fullName: 'Rocket Lab', holders: 1, buyers: 1, sellers: 0 },
       ]},
       { name: 'Financial', children: [
-        { name: 'NU', fullName: 'Nu Holdings', size: 241.8, change: 15.3 },
-        { name: 'DB', fullName: 'Deutsche Bank', size: 100.0, change: -3.1 },
-        { name: 'IBKR', fullName: 'Interactive Brokers', size: 30.6, change: 9.8 },
-        { name: 'CME', fullName: 'CME Group', size: 74.7, change: 0.5 },
-        { name: 'VEL', fullName: 'Velocity Financial', size: 79.0, change: 22.0 },
-        { name: 'AXP', fullName: 'American Express', size: 18.8, change: -1.5 },
-        { name: 'BAC', fullName: 'Bank of America', size: 11.0, change: -8.2 },
-        { name: 'V', fullName: 'Visa Inc.', size: 1.1, change: 4.6 },
+        { name: 'NU', fullName: 'Nu Holdings', holders: 4, buyers: 3, sellers: 0 },
+        { name: 'DB', fullName: 'Deutsche Bank', holders: 1, buyers: 0, sellers: 0 },
+        { name: 'IBKR', fullName: 'Interactive Brokers', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'CME', fullName: 'CME Group', holders: 1, buyers: 0, sellers: 0 },
+        { name: 'VEL', fullName: 'Velocity Financial', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'AXP', fullName: 'American Express', holders: 1, buyers: 0, sellers: 1 },
+        { name: 'BAC', fullName: 'Bank of America', holders: 1, buyers: 0, sellers: 1 },
+        { name: 'V', fullName: 'Visa Inc.', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'MCO', fullName: "Moody's Corp", holders: 2, buyers: 1, sellers: 0 },
+        { name: 'KHC', fullName: 'Kraft Heinz', holders: 2, buyers: 0, sellers: 2 },
       ]},
       { name: 'Healthcare', children: [
-        { name: 'BTSG', fullName: 'BrightSpring Health', size: 43.3, change: 0.0 },
-        { name: 'JNJ', fullName: 'Johnson & Johnson', size: 12.9, change: -6.3 },
-        { name: 'HIMS', fullName: 'Hims & Hers Health', size: 14.2, change: 38.5 },
-        { name: 'PCVX', fullName: 'Vaxcyte, Inc.', size: 28.6, change: 12.0 },
-        { name: 'CGON', fullName: 'CG Oncology', size: 37.2, change: 0.0 },
-        { name: 'MRK', fullName: 'Merck & Co.', size: 8.6, change: -4.1 },
-        { name: 'UTHR', fullName: 'United Therapeutics', size: 11.8, change: 7.3 },
-        { name: 'BBIO', fullName: 'BridgeBio Pharma', size: 13.1, change: 20.5 },
+        { name: 'BTSG', fullName: 'BrightSpring Health', holders: 1, buyers: 0, sellers: 0 },
+        { name: 'JNJ', fullName: 'Johnson & Johnson', holders: 1, buyers: 0, sellers: 1 },
+        { name: 'HIMS', fullName: 'Hims & Hers Health', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'PCVX', fullName: 'Vaxcyte, Inc.', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'CGON', fullName: 'CG Oncology', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'MRK', fullName: 'Merck & Co.', holders: 1, buyers: 0, sellers: 1 },
+        { name: 'UTHR', fullName: 'United Therapeutics', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'BBIO', fullName: 'BridgeBio Pharma', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'MRNA', fullName: 'Moderna', holders: 1, buyers: 0, sellers: 1 },
+        { name: 'HSIC', fullName: 'Henry Schein', holders: 1, buyers: 0, sellers: 0 },
       ]},
       { name: 'Consumer', children: [
-        { name: 'AMZN', fullName: 'Amazon.com', size: 63.7, change: 5.4 },
-        { name: 'COST', fullName: 'Costco Wholesale', size: 37.1, change: 2.1 },
-        { name: 'KO', fullName: 'The Coca-Cola Co', size: 9.9, change: -0.8 },
-        { name: 'EXPE', fullName: 'Expedia Group', size: 10.9, change: -12.7 },
-        { name: 'KHC', fullName: 'Kraft Heinz', size: 3.4, change: -15.3 },
-        { name: 'GIL', fullName: 'Gildan Activewear', size: 17.0, change: 11.2 },
+        { name: 'AMZN', fullName: 'Amazon.com', holders: 5, buyers: 3, sellers: 1 },
+        { name: 'COST', fullName: 'Costco Wholesale', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'KO', fullName: 'The Coca-Cola Co', holders: 1, buyers: 0, sellers: 0 },
+        { name: 'EXPE', fullName: 'Expedia Group', holders: 1, buyers: 0, sellers: 1 },
+        { name: 'GIL', fullName: 'Gildan Activewear', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'WEN', fullName: "The Wendy's Co", holders: 1, buyers: 0, sellers: 1 },
+        { name: 'LAUR', fullName: 'Laureate Education', holders: 2, buyers: 1, sellers: 0 },
       ]},
       { name: 'Industrial', children: [
-        { name: 'FTAI', fullName: 'FTAI Aviation', size: 82.3, change: 30.2 },
-        { name: 'TDG', fullName: 'TransDigm Group', size: 24.9, change: 6.5 },
-        { name: 'CAT', fullName: 'Caterpillar', size: 8.5, change: -2.3 },
-        { name: 'GE', fullName: 'General Electric', size: 29.5, change: -9.1 },
-        { name: 'POWL', fullName: 'Powell Industries', size: 40.9, change: 45.0 },
-        { name: 'VRT', fullName: 'Vertiv Holdings', size: 27.2, change: 18.3 },
-        { name: 'DE', fullName: 'Deere & Company', size: 4.6, change: -1.0 },
+        { name: 'FTAI', fullName: 'FTAI Aviation', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'TDG', fullName: 'TransDigm Group', holders: 2, buyers: 2, sellers: 0 },
+        { name: 'CAT', fullName: 'Caterpillar', holders: 1, buyers: 0, sellers: 0 },
+        { name: 'GE', fullName: 'General Electric', holders: 1, buyers: 0, sellers: 1 },
+        { name: 'POWL', fullName: 'Powell Industries', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'VRT', fullName: 'Vertiv Holdings', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'DE', fullName: 'Deere & Company', holders: 1, buyers: 0, sellers: 0 },
+        { name: 'DAL', fullName: 'Delta Air Lines', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'UAL', fullName: 'United Airlines', holders: 1, buyers: 1, sellers: 0 },
       ]},
       { name: 'Energy', children: [
-        { name: 'BE', fullName: 'Bloom Energy', size: 54.2, change: 28.0 },
-        { name: 'CVX', fullName: 'Chevron Corp', size: 7.1, change: -5.5 },
-        { name: 'OXY', fullName: 'Occidental Petroleum', size: 4.7, change: -10.2 },
-        { name: 'FSLR', fullName: 'First Solar', size: 11.9, change: 15.8 },
-        { name: 'XOM', fullName: 'Exxon Mobil', size: 0.5, change: -3.0 },
+        { name: 'BE', fullName: 'Bloom Energy', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'CVX', fullName: 'Chevron Corp', holders: 1, buyers: 0, sellers: 1 },
+        { name: 'OXY', fullName: 'Occidental Petroleum', holders: 1, buyers: 0, sellers: 1 },
+        { name: 'FSLR', fullName: 'First Solar', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'XOM', fullName: 'Exxon Mobil', holders: 1, buyers: 0, sellers: 0 },
+        { name: 'ENB', fullName: 'Enbridge Inc.', holders: 1, buyers: 0, sellers: 1 },
       ]},
       { name: 'Materials', children: [
-        { name: 'AU', fullName: 'AngloGold Ashanti', size: 28.8, change: 22.4 },
-        { name: 'FCX', fullName: 'Freeport-McMoRan', size: 6.5, change: 8.7 },
-        { name: 'CCJ', fullName: 'Cameco Corp', size: 9.6, change: 14.0 },
-        { name: 'SKE', fullName: 'Skeena Resources', size: 24.5, change: 33.0 },
-        { name: 'USAS', fullName: 'Americas Gold & Silver', size: 26.8, change: 19.5 },
+        { name: 'AU', fullName: 'AngloGold Ashanti', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'FCX', fullName: 'Freeport-McMoRan', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'CCJ', fullName: 'Cameco Corp', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'SKE', fullName: 'Skeena Resources', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'USAS', fullName: 'Americas Gold & Silver', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'SLSR', fullName: 'Solaris Resources', holders: 2, buyers: 1, sellers: 1 },
       ]},
       { name: 'ETF', children: [
-        { name: 'SPY', fullName: 'SPDR S&P 500', size: 57.9, change: 0.3 },
-        { name: 'VTI', fullName: 'Vanguard Total Stock', size: 91.0, change: 1.2 },
-        { name: 'IAU', fullName: 'iShares Gold Trust', size: 84.0, change: 25.0 },
-        { name: 'GLD', fullName: 'SPDR Gold Shares', size: 5.3, change: 20.0 },
-        { name: 'IEMG', fullName: 'iShares MSCI Emerging', size: 21.0, change: -4.5 },
+        { name: 'SPY', fullName: 'SPDR S&P 500', holders: 1, buyers: 0, sellers: 0 },
+        { name: 'VTI', fullName: 'Vanguard Total Stock', holders: 1, buyers: 0, sellers: 0 },
+        { name: 'IAU', fullName: 'iShares Gold Trust', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'GLD', fullName: 'SPDR Gold Shares', holders: 1, buyers: 1, sellers: 0 },
+        { name: 'IEMG', fullName: 'iShares MSCI Emerging', holders: 2, buyers: 0, sellers: 1 },
+        { name: 'IBIT', fullName: 'iShares Bitcoin Trust', holders: 1, buyers: 1, sellers: 0 },
       ]},
       { name: 'Communication', children: [
-        { name: 'SIRI', fullName: 'Sirius XM', size: 1.1, change: -18.0 },
-        { name: 'MSGS', fullName: 'Madison Square Garden', size: 1.7, change: 5.2 },
-        { name: 'GRMN', fullName: 'Garmin Ltd.', size: 1.1, change: 3.0 },
+        { name: 'SIRI', fullName: 'Sirius XM', holders: 1, buyers: 0, sellers: 1 },
+        { name: 'MSGS', fullName: 'Madison Square Garden', holders: 2, buyers: 1, sellers: 0 },
+        { name: 'GRMN', fullName: 'Garmin Ltd.', holders: 1, buyers: 0, sellers: 0 },
       ]}
     ];
 
@@ -1770,29 +1789,41 @@
         return () => window.removeEventListener('resize', measure);
       }, []);
 
-      // Color scale: Japanese style — red = buy, green = sell
-      const getColor = (change) => {
-        if (change > 0) {
-          const intensity = Math.min(change / 50, 1);
+      // Color: Diffusion Index — normalized score = (buyers - sellers) / (buyers + sellers)
+      // Japanese style: red = net buy, green = net sell, grey = neutral
+      const getColor = (d) => {
+        const total = d.buyers + d.sellers;
+        if (total === 0) return '#B8B5AD';
+        const score = (d.buyers - d.sellers) / total; // -1 to +1
+        if (score > 0) {
+          const intensity = score; // 0..1
           const r = Math.round(200 + 55 * intensity);
-          const g = Math.round(120 - 80 * intensity);
-          const b = Math.round(120 - 80 * intensity);
+          const g = Math.round(130 - 90 * intensity);
+          const b = Math.round(130 - 90 * intensity);
           return `rgb(${r},${g},${b})`;
-        } else if (change < 0) {
-          const intensity = Math.min(Math.abs(change) / 30, 1);
-          const r = Math.round(100 - 50 * intensity);
+        } else if (score < 0) {
+          const intensity = Math.abs(score); // 0..1
+          const r = Math.round(110 - 60 * intensity);
           const g = Math.round(160 + 40 * intensity);
-          const b = Math.round(100 - 30 * intensity);
+          const b = Math.round(110 - 40 * intensity);
           return `rgb(${r},${g},${b})`;
         }
         return '#B8B5AD';
       };
 
-      // Build treemap layout
+      // Diffusion label for cell text
+      const getDiffusionLabel = (d) => {
+        const total = d.buyers + d.sellers;
+        if (total === 0) return '—';
+        const score = d.buyers - d.sellers;
+        return (score > 0 ? '+' : '') + score;
+      };
+
+      // Build treemap layout — size = holders count
       const cells = React.useMemo(() => {
         const { width, height } = dims;
         const root = d3.hierarchy({ name: 'root', children: MOCK_MONEY_FLOW })
-          .sum(d => Math.max(d.size || 0, 0.5))
+          .sum(d => d.holders || 0)
           .sort((a, b) => b.value - a.value);
 
         d3.treemap()
@@ -1811,8 +1842,9 @@
           y: e.clientY - 10,
           ticker: d.data.name,
           fullName: d.data.fullName,
-          size: d.data.size,
-          change: d.data.change
+          holders: d.data.holders,
+          buyers: d.data.buyers,
+          sellers: d.data.sellers,
         });
       };
 
@@ -1827,7 +1859,6 @@
               <svg width={dims.width} height={dims.height} style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 {sectorGroups.map(group => (
                   <g key={group.data.name}>
-                    {/* Sector background */}
                     <rect
                       x={group.x0} y={group.y0}
                       width={group.x1 - group.x0} height={group.y1 - group.y0}
@@ -1836,7 +1867,6 @@
                       strokeWidth="1"
                       rx="4"
                     />
-                    {/* Sector label */}
                     <text
                       x={group.x0 + 8} y={group.y0 + 15}
                       fontSize="10" fontWeight="700" fill="#264653"
@@ -1845,12 +1875,11 @@
                     >
                       {lang === 'ja' ? (SECTOR_NAMES_JP[group.data.name] || group.data.name) : group.data.name}
                     </text>
-                    {/* Child cells */}
                     {(group.children || []).map(leaf => {
                       const w = leaf.x1 - leaf.x0;
                       const h = leaf.y1 - leaf.y0;
                       const showTicker = w > 32 && h > 20;
-                      const showChange = w > 44 && h > 34;
+                      const showDI = w > 44 && h > 34;
                       return (
                         <g key={leaf.data.name} className="treemap-cell"
                           onMouseMove={e => handleMouseMove(e, leaf)}
@@ -1859,12 +1888,12 @@
                           <rect
                             x={leaf.x0} y={leaf.y0}
                             width={w} height={h}
-                            fill={getColor(leaf.data.change)}
+                            fill={getColor(leaf.data)}
                             rx="3"
                           />
                           {showTicker && (
                             <text
-                              x={leaf.x0 + w / 2} y={leaf.y0 + h / 2 + (showChange ? -4 : 2)}
+                              x={leaf.x0 + w / 2} y={leaf.y0 + h / 2 + (showDI ? -4 : 2)}
                               textAnchor="middle"
                               fontSize={w > 70 ? '12' : '10'}
                               fontWeight="700"
@@ -1873,7 +1902,7 @@
                               {leaf.data.name}
                             </text>
                           )}
-                          {showChange && (
+                          {showDI && (
                             <text
                               x={leaf.x0 + w / 2} y={leaf.y0 + h / 2 + 12}
                               textAnchor="middle"
@@ -1881,7 +1910,7 @@
                               fontWeight="600"
                               fill="rgba(255,255,255,0.85)"
                             >
-                              {leaf.data.change > 0 ? '+' : ''}{leaf.data.change.toFixed(1)}%
+                              {getDiffusionLabel(leaf.data)}
                             </text>
                           )}
                         </g>
@@ -1897,7 +1926,7 @@
               <div className="flow-scale">
                 <span className="flow-scale-label">{t.netSell}</span>
                 <div className="flow-scale-bar" style={{
-                  background: 'linear-gradient(90deg, rgb(50,200,70), rgb(100,160,100), #B8B5AD, rgb(200,120,120), rgb(220,50,50))'
+                  background: 'linear-gradient(90deg, rgb(50,200,70), rgb(110,160,110), #B8B5AD, rgb(200,130,130), rgb(255,40,40))'
                 }}></div>
                 <span className="flow-scale-label">{t.netBuy}</span>
               </div>
@@ -1910,13 +1939,15 @@
               <div className="tt-ticker">{tooltip.ticker}</div>
               <div className="tt-company">{tooltip.fullName}</div>
               <div className="tt-row">
-                <span>{t.totalWeightLabel}</span>
-                <span style={{ fontWeight: 700 }}>{tooltip.size.toFixed(1)}%</span>
+                <span>{t.heldBy}</span>
+                <span style={{ fontWeight: 700 }}>{tooltip.holders} {t.fundsUnit}</span>
               </div>
               <div className="tt-row">
-                <span>{t.qoqChange}</span>
-                <span className={tooltip.change >= 0 ? 'tt-change-pos' : 'tt-change-neg'}>
-                  {tooltip.change > 0 ? '+' : ''}{tooltip.change.toFixed(1)}%
+                <span>{t.sentiment}</span>
+                <span>
+                  <span className="tt-change-pos">{tooltip.buyers} {t.buys}</span>
+                  {' / '}
+                  <span className="tt-change-neg">{tooltip.sellers} {t.sells}</span>
                 </span>
               </div>
             </div>
