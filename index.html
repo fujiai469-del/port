@@ -549,6 +549,92 @@
       margin-bottom: 20px;
     }
 
+    .ranking-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .ranking-tab {
+      padding: 10px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      background: #fff;
+      color: var(--primary-teal);
+      border: 2px solid rgba(38, 70, 83, 0.12);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .ranking-tab:hover {
+      border-color: var(--teal-light);
+    }
+
+    .ranking-tab.active {
+      background: var(--primary-teal);
+      color: #fff;
+      border-color: var(--primary-teal);
+    }
+
+    .ranking-table tr.clickable {
+      cursor: pointer;
+    }
+
+    .ranking-table tr.clickable:hover td {
+      background: rgba(233, 196, 106, 0.15);
+    }
+
+    .ticker-funds-panel {
+      background: var(--bg-sand);
+      border-radius: 0 0 12px 12px;
+    }
+
+    .ticker-funds-panel td {
+      padding: 0 !important;
+      background: transparent !important;
+    }
+
+    .ticker-funds-inner {
+      padding: 12px 20px 16px 60px;
+    }
+
+    .ticker-funds-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--teal-light);
+      margin-bottom: 8px;
+    }
+
+    .ticker-fund-chip {
+      display: inline-block;
+      background: #fff;
+      border: 1px solid rgba(38, 70, 83, 0.1);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--primary-teal);
+      margin: 3px 4px 3px 0;
+      transition: all 0.2s;
+    }
+
+    .ticker-fund-chip:hover {
+      background: var(--accent-gold);
+      border-color: var(--accent-gold);
+    }
+
+    .ticker-fund-chip .chip-weight {
+      font-weight: 700;
+      color: var(--teal-light);
+      margin-left: 6px;
+    }
+
     /* Overlap Analysis */
     .overlap-controls {
       display: flex;
@@ -834,6 +920,9 @@
         avgWeight: 'Avg Weight',
         totalWeight: 'Total Weight',
         funds: 'Funds',
+        rankByWeight: 'By Weight',
+        rankByPopularity: 'By Popularity',
+        holdingFunds: 'Held by',
         overlap: 'Overlap',
         overlapTitle: 'Fund Overlap Analysis',
         fundA: 'Fund A',
@@ -878,6 +967,9 @@
         avgWeight: '平均比率',
         totalWeight: '合計比率',
         funds: 'ファンド数',
+        rankByWeight: '比率順',
+        rankByPopularity: '人気順',
+        holdingFunds: '保有ファンド',
         overlap: '重複分析',
         overlapTitle: 'ファンド重複分析',
         fundA: 'ファンドA',
@@ -1337,32 +1429,48 @@
     function RankingView() {
       const lang = React.useContext(LangContext);
       const t = I18N[lang];
+      const [mode, setMode] = React.useState('weight');
+      const [expandedTicker, setExpandedTicker] = React.useState(null);
 
-      const rankingData = React.useMemo(() => {
+      const allData = React.useMemo(() => {
         const tickerMap = {};
         FUNDS_DATA.forEach(fund => {
           fund.holdings.forEach(h => {
             if (!tickerMap[h.ticker]) {
-              tickerMap[h.ticker] = { ticker: h.ticker, name: h.name, totalWeight: 0, fundCount: 0 };
+              tickerMap[h.ticker] = { ticker: h.ticker, name: h.name, totalWeight: 0, fundCount: 0, funds: [] };
             }
             tickerMap[h.ticker].totalWeight += h.percent;
             tickerMap[h.ticker].fundCount += 1;
+            tickerMap[h.ticker].funds.push({ name: fund.name, weight: h.percent });
           });
         });
-        const list = Object.values(tickerMap).map(item => ({
+        return Object.values(tickerMap).map(item => ({
           ...item,
           avgWeight: item.totalWeight / item.fundCount
         }));
-        list.sort((a, b) => b.totalWeight - a.totalWeight);
-        return list.slice(0, 30);
       }, []);
 
-      const maxTotal = rankingData.length > 0 ? rankingData[0].totalWeight : 1;
+      const rankingData = React.useMemo(() => {
+        const sorted = [...allData];
+        if (mode === 'weight') {
+          sorted.sort((a, b) => b.totalWeight - a.totalWeight);
+        } else {
+          sorted.sort((a, b) => b.fundCount - a.fundCount || b.totalWeight - a.totalWeight);
+        }
+        return sorted.slice(0, 30);
+      }, [allData, mode]);
+
+      const maxTotal = rankingData.length > 0 ? Math.max(...rankingData.map(d => d.totalWeight)) : 1;
       const maxAvg = rankingData.length > 0 ? Math.max(...rankingData.map(d => d.avgWeight)) : 1;
+      const maxFunds = rankingData.length > 0 ? Math.max(...rankingData.map(d => d.fundCount)) : 1;
 
       return (
         <div>
           <div className="ranking-section-title">{t.rankingTitle}</div>
+          <div className="ranking-tabs">
+            <button className={`ranking-tab ${mode === 'weight' ? 'active' : ''}`} onClick={() => { setMode('weight'); setExpandedTicker(null); }}>{t.rankByWeight}</button>
+            <button className={`ranking-tab ${mode === 'popularity' ? 'active' : ''}`} onClick={() => { setMode('popularity'); setExpandedTicker(null); }}>{t.rankByPopularity}</button>
+          </div>
           <div className="ranking-table-container">
             <table className="ranking-table">
               <thead>
@@ -1382,22 +1490,39 @@
                   const sectorLabel = lang === 'ja' ? (SECTOR_NAMES_JP[sector] || sector) : sector;
                   const totalBarWidth = (item.totalWeight / maxTotal) * 100;
                   const avgBarWidth = (item.avgWeight / maxAvg) * 100;
+                  const isExpanded = expandedTicker === item.ticker;
                   return (
-                    <tr key={item.ticker}>
-                      <td><span className={`ranking-rank ${i < 3 ? 'top3' : ''}`}>{i + 1}</span></td>
-                      <td><span className="ticker">{item.ticker}</span></td>
-                      <td>{item.name}</td>
-                      <td><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
-                      <td className="weight-cell">
-                        <div className="weight-bar" style={{ width: avgBarWidth + '%' }}></div>
-                        <span className="weight-value">{item.avgWeight.toFixed(1)}%</span>
-                      </td>
-                      <td className="weight-cell">
-                        <div className="weight-bar accent" style={{ width: totalBarWidth + '%' }}></div>
-                        <span className="weight-value">{item.totalWeight.toFixed(1)}%</span>
-                      </td>
-                      <td><span className="ranking-funds-count">{item.fundCount}</span></td>
-                    </tr>
+                    <React.Fragment key={item.ticker}>
+                      <tr className="clickable" onClick={() => setExpandedTicker(isExpanded ? null : item.ticker)}>
+                        <td><span className={`ranking-rank ${i < 3 ? 'top3' : ''}`}>{i + 1}</span></td>
+                        <td><span className="ticker">{item.ticker}</span></td>
+                        <td>{item.name}</td>
+                        <td><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
+                        <td className="weight-cell">
+                          <div className="weight-bar" style={{ width: avgBarWidth + '%' }}></div>
+                          <span className="weight-value">{item.avgWeight.toFixed(1)}%</span>
+                        </td>
+                        <td className="weight-cell">
+                          <div className="weight-bar accent" style={{ width: totalBarWidth + '%' }}></div>
+                          <span className="weight-value">{item.totalWeight.toFixed(1)}%</span>
+                        </td>
+                        <td><span className="ranking-funds-count">{item.fundCount}</span></td>
+                      </tr>
+                      {isExpanded && (
+                        <tr className="ticker-funds-panel">
+                          <td colSpan="7">
+                            <div className="ticker-funds-inner">
+                              <div className="ticker-funds-label">{t.holdingFunds}</div>
+                              {item.funds.sort((a, b) => b.weight - a.weight).map((f, fi) => (
+                                <span key={fi} className="ticker-fund-chip">
+                                  {f.name}<span className="chip-weight">{f.weight.toFixed(1)}%</span>
+                                </span>
+                              ))}
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </React.Fragment>
                   );
                 })}
               </tbody>
