@@ -1025,7 +1025,7 @@
 
       const filtered = FUNDS_DATA.filter(f =>
         f.name.toLowerCase().includes(search.toLowerCase()) ||
-        f.holdings.some(h => h.ticker.toLowerCase().includes(search.toLowerCase()))
+        f.holdings.some(h => h.ticker.toLowerCase() === search.toLowerCase())
       );
 
       const [prevTab, setPrevTab] = React.useState('home');
