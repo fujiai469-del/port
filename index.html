@@ -1231,7 +1231,20 @@
           item.funds.sort((a, b) => b.percent - a.percent);
         });
         list.sort((a, b) => b.fundCount - a.fundCount || b.totalWeight - a.totalWeight);
-        return list.slice(0, 20);
+        // Dense ranking: same fundCount = same rank
+        let rank = 1;
+        list.forEach((item, i) => {
+          if (i === 0) {
+            item.rank = rank;
+          } else if (item.fundCount === list[i - 1].fundCount) {
+            item.rank = list[i - 1].rank;
+          } else {
+            rank = list[i - 1].rank + 1;
+            item.rank = rank;
+          }
+        });
+        // Include all items up to rank 20
+        return list.filter(item => item.rank <= 20);
       }, []);
 
       const toggleExpand = (ticker) => {
@@ -1264,7 +1277,7 @@
                   return (
                     <React.Fragment key={item.ticker}>
                       <tr className={`rank-row ${isExpanded ? 'expanded' : ''}`} onClick={() => toggleExpand(item.ticker)} style={{ cursor: 'pointer' }}>
-                        <td><span className={`rank-number ${i < 3 ? 'top3' : ''}`}>{i + 1}</span></td>
+                        <td><span className={`rank-number ${item.rank <= 3 ? 'top3' : ''}`}>{item.rank}</span></td>
                         <td><span className="ticker">{item.ticker}</span></td>
                         <td>{item.name}</td>
                         <td className="hide-mobile"><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
