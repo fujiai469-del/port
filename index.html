@@ -10,6 +10,7 @@
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <style>
     :root {
       --bg-sand: #E8E1D5;
@@ -755,6 +756,122 @@
       font-size: 14px;
     }
 
+    /* Flow / Treemap */
+    .flow-container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(38, 70, 83, 0.08);
+      padding: 32px;
+    }
+
+    .treemap-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .treemap-wrapper svg {
+      display: block;
+    }
+
+    .treemap-cell rect {
+      stroke: var(--bg-sand);
+      stroke-width: 2px;
+      transition: opacity 0.15s;
+    }
+
+    .treemap-cell:hover rect {
+      opacity: 0.85;
+    }
+
+    .treemap-cell text {
+      pointer-events: none;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .treemap-tooltip {
+      position: fixed;
+      background: var(--primary-teal);
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-family: 'Montserrat', sans-serif;
+      pointer-events: none;
+      z-index: 200;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      line-height: 1.6;
+      max-width: 260px;
+    }
+
+    .treemap-tooltip .tt-ticker {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .treemap-tooltip .tt-company {
+      opacity: 0.8;
+      font-size: 11px;
+    }
+
+    .treemap-tooltip .tt-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    .treemap-tooltip .tt-change-pos {
+      color: #FF6B6B;
+      font-weight: 700;
+    }
+
+    .treemap-tooltip .tt-change-neg {
+      color: #6BCB77;
+      font-weight: 700;
+    }
+
+    .flow-legend {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--primary-teal);
+    }
+
+    .flow-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .flow-legend-swatch {
+      width: 28px;
+      height: 14px;
+      border-radius: 3px;
+    }
+
+    .flow-scale {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .flow-scale-bar {
+      width: 120px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    .flow-scale-label {
+      font-size: 10px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
     /* Empty State */
     .empty-state {
       display: flex;
@@ -869,7 +986,7 @@
   <script type="text/babel">
     const FUNDS_DATA = [{"name":"Sharp Capital","holdings":[{"ticker":"NU","name":"Nu Holdings Ltd.","percent":69.2},{"ticker":"INTR","name":"Inter & Co, Inc.","percent":15.9},{"ticker":"STNE","name":"StoneCo Ltd.","percent":14.9}]},{"name":"Nelson Peltz (Trian Fund Management)","holdings":[{"ticker":"JHG","name":"Janus Henderson Group","percent":34.5},{"ticker":"GE","name":"General Electric","percent":29.5},{"ticker":"SOLV","name":"Solventum Corp","percent":15.0},{"ticker":"IVZ","name":"Invesco Ltd.","percent":8.2},{"ticker":"WEN","name":"The Wendy's Co","percent":6.8},{"ticker":"FERG","name":"Ferguson Enterprises","percent":5.8},{"ticker":"GEHC","name":"GE HealthCare","percent":0.0}]},{"name":"Cabot-Wellington","holdings":[{"ticker":"VTI","name":"Vanguard Total Stock","percent":91.0},{"ticker":"IEMG","name":"iShares Core MSCI Emerging","percent":8.3},{"ticker":"VB","name":"Vanguard Small-Cap","percent":0.6},{"ticker":"VT","name":"Vanguard Total World","percent":0.1}]},{"name":"Windacre Partnership","holdings":[{"ticker":"FNF","name":"Fidelity National Financial","percent":15.9},{"ticker":"TDG","name":"TransDigm Group","percent":11.2},{"ticker":"TSM","name":"Taiwan Semiconductor","percent":11.0},{"ticker":"EXPE","name":"Expedia Group","percent":10.9},{"ticker":"AMZN","name":"Amazon.com","percent":10.7},{"ticker":"GOOGL","name":"Alphabet Inc.","percent":10.6},{"ticker":"SAP","name":"SAP SE","percent":8.7},{"ticker":"MCO","name":"Moody's Corp","percent":7.7},{"ticker":"PRM","name":"Perimeter Solutions","percent":6.8},{"ticker":"NVDA","name":"NVIDIA Corp","percent":6.6}]},{"name":"Oaktop Capital","holdings":[{"ticker":"LRCX","name":"Lam Research","percent":32.7},{"ticker":"KLAC","name":"KLA Corp","percent":32.2},{"ticker":"AVGO","name":"Broadcom Inc.","percent":10.9},{"ticker":"ADI","name":"Analog Devices","percent":10.4},{"ticker":"ASPN","name":"Aspen Aerogels","percent":2.8},{"ticker":"EGAN","name":"eGain Corp","percent":2.1},{"ticker":"PRGS","name":"Progress Software","percent":2.0},{"ticker":"BMY","name":"Bristol-Myers Squibb","percent":2.0},{"ticker":"DELL","name":"Dell Technologies","percent":1.7},{"ticker":"GRMN","name":"Garmin Ltd.","percent":1.1},{"ticker":"CEVA","name":"CEVA, Inc.","percent":1.1},{"ticker":"PINS","name":"Pinterest","percent":1.0},{"ticker":"PETS","name":"PetMed Express","percent":0.1},{"ticker":"INTC","name":"Intel Corp","percent":0.1}]},{"name":"Oakcliff Capital","holdings":[{"ticker":"IBKR","name":"Interactive Brokers","percent":30.6},{"ticker":"GIL","name":"Gildan Activewear","percent":17.0},{"ticker":"TDG","name":"TransDigm Group","percent":13.7},{"ticker":"GOOG","name":"Alphabet Inc.","percent":12.4},{"ticker":"NRP","name":"Natural Resource Partners","percent":7.7}]},{"name":"Lansdowne Partners (UK) Llp","holdings":[{"ticker":"TSM","name":"Taiwan Semiconductor","percent":36.2},{"ticker":"LIN","name":"Linde plc","percent":15.8},{"ticker":"DAL","name":"Delta Air Lines","percent":11.8},{"ticker":"UAL","name":"United Airlines","percent":9.7},{"ticker":"SW","name":"Smurfit Westrock","percent":5.0},{"ticker":"GOLF","name":"Acushnet Holdings","percent":3.8},{"ticker":"IONQ","name":"IonQ, Inc.","percent":3.6},{"ticker":"ADI","name":"Analog Devices","percent":3.4},{"ticker":"AMZN","name":"Amazon.com","percent":3.4},{"ticker":"TECK","name":"Teck Resources","percent":2.9},{"ticker":"PRTC","name":"PureTech Health","percent":1.7},{"ticker":"ROK","name":"Rockwell Automation","percent":0.9},{"ticker":"ARM","name":"Arm Holdings","percent":0.8},{"ticker":"TXN","name":"Texas Instruments","percent":0.6},{"ticker":"FTV","name":"Fortive Corp","percent":0.2},{"ticker":"RAL","name":"Raliant Corp","percent":0.1},{"ticker":"AEM","name":"Agnico Eagle Mines","percent":0.1}]},{"name":"Kohlberg Kravis Roberts & Co. L.p.","holdings":[{"ticker":"BTSG","name":"BrightSpring Health","percent":43.3},{"ticker":"HSIC","name":"Henry Schein","percent":19.7},{"ticker":"BBIO","name":"BridgeBio Pharma","percent":13.1},{"ticker":"NIQ","name":"NIQ Global Intelligence","percent":8.9},{"ticker":"BV","name":"BrightView Holdings","percent":5.5},{"ticker":"CRGY","name":"Crescent Energy","percent":4.5},{"ticker":"KREF","name":"KKR Real Estate Finance","percent":1.7},{"ticker":"MSGS","name":"Madison Square Garden","percent":1.3},{"ticker":"BHC","name":"Bausch Health","percent":0.6},{"ticker":"DEC","name":"Diversified Energy","percent":0.4},{"ticker":"NCLH","name":"Norwegian Cruise Line","percent":0.3},{"ticker":"FSK","name":"FS KKR Capital","percent":0.3},{"ticker":"TEM","name":"Tempus AI","percent":0.2}]},{"name":"First Sabrepoint Capital Management Lp","holdings":[{"ticker":"TPB","name":"Turning Point Brands","percent":16.0},{"ticker":"FCFS","name":"FirstCash Holdings","percent":12.8},{"ticker":"LAUR","name":"Laureate Education","percent":10.2},{"ticker":"CVCO","name":"Cavco Industries","percent":8.2},{"ticker":"MSFT","name":"Microsoft Corp","percent":7.3},{"ticker":"BTI","name":"British American Tobacco","percent":6.6},{"ticker":"STRL","name":"Sterling Infrastructure","percent":5.8},{"ticker":"AMRZ","name":"Amrize AG","percent":5.3},{"ticker":"HAS","name":"Hasbro, Inc.","percent":4.3},{"ticker":"WD","name":"Walker & Dunlop","percent":4.1},{"ticker":"AZO","name":"AutoZone","percent":3.2},{"ticker":"MAA","name":"Mid-America Apartment","percent":3.1},{"ticker":"EGY","name":"VAALCO Energy","percent":3.1},{"ticker":"PGNY","name":"Progyny, Inc.","percent":3.0},{"ticker":"LOPE","name":"Grand Canyon Education","percent":2.7},{"ticker":"GRBK","name":"Green Brick Partners","percent":2.1},{"ticker":"BLD","name":"TopBuild Corp","percent":1.3},{"ticker":"OPRA","name":"Opera Limited","percent":1.1}]},{"name":"Washington State Investment Board","holdings":[{"ticker":"FTAI","name":"FTAI Aviation","percent":82.3},{"ticker":"FIP","name":"FTAI Infrastructure","percent":17.7}]},{"name":"Vk Services, Llc","holdings":[{"ticker":"RKLB","name":"Rocket Lab","percent":98.6},{"ticker":"RBOT","name":"Vicarious Surgical","percent":1.3}]},{"name":"Vitol Holding b.v.","holdings":[{"ticker":"CME","name":"CME Group","percent":74.7},{"ticker":"ADES","name":"PT Akasha Wira","percent":25.3}]},{"name":"Washington University","holdings":[{"ticker":"NU","name":"Nu Holdings","percent":89.4},{"ticker":"MAZE","name":"Maze Therapeutics","percent":5.9},{"ticker":"MRNA","name":"Moderna","percent":2.2},{"ticker":"RBRK","name":"Rubrik","percent":2.0},{"ticker":"FIG","name":"Figma","percent":0.5}]},{"name":"Trybe Capital","holdings":[{"ticker":"NVDA","name":"NVIDIA Corp","percent":34.4},{"ticker":"MSFT","name":"Microsoft Corp","percent":20.1},{"ticker":"GOOGL","name":"Alphabet Inc.","percent":14.6},{"ticker":"LRCX","name":"Lam Research","percent":8.5},{"ticker":"TSM","name":"Taiwan Semiconductor","percent":7.5},{"ticker":"AMZN","name":"Amazon.com","percent":6.5},{"ticker":"META","name":"Meta Platforms","percent":6.3},{"ticker":"ASML","name":"ASML Holding","percent":1.9}]},{"name":"Trustees of Dartmouth College","holdings":[{"ticker":"SPY","name":"SPDR S&P 500","percent":57.9},{"ticker":"IEMG","name":"iShares MSCI Emerging","percent":12.7},{"ticker":"QLTY","name":"GMO U.S. Quality ETF","percent":10.7},{"ticker":"VTV","name":"Vanguard Value","percent":8.9},{"ticker":"IJR","name":"iShares S&P Small-Cap","percent":5.3},{"ticker":"IBIT","name":"iShares Bitcoin Trust","percent":2.5},{"ticker":"ETH","name":"Grayscale Ethereum","percent":1.3},{"ticker":"XOM","name":"Exxon Mobil","percent":0.5},{"ticker":"XLK","name":"Tech Select Sector","percent":0.1}]},{"name":"Tri Locum Partners","holdings":[{"ticker":"JNJ","name":"Johnson & Johnson","percent":12.9},{"ticker":"UTHR","name":"United Therapeutics","percent":11.8},{"ticker":"MRK","name":"Merck & Co.","percent":8.6},{"ticker":"AXSM","name":"Axsome Therapeutics","percent":8.2},{"ticker":"ASND","name":"Ascendis Pharma","percent":8.0},{"ticker":"VERA","name":"Vera Therapeutics","percent":8.0},{"ticker":"ARGX","name":"argenx SE","percent":7.4},{"ticker":"MDGL","name":"Madrigal Pharma","percent":7.1},{"ticker":"SLNO","name":"Soleno Therapeutics","percent":7.0},{"ticker":"ABBV","name":"AbbVie Inc.","percent":4.8},{"ticker":"KRRO","name":"Korro Bio","percent":3.7},{"ticker":"XENE","name":"Xenon Pharma","percent":3.4},{"ticker":"AVDL","name":"Avadel Pharma","percent":2.5},{"ticker":"STVN","name":"Stevanato Group","percent":2.0},{"ticker":"DNTH","name":"Dianthus Therapeutics","percent":1.7},{"ticker":"TARS","name":"Tarsus Pharma","percent":1.6},{"ticker":"PRAX","name":"Praxis Precision","percent":0.9},{"ticker":"BHVN","name":"Biohaven Ltd.","percent":0.5}]},{"name":"Vantage Consulting","holdings":[{"ticker":"BW","name":"Babcock & Wilcox","percent":62.5},{"ticker":"ADCT","name":"ADC Therapeutics","percent":24.4},{"ticker":"CBUS","name":"Cibus, Inc.","percent":13.2}]},{"name":"Technology Crossover Management X, Ltd.","holdings":[{"ticker":"NU","name":"Nu Holdings","percent":75.2},{"ticker":"KLAR","name":"Klarna Group","percent":11.9},{"ticker":"RKT","name":"Rocket Companies","percent":7.3},{"ticker":"PTON","name":"Peloton Interactive","percent":1.8},{"ticker":"TOST","name":"Toast, Inc.","percent":1.8},{"ticker":"GTLB","name":"GitLab Inc.","percent":1.2},{"ticker":"GDRX","name":"GoodRx Holdings","percent":0.8}]},{"name":"Snow Phipps Group","holdings":[{"ticker":"VEL","name":"Velocity Financial","percent":79.0},{"ticker":"LAUR","name":"Laureate Education","percent":21.0}]},{"name":"Pivotal Bioventure","holdings":[{"ticker":"PCVX","name":"Vaxcyte, Inc.","percent":28.6},{"ticker":"OCS","name":"Oculis Holding","percent":23.4},{"ticker":"ARQT","name":"Arcutis Biotherapeutics","percent":23.1},{"ticker":"ZBIO","name":"Zenas BioPharma","percent":10.0},{"ticker":"TRVI","name":"Trevi Therapeutics","percent":6.6},{"ticker":"IMNM","name":"Immunome, Inc.","percent":3.4},{"ticker":"BIOA","name":"BioAge Labs","percent":2.2},{"ticker":"RXRX","name":"Recursion Pharma","percent":1.7},{"ticker":"RLYB","name":"Rallybio Corp","percent":0.7},{"ticker":"BOLT","name":"Bolt Biotherapeutics","percent":0.3}]},{"name":"Oaktree Fund (Oaktree Fund Advisors, LLC)","holdings":[{"ticker":"AU","name":"AngloGold Ashanti","percent":28.8},{"ticker":"ITUB","name":"Itaú Unibanco","percent":11.6},{"ticker":"HDB","name":"HDFC Bank","percent":9.8},{"ticker":"GRAB","name":"Grab Holdings","percent":8.8},{"ticker":"NU","name":"Nu Holdings","percent":8.0},{"ticker":"FCX","name":"Freeport-McMoRan","percent":6.5},{"ticker":"YMM","name":"Full Truck Alliance","percent":6.0},{"ticker":"XP","name":"XP Inc.","percent":4.6},{"ticker":"BZ","name":"Kanzhun Limited","percent":4.6},{"ticker":"TX","name":"Ternium S.A.","percent":3.8},{"ticker":"SE","name":"Sea Limited","percent":3.1},{"ticker":"JBS","name":"JBS N.V.","percent":2.8},{"ticker":"ALVO","name":"Alvotech","percent":1.3},{"ticker":"BTAI","name":"BioXcel Therapeutics","percent":0.2}]},{"name":"Newgen Asset Management Ltd","holdings":[{"ticker":"USAS","name":"Americas Gold and Silver","percent":26.8},{"ticker":"B","name":"Barrick Mining","percent":10.1},{"ticker":"BB","name":"BlackBerry Ltd","percent":9.9},{"ticker":"CCJ","name":"Cameco Corp","percent":9.6},{"ticker":"SLSR","name":"Solaris Resources","percent":7.9},{"ticker":"IAG","name":"IAMGOLD Corp","percent":6.6},{"ticker":"EFXT","name":"Enerflex Ltd.","percent":6.5},{"ticker":"BEP","name":"Brookfield Renewable","percent":5.3},{"ticker":"PPTA","name":"Perpetua Resources","percent":4.3},{"ticker":"NOA","name":"North American Const.","percent":3.4},{"ticker":"ENB","name":"Enbridge Inc.","percent":3.1},{"ticker":"BAM","name":"Brookfield Asset Mgmt","percent":2.9},{"ticker":"NTSK","name":"Netskope, Inc.","percent":2.6},{"ticker":"ASTL","name":"Algoma Steel","percent":0.7},{"ticker":"POET","name":"POET Technologies","percent":0.1},{"ticker":"ANNA","name":"AleAnna, Inc.","percent":0.1}]},{"name":"Moon Capital Management Lp","holdings":[{"ticker":"IAU","name":"iShares Gold Trust","percent":84.0},{"ticker":"GDX","name":"VanEck Gold Miners","percent":3.3},{"ticker":"GDXJ","name":"VanEck Junior Gold","percent":3.0},{"ticker":"IAUX","name":"i-80 Gold Corp","percent":2.1},{"ticker":"GM","name":"General Motors","percent":1.9},{"ticker":"LAD","name":"Lithia Motors","percent":1.8},{"ticker":"BWA","name":"BorgWarner Inc.","percent":1.4},{"ticker":"LEA","name":"Lear Corp","percent":1.3},{"ticker":"EWZ","name":"iShares MSCI Brazil","percent":0.7},{"ticker":"ABG","name":"Asbury Automotive","percent":0.4}]},{"name":"i.g.y. Ltd","holdings":[{"ticker":"AMZN","name":"Amazon.com","percent":42.3},{"ticker":"COST","name":"Costco Wholesale","percent":37.1},{"ticker":"BRK.A","name":"Berkshire Hathaway","percent":20.5}]},{"name":"Hpc Germany Gmbh & Co. Kg","holdings":[{"ticker":"DB","name":"Deutsche Bank","percent":100.0}]},{"name":"Helikon Investments","holdings":[{"ticker":"SKE","name":"Skeena Resources","percent":24.5},{"ticker":"AAUC","name":"Allied Gold","percent":20.3},{"ticker":"CAAP","name":"Corp América Airports","percent":18.2},{"ticker":"MGM","name":"MGM Resorts","percent":9.5},{"ticker":"TGS","name":"Gas del Sur","percent":4.8},{"ticker":"IAC","name":"IAC Inc.","percent":3.6},{"ticker":"SLSR","name":"Solaris Resources","percent":3.4},{"ticker":"PAM","name":"Pampa Energía","percent":3.3},{"ticker":"IRS","name":"IRSA","percent":3.2},{"ticker":"IFS","name":"Intercorp Financial","percent":3.0},{"ticker":"IHS","name":"IHS Holding","percent":2.6},{"ticker":"EDN","name":"Edenor","percent":2.2},{"ticker":"CRES.Y","name":"Cresud","percent":0.3},{"ticker":"LOMA","name":"Loma Negra","percent":0.1}]},{"name":"Foresite Capital Management V, Llc","holdings":[{"ticker":"CGON","name":"CG Oncology","percent":37.2},{"ticker":"ALMS","name":"Alumis Inc.","percent":21.2},{"ticker":"IRON","name":"Disc Medicine","percent":18.2},{"ticker":"HIMS","name":"Hims & Hers Health","percent":14.2},{"ticker":"LYEL","name":"Lyell Immunopharma","percent":7.1},{"ticker":"MAZE","name":"Maze Therapeutics","percent":2.1}]},{"name":"Engine No. 1 Llc","holdings":[{"ticker":"POWL","name":"Powell Industries","percent":40.9},{"ticker":"VRT","name":"Vertiv Holdings","percent":27.2},{"ticker":"FSLR","name":"First Solar","percent":11.9},{"ticker":"HRI","name":"Herc Holdings","percent":8.7},{"ticker":"GLD","name":"SPDR Gold Shares","percent":5.3},{"ticker":"HUBB","name":"Hubbell Inc.","percent":4.9}]},{"name":"Elemental Capital Partners Llc","holdings":[{"ticker":"BE","name":"Bloom Energy","percent":54.2},{"ticker":"INDI","name":"indie Semiconductor","percent":14.8},{"ticker":"CRDO","name":"Credo Technology","percent":14.7},{"ticker":"MRVL","name":"Marvell Technology","percent":9.0},{"ticker":"LRCX","name":"Lam Research","percent":4.7},{"ticker":"NVDA","name":"NVIDIA Corp","percent":2.5}]},{"name":"Warren Buffett (Berkshire Hathaway)","holdings":[{"ticker":"AAPL","name":"Apple Inc.","percent":22.7},{"ticker":"AXP","name":"American Express","percent":18.8},{"ticker":"BAC","name":"Bank of America","percent":11.0},{"ticker":"KO","name":"The Coca-Cola Co","percent":9.9},{"ticker":"CVX","name":"Chevron Corp","percent":7.1},{"ticker":"OXY","name":"Occidental Petroleum","percent":4.7},{"ticker":"MCO","name":"Moody's Corp","percent":4.4},{"ticker":"CB","name":"Chubb Limited","percent":3.3},{"ticker":"KHC","name":"Kraft Heinz","percent":3.2},{"ticker":"GOOGL","name":"Alphabet Inc.","percent":1.6},{"ticker":"DVA","name":"DaVita Inc.","percent":1.6},{"ticker":"KR","name":"The Kroger Co.","percent":1.3},{"ticker":"SIRI","name":"Sirius XM","percent":1.1},{"ticker":"V","name":"Visa Inc.","percent":1.1},{"ticker":"VRSN","name":"VeriSign","percent":0.9},{"ticker":"MA","name":"Mastercard","percent":0.8},{"ticker":"AMZN","name":"Amazon.com","percent":0.8},{"ticker":"STZ","name":"Constellation Brands","percent":0.7},{"ticker":"UNH","name":"UnitedHealth","percent":0.7},{"ticker":"COF","name":"Capital One","percent":0.6},{"ticker":"AON","name":"Aon plc","percent":0.5},{"ticker":"DPZ","name":"Domino's Pizza","percent":0.5},{"ticker":"ALLY","name":"Ally Financial","percent":0.4},{"ticker":"POOL","name":"Pool Corp","percent":0.4},{"ticker":"LLYV.K","name":"Liberty Live","percent":0.4}]},{"name":"Bill Gates (Bill & Melinda Gates Foundation Trust)","holdings":[{"ticker":"BRK.B","name":"Berkshire Hathaway","percent":30.6},{"ticker":"WM","name":"Waste Management","percent":17.9},{"ticker":"CNI","name":"Canadian National Ry","percent":13.7},{"ticker":"MSFT","name":"Microsoft Corp","percent":13.3},{"ticker":"CAT","name":"Caterpillar","percent":8.5},{"ticker":"DE","name":"Deere & Company","percent":4.6},{"ticker":"ECL","name":"Ecolab Inc.","percent":4.0},{"ticker":"FDX","name":"FedEx Corp","percent":1.6},{"ticker":"KOF","name":"Coca-Cola FEMSA","percent":1.4},{"ticker":"WCN","name":"Waste Connections","percent":1.0},{"ticker":"CPNG","name":"Coupang, Inc.","percent":0.8},{"ticker":"SDGR","name":"Schrödinger","percent":0.4},{"ticker":"MSGS","name":"Madison Square Garden","percent":0.4},{"ticker":"WST","name":"West Pharma","percent":0.3},{"ticker":"MCD","name":"McDonald's","percent":0.3},{"ticker":"BUD","name":"Anheuser-Busch","percent":0.3},{"ticker":"PCAR","name":"PACCAR Inc","percent":0.3},{"ticker":"DHR","name":"Danaher Corp","percent":0.2},{"ticker":"KHC","name":"Kraft Heinz","percent":0.2},{"ticker":"HRL","name":"Hormel Foods","percent":0.1},{"ticker":"ONON","name":"On Holding AG","percent":0.1},{"ticker":"VLTO","name":"Veralto Corp","percent":0.0}]}];
 
-    const DATA_AS_OF = '2024-12-31';
+    const DATA_AS_OF = '2026-02-01';
 
     // Sector colors
     const SECTOR_COLORS = {
@@ -935,6 +1052,14 @@
         weightInB: 'Weight (B)',
         selectBothFunds: 'Select two funds to compare their holdings',
         noOverlap: 'No common holdings found',
+        flow: 'Flow',
+        flowTitle: 'Smart Money Flow',
+        flowSubtitle: 'Institutional capital allocation by sector — size by weight, color by QoQ change',
+        qoqChange: 'QoQ Change',
+        totalWeightLabel: 'Total Weight',
+        netBuy: 'Net Buy',
+        netSell: 'Net Sell',
+        neutral: 'Neutral',
         dataAsOf: 'Data as of',
         sectorLegend: 'Sectors',
         Financial: 'Financial',
@@ -982,6 +1107,14 @@
         weightInB: '比率 (B)',
         selectBothFunds: '2つのファンドを選んで保有銘柄を比較',
         noOverlap: '共通銘柄がありません',
+        flow: 'フロー',
+        flowTitle: 'スマートマネーフロー',
+        flowSubtitle: '機関投資家のセクター別資金配分 — サイズ: 比率、色: 前四半期比',
+        qoqChange: '前四半期比',
+        totalWeightLabel: '合計比率',
+        netBuy: '買い越し',
+        netSell: '売り越し',
+        neutral: '中立',
         dataAsOf: 'データ基準日',
         sectorLegend: 'セクター',
         Financial: '金融',
@@ -1140,6 +1273,7 @@
                   <button className={`tab ${tab === 'list' ? 'active' : ''}`} onClick={() => setTab('list')}>{t.list}</button>
                   <button className={`tab ${tab === 'ranking' ? 'active' : ''}`} onClick={() => setTab('ranking')}>{t.ranking}</button>
                   <button className={`tab ${tab === 'overlap' ? 'active' : ''}`} onClick={() => setTab('overlap')}>{t.overlap}</button>
+                  <button className={`tab ${tab === 'flow' ? 'active' : ''}`} onClick={() => setTab('flow')}>{t.flow}</button>
                 </div>
                 <div className="header-right">
                   <input type="text" className="search-box" placeholder={t.searchPlaceholder} value={search} onChange={e => setSearch(e.target.value)} />
@@ -1157,6 +1291,7 @@
               {tab === 'list' && <ListView funds={filtered} selected={selected} onSelect={setSelected} />}
               {tab === 'ranking' && <RankingView />}
               {tab === 'overlap' && <OverlapView />}
+              {tab === 'flow' && <FlowView />}
             </main>
           </div>
         </LangContext.Provider>
@@ -1528,6 +1663,264 @@
               </tbody>
             </table>
           </div>
+        </div>
+      );
+    }
+
+    // Mock Money Flow Data (QoQ change %)
+    const MOCK_MONEY_FLOW = [
+      { name: 'Technology', children: [
+        { name: 'NVDA', fullName: 'NVIDIA Corp', size: 43.5, change: 25.5 },
+        { name: 'MSFT', fullName: 'Microsoft Corp', size: 40.7, change: -5.2 },
+        { name: 'GOOGL', fullName: 'Alphabet Inc.', size: 26.8, change: 8.3 },
+        { name: 'TSM', fullName: 'Taiwan Semiconductor', size: 54.7, change: 12.1 },
+        { name: 'LRCX', fullName: 'Lam Research', size: 45.9, change: -2.8 },
+        { name: 'AVGO', fullName: 'Broadcom Inc.', size: 10.9, change: 18.7 },
+        { name: 'META', fullName: 'Meta Platforms', size: 6.3, change: -11.4 },
+        { name: 'ASML', fullName: 'ASML Holding', size: 1.9, change: 3.1 },
+        { name: 'KLAC', fullName: 'KLA Corp', size: 32.2, change: -7.6 },
+        { name: 'ADI', fullName: 'Analog Devices', size: 13.8, change: 1.2 },
+        { name: 'INTC', fullName: 'Intel Corp', size: 0.1, change: -22.3 },
+        { name: 'ARM', fullName: 'Arm Holdings', size: 0.8, change: 35.0 },
+        { name: 'IONQ', fullName: 'IonQ, Inc.', size: 3.6, change: 42.0 },
+        { name: 'RKLB', fullName: 'Rocket Lab', size: 98.6, change: 55.2 },
+      ]},
+      { name: 'Financial', children: [
+        { name: 'NU', fullName: 'Nu Holdings', size: 241.8, change: 15.3 },
+        { name: 'DB', fullName: 'Deutsche Bank', size: 100.0, change: -3.1 },
+        { name: 'IBKR', fullName: 'Interactive Brokers', size: 30.6, change: 9.8 },
+        { name: 'CME', fullName: 'CME Group', size: 74.7, change: 0.5 },
+        { name: 'VEL', fullName: 'Velocity Financial', size: 79.0, change: 22.0 },
+        { name: 'AXP', fullName: 'American Express', size: 18.8, change: -1.5 },
+        { name: 'BAC', fullName: 'Bank of America', size: 11.0, change: -8.2 },
+        { name: 'V', fullName: 'Visa Inc.', size: 1.1, change: 4.6 },
+      ]},
+      { name: 'Healthcare', children: [
+        { name: 'BTSG', fullName: 'BrightSpring Health', size: 43.3, change: 0.0 },
+        { name: 'JNJ', fullName: 'Johnson & Johnson', size: 12.9, change: -6.3 },
+        { name: 'HIMS', fullName: 'Hims & Hers Health', size: 14.2, change: 38.5 },
+        { name: 'PCVX', fullName: 'Vaxcyte, Inc.', size: 28.6, change: 12.0 },
+        { name: 'CGON', fullName: 'CG Oncology', size: 37.2, change: 0.0 },
+        { name: 'MRK', fullName: 'Merck & Co.', size: 8.6, change: -4.1 },
+        { name: 'UTHR', fullName: 'United Therapeutics', size: 11.8, change: 7.3 },
+        { name: 'BBIO', fullName: 'BridgeBio Pharma', size: 13.1, change: 20.5 },
+      ]},
+      { name: 'Consumer', children: [
+        { name: 'AMZN', fullName: 'Amazon.com', size: 63.7, change: 5.4 },
+        { name: 'COST', fullName: 'Costco Wholesale', size: 37.1, change: 2.1 },
+        { name: 'KO', fullName: 'The Coca-Cola Co', size: 9.9, change: -0.8 },
+        { name: 'EXPE', fullName: 'Expedia Group', size: 10.9, change: -12.7 },
+        { name: 'KHC', fullName: 'Kraft Heinz', size: 3.4, change: -15.3 },
+        { name: 'GIL', fullName: 'Gildan Activewear', size: 17.0, change: 11.2 },
+      ]},
+      { name: 'Industrial', children: [
+        { name: 'FTAI', fullName: 'FTAI Aviation', size: 82.3, change: 30.2 },
+        { name: 'TDG', fullName: 'TransDigm Group', size: 24.9, change: 6.5 },
+        { name: 'CAT', fullName: 'Caterpillar', size: 8.5, change: -2.3 },
+        { name: 'GE', fullName: 'General Electric', size: 29.5, change: -9.1 },
+        { name: 'POWL', fullName: 'Powell Industries', size: 40.9, change: 45.0 },
+        { name: 'VRT', fullName: 'Vertiv Holdings', size: 27.2, change: 18.3 },
+        { name: 'DE', fullName: 'Deere & Company', size: 4.6, change: -1.0 },
+      ]},
+      { name: 'Energy', children: [
+        { name: 'BE', fullName: 'Bloom Energy', size: 54.2, change: 28.0 },
+        { name: 'CVX', fullName: 'Chevron Corp', size: 7.1, change: -5.5 },
+        { name: 'OXY', fullName: 'Occidental Petroleum', size: 4.7, change: -10.2 },
+        { name: 'FSLR', fullName: 'First Solar', size: 11.9, change: 15.8 },
+        { name: 'XOM', fullName: 'Exxon Mobil', size: 0.5, change: -3.0 },
+      ]},
+      { name: 'Materials', children: [
+        { name: 'AU', fullName: 'AngloGold Ashanti', size: 28.8, change: 22.4 },
+        { name: 'FCX', fullName: 'Freeport-McMoRan', size: 6.5, change: 8.7 },
+        { name: 'CCJ', fullName: 'Cameco Corp', size: 9.6, change: 14.0 },
+        { name: 'SKE', fullName: 'Skeena Resources', size: 24.5, change: 33.0 },
+        { name: 'USAS', fullName: 'Americas Gold & Silver', size: 26.8, change: 19.5 },
+      ]},
+      { name: 'ETF', children: [
+        { name: 'SPY', fullName: 'SPDR S&P 500', size: 57.9, change: 0.3 },
+        { name: 'VTI', fullName: 'Vanguard Total Stock', size: 91.0, change: 1.2 },
+        { name: 'IAU', fullName: 'iShares Gold Trust', size: 84.0, change: 25.0 },
+        { name: 'GLD', fullName: 'SPDR Gold Shares', size: 5.3, change: 20.0 },
+        { name: 'IEMG', fullName: 'iShares MSCI Emerging', size: 21.0, change: -4.5 },
+      ]},
+      { name: 'Communication', children: [
+        { name: 'SIRI', fullName: 'Sirius XM', size: 1.1, change: -18.0 },
+        { name: 'MSGS', fullName: 'Madison Square Garden', size: 1.7, change: 5.2 },
+        { name: 'GRMN', fullName: 'Garmin Ltd.', size: 1.1, change: 3.0 },
+      ]}
+    ];
+
+    function FlowView() {
+      const lang = React.useContext(LangContext);
+      const t = I18N[lang];
+      const containerRef = React.useRef(null);
+      const [tooltip, setTooltip] = React.useState(null);
+      const [dims, setDims] = React.useState({ width: 1000, height: 600 });
+
+      // Measure container
+      React.useEffect(() => {
+        const measure = () => {
+          if (containerRef.current) {
+            const w = containerRef.current.clientWidth;
+            setDims({ width: w, height: Math.max(500, Math.min(700, w * 0.55)) });
+          }
+        };
+        measure();
+        window.addEventListener('resize', measure);
+        return () => window.removeEventListener('resize', measure);
+      }, []);
+
+      // Color scale: Japanese style — red = buy, green = sell
+      const getColor = (change) => {
+        if (change > 0) {
+          const intensity = Math.min(change / 50, 1);
+          const r = Math.round(200 + 55 * intensity);
+          const g = Math.round(120 - 80 * intensity);
+          const b = Math.round(120 - 80 * intensity);
+          return `rgb(${r},${g},${b})`;
+        } else if (change < 0) {
+          const intensity = Math.min(Math.abs(change) / 30, 1);
+          const r = Math.round(100 - 50 * intensity);
+          const g = Math.round(160 + 40 * intensity);
+          const b = Math.round(100 - 30 * intensity);
+          return `rgb(${r},${g},${b})`;
+        }
+        return '#B8B5AD';
+      };
+
+      // Build treemap layout
+      const cells = React.useMemo(() => {
+        const { width, height } = dims;
+        const root = d3.hierarchy({ name: 'root', children: MOCK_MONEY_FLOW })
+          .sum(d => Math.max(d.size || 0, 0.5))
+          .sort((a, b) => b.value - a.value);
+
+        d3.treemap()
+          .size([width, height])
+          .paddingTop(22)
+          .paddingInner(2)
+          .paddingOuter(3)
+          .round(true)(root);
+
+        return root;
+      }, [dims]);
+
+      const handleMouseMove = (e, d) => {
+        setTooltip({
+          x: e.clientX + 12,
+          y: e.clientY - 10,
+          ticker: d.data.name,
+          fullName: d.data.fullName,
+          size: d.data.size,
+          change: d.data.change
+        });
+      };
+
+      const sectorGroups = cells.children || [];
+
+      return (
+        <div>
+          <div className="ranking-section-title">{t.flowTitle}</div>
+          <p style={{ fontSize: '12px', color: '#2A9D8F', marginBottom: '24px', marginTop: '-12px' }}>{t.flowSubtitle}</p>
+          <div className="flow-container">
+            <div className="treemap-wrapper" ref={containerRef}>
+              <svg width={dims.width} height={dims.height} style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                {sectorGroups.map(group => (
+                  <g key={group.data.name}>
+                    {/* Sector background */}
+                    <rect
+                      x={group.x0} y={group.y0}
+                      width={group.x1 - group.x0} height={group.y1 - group.y0}
+                      fill="rgba(38, 70, 83, 0.04)"
+                      stroke="rgba(38, 70, 83, 0.12)"
+                      strokeWidth="1"
+                      rx="4"
+                    />
+                    {/* Sector label */}
+                    <text
+                      x={group.x0 + 8} y={group.y0 + 15}
+                      fontSize="10" fontWeight="700" fill="#264653"
+                      textAnchor="start" letterSpacing="1.5"
+                      style={{ textTransform: 'uppercase' }}
+                    >
+                      {lang === 'ja' ? (SECTOR_NAMES_JP[group.data.name] || group.data.name) : group.data.name}
+                    </text>
+                    {/* Child cells */}
+                    {(group.children || []).map(leaf => {
+                      const w = leaf.x1 - leaf.x0;
+                      const h = leaf.y1 - leaf.y0;
+                      const showTicker = w > 32 && h > 20;
+                      const showChange = w > 44 && h > 34;
+                      return (
+                        <g key={leaf.data.name} className="treemap-cell"
+                          onMouseMove={e => handleMouseMove(e, leaf)}
+                          onMouseLeave={() => setTooltip(null)}
+                        >
+                          <rect
+                            x={leaf.x0} y={leaf.y0}
+                            width={w} height={h}
+                            fill={getColor(leaf.data.change)}
+                            rx="3"
+                          />
+                          {showTicker && (
+                            <text
+                              x={leaf.x0 + w / 2} y={leaf.y0 + h / 2 + (showChange ? -4 : 2)}
+                              textAnchor="middle"
+                              fontSize={w > 70 ? '12' : '10'}
+                              fontWeight="700"
+                              fill="#fff"
+                            >
+                              {leaf.data.name}
+                            </text>
+                          )}
+                          {showChange && (
+                            <text
+                              x={leaf.x0 + w / 2} y={leaf.y0 + h / 2 + 12}
+                              textAnchor="middle"
+                              fontSize="9"
+                              fontWeight="600"
+                              fill="rgba(255,255,255,0.85)"
+                            >
+                              {leaf.data.change > 0 ? '+' : ''}{leaf.data.change.toFixed(1)}%
+                            </text>
+                          )}
+                        </g>
+                      );
+                    })}
+                  </g>
+                ))}
+              </svg>
+            </div>
+
+            {/* Legend */}
+            <div className="flow-legend">
+              <div className="flow-scale">
+                <span className="flow-scale-label">{t.netSell}</span>
+                <div className="flow-scale-bar" style={{
+                  background: 'linear-gradient(90deg, rgb(50,200,70), rgb(100,160,100), #B8B5AD, rgb(200,120,120), rgb(220,50,50))'
+                }}></div>
+                <span className="flow-scale-label">{t.netBuy}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Tooltip */}
+          {tooltip && (
+            <div className="treemap-tooltip" style={{ left: tooltip.x, top: tooltip.y }}>
+              <div className="tt-ticker">{tooltip.ticker}</div>
+              <div className="tt-company">{tooltip.fullName}</div>
+              <div className="tt-row">
+                <span>{t.totalWeightLabel}</span>
+                <span style={{ fontWeight: 700 }}>{tooltip.size.toFixed(1)}%</span>
+              </div>
+              <div className="tt-row">
+                <span>{t.qoqChange}</span>
+                <span className={tooltip.change >= 0 ? 'tt-change-pos' : 'tt-change-neg'}>
+                  {tooltip.change > 0 ? '+' : ''}{tooltip.change.toFixed(1)}%
+                </span>
+              </div>
+            </div>
+          )}
         </div>
       );
     }
