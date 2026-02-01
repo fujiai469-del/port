@@ -537,6 +537,110 @@
       color: var(--primary-teal);
     }
 
+    .rank-row {
+      transition: background 0.2s;
+    }
+
+    .rank-row.expanded td {
+      background: rgba(233, 196, 106, 0.15);
+      border-bottom-color: transparent;
+    }
+
+    .expand-arrow {
+      font-size: 10px;
+      color: var(--teal-light);
+      transition: transform 0.2s;
+    }
+
+    .rank-detail-row td {
+      background: var(--bg-sand) !important;
+      padding: 0 !important;
+    }
+
+    .rank-funds-panel {
+      padding: 16px 24px 20px;
+    }
+
+    .rank-funds-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--teal-light);
+      padding: 0 0 10px;
+      border-bottom: 1px solid rgba(38, 70, 83, 0.1);
+      margin-bottom: 4px;
+    }
+
+    .rank-fund-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(38, 70, 83, 0.06);
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 6px;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    .rank-fund-item:last-child {
+      border-bottom: none;
+    }
+
+    .rank-fund-item:hover {
+      background: rgba(233, 196, 106, 0.2);
+    }
+
+    .rank-fund-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--primary-teal);
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 16px;
+    }
+
+    .rank-fund-item:hover .rank-fund-name {
+      color: var(--teal-light);
+      text-decoration: underline;
+    }
+
+    .rank-fund-bar-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 140px;
+    }
+
+    .rank-fund-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(38, 70, 83, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .rank-fund-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-gold), #F4A261);
+      border-radius: 3px;
+    }
+
+    .rank-fund-percent {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary-teal);
+      min-width: 50px;
+      text-align: right;
+    }
+
     /* Mobile */
     @media (max-width: 900px) {
       .header {
@@ -645,6 +749,18 @@
       .ranking-table .hide-mobile {
         display: none;
       }
+
+      .rank-funds-panel {
+        padding: 12px 16px;
+      }
+
+      .rank-fund-bar-wrapper {
+        min-width: 100px;
+      }
+
+      .rank-fund-name {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
@@ -708,6 +824,9 @@
         rankFunds: 'Funds',
         rankAvgWeight: 'Avg Weight',
         rankTotalWeight: 'Total Weight',
+        backToRanking: 'Back to Ranking',
+        rankFundName: 'Fund',
+        rankWeight: 'Weight',
         Financial: 'Financial',
         Technology: 'Technology',
         Healthcare: 'Healthcare',
@@ -743,6 +862,9 @@
         rankFunds: 'ファンド数',
         rankAvgWeight: '平均比率',
         rankTotalWeight: '合計比率',
+        backToRanking: 'ランキングに戻る',
+        rankFundName: 'ファンド',
+        rankWeight: '比率',
         Financial: '金融',
         Technology: 'テクノロジー',
         Healthcare: 'ヘルスケア',
@@ -872,14 +994,17 @@
         f.holdings.some(h => h.ticker.toLowerCase().includes(search.toLowerCase()))
       );
 
-      const handleSelectFund = (fund) => {
+      const [prevTab, setPrevTab] = React.useState('home');
+
+      const handleSelectFund = (fund, fromTab) => {
         setSelected(fund);
-        if (tab === 'home') setTab('detail');
+        setPrevTab(fromTab || tab);
+        setTab('detail');
       };
 
       const handleBack = () => {
         setSelected(null);
-        setTab('home');
+        setTab(prevTab);
       };
 
       return (
@@ -889,9 +1014,9 @@
               <div className="header-content">
                 <div className="logo">Portfolio Visualizer</div>
                 <div className="tabs">
-                  <button className={`tab ${tab === 'home' || tab === 'detail' ? 'active' : ''}`} onClick={() => { setTab('home'); setSelected(null); }}>{t.home}</button>
+                  <button className={`tab ${tab === 'home' || (tab === 'detail' && prevTab === 'home') ? 'active' : ''}`} onClick={() => { setTab('home'); setSelected(null); }}>{t.home}</button>
                   <button className={`tab ${tab === 'list' ? 'active' : ''}`} onClick={() => setTab('list')}>{t.list}</button>
-                  <button className={`tab ${tab === 'ranking' ? 'active' : ''}`} onClick={() => setTab('ranking')}>{t.ranking}</button>
+                  <button className={`tab ${tab === 'ranking' || (tab === 'detail' && prevTab === 'ranking') ? 'active' : ''}`} onClick={() => setTab('ranking')}>{t.ranking}</button>
                 </div>
                 <div className="header-right">
                   <input type="text" className="search-box" placeholder={t.searchPlaceholder} value={search} onChange={e => setSearch(e.target.value)} />
@@ -904,9 +1029,9 @@
             </header>
             <main className="main-content">
               {tab === 'home' && <HomeView funds={filtered} onSelect={handleSelectFund} />}
-              {tab === 'detail' && selected && <DetailView fund={selected} onBack={handleBack} />}
+              {tab === 'detail' && selected && <DetailView fund={selected} onBack={handleBack} backLabel={prevTab === 'ranking' ? t.backToRanking : t.backToHome} />}
               {tab === 'list' && <ListView funds={filtered} selected={selected} onSelect={setSelected} />}
-              {tab === 'ranking' && <RankingView />}
+              {tab === 'ranking' && <RankingView onSelectFund={(fund) => handleSelectFund(fund, 'ranking')} />}
             </main>
           </div>
         </LangContext.Provider>
@@ -974,7 +1099,7 @@
       );
     }
 
-    function DetailView({ fund, onBack }) {
+    function DetailView({ fund, onBack, backLabel }) {
       const chartRef = React.useRef(null);
       const chartInstance = React.useRef(null);
       const lang = React.useContext(LangContext);
@@ -1021,7 +1146,7 @@
 
       return (
         <div className="detail-view">
-          {onBack && <button className="back-btn" onClick={onBack}>← {t.backToHome}</button>}
+          {onBack && <button className="back-btn" onClick={onBack}>← {backLabel || t.backToHome}</button>}
           <h1 className="fund-title">{fund.name}</h1>
           <p className="fund-subtitle">{fund.holdings.length} {t.holdings}</p>
           <div className="chart-container"><canvas ref={chartRef}></canvas></div>
@@ -1048,26 +1173,35 @@
       );
     }
 
-    function RankingView() {
+    function RankingView({ onSelectFund }) {
       const lang = React.useContext(LangContext);
       const t = I18N[lang];
+      const [expanded, setExpanded] = React.useState(null);
 
       const rankings = React.useMemo(() => {
         const tickerMap = {};
         FUNDS_DATA.forEach(fund => {
           fund.holdings.forEach(h => {
             if (!tickerMap[h.ticker]) {
-              tickerMap[h.ticker] = { ticker: h.ticker, name: h.name, fundCount: 0, totalWeight: 0 };
+              tickerMap[h.ticker] = { ticker: h.ticker, name: h.name, fundCount: 0, totalWeight: 0, funds: [] };
             }
             tickerMap[h.ticker].fundCount += 1;
             tickerMap[h.ticker].totalWeight += h.percent;
+            tickerMap[h.ticker].funds.push({ fund, percent: h.percent });
           });
         });
         const list = Object.values(tickerMap);
-        list.forEach(item => { item.avgWeight = item.totalWeight / item.fundCount; });
+        list.forEach(item => {
+          item.avgWeight = item.totalWeight / item.fundCount;
+          item.funds.sort((a, b) => b.percent - a.percent);
+        });
         list.sort((a, b) => b.fundCount - a.fundCount || b.totalWeight - a.totalWeight);
         return list.slice(0, 20);
       }, []);
+
+      const toggleExpand = (ticker) => {
+        setExpanded(expanded === ticker ? null : ticker);
+      };
 
       return (
         <div className="ranking-view">
@@ -1090,16 +1224,47 @@
                 {rankings.map((item, i) => {
                   const sector = getSector(item.ticker);
                   const sectorLabel = lang === 'ja' ? (SECTOR_NAMES_JP[sector] || sector) : sector;
+                  const isExpanded = expanded === item.ticker;
                   return (
-                    <tr key={item.ticker}>
-                      <td><span className={`rank-number ${i < 3 ? 'top3' : ''}`}>{i + 1}</span></td>
-                      <td><span className="ticker">{item.ticker}</span></td>
-                      <td>{item.name}</td>
-                      <td className="hide-mobile"><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
-                      <td><span className="rank-funds-count">{item.fundCount}</span></td>
-                      <td className="hide-mobile"><span className="rank-weight">{item.avgWeight.toFixed(1)}%</span></td>
-                      <td><span className="rank-weight">{item.totalWeight.toFixed(1)}%</span></td>
-                    </tr>
+                    <React.Fragment key={item.ticker}>
+                      <tr className={`rank-row ${isExpanded ? 'expanded' : ''}`} onClick={() => toggleExpand(item.ticker)} style={{ cursor: 'pointer' }}>
+                        <td><span className={`rank-number ${i < 3 ? 'top3' : ''}`}>{i + 1}</span></td>
+                        <td><span className="ticker">{item.ticker}</span></td>
+                        <td>{item.name}</td>
+                        <td className="hide-mobile"><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
+                        <td><span className="rank-funds-count">{item.fundCount}</span></td>
+                        <td className="hide-mobile"><span className="rank-weight">{item.avgWeight.toFixed(1)}%</span></td>
+                        <td>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span className="rank-weight">{item.totalWeight.toFixed(1)}%</span>
+                            <span className="expand-arrow">{isExpanded ? '▲' : '▼'}</span>
+                          </div>
+                        </td>
+                      </tr>
+                      {isExpanded && (
+                        <tr className="rank-detail-row">
+                          <td colSpan="7" style={{ padding: 0 }}>
+                            <div className="rank-funds-panel">
+                              <div className="rank-funds-header">
+                                <span>{t.rankFundName}</span>
+                                <span>{t.rankWeight}</span>
+                              </div>
+                              {item.funds.map((f, fi) => (
+                                <div key={fi} className="rank-fund-item" onClick={(e) => { e.stopPropagation(); onSelectFund(f.fund); }}>
+                                  <span className="rank-fund-name">{f.fund.name}</span>
+                                  <div className="rank-fund-bar-wrapper">
+                                    <div className="rank-fund-bar">
+                                      <div className="rank-fund-bar-fill" style={{ width: `${Math.min(f.percent, 100)}%` }}></div>
+                                    </div>
+                                    <span className="rank-fund-percent">{f.percent.toFixed(1)}%</span>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </React.Fragment>
                   );
                 })}
               </tbody>
