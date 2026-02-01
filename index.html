@@ -74,6 +74,7 @@
       background: rgba(255, 255, 255, 0.1);
       color: rgba(255, 255, 255, 0.7);
       border: none;
+      font-family: 'Montserrat', sans-serif;
     }
 
     .tab:hover {
@@ -86,7 +87,7 @@
       color: var(--primary-teal);
     }
 
-    .search-header {
+    .header-right {
       display: flex;
       align-items: center;
       gap: 16px;
@@ -102,6 +103,7 @@
       width: 220px;
       outline: none;
       transition: all 0.3s;
+      font-family: 'Montserrat', sans-serif;
     }
 
     .search-box::placeholder {
@@ -113,11 +115,96 @@
       width: 280px;
     }
 
+    .lang-toggle {
+      display: flex;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .lang-btn {
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border: none;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.5);
+      transition: all 0.3s;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .lang-btn:hover {
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.8);
+    }
+
+    .lang-btn.active {
+      background: var(--accent-gold);
+      color: var(--primary-teal);
+    }
+
     /* Main Content */
     .main-content {
       max-width: 1400px;
       margin: 0 auto;
       padding: 40px;
+    }
+
+    /* Layout with legend */
+    .home-layout {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      gap: 32px;
+    }
+
+    .list-layout-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      gap: 32px;
+    }
+
+    /* Sector Legend */
+    .sector-legend {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 16px rgba(38, 70, 83, 0.08);
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+
+    .sector-legend-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary-teal);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--bg-sand);
+    }
+
+    .sector-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 12px;
+      color: var(--primary-teal);
+    }
+
+    .sector-legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .sector-legend-label {
+      font-weight: 500;
     }
 
     /* Home Grid */
@@ -235,6 +322,7 @@
       border: none;
       margin-bottom: 24px;
       transition: all 0.3s;
+      font-family: 'Montserrat', sans-serif;
     }
 
     .back-btn:hover {
@@ -306,6 +394,16 @@
       font-size: 13px;
     }
 
+    .sector-badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: #fff;
+      display: inline-block;
+      margin-left: 8px;
+    }
+
     .percent-bar {
       display: flex;
       align-items: center;
@@ -359,12 +457,13 @@
       }
 
       .header-content {
-        flex-direction: column;
-        gap: 16px;
+        flex-wrap: wrap;
+        gap: 12px;
       }
 
-      .search-header {
+      .header-right {
         width: 100%;
+        justify-content: space-between;
       }
 
       .search-box {
@@ -372,8 +471,37 @@
         width: auto;
       }
 
+      .search-box:focus {
+        width: auto;
+      }
+
       .main-content {
         padding: 20px;
+      }
+
+      .home-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .list-layout-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .sector-legend {
+        position: static;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 16px;
+        padding: 16px;
+      }
+
+      .sector-legend-title {
+        width: 100%;
+        margin-bottom: 8px;
+      }
+
+      .sector-legend-item {
+        padding: 4px 0;
       }
 
       .funds-grid {
@@ -418,26 +546,92 @@
 <body>
   <div id="root"></div>
   <script type="text/babel">
-    const FUNDS_DATA = [{ "name": "Sharp Capital", "holdings": [{ "ticker": "NU", "name": "Nu Holdings Ltd.", "percent": 69.2 }, { "ticker": "INTR", "name": "Inter & Co, Inc.", "percent": 15.9 }, { "ticker": "STNE", "name": "StoneCo Ltd.", "percent": 14.9 }] }, { "name": "Nelson Peltz (Trian Fund Management)", "holdings": [{ "ticker": "JHG", "name": "Janus Henderson Group", "percent": 34.5 }, { "ticker": "GE", "name": "General Electric", "percent": 29.5 }, { "ticker": "SOLV", "name": "Solventum Corp", "percent": 15.0 }, { "ticker": "IVZ", "name": "Invesco Ltd.", "percent": 8.2 }, { "ticker": "WEN", "name": "The Wendy's Co", "percent": 6.8 }, { "ticker": "FERG", "name": "Ferguson Enterprises", "percent": 5.8 }, { "ticker": "GEHC", "name": "GE HealthCare", "percent": 0.0 }] }, { "name": "Cabot-Wellington", "holdings": [{ "ticker": "VTI", "name": "Vanguard Total Stock", "percent": 91.0 }, { "ticker": "IEMG", "name": "iShares Core MSCI Emerging", "percent": 8.3 }, { "ticker": "VB", "name": "Vanguard Small-Cap", "percent": 0.6 }, { "ticker": "VT", "name": "Vanguard Total World", "percent": 0.1 }] }, { "name": "Windacre Partnership", "holdings": [{ "ticker": "FNF", "name": "Fidelity National Financial", "percent": 15.9 }, { "ticker": "TDG", "name": "TransDigm Group", "percent": 11.2 }, { "ticker": "TSM", "name": "Taiwan Semiconductor", "percent": 11.0 }, { "ticker": "EXPE", "name": "Expedia Group", "percent": 10.9 }, { "ticker": "AMZN", "name": "Amazon.com", "percent": 10.7 }, { "ticker": "GOOGL", "name": "Alphabet Inc.", "percent": 10.6 }, { "ticker": "SAP", "name": "SAP SE", "percent": 8.7 }, { "ticker": "MCO", "name": "Moody's Corp", "percent": 7.7 }, { "ticker": "PRM", "name": "Perimeter Solutions", "percent": 6.8 }, { "ticker": "NVDA", "name": "NVIDIA Corp", "percent": 6.6 }] }, { "name": "Oaktop Capital", "holdings": [{ "ticker": "LRCX", "name": "Lam Research", "percent": 32.7 }, { "ticker": "KLAC", "name": "KLA Corp", "percent": 32.2 }, { "ticker": "AVGO", "name": "Broadcom Inc.", "percent": 10.9 }, { "ticker": "ADI", "name": "Analog Devices", "percent": 10.4 }, { "ticker": "ASPN", "name": "Aspen Aerogels", "percent": 2.8 }, { "ticker": "EGAN", "name": "eGain Corp", "percent": 2.1 }, { "ticker": "PRGS", "name": "Progress Software", "percent": 2.0 }, { "ticker": "BMY", "name": "Bristol-Myers Squibb", "percent": 2.0 }, { "ticker": "DELL", "name": "Dell Technologies", "percent": 1.7 }, { "ticker": "GRMN", "name": "Garmin Ltd.", "percent": 1.1 }, { "ticker": "CEVA", "name": "CEVA, Inc.", "percent": 1.1 }, { "ticker": "PINS", "name": "Pinterest", "percent": 1.0 }, { "ticker": "PETS", "name": "PetMed Express", "percent": 0.1 }, { "ticker": "INTC", "name": "Intel Corp", "percent": 0.1 }] }, { "name": "Oakcliff Capital", "holdings": [{ "ticker": "IBKR", "name": "Interactive Brokers", "percent": 30.6 }, { "ticker": "GIL", "name": "Gildan Activewear", "percent": 17.0 }, { "ticker": "TDG", "name": "TransDigm Group", "percent": 13.7 }, { "ticker": "GOOG", "name": "Alphabet Inc.", "percent": 12.4 }, { "ticker": "NRP", "name": "Natural Resource Partners", "percent": 7.7 }] }, { "name": "Lansdowne Partners (UK) Llp", "holdings": [{ "ticker": "TSM", "name": "Taiwan Semiconductor", "percent": 36.2 }, { "ticker": "LIN", "name": "Linde plc", "percent": 15.8 }, { "ticker": "DAL", "name": "Delta Air Lines", "percent": 11.8 }, { "ticker": "UAL", "name": "United Airlines", "percent": 9.7 }, { "ticker": "SW", "name": "Smurfit Westrock", "percent": 5.0 }, { "ticker": "GOLF", "name": "Acushnet Holdings", "percent": 3.8 }, { "ticker": "IONQ", "name": "IonQ, Inc.", "percent": 3.6 }, { "ticker": "ADI", "name": "Analog Devices", "percent": 3.4 }, { "ticker": "AMZN", "name": "Amazon.com", "percent": 3.4 }, { "ticker": "TECK", "name": "Teck Resources", "percent": 2.9 }, { "ticker": "PRTC", "name": "PureTech Health", "percent": 1.7 }, { "ticker": "ROK", "name": "Rockwell Automation", "percent": 0.9 }, { "ticker": "ARM", "name": "Arm Holdings", "percent": 0.8 }, { "ticker": "TXN", "name": "Texas Instruments", "percent": 0.6 }, { "ticker": "FTV", "name": "Fortive Corp", "percent": 0.2 }, { "ticker": "RAL", "name": "Raliant Corp", "percent": 0.1 }, { "ticker": "AEM", "name": "Agnico Eagle Mines", "percent": 0.1 }] }, { "name": "Kohlberg Kravis Roberts & Co. L.p.", "holdings": [{ "ticker": "BTSG", "name": "BrightSpring Health", "percent": 43.3 }, { "ticker": "HSIC", "name": "Henry Schein", "percent": 19.7 }, { "ticker": "BBIO", "name": "BridgeBio Pharma", "percent": 13.1 }, { "ticker": "NIQ", "name": "NIQ Global Intelligence", "percent": 8.9 }, { "ticker": "BV", "name": "BrightView Holdings", "percent": 5.5 }, { "ticker": "CRGY", "name": "Crescent Energy", "percent": 4.5 }, { "ticker": "KREF", "name": "KKR Real Estate Finance", "percent": 1.7 }, { "ticker": "MSGS", "name": "Madison Square Garden", "percent": 1.3 }, { "ticker": "BHC", "name": "Bausch Health", "percent": 0.6 }, { "ticker": "DEC", "name": "Diversified Energy", "percent": 0.4 }, { "ticker": "NCLH", "name": "Norwegian Cruise Line", "percent": 0.3 }, { "ticker": "FSK", "name": "FS KKR Capital", "percent": 0.3 }, { "ticker": "TEM", "name": "Tempus AI", "percent": 0.2 }] }, { "name": "First Sabrepoint Capital Management Lp", "holdings": [{ "ticker": "TPB", "name": "Turning Point Brands", "percent": 16.0 }, { "ticker": "FCFS", "name": "FirstCash Holdings", "percent": 12.8 }, { "ticker": "LAUR", "name": "Laureate Education", "percent": 10.2 }, { "ticker": "CVCO", "name": "Cavco Industries", "percent": 8.2 }, { "ticker": "MSFT", "name": "Microsoft Corp", "percent": 7.3 }, { "ticker": "BTI", "name": "British American Tobacco", "percent": 6.6 }, { "ticker": "STRL", "name": "Sterling Infrastructure", "percent": 5.8 }, { "ticker": "AMRZ", "name": "Amrize AG", "percent": 5.3 }, { "ticker": "HAS", "name": "Hasbro, Inc.", "percent": 4.3 }, { "ticker": "WD", "name": "Walker & Dunlop", "percent": 4.1 }, { "ticker": "AZO", "name": "AutoZone", "percent": 3.2 }, { "ticker": "MAA", "name": "Mid-America Apartment", "percent": 3.1 }, { "ticker": "EGY", "name": "VAALCO Energy", "percent": 3.1 }, { "ticker": "PGNY", "name": "Progyny, Inc.", "percent": 3.0 }, { "ticker": "LOPE", "name": "Grand Canyon Education", "percent": 2.7 }, { "ticker": "GRBK", "name": "Green Brick Partners", "percent": 2.1 }, { "ticker": "BLD", "name": "TopBuild Corp", "percent": 1.3 }, { "ticker": "OPRA", "name": "Opera Limited", "percent": 1.1 }] }, { "name": "Washington State Investment Board", "holdings": [{ "ticker": "FTAI", "name": "FTAI Aviation", "percent": 82.3 }, { "ticker": "FIP", "name": "FTAI Infrastructure", "percent": 17.7 }] }, { "name": "Vk Services, Llc", "holdings": [{ "ticker": "RKLB", "name": "Rocket Lab", "percent": 98.6 }, { "ticker": "RBOT", "name": "Vicarious Surgical", "percent": 1.3 }] }, { "name": "Vitol Holding b.v.", "holdings": [{ "ticker": "CME", "name": "CME Group", "percent": 74.7 }, { "ticker": "ADES", "name": "PT Akasha Wira", "percent": 25.3 }] }, { "name": "Washington University", "holdings": [{ "ticker": "NU", "name": "Nu Holdings", "percent": 89.4 }, { "ticker": "MAZE", "name": "Maze Therapeutics", "percent": 5.9 }, { "ticker": "MRNA", "name": "Moderna", "percent": 2.2 }, { "ticker": "RBRK", "name": "Rubrik", "percent": 2.0 }, { "ticker": "FIG", "name": "Figma", "percent": 0.5 }] }, { "name": "Trybe Capital", "holdings": [{ "ticker": "NVDA", "name": "NVIDIA Corp", "percent": 34.4 }, { "ticker": "MSFT", "name": "Microsoft Corp", "percent": 20.1 }, { "ticker": "GOOGL", "name": "Alphabet Inc.", "percent": 14.6 }, { "ticker": "LRCX", "name": "Lam Research", "percent": 8.5 }, { "ticker": "TSM", "name": "Taiwan Semiconductor", "percent": 7.5 }, { "ticker": "AMZN", "name": "Amazon.com", "percent": 6.5 }, { "ticker": "META", "name": "Meta Platforms", "percent": 6.3 }, { "ticker": "ASML", "name": "ASML Holding", "percent": 1.9 }] }, { "name": "Trustees of Dartmouth College", "holdings": [{ "ticker": "SPY", "name": "SPDR S&P 500", "percent": 57.9 }, { "ticker": "IEMG", "name": "iShares MSCI Emerging", "percent": 12.7 }, { "ticker": "QLTY", "name": "GMO U.S. Quality ETF", "percent": 10.7 }, { "ticker": "VTV", "name": "Vanguard Value", "percent": 8.9 }, { "ticker": "IJR", "name": "iShares S&P Small-Cap", "percent": 5.3 }, { "ticker": "IBIT", "name": "iShares Bitcoin Trust", "percent": 2.5 }, { "ticker": "ETH", "name": "Grayscale Ethereum", "percent": 1.3 }, { "ticker": "XOM", "name": "Exxon Mobil", "percent": 0.5 }, { "ticker": "XLK", "name": "Tech Select Sector", "percent": 0.1 }] }, { "name": "Tri Locum Partners", "holdings": [{ "ticker": "JNJ", "name": "Johnson & Johnson", "percent": 12.9 }, { "ticker": "UTHR", "name": "United Therapeutics", "percent": 11.8 }, { "ticker": "MRK", "name": "Merck & Co.", "percent": 8.6 }, { "ticker": "AXSM", "name": "Axsome Therapeutics", "percent": 8.2 }, { "ticker": "ASND", "name": "Ascendis Pharma", "percent": 8.0 }, { "ticker": "VERA", "name": "Vera Therapeutics", "percent": 8.0 }, { "ticker": "ARGX", "name": "argenx SE", "percent": 7.4 }, { "ticker": "MDGL", "name": "Madrigal Pharma", "percent": 7.1 }, { "ticker": "SLNO", "name": "Soleno Therapeutics", "percent": 7.0 }, { "ticker": "ABBV", "name": "AbbVie Inc.", "percent": 4.8 }, { "ticker": "KRRO", "name": "Korro Bio", "percent": 3.7 }, { "ticker": "XENE", "name": "Xenon Pharma", "percent": 3.4 }, { "ticker": "AVDL", "name": "Avadel Pharma", "percent": 2.5 }, { "ticker": "STVN", "name": "Stevanato Group", "percent": 2.0 }, { "ticker": "DNTH", "name": "Dianthus Therapeutics", "percent": 1.7 }, { "ticker": "TARS", "name": "Tarsus Pharma", "percent": 1.6 }, { "ticker": "PRAX", "name": "Praxis Precision", "percent": 0.9 }, { "ticker": "BHVN", "name": "Biohaven Ltd.", "percent": 0.5 }] }, { "name": "Vantage Consulting", "holdings": [{ "ticker": "BW", "name": "Babcock & Wilcox", "percent": 62.5 }, { "ticker": "ADCT", "name": "ADC Therapeutics", "percent": 24.4 }, { "ticker": "CBUS", "name": "Cibus, Inc.", "percent": 13.2 }] }, { "name": "Technology Crossover Management X, Ltd.", "holdings": [{ "ticker": "NU", "name": "Nu Holdings", "percent": 75.2 }, { "ticker": "KLAR", "name": "Klarna Group", "percent": 11.9 }, { "ticker": "RKT", "name": "Rocket Companies", "percent": 7.3 }, { "ticker": "PTON", "name": "Peloton Interactive", "percent": 1.8 }, { "ticker": "TOST", "name": "Toast, Inc.", "percent": 1.8 }, { "ticker": "GTLB", "name": "GitLab Inc.", "percent": 1.2 }, { "ticker": "GDRX", "name": "GoodRx Holdings", "percent": 0.8 }] }, { "name": "Snow Phipps Group", "holdings": [{ "ticker": "VEL", "name": "Velocity Financial", "percent": 79.0 }, { "ticker": "LAUR", "name": "Laureate Education", "percent": 21.0 }] }, { "name": "Pivotal Bioventure", "holdings": [{ "ticker": "PCVX", "name": "Vaxcyte, Inc.", "percent": 28.6 }, { "ticker": "OCS", "name": "Oculis Holding", "percent": 23.4 }, { "ticker": "ARQT", "name": "Arcutis Biotherapeutics", "percent": 23.1 }, { "ticker": "ZBIO", "name": "Zenas BioPharma", "percent": 10.0 }, { "ticker": "TRVI", "name": "Trevi Therapeutics", "percent": 6.6 }, { "ticker": "IMNM", "name": "Immunome, Inc.", "percent": 3.4 }, { "ticker": "BIOA", "name": "BioAge Labs", "percent": 2.2 }, { "ticker": "RXRX", "name": "Recursion Pharma", "percent": 1.7 }, { "ticker": "RLYB", "name": "Rallybio Corp", "percent": 0.7 }, { "ticker": "BOLT", "name": "Bolt Biotherapeutics", "percent": 0.3 }] }, { "name": "Oaktree Fund (Oaktree Fund Advisors, LLC)", "holdings": [{ "ticker": "AU", "name": "AngloGold Ashanti", "percent": 28.8 }, { "ticker": "ITUB", "name": "Itaú Unibanco", "percent": 11.6 }, { "ticker": "HDB", "name": "HDFC Bank", "percent": 9.8 }, { "ticker": "GRAB", "name": "Grab Holdings", "percent": 8.8 }, { "ticker": "NU", "name": "Nu Holdings", "percent": 8.0 }, { "ticker": "FCX", "name": "Freeport-McMoRan", "percent": 6.5 }, { "ticker": "YMM", "name": "Full Truck Alliance", "percent": 6.0 }, { "ticker": "XP", "name": "XP Inc.", "percent": 4.6 }, { "ticker": "BZ", "name": "Kanzhun Limited", "percent": 4.6 }, { "ticker": "TX", "name": "Ternium S.A.", "percent": 3.8 }, { "ticker": "SE", "name": "Sea Limited", "percent": 3.1 }, { "ticker": "JBS", "name": "JBS N.V.", "percent": 2.8 }, { "ticker": "ALVO", "name": "Alvotech", "percent": 1.3 }, { "ticker": "BTAI", "name": "BioXcel Therapeutics", "percent": 0.2 }] }, { "name": "Newgen Asset Management Ltd", "holdings": [{ "ticker": "USAS", "name": "Americas Gold and Silver", "percent": 26.8 }, { "ticker": "B", "name": "Barrick Mining", "percent": 10.1 }, { "ticker": "BB", "name": "BlackBerry Ltd", "percent": 9.9 }, { "ticker": "CCJ", "name": "Cameco Corp", "percent": 9.6 }, { "ticker": "SLSR", "name": "Solaris Resources", "percent": 7.9 }, { "ticker": "IAG", "name": "IAMGOLD Corp", "percent": 6.6 }, { "ticker": "EFXT", "name": "Enerflex Ltd.", "percent": 6.5 }, { "ticker": "BEP", "name": "Brookfield Renewable", "percent": 5.3 }, { "ticker": "PPTA", "name": "Perpetua Resources", "percent": 4.3 }, { "ticker": "NOA", "name": "North American Const.", "percent": 3.4 }, { "ticker": "ENB", "name": "Enbridge Inc.", "percent": 3.1 }, { "ticker": "BAM", "name": "Brookfield Asset Mgmt", "percent": 2.9 }, { "ticker": "NTSK", "name": "Netskope, Inc.", "percent": 2.6 }, { "ticker": "ASTL", "name": "Algoma Steel", "percent": 0.7 }, { "ticker": "POET", "name": "POET Technologies", "percent": 0.1 }, { "ticker": "ANNA", "name": "AleAnna, Inc.", "percent": 0.1 }] }, { "name": "Moon Capital Management Lp", "holdings": [{ "ticker": "IAU", "name": "iShares Gold Trust", "percent": 84.0 }, { "ticker": "GDX", "name": "VanEck Gold Miners", "percent": 3.3 }, { "ticker": "GDXJ", "name": "VanEck Junior Gold", "percent": 3.0 }, { "ticker": "IAUX", "name": "i-80 Gold Corp", "percent": 2.1 }, { "ticker": "GM", "name": "General Motors", "percent": 1.9 }, { "ticker": "LAD", "name": "Lithia Motors", "percent": 1.8 }, { "ticker": "BWA", "name": "BorgWarner Inc.", "percent": 1.4 }, { "ticker": "LEA", "name": "Lear Corp", "percent": 1.3 }, { "ticker": "EWZ", "name": "iShares MSCI Brazil", "percent": 0.7 }, { "ticker": "ABG", "name": "Asbury Automotive", "percent": 0.4 }] }, { "name": "i.g.y. Ltd", "holdings": [{ "ticker": "AMZN", "name": "Amazon.com", "percent": 42.3 }, { "ticker": "COST", "name": "Costco Wholesale", "percent": 37.1 }, { "ticker": "BRK.A", "name": "Berkshire Hathaway", "percent": 20.5 }] }, { "name": "Hpc Germany Gmbh & Co. Kg", "holdings": [{ "ticker": "DB", "name": "Deutsche Bank", "percent": 100.0 }] }, { "name": "Helikon Investments", "holdings": [{ "ticker": "SKE", "name": "Skeena Resources", "percent": 24.5 }, { "ticker": "AAUC", "name": "Allied Gold", "percent": 20.3 }, { "ticker": "CAAP", "name": "Corp América Airports", "percent": 18.2 }, { "ticker": "MGM", "name": "MGM Resorts", "percent": 9.5 }, { "ticker": "TGS", "name": "Gas del Sur", "percent": 4.8 }, { "ticker": "IAC", "name": "IAC Inc.", "percent": 3.6 }, { "ticker": "SLSR", "name": "Solaris Resources", "percent": 3.4 }, { "ticker": "PAM", "name": "Pampa Energía", "percent": 3.3 }, { "ticker": "IRS", "name": "IRSA", "percent": 3.2 }, { "ticker": "IFS", "name": "Intercorp Financial", "percent": 3.0 }, { "ticker": "IHS", "name": "IHS Holding", "percent": 2.6 }, { "ticker": "EDN", "name": "Edenor", "percent": 2.2 }, { "ticker": "CRES.Y", "name": "Cresud", "percent": 0.3 }, { "ticker": "LOMA", "name": "Loma Negra", "percent": 0.1 }] }, { "name": "Foresite Capital Management V, Llc", "holdings": [{ "ticker": "CGON", "name": "CG Oncology", "percent": 37.2 }, { "ticker": "ALMS", "name": "Alumis Inc.", "percent": 21.2 }, { "ticker": "IRON", "name": "Disc Medicine", "percent": 18.2 }, { "ticker": "HIMS", "name": "Hims & Hers Health", "percent": 14.2 }, { "ticker": "LYEL", "name": "Lyell Immunopharma", "percent": 7.1 }, { "ticker": "MAZE", "name": "Maze Therapeutics", "percent": 2.1 }] }, { "name": "Engine No. 1 Llc", "holdings": [{ "ticker": "POWL", "name": "Powell Industries", "percent": 40.9 }, { "ticker": "VRT", "name": "Vertiv Holdings", "percent": 27.2 }, { "ticker": "FSLR", "name": "First Solar", "percent": 11.9 }, { "ticker": "HRI", "name": "Herc Holdings", "percent": 8.7 }, { "ticker": "GLD", "name": "SPDR Gold Shares", "percent": 5.3 }, { "ticker": "HUBB", "name": "Hubbell Inc.", "percent": 4.9 }] }, { "name": "Elemental Capital Partners Llc", "holdings": [{ "ticker": "BE", "name": "Bloom Energy", "percent": 54.2 }, { "ticker": "INDI", "name": "indie Semiconductor", "percent": 14.8 }, { "ticker": "CRDO", "name": "Credo Technology", "percent": 14.7 }, { "ticker": "MRVL", "name": "Marvell Technology", "percent": 9.0 }, { "ticker": "LRCX", "name": "Lam Research", "percent": 4.7 }, { "ticker": "NVDA", "name": "NVIDIA Corp", "percent": 2.5 }] }, { "name": "Warren Buffett (Berkshire Hathaway)", "holdings": [{ "ticker": "AAPL", "name": "Apple Inc.", "percent": 22.7 }, { "ticker": "AXP", "name": "American Express", "percent": 18.8 }, { "ticker": "BAC", "name": "Bank of America", "percent": 11.0 }, { "ticker": "KO", "name": "The Coca-Cola Co", "percent": 9.9 }, { "ticker": "CVX", "name": "Chevron Corp", "percent": 7.1 }, { "ticker": "OXY", "name": "Occidental Petroleum", "percent": 4.7 }, { "ticker": "MCO", "name": "Moody's Corp", "percent": 4.4 }, { "ticker": "CB", "name": "Chubb Limited", "percent": 3.3 }, { "ticker": "KHC", "name": "Kraft Heinz", "percent": 3.2 }, { "ticker": "GOOGL", "name": "Alphabet Inc.", "percent": 1.6 }, { "ticker": "DVA", "name": "DaVita Inc.", "percent": 1.6 }, { "ticker": "KR", "name": "The Kroger Co.", "percent": 1.3 }, { "ticker": "SIRI", "name": "Sirius XM", "percent": 1.1 }, { "ticker": "V", "name": "Visa Inc.", "percent": 1.1 }, { "ticker": "VRSN", "name": "VeriSign", "percent": 0.9 }, { "ticker": "MA", "name": "Mastercard", "percent": 0.8 }, { "ticker": "AMZN", "name": "Amazon.com", "percent": 0.8 }, { "ticker": "STZ", "name": "Constellation Brands", "percent": 0.7 }, { "ticker": "UNH", "name": "UnitedHealth", "percent": 0.7 }, { "ticker": "COF", "name": "Capital One", "percent": 0.6 }, { "ticker": "AON", "name": "Aon plc", "percent": 0.5 }, { "ticker": "DPZ", "name": "Domino's Pizza", "percent": 0.5 }, { "ticker": "ALLY", "name": "Ally Financial", "percent": 0.4 }, { "ticker": "POOL", "name": "Pool Corp", "percent": 0.4 }, { "ticker": "LLYV.K", "name": "Liberty Live", "percent": 0.4 }] }, { "name": "Bill Gates (Bill & Melinda Gates Foundation Trust)", "holdings": [{ "ticker": "BRK.B", "name": "Berkshire Hathaway", "percent": 30.6 }, { "ticker": "WM", "name": "Waste Management", "percent": 17.9 }, { "ticker": "CNI", "name": "Canadian National Ry", "percent": 13.7 }, { "ticker": "MSFT", "name": "Microsoft Corp", "percent": 13.3 }, { "ticker": "CAT", "name": "Caterpillar", "percent": 8.5 }, { "ticker": "DE", "name": "Deere & Company", "percent": 4.6 }, { "ticker": "ECL", "name": "Ecolab Inc.", "percent": 4.0 }, { "ticker": "FDX", "name": "FedEx Corp", "percent": 1.6 }, { "ticker": "KOF", "name": "Coca-Cola FEMSA", "percent": 1.4 }, { "ticker": "WCN", "name": "Waste Connections", "percent": 1.0 }, { "ticker": "CPNG", "name": "Coupang, Inc.", "percent": 0.8 }, { "ticker": "SDGR", "name": "Schrödinger", "percent": 0.4 }, { "ticker": "MSGS", "name": "Madison Square Garden", "percent": 0.4 }, { "ticker": "WST", "name": "West Pharma", "percent": 0.3 }, { "ticker": "MCD", "name": "McDonald's", "percent": 0.3 }, { "ticker": "BUD", "name": "Anheuser-Busch", "percent": 0.3 }, { "ticker": "PCAR", "name": "PACCAR Inc", "percent": 0.3 }, { "ticker": "DHR", "name": "Danaher Corp", "percent": 0.2 }, { "ticker": "KHC", "name": "Kraft Heinz", "percent": 0.2 }, { "ticker": "HRL", "name": "Hormel Foods", "percent": 0.1 }, { "ticker": "ONON", "name": "On Holding AG", "percent": 0.1 }, { "ticker": "VLTO", "name": "Veralto Corp", "percent": 0.0 }] }];
-    const COLORS = ['#264653', '#2A9D8F', '#E9C46A', '#F4A261', '#E76F51', '#1D3F4A', '#457B9D', '#A8DADC', '#1D3557', '#F1FAEE'];
+    const FUNDS_DATA = [{"name":"Sharp Capital","holdings":[{"ticker":"NU","name":"Nu Holdings Ltd.","percent":69.2},{"ticker":"INTR","name":"Inter & Co, Inc.","percent":15.9},{"ticker":"STNE","name":"StoneCo Ltd.","percent":14.9}]},{"name":"Nelson Peltz (Trian Fund Management)","holdings":[{"ticker":"JHG","name":"Janus Henderson Group","percent":34.5},{"ticker":"GE","name":"General Electric","percent":29.5},{"ticker":"SOLV","name":"Solventum Corp","percent":15.0},{"ticker":"IVZ","name":"Invesco Ltd.","percent":8.2},{"ticker":"WEN","name":"The Wendy's Co","percent":6.8},{"ticker":"FERG","name":"Ferguson Enterprises","percent":5.8},{"ticker":"GEHC","name":"GE HealthCare","percent":0.0}]},{"name":"Cabot-Wellington","holdings":[{"ticker":"VTI","name":"Vanguard Total Stock","percent":91.0},{"ticker":"IEMG","name":"iShares Core MSCI Emerging","percent":8.3},{"ticker":"VB","name":"Vanguard Small-Cap","percent":0.6},{"ticker":"VT","name":"Vanguard Total World","percent":0.1}]},{"name":"Windacre Partnership","holdings":[{"ticker":"FNF","name":"Fidelity National Financial","percent":15.9},{"ticker":"TDG","name":"TransDigm Group","percent":11.2},{"ticker":"TSM","name":"Taiwan Semiconductor","percent":11.0},{"ticker":"EXPE","name":"Expedia Group","percent":10.9},{"ticker":"AMZN","name":"Amazon.com","percent":10.7},{"ticker":"GOOGL","name":"Alphabet Inc.","percent":10.6},{"ticker":"SAP","name":"SAP SE","percent":8.7},{"ticker":"MCO","name":"Moody's Corp","percent":7.7},{"ticker":"PRM","name":"Perimeter Solutions","percent":6.8},{"ticker":"NVDA","name":"NVIDIA Corp","percent":6.6}]},{"name":"Oaktop Capital","holdings":[{"ticker":"LRCX","name":"Lam Research","percent":32.7},{"ticker":"KLAC","name":"KLA Corp","percent":32.2},{"ticker":"AVGO","name":"Broadcom Inc.","percent":10.9},{"ticker":"ADI","name":"Analog Devices","percent":10.4},{"ticker":"ASPN","name":"Aspen Aerogels","percent":2.8},{"ticker":"EGAN","name":"eGain Corp","percent":2.1},{"ticker":"PRGS","name":"Progress Software","percent":2.0},{"ticker":"BMY","name":"Bristol-Myers Squibb","percent":2.0},{"ticker":"DELL","name":"Dell Technologies","percent":1.7},{"ticker":"GRMN","name":"Garmin Ltd.","percent":1.1},{"ticker":"CEVA","name":"CEVA, Inc.","percent":1.1},{"ticker":"PINS","name":"Pinterest","percent":1.0},{"ticker":"PETS","name":"PetMed Express","percent":0.1},{"ticker":"INTC","name":"Intel Corp","percent":0.1}]},{"name":"Oakcliff Capital","holdings":[{"ticker":"IBKR","name":"Interactive Brokers","percent":30.6},{"ticker":"GIL","name":"Gildan Activewear","percent":17.0},{"ticker":"TDG","name":"TransDigm Group","percent":13.7},{"ticker":"GOOG","name":"Alphabet Inc.","percent":12.4},{"ticker":"NRP","name":"Natural Resource Partners","percent":7.7}]},{"name":"Lansdowne Partners (UK) Llp","holdings":[{"ticker":"TSM","name":"Taiwan Semiconductor","percent":36.2},{"ticker":"LIN","name":"Linde plc","percent":15.8},{"ticker":"DAL","name":"Delta Air Lines","percent":11.8},{"ticker":"UAL","name":"United Airlines","percent":9.7},{"ticker":"SW","name":"Smurfit Westrock","percent":5.0},{"ticker":"GOLF","name":"Acushnet Holdings","percent":3.8},{"ticker":"IONQ","name":"IonQ, Inc.","percent":3.6},{"ticker":"ADI","name":"Analog Devices","percent":3.4},{"ticker":"AMZN","name":"Amazon.com","percent":3.4},{"ticker":"TECK","name":"Teck Resources","percent":2.9},{"ticker":"PRTC","name":"PureTech Health","percent":1.7},{"ticker":"ROK","name":"Rockwell Automation","percent":0.9},{"ticker":"ARM","name":"Arm Holdings","percent":0.8},{"ticker":"TXN","name":"Texas Instruments","percent":0.6},{"ticker":"FTV","name":"Fortive Corp","percent":0.2},{"ticker":"RAL","name":"Raliant Corp","percent":0.1},{"ticker":"AEM","name":"Agnico Eagle Mines","percent":0.1}]},{"name":"Kohlberg Kravis Roberts & Co. L.p.","holdings":[{"ticker":"BTSG","name":"BrightSpring Health","percent":43.3},{"ticker":"HSIC","name":"Henry Schein","percent":19.7},{"ticker":"BBIO","name":"BridgeBio Pharma","percent":13.1},{"ticker":"NIQ","name":"NIQ Global Intelligence","percent":8.9},{"ticker":"BV","name":"BrightView Holdings","percent":5.5},{"ticker":"CRGY","name":"Crescent Energy","percent":4.5},{"ticker":"KREF","name":"KKR Real Estate Finance","percent":1.7},{"ticker":"MSGS","name":"Madison Square Garden","percent":1.3},{"ticker":"BHC","name":"Bausch Health","percent":0.6},{"ticker":"DEC","name":"Diversified Energy","percent":0.4},{"ticker":"NCLH","name":"Norwegian Cruise Line","percent":0.3},{"ticker":"FSK","name":"FS KKR Capital","percent":0.3},{"ticker":"TEM","name":"Tempus AI","percent":0.2}]},{"name":"First Sabrepoint Capital Management Lp","holdings":[{"ticker":"TPB","name":"Turning Point Brands","percent":16.0},{"ticker":"FCFS","name":"FirstCash Holdings","percent":12.8},{"ticker":"LAUR","name":"Laureate Education","percent":10.2},{"ticker":"CVCO","name":"Cavco Industries","percent":8.2},{"ticker":"MSFT","name":"Microsoft Corp","percent":7.3},{"ticker":"BTI","name":"British American Tobacco","percent":6.6},{"ticker":"STRL","name":"Sterling Infrastructure","percent":5.8},{"ticker":"AMRZ","name":"Amrize AG","percent":5.3},{"ticker":"HAS","name":"Hasbro, Inc.","percent":4.3},{"ticker":"WD","name":"Walker & Dunlop","percent":4.1},{"ticker":"AZO","name":"AutoZone","percent":3.2},{"ticker":"MAA","name":"Mid-America Apartment","percent":3.1},{"ticker":"EGY","name":"VAALCO Energy","percent":3.1},{"ticker":"PGNY","name":"Progyny, Inc.","percent":3.0},{"ticker":"LOPE","name":"Grand Canyon Education","percent":2.7},{"ticker":"GRBK","name":"Green Brick Partners","percent":2.1},{"ticker":"BLD","name":"TopBuild Corp","percent":1.3},{"ticker":"OPRA","name":"Opera Limited","percent":1.1}]},{"name":"Washington State Investment Board","holdings":[{"ticker":"FTAI","name":"FTAI Aviation","percent":82.3},{"ticker":"FIP","name":"FTAI Infrastructure","percent":17.7}]},{"name":"Vk Services, Llc","holdings":[{"ticker":"RKLB","name":"Rocket Lab","percent":98.6},{"ticker":"RBOT","name":"Vicarious Surgical","percent":1.3}]},{"name":"Vitol Holding b.v.","holdings":[{"ticker":"CME","name":"CME Group","percent":74.7},{"ticker":"ADES","name":"PT Akasha Wira","percent":25.3}]},{"name":"Washington University","holdings":[{"ticker":"NU","name":"Nu Holdings","percent":89.4},{"ticker":"MAZE","name":"Maze Therapeutics","percent":5.9},{"ticker":"MRNA","name":"Moderna","percent":2.2},{"ticker":"RBRK","name":"Rubrik","percent":2.0},{"ticker":"FIG","name":"Figma","percent":0.5}]},{"name":"Trybe Capital","holdings":[{"ticker":"NVDA","name":"NVIDIA Corp","percent":34.4},{"ticker":"MSFT","name":"Microsoft Corp","percent":20.1},{"ticker":"GOOGL","name":"Alphabet Inc.","percent":14.6},{"ticker":"LRCX","name":"Lam Research","percent":8.5},{"ticker":"TSM","name":"Taiwan Semiconductor","percent":7.5},{"ticker":"AMZN","name":"Amazon.com","percent":6.5},{"ticker":"META","name":"Meta Platforms","percent":6.3},{"ticker":"ASML","name":"ASML Holding","percent":1.9}]},{"name":"Trustees of Dartmouth College","holdings":[{"ticker":"SPY","name":"SPDR S&P 500","percent":57.9},{"ticker":"IEMG","name":"iShares MSCI Emerging","percent":12.7},{"ticker":"QLTY","name":"GMO U.S. Quality ETF","percent":10.7},{"ticker":"VTV","name":"Vanguard Value","percent":8.9},{"ticker":"IJR","name":"iShares S&P Small-Cap","percent":5.3},{"ticker":"IBIT","name":"iShares Bitcoin Trust","percent":2.5},{"ticker":"ETH","name":"Grayscale Ethereum","percent":1.3},{"ticker":"XOM","name":"Exxon Mobil","percent":0.5},{"ticker":"XLK","name":"Tech Select Sector","percent":0.1}]},{"name":"Tri Locum Partners","holdings":[{"ticker":"JNJ","name":"Johnson & Johnson","percent":12.9},{"ticker":"UTHR","name":"United Therapeutics","percent":11.8},{"ticker":"MRK","name":"Merck & Co.","percent":8.6},{"ticker":"AXSM","name":"Axsome Therapeutics","percent":8.2},{"ticker":"ASND","name":"Ascendis Pharma","percent":8.0},{"ticker":"VERA","name":"Vera Therapeutics","percent":8.0},{"ticker":"ARGX","name":"argenx SE","percent":7.4},{"ticker":"MDGL","name":"Madrigal Pharma","percent":7.1},{"ticker":"SLNO","name":"Soleno Therapeutics","percent":7.0},{"ticker":"ABBV","name":"AbbVie Inc.","percent":4.8},{"ticker":"KRRO","name":"Korro Bio","percent":3.7},{"ticker":"XENE","name":"Xenon Pharma","percent":3.4},{"ticker":"AVDL","name":"Avadel Pharma","percent":2.5},{"ticker":"STVN","name":"Stevanato Group","percent":2.0},{"ticker":"DNTH","name":"Dianthus Therapeutics","percent":1.7},{"ticker":"TARS","name":"Tarsus Pharma","percent":1.6},{"ticker":"PRAX","name":"Praxis Precision","percent":0.9},{"ticker":"BHVN","name":"Biohaven Ltd.","percent":0.5}]},{"name":"Vantage Consulting","holdings":[{"ticker":"BW","name":"Babcock & Wilcox","percent":62.5},{"ticker":"ADCT","name":"ADC Therapeutics","percent":24.4},{"ticker":"CBUS","name":"Cibus, Inc.","percent":13.2}]},{"name":"Technology Crossover Management X, Ltd.","holdings":[{"ticker":"NU","name":"Nu Holdings","percent":75.2},{"ticker":"KLAR","name":"Klarna Group","percent":11.9},{"ticker":"RKT","name":"Rocket Companies","percent":7.3},{"ticker":"PTON","name":"Peloton Interactive","percent":1.8},{"ticker":"TOST","name":"Toast, Inc.","percent":1.8},{"ticker":"GTLB","name":"GitLab Inc.","percent":1.2},{"ticker":"GDRX","name":"GoodRx Holdings","percent":0.8}]},{"name":"Snow Phipps Group","holdings":[{"ticker":"VEL","name":"Velocity Financial","percent":79.0},{"ticker":"LAUR","name":"Laureate Education","percent":21.0}]},{"name":"Pivotal Bioventure","holdings":[{"ticker":"PCVX","name":"Vaxcyte, Inc.","percent":28.6},{"ticker":"OCS","name":"Oculis Holding","percent":23.4},{"ticker":"ARQT","name":"Arcutis Biotherapeutics","percent":23.1},{"ticker":"ZBIO","name":"Zenas BioPharma","percent":10.0},{"ticker":"TRVI","name":"Trevi Therapeutics","percent":6.6},{"ticker":"IMNM","name":"Immunome, Inc.","percent":3.4},{"ticker":"BIOA","name":"BioAge Labs","percent":2.2},{"ticker":"RXRX","name":"Recursion Pharma","percent":1.7},{"ticker":"RLYB","name":"Rallybio Corp","percent":0.7},{"ticker":"BOLT","name":"Bolt Biotherapeutics","percent":0.3}]},{"name":"Oaktree Fund (Oaktree Fund Advisors, LLC)","holdings":[{"ticker":"AU","name":"AngloGold Ashanti","percent":28.8},{"ticker":"ITUB","name":"Itaú Unibanco","percent":11.6},{"ticker":"HDB","name":"HDFC Bank","percent":9.8},{"ticker":"GRAB","name":"Grab Holdings","percent":8.8},{"ticker":"NU","name":"Nu Holdings","percent":8.0},{"ticker":"FCX","name":"Freeport-McMoRan","percent":6.5},{"ticker":"YMM","name":"Full Truck Alliance","percent":6.0},{"ticker":"XP","name":"XP Inc.","percent":4.6},{"ticker":"BZ","name":"Kanzhun Limited","percent":4.6},{"ticker":"TX","name":"Ternium S.A.","percent":3.8},{"ticker":"SE","name":"Sea Limited","percent":3.1},{"ticker":"JBS","name":"JBS N.V.","percent":2.8},{"ticker":"ALVO","name":"Alvotech","percent":1.3},{"ticker":"BTAI","name":"BioXcel Therapeutics","percent":0.2}]},{"name":"Newgen Asset Management Ltd","holdings":[{"ticker":"USAS","name":"Americas Gold and Silver","percent":26.8},{"ticker":"B","name":"Barrick Mining","percent":10.1},{"ticker":"BB","name":"BlackBerry Ltd","percent":9.9},{"ticker":"CCJ","name":"Cameco Corp","percent":9.6},{"ticker":"SLSR","name":"Solaris Resources","percent":7.9},{"ticker":"IAG","name":"IAMGOLD Corp","percent":6.6},{"ticker":"EFXT","name":"Enerflex Ltd.","percent":6.5},{"ticker":"BEP","name":"Brookfield Renewable","percent":5.3},{"ticker":"PPTA","name":"Perpetua Resources","percent":4.3},{"ticker":"NOA","name":"North American Const.","percent":3.4},{"ticker":"ENB","name":"Enbridge Inc.","percent":3.1},{"ticker":"BAM","name":"Brookfield Asset Mgmt","percent":2.9},{"ticker":"NTSK","name":"Netskope, Inc.","percent":2.6},{"ticker":"ASTL","name":"Algoma Steel","percent":0.7},{"ticker":"POET","name":"POET Technologies","percent":0.1},{"ticker":"ANNA","name":"AleAnna, Inc.","percent":0.1}]},{"name":"Moon Capital Management Lp","holdings":[{"ticker":"IAU","name":"iShares Gold Trust","percent":84.0},{"ticker":"GDX","name":"VanEck Gold Miners","percent":3.3},{"ticker":"GDXJ","name":"VanEck Junior Gold","percent":3.0},{"ticker":"IAUX","name":"i-80 Gold Corp","percent":2.1},{"ticker":"GM","name":"General Motors","percent":1.9},{"ticker":"LAD","name":"Lithia Motors","percent":1.8},{"ticker":"BWA","name":"BorgWarner Inc.","percent":1.4},{"ticker":"LEA","name":"Lear Corp","percent":1.3},{"ticker":"EWZ","name":"iShares MSCI Brazil","percent":0.7},{"ticker":"ABG","name":"Asbury Automotive","percent":0.4}]},{"name":"i.g.y. Ltd","holdings":[{"ticker":"AMZN","name":"Amazon.com","percent":42.3},{"ticker":"COST","name":"Costco Wholesale","percent":37.1},{"ticker":"BRK.A","name":"Berkshire Hathaway","percent":20.5}]},{"name":"Hpc Germany Gmbh & Co. Kg","holdings":[{"ticker":"DB","name":"Deutsche Bank","percent":100.0}]},{"name":"Helikon Investments","holdings":[{"ticker":"SKE","name":"Skeena Resources","percent":24.5},{"ticker":"AAUC","name":"Allied Gold","percent":20.3},{"ticker":"CAAP","name":"Corp América Airports","percent":18.2},{"ticker":"MGM","name":"MGM Resorts","percent":9.5},{"ticker":"TGS","name":"Gas del Sur","percent":4.8},{"ticker":"IAC","name":"IAC Inc.","percent":3.6},{"ticker":"SLSR","name":"Solaris Resources","percent":3.4},{"ticker":"PAM","name":"Pampa Energía","percent":3.3},{"ticker":"IRS","name":"IRSA","percent":3.2},{"ticker":"IFS","name":"Intercorp Financial","percent":3.0},{"ticker":"IHS","name":"IHS Holding","percent":2.6},{"ticker":"EDN","name":"Edenor","percent":2.2},{"ticker":"CRES.Y","name":"Cresud","percent":0.3},{"ticker":"LOMA","name":"Loma Negra","percent":0.1}]},{"name":"Foresite Capital Management V, Llc","holdings":[{"ticker":"CGON","name":"CG Oncology","percent":37.2},{"ticker":"ALMS","name":"Alumis Inc.","percent":21.2},{"ticker":"IRON","name":"Disc Medicine","percent":18.2},{"ticker":"HIMS","name":"Hims & Hers Health","percent":14.2},{"ticker":"LYEL","name":"Lyell Immunopharma","percent":7.1},{"ticker":"MAZE","name":"Maze Therapeutics","percent":2.1}]},{"name":"Engine No. 1 Llc","holdings":[{"ticker":"POWL","name":"Powell Industries","percent":40.9},{"ticker":"VRT","name":"Vertiv Holdings","percent":27.2},{"ticker":"FSLR","name":"First Solar","percent":11.9},{"ticker":"HRI","name":"Herc Holdings","percent":8.7},{"ticker":"GLD","name":"SPDR Gold Shares","percent":5.3},{"ticker":"HUBB","name":"Hubbell Inc.","percent":4.9}]},{"name":"Elemental Capital Partners Llc","holdings":[{"ticker":"BE","name":"Bloom Energy","percent":54.2},{"ticker":"INDI","name":"indie Semiconductor","percent":14.8},{"ticker":"CRDO","name":"Credo Technology","percent":14.7},{"ticker":"MRVL","name":"Marvell Technology","percent":9.0},{"ticker":"LRCX","name":"Lam Research","percent":4.7},{"ticker":"NVDA","name":"NVIDIA Corp","percent":2.5}]},{"name":"Warren Buffett (Berkshire Hathaway)","holdings":[{"ticker":"AAPL","name":"Apple Inc.","percent":22.7},{"ticker":"AXP","name":"American Express","percent":18.8},{"ticker":"BAC","name":"Bank of America","percent":11.0},{"ticker":"KO","name":"The Coca-Cola Co","percent":9.9},{"ticker":"CVX","name":"Chevron Corp","percent":7.1},{"ticker":"OXY","name":"Occidental Petroleum","percent":4.7},{"ticker":"MCO","name":"Moody's Corp","percent":4.4},{"ticker":"CB","name":"Chubb Limited","percent":3.3},{"ticker":"KHC","name":"Kraft Heinz","percent":3.2},{"ticker":"GOOGL","name":"Alphabet Inc.","percent":1.6},{"ticker":"DVA","name":"DaVita Inc.","percent":1.6},{"ticker":"KR","name":"The Kroger Co.","percent":1.3},{"ticker":"SIRI","name":"Sirius XM","percent":1.1},{"ticker":"V","name":"Visa Inc.","percent":1.1},{"ticker":"VRSN","name":"VeriSign","percent":0.9},{"ticker":"MA","name":"Mastercard","percent":0.8},{"ticker":"AMZN","name":"Amazon.com","percent":0.8},{"ticker":"STZ","name":"Constellation Brands","percent":0.7},{"ticker":"UNH","name":"UnitedHealth","percent":0.7},{"ticker":"COF","name":"Capital One","percent":0.6},{"ticker":"AON","name":"Aon plc","percent":0.5},{"ticker":"DPZ","name":"Domino's Pizza","percent":0.5},{"ticker":"ALLY","name":"Ally Financial","percent":0.4},{"ticker":"POOL","name":"Pool Corp","percent":0.4},{"ticker":"LLYV.K","name":"Liberty Live","percent":0.4}]},{"name":"Bill Gates (Bill & Melinda Gates Foundation Trust)","holdings":[{"ticker":"BRK.B","name":"Berkshire Hathaway","percent":30.6},{"ticker":"WM","name":"Waste Management","percent":17.9},{"ticker":"CNI","name":"Canadian National Ry","percent":13.7},{"ticker":"MSFT","name":"Microsoft Corp","percent":13.3},{"ticker":"CAT","name":"Caterpillar","percent":8.5},{"ticker":"DE","name":"Deere & Company","percent":4.6},{"ticker":"ECL","name":"Ecolab Inc.","percent":4.0},{"ticker":"FDX","name":"FedEx Corp","percent":1.6},{"ticker":"KOF","name":"Coca-Cola FEMSA","percent":1.4},{"ticker":"WCN","name":"Waste Connections","percent":1.0},{"ticker":"CPNG","name":"Coupang, Inc.","percent":0.8},{"ticker":"SDGR","name":"Schrödinger","percent":0.4},{"ticker":"MSGS","name":"Madison Square Garden","percent":0.4},{"ticker":"WST","name":"West Pharma","percent":0.3},{"ticker":"MCD","name":"McDonald's","percent":0.3},{"ticker":"BUD","name":"Anheuser-Busch","percent":0.3},{"ticker":"PCAR","name":"PACCAR Inc","percent":0.3},{"ticker":"DHR","name":"Danaher Corp","percent":0.2},{"ticker":"KHC","name":"Kraft Heinz","percent":0.2},{"ticker":"HRL","name":"Hormel Foods","percent":0.1},{"ticker":"ONON","name":"On Holding AG","percent":0.1},{"ticker":"VLTO","name":"Veralto Corp","percent":0.0}]}];
 
-    // セクター別カラー定義
+    // Sector colors
     const SECTOR_COLORS = {
-      'Financial': '#E9C46A',     // 黄色 - 金融
-      'Technology': '#3498DB',    // 青 - テクノロジー
-      'Healthcare': '#9B59B6',    // 紫 - ヘルスケア
-      'Energy': '#E67E22',        // オレンジ - エネルギー
-      'Consumer': '#E91E63',      // ピンク - 消費財
-      'Industrial': '#2A9D8F',    // ティール - 産業
-      'Communication': '#00BCD4', // シアン - 通信
-      'Materials': '#795548',     // 茶色 - 素材
-      'ETF': '#9E9E9E',           // グレー - ETF
-      'Other': '#264653'          // ダークティール - その他
+      'Financial': '#E9C46A',
+      'Technology': '#3498DB',
+      'Healthcare': '#9B59B6',
+      'Energy': '#E67E22',
+      'Consumer': '#E91E63',
+      'Industrial': '#2A9D8F',
+      'Communication': '#00BCD4',
+      'Materials': '#795548',
+      'ETF': '#9E9E9E',
+      'Other': '#264653'
     };
 
-    // 銘柄→セクターマッピング
+    // Sector Japanese names
+    const SECTOR_NAMES_JP = {
+      'Financial': '金融',
+      'Technology': 'テクノロジー',
+      'Healthcare': 'ヘルスケア',
+      'Energy': 'エネルギー',
+      'Consumer': '消費財',
+      'Industrial': '産業',
+      'Communication': '通信',
+      'Materials': '素材',
+      'ETF': 'ETF',
+      'Other': 'その他'
+    };
+
+    // i18n translations
+    const I18N = {
+      en: {
+        home: 'Home',
+        list: 'List',
+        searchPlaceholder: 'Search funds or tickers...',
+        holdings: 'holdings',
+        top: 'Top',
+        selectFund: 'Select a Fund',
+        selectFundDesc: 'Choose a fund from the list',
+        backToHome: 'Back to Home',
+        ticker: 'Ticker',
+        company: 'Company',
+        sector: 'Sector',
+        allocation: 'Allocation',
+        sectorLegend: 'Sectors',
+        Financial: 'Financial',
+        Technology: 'Technology',
+        Healthcare: 'Healthcare',
+        Energy: 'Energy',
+        Consumer: 'Consumer',
+        Industrial: 'Industrial',
+        Communication: 'Communication',
+        Materials: 'Materials',
+        ETF: 'ETF',
+        Other: 'Other'
+      },
+      ja: {
+        home: 'ホーム',
+        list: 'リスト',
+        searchPlaceholder: 'ファンド名・ティッカーで検索...',
+        holdings: '銘柄',
+        top: 'Top',
+        selectFund: 'ファンドを選択',
+        selectFundDesc: 'リストからファンドを選んでください',
+        backToHome: 'ホームに戻る',
+        ticker: 'ティッカー',
+        company: '企業名',
+        sector: 'セクター',
+        allocation: '配分',
+        sectorLegend: 'セクター',
+        Financial: '金融',
+        Technology: 'テクノロジー',
+        Healthcare: 'ヘルスケア',
+        Energy: 'エネルギー',
+        Consumer: '消費財',
+        Industrial: '産業',
+        Communication: '通信',
+        Materials: '素材',
+        ETF: 'ETF',
+        Other: 'その他'
+      }
+    };
+
+    // Ticker -> Sector mapping
     const SECTOR_MAP = {
-      // Financial - 金融
       'JPM': 'Financial', 'BAC': 'Financial', 'WFC': 'Financial', 'C': 'Financial', 'GS': 'Financial',
       'MS': 'Financial', 'AXP': 'Financial', 'V': 'Financial', 'MA': 'Financial', 'BRK.A': 'Financial',
       'BRK.B': 'Financial', 'COF': 'Financial', 'ALLY': 'Financial', 'DB': 'Financial', 'CME': 'Financial',
@@ -446,7 +640,6 @@
       'AON': 'Financial', 'JHG': 'Financial', 'IVZ': 'Financial', 'FNF': 'Financial', 'VEL': 'Financial',
       'WD': 'Financial', 'FCFS': 'Financial', 'RKT': 'Financial', 'KLAR': 'Financial', 'FSK': 'Financial',
       'KREF': 'Financial', 'BAM': 'Financial', 'GRAB': 'Financial',
-      // Technology - テクノロジー
       'AAPL': 'Technology', 'MSFT': 'Technology', 'GOOGL': 'Technology', 'GOOG': 'Technology', 'META': 'Technology',
       'NVDA': 'Technology', 'AVGO': 'Technology', 'ASML': 'Technology', 'TSM': 'Technology', 'INTC': 'Technology',
       'AMD': 'Technology', 'QCOM': 'Technology', 'TXN': 'Technology', 'ADI': 'Technology', 'LRCX': 'Technology',
@@ -455,8 +648,7 @@
       'CRDO': 'Technology', 'INDI': 'Technology', 'CEVA': 'Technology', 'PRGS': 'Technology', 'EGAN': 'Technology',
       'PINS': 'Technology', 'GTLB': 'Technology', 'IONQ': 'Technology', 'RKLB': 'Technology', 'RBOT': 'Technology',
       'BB': 'Technology', 'POET': 'Technology', 'NTSK': 'Technology', 'VRSN': 'Technology', 'OPRA': 'Technology',
-      'RBRK': 'Technology', 'FIG': 'Technology',
-      // Healthcare - ヘルスケア
+      'RBRK': 'Technology', 'FIG': 'Technology', 'TEM': 'Technology',
       'JNJ': 'Healthcare', 'UNH': 'Healthcare', 'PFE': 'Healthcare', 'MRK': 'Healthcare', 'ABBV': 'Healthcare',
       'LLY': 'Healthcare', 'TMO': 'Healthcare', 'ABT': 'Healthcare', 'DHR': 'Healthcare', 'BMY': 'Healthcare',
       'AMGN': 'Healthcare', 'GILD': 'Healthcare', 'MRNA': 'Healthcare', 'REGN': 'Healthcare', 'VRTX': 'Healthcare',
@@ -469,12 +661,11 @@
       'BOLT': 'Healthcare', 'MAZE': 'Healthcare', 'ALVO': 'Healthcare', 'BTAI': 'Healthcare', 'BHC': 'Healthcare',
       'CGON': 'Healthcare', 'ALMS': 'Healthcare', 'IRON': 'Healthcare', 'HIMS': 'Healthcare', 'LYEL': 'Healthcare',
       'PGNY': 'Healthcare', 'WST': 'Healthcare', 'SDGR': 'Healthcare', 'PRTC': 'Healthcare',
-      // Energy - エネルギー
       'XOM': 'Energy', 'CVX': 'Energy', 'COP': 'Energy', 'EOG': 'Energy', 'SLB': 'Energy',
       'OXY': 'Energy', 'MPC': 'Energy', 'PSX': 'Energy', 'VLO': 'Energy', 'PXD': 'Energy',
       'CRGY': 'Energy', 'DEC': 'Energy', 'EGY': 'Energy', 'ENB': 'Energy', 'EFXT': 'Energy',
       'TGS': 'Energy', 'PAM': 'Energy', 'EDN': 'Energy', 'BE': 'Energy', 'FSLR': 'Energy',
-      // Consumer - 消費財
+      'BEP': 'Energy',
       'AMZN': 'Consumer', 'TSLA': 'Consumer', 'HD': 'Consumer', 'MCD': 'Consumer', 'NKE': 'Consumer',
       'SBUX': 'Consumer', 'TGT': 'Consumer', 'COST': 'Consumer', 'WMT': 'Consumer', 'LOW': 'Consumer',
       'KO': 'Consumer', 'PEP': 'Consumer', 'PG': 'Consumer', 'KHC': 'Consumer', 'KR': 'Consumer',
@@ -483,8 +674,7 @@
       'HAS': 'Consumer', 'PTON': 'Consumer', 'EXPE': 'Consumer', 'NCLH': 'Consumer', 'MGM': 'Consumer',
       'ONON': 'Consumer', 'CPNG': 'Consumer', 'TOST': 'Consumer', 'GDRX': 'Consumer', 'LAD': 'Consumer',
       'ABG': 'Consumer', 'GM': 'Consumer', 'BWA': 'Consumer', 'LEA': 'Consumer', 'KOF': 'Consumer',
-      'PETS': 'Consumer', 'GOLF': 'Consumer',
-      // Industrial - 産業
+      'PETS': 'Consumer', 'GOLF': 'Consumer', 'CBUS': 'Consumer', 'JBS': 'Consumer',
       'CAT': 'Industrial', 'DE': 'Industrial', 'BA': 'Industrial', 'HON': 'Industrial', 'UPS': 'Industrial',
       'RTX': 'Industrial', 'LMT': 'Industrial', 'GE': 'Industrial', 'MMM': 'Industrial', 'EMR': 'Industrial',
       'TDG': 'Industrial', 'ROK': 'Industrial', 'FTV': 'Industrial', 'FDX': 'Industrial', 'CNI': 'Industrial',
@@ -493,33 +683,64 @@
       'VRT': 'Industrial', 'POWL': 'Industrial', 'STRL': 'Industrial', 'BLD': 'Industrial', 'GRBK': 'Industrial',
       'CVCO': 'Industrial', 'BW': 'Industrial', 'NOA': 'Industrial', 'DAL': 'Industrial', 'UAL': 'Industrial',
       'SW': 'Industrial', 'LIN': 'Industrial', 'SOLV': 'Industrial', 'PRM': 'Industrial', 'ASPN': 'Industrial',
-      'CAAP': 'Industrial',
-      // Communication - 通信
+      'CAAP': 'Industrial', 'BV': 'Industrial',
       'T': 'Communication', 'VZ': 'Communication', 'TMUS': 'Communication', 'CMCSA': 'Communication',
       'DIS': 'Communication', 'NFLX': 'Communication', 'SIRI': 'Communication', 'IAC': 'Communication',
       'IHS': 'Communication', 'LLYV.K': 'Communication', 'MSGS': 'Communication', 'GRMN': 'Communication',
-      // Materials - 素材
       'APD': 'Materials', 'SHW': 'Materials', 'DD': 'Materials',
       'FCX': 'Materials', 'NEM': 'Materials', 'AU': 'Materials', 'USAS': 'Materials', 'B': 'Materials',
       'CCJ': 'Materials', 'IAG': 'Materials', 'SLSR': 'Materials', 'PPTA': 'Materials', 'ASTL': 'Materials',
       'TECK': 'Materials', 'AEM': 'Materials', 'TX': 'Materials', 'SKE': 'Materials', 'AAUC': 'Materials',
       'IAUX': 'Materials', 'NRP': 'Materials', 'LOMA': 'Materials', 'ANNA': 'Materials', 'CRES.Y': 'Materials',
-      // ETF/Index
       'SPY': 'ETF', 'QQQ': 'ETF', 'VTI': 'ETF', 'VOO': 'ETF', 'IWM': 'ETF',
       'VTV': 'ETF', 'VB': 'ETF', 'VT': 'ETF', 'IEMG': 'ETF', 'IJR': 'ETF',
       'IBIT': 'ETF', 'ETH': 'ETF', 'XLK': 'ETF', 'IAU': 'ETF', 'GLD': 'ETF',
-      'GDX': 'ETF', 'GDXJ': 'ETF', 'EWZ': 'ETF', 'QLTY': 'ETF'
+      'GDX': 'ETF', 'GDXJ': 'ETF', 'EWZ': 'ETF', 'QLTY': 'ETF',
+      'LAUR': 'Consumer', 'LOPE': 'Consumer', 'MAA': 'Financial', 'NIQ': 'Technology',
+      'AMRZ': 'Financial', 'SE': 'Technology', 'BZ': 'Technology', 'YMM': 'Technology',
+      'IRS': 'Financial', 'RAL': 'Other', 'ADES': 'Consumer'
     };
 
+    function getSector(ticker) {
+      return SECTOR_MAP[ticker] || 'Other';
+    }
+
     function getSectorColor(ticker) {
-      const sector = SECTOR_MAP[ticker] || 'Other';
-      return SECTOR_COLORS[sector];
+      return SECTOR_COLORS[getSector(ticker)];
+    }
+
+    function getSectorName(ticker, lang) {
+      const sector = getSector(ticker);
+      return lang === 'ja' ? (SECTOR_NAMES_JP[sector] || sector) : sector;
+    }
+
+    // Language context
+    const LangContext = React.createContext('en');
+
+    function SectorLegend() {
+      const lang = React.useContext(LangContext);
+      const t = I18N[lang];
+      const sectors = Object.keys(SECTOR_COLORS);
+      return (
+        <div className="sector-legend">
+          <div className="sector-legend-title">{t.sectorLegend}</div>
+          {sectors.map(s => (
+            <div key={s} className="sector-legend-item">
+              <div className="sector-legend-dot" style={{ background: SECTOR_COLORS[s] }}></div>
+              <span className="sector-legend-label">{t[s] || s}</span>
+            </div>
+          ))}
+        </div>
+      );
     }
 
     function App() {
       const [tab, setTab] = React.useState('home');
       const [selected, setSelected] = React.useState(null);
       const [search, setSearch] = React.useState('');
+      const [lang, setLang] = React.useState('en');
+      const t = I18N[lang];
+
       const filtered = FUNDS_DATA.filter(f =>
         f.name.toLowerCase().includes(search.toLowerCase()) ||
         f.holdings.some(h => h.ticker.toLowerCase().includes(search.toLowerCase()))
@@ -536,32 +757,41 @@
       };
 
       return (
-        <div>
-          <header className="header">
-            <div className="header-content">
-              <div className="logo">Portfolio Visualizer</div>
-              <div className="tabs">
-                <button className={`tab ${tab === 'home' || tab === 'detail' ? 'active' : ''}`} onClick={() => { setTab('home'); setSelected(null); }}>🏠 Home</button>
-                <button className={`tab ${tab === 'list' ? 'active' : ''}`} onClick={() => setTab('list')}>📋 List</button>
+        <LangContext.Provider value={lang}>
+          <div>
+            <header className="header">
+              <div className="header-content">
+                <div className="logo">Portfolio Visualizer</div>
+                <div className="tabs">
+                  <button className={`tab ${tab === 'home' || tab === 'detail' ? 'active' : ''}`} onClick={() => { setTab('home'); setSelected(null); }}>{t.home}</button>
+                  <button className={`tab ${tab === 'list' ? 'active' : ''}`} onClick={() => setTab('list')}>{t.list}</button>
+                </div>
+                <div className="header-right">
+                  <input type="text" className="search-box" placeholder={t.searchPlaceholder} value={search} onChange={e => setSearch(e.target.value)} />
+                  <div className="lang-toggle">
+                    <button className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => setLang('en')}>EN</button>
+                    <button className={`lang-btn ${lang === 'ja' ? 'active' : ''}`} onClick={() => setLang('ja')}>JP</button>
+                  </div>
+                </div>
               </div>
-              <div className="search-header">
-                <input type="text" className="search-box" placeholder="Search funds or tickers..." value={search} onChange={e => setSearch(e.target.value)} />
-              </div>
-            </div>
-          </header>
-          <main className="main-content">
-            {tab === 'home' && <HomeView funds={filtered} onSelect={handleSelectFund} />}
-            {tab === 'detail' && selected && <DetailView fund={selected} onBack={handleBack} />}
-            {tab === 'list' && <ListView funds={filtered} selected={selected} onSelect={setSelected} />}
-          </main>
-        </div>
+            </header>
+            <main className="main-content">
+              {tab === 'home' && <HomeView funds={filtered} onSelect={handleSelectFund} />}
+              {tab === 'detail' && selected && <DetailView fund={selected} onBack={handleBack} />}
+              {tab === 'list' && <ListView funds={filtered} selected={selected} onSelect={setSelected} />}
+            </main>
+          </div>
+        </LangContext.Provider>
       );
     }
 
     function HomeView({ funds, onSelect }) {
       return (
-        <div className="funds-grid">
-          {funds.map((fund, i) => <FundCard key={i} fund={fund} onClick={() => onSelect(fund)} />)}
+        <div className="home-layout">
+          <div className="funds-grid">
+            {funds.map((fund, i) => <FundCard key={i} fund={fund} onClick={() => onSelect(fund)} />)}
+          </div>
+          <SectorLegend />
         </div>
       );
     }
@@ -569,6 +799,8 @@
     function FundCard({ fund, onClick }) {
       const chartRef = React.useRef(null);
       const chartInstance = React.useRef(null);
+      const lang = React.useContext(LangContext);
+      const t = I18N[lang];
 
       React.useEffect(() => {
         if (chartInstance.current) chartInstance.current.destroy();
@@ -589,22 +821,27 @@
           <div className="fund-card-chart"><canvas ref={chartRef}></canvas></div>
           <div className="fund-card-name">{fund.name}</div>
           <div className="fund-card-meta">
-            <span>{fund.holdings.length} holdings</span>
-            <span>Top: {fund.holdings[0]?.ticker}</span>
+            <span>{fund.holdings.length} {t.holdings}</span>
+            <span>{t.top}: {fund.holdings[0]?.ticker}</span>
           </div>
         </div>
       );
     }
 
     function ListView({ funds, selected, onSelect }) {
+      const lang = React.useContext(LangContext);
+      const t = I18N[lang];
       return (
-        <div className="list-container">
-          <div className="list-sidebar">
-            {funds.map((fund, i) => (
-              <div key={i} className={`list-item ${selected?.name === fund.name ? 'active' : ''}`} onClick={() => onSelect(fund)}>{fund.name}</div>
-            ))}
+        <div className="list-layout-wrapper">
+          <div className="list-container">
+            <div className="list-sidebar">
+              {funds.map((fund, i) => (
+                <div key={i} className={`list-item ${selected?.name === fund.name ? 'active' : ''}`} onClick={() => onSelect(fund)}>{fund.name}</div>
+              ))}
+            </div>
+            <div>{selected ? <DetailView fund={selected} /> : <div className="empty-state"><div className="empty-icon">📊</div><h2>{t.selectFund}</h2><p>{t.selectFundDesc}</p></div>}</div>
           </div>
-          <div>{selected ? <DetailView fund={selected} /> : <div className="empty-state"><div className="empty-icon">📊</div><h2>Select a Fund</h2><p>Choose a fund from the list</p></div>}</div>
+          <SectorLegend />
         </div>
       );
     }
@@ -612,35 +849,70 @@
     function DetailView({ fund, onBack }) {
       const chartRef = React.useRef(null);
       const chartInstance = React.useRef(null);
+      const lang = React.useContext(LangContext);
+      const t = I18N[lang];
 
       React.useEffect(() => {
         if (chartInstance.current) chartInstance.current.destroy();
         const ctx = chartRef.current.getContext('2d');
         chartInstance.current = new Chart(ctx, {
           type: 'doughnut',
-          data: { labels: fund.holdings.map(h => h.ticker), datasets: [{ data: fund.holdings.map(h => h.percent), backgroundColor: fund.holdings.map(h => getSectorColor(h.ticker)), borderWidth: 2, borderColor: '#fff' }] },
-          options: { responsive: true, plugins: { legend: { display: false }, tooltip: { backgroundColor: '#264653', callbacks: { label: ctx => `${ctx.label}: ${ctx.raw.toFixed(1)}%` } } }, cutout: '60%' }
+          data: {
+            labels: fund.holdings.map(h => h.ticker),
+            datasets: [{
+              data: fund.holdings.map(h => h.percent),
+              backgroundColor: fund.holdings.map(h => getSectorColor(h.ticker)),
+              borderWidth: 2,
+              borderColor: '#fff'
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: '#264653',
+                titleFont: { family: 'Montserrat', weight: '600' },
+                bodyFont: { family: 'Montserrat' },
+                callbacks: {
+                  title: function(items) {
+                    return items[0].label + '  ' + items[0].raw.toFixed(1) + '%';
+                  },
+                  label: function(ctx) {
+                    const ticker = fund.holdings[ctx.dataIndex].ticker;
+                    return getSectorName(ticker, lang);
+                  }
+                }
+              }
+            },
+            cutout: '60%'
+          }
         });
         return () => chartInstance.current?.destroy();
-      }, [fund]);
+      }, [fund, lang]);
 
       return (
         <div className="detail-view">
-          {onBack && <button className="back-btn" onClick={onBack}>← Back to Home</button>}
+          {onBack && <button className="back-btn" onClick={onBack}>← {t.backToHome}</button>}
           <h1 className="fund-title">{fund.name}</h1>
-          <p className="fund-subtitle">{fund.holdings.length} holdings</p>
+          <p className="fund-subtitle">{fund.holdings.length} {t.holdings}</p>
           <div className="chart-container"><canvas ref={chartRef}></canvas></div>
           <div className="table-container">
             <table className="holdings-table">
-              <thead><tr><th>Ticker</th><th>Company</th><th>Allocation</th></tr></thead>
+              <thead><tr><th>{t.ticker}</th><th>{t.company}</th><th>{t.sector}</th><th>{t.allocation}</th></tr></thead>
               <tbody>
-                {fund.holdings.map((h, i) => (
-                  <tr key={i}>
-                    <td><span className="ticker">{h.ticker}</span></td>
-                    <td>{h.name}</td>
-                    <td><div className="percent-bar"><div className="percent-bar-bg"><div className={`percent-bar-fill ${i === 0 ? 'top' : ''}`} style={{ width: `${h.percent}%` }}></div></div><span className="percent-value">{h.percent.toFixed(1)}%</span></div></td>
-                  </tr>
-                ))}
+                {fund.holdings.map((h, i) => {
+                  const sector = getSector(h.ticker);
+                  const sectorLabel = lang === 'ja' ? (SECTOR_NAMES_JP[sector] || sector) : sector;
+                  return (
+                    <tr key={i}>
+                      <td><span className="ticker">{h.ticker}</span></td>
+                      <td>{h.name}</td>
+                      <td><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
+                      <td><div className="percent-bar"><div className="percent-bar-bg"><div className={`percent-bar-fill ${i === 0 ? 'top' : ''}`} style={{ width: `${h.percent}%` }}></div></div><span className="percent-value">{h.percent.toFixed(1)}%</span></div></td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
