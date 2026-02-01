@@ -355,6 +355,10 @@
       overflow: hidden;
     }
 
+    .scroll-hint {
+      display: none;
+    }
+
     .holdings-table {
       width: 100%;
       border-collapse: collapse;
@@ -723,7 +727,7 @@
       }
 
       .detail-view {
-        padding: 24px;
+        padding: 20px 16px;
       }
 
       .fund-title {
@@ -731,8 +735,41 @@
         letter-spacing: 2px;
       }
 
+      .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 12px;
+        position: relative;
+      }
+
+      .table-container .holdings-table,
+      .table-container .ranking-table {
+        min-width: 600px;
+      }
+
+      .scroll-hint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-size: 11px;
+        color: var(--teal-light);
+        padding: 8px 0 4px;
+        opacity: 0.7;
+      }
+
+      .scroll-hint-arrow {
+        display: inline-block;
+        animation: swipeHint 1.5s ease-in-out infinite;
+      }
+
+      @keyframes swipeHint {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(6px); }
+      }
+
       .ranking-view {
-        padding: 24px;
+        padding: 20px 16px;
       }
 
       .ranking-title {
@@ -740,14 +777,9 @@
         letter-spacing: 2px;
       }
 
-      .ranking-table th,
-      .ranking-table td {
-        padding: 10px 8px;
-        font-size: 11px;
-      }
-
-      .ranking-table .hide-mobile {
-        display: none;
+      .ranking-table .hide-mobile,
+      .holdings-table .hide-mobile {
+        /* All columns visible via horizontal scroll */
       }
 
       .rank-funds-panel {
@@ -827,6 +859,7 @@
         backToRanking: 'Back to Ranking',
         rankFundName: 'Fund',
         rankWeight: 'Weight',
+        swipeToScroll: 'Swipe to scroll',
         Financial: 'Financial',
         Technology: 'Technology',
         Healthcare: 'Healthcare',
@@ -865,6 +898,7 @@
         backToRanking: 'ランキングに戻る',
         rankFundName: 'ファンド',
         rankWeight: '比率',
+        swipeToScroll: 'スワイプでスクロール',
         Financial: '金融',
         Technology: 'テクノロジー',
         Healthcare: 'ヘルスケア',
@@ -1150,6 +1184,7 @@
           <h1 className="fund-title">{fund.name}</h1>
           <p className="fund-subtitle">{fund.holdings.length} {t.holdings}</p>
           <div className="chart-container"><canvas ref={chartRef}></canvas></div>
+          <div className="scroll-hint"><span className="scroll-hint-arrow">→</span> {t.swipeToScroll}</div>
           <div className="table-container">
             <table className="holdings-table">
               <thead><tr><th>{t.ticker}</th><th>{t.company}</th><th>{t.sector}</th><th>{t.allocation}</th></tr></thead>
@@ -1207,6 +1242,7 @@
         <div className="ranking-view">
           <h1 className="ranking-title">{t.rankingTitle}</h1>
           <p className="ranking-subtitle">{t.rankingDesc}</p>
+          <div className="scroll-hint"><span className="scroll-hint-arrow">→</span> {t.swipeToScroll}</div>
           <div className="table-container">
             <table className="ranking-table">
               <thead>
