@@ -27,6 +27,15 @@ const parser = new XMLParser({
   trimValues: true
 });
 
+const SECTOR_BY_TICKER = {
+  SW: 'Industrial',
+  CRH: 'Materials',
+  FERG: 'Industrial',
+  IONQ: 'Technology',
+  NVO: 'Healthcare',
+  ABT: 'Healthcare'
+};
+
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function readJson(filePath, fallback) {
@@ -263,11 +272,13 @@ function buildHoldings(entries, lookup) {
         lookup?.cusipMap?.[cusipKey] ||
         lookup?.cusipMap?.[paddedCusip] ||
         matchTickerByName(name, title, lookup);
+      const sector = mappedTicker ? SECTOR_BY_TICKER[mappedTicker] || '' : '';
       return {
         name,
         cusip,
         value,
-        ticker: mappedTicker || cusip
+        ticker: mappedTicker || cusip,
+        sector: sector || undefined
       };
     })
     .filter(Boolean);
