@@ -754,7 +754,7 @@
         "percent": 9.6
       },
       {
-        "ticker": "02079K305",
+        "ticker": "GOOGL",
         "name": "ALPHABET INC",
         "percent": 9.5
       },
@@ -802,7 +802,7 @@
         "percent": 13.7
       },
       {
-        "ticker": "02079K107",
+        "ticker": "GOOG",
         "name": "ALPHABET INC",
         "percent": 12.4
       },
@@ -966,7 +966,7 @@
         "percent": 1.9
       },
       {
-        "ticker": "02079K305",
+        "ticker": "GOOGL",
         "name": "ALPHABET INC",
         "percent": 1.6
       },
@@ -986,7 +986,7 @@
         "percent": 1.4
       },
       {
-        "ticker": "92826C839",
+        "ticker": "V",
         "name": "VISA INC",
         "percent": 1.1
       },
@@ -1011,7 +1011,7 @@
         "percent": 0.8
       },
       {
-        "ticker": "57636Q104",
+        "ticker": "MA",
         "name": "MASTERCARD INC",
         "percent": 0.8
       },
@@ -1081,7 +1081,7 @@
         "percent": 0.4
       },
       {
-        "ticker": "91324P102",
+        "ticker": "UNH",
         "name": "UNITEDHEALTH GROUP INC",
         "percent": 0.4
       },
@@ -1106,7 +1106,7 @@
         "percent": 0.3
       },
       {
-        "ticker": "91324P102",
+        "ticker": "UNH",
         "name": "UNITEDHEALTH GROUP INC",
         "percent": 0.3
       },
@@ -1184,7 +1184,7 @@
         "percent": 3.9
       },
       {
-        "ticker": "931142103",
+        "ticker": "WMT",
         "name": "WALMART INC",
         "percent": 2.4
       },
@@ -1282,7 +1282,7 @@
         "percent": 6.7
       },
       {
-        "ticker": "02079K305",
+        "ticker": "GOOGL",
         "name": "ALPHABET INC",
         "percent": 2.5
       },
@@ -1332,7 +1332,7 @@
         "percent": 1.2
       },
       {
-        "ticker": "30303M102",
+        "ticker": "META",
         "name": "META PLATFORMS INC",
         "percent": 1.2
       },
@@ -1342,7 +1342,7 @@
         "percent": 1.1
       },
       {
-        "ticker": "11135F101",
+        "ticker": "AVGO",
         "name": "BROADCOM INC",
         "percent": 1.1
       },
@@ -1372,7 +1372,7 @@
         "percent": 1
       },
       {
-        "ticker": "92826C839",
+        "ticker": "V",
         "name": "VISA INC",
         "percent": 0.9
       },
@@ -1392,7 +1392,7 @@
         "percent": 0.8
       },
       {
-        "ticker": "57636Q104",
+        "ticker": "MA",
         "name": "MASTERCARD INCORPORATED",
         "percent": 0.8
       },
@@ -1570,7 +1570,7 @@
         "percent": 0.9
       },
       {
-        "ticker": "02079K305",
+        "ticker": "GOOGL",
         "name": "ALPHABET INC",
         "percent": 0.8
       },
@@ -1610,7 +1610,7 @@
         "percent": 0.7
       },
       {
-        "ticker": "02079K107",
+        "ticker": "GOOG",
         "name": "ALPHABET INC",
         "percent": 0.6
       },
@@ -1655,7 +1655,7 @@
         "percent": 0.5
       },
       {
-        "ticker": "30303M102",
+        "ticker": "META",
         "name": "META PLATFORMS INC",
         "percent": 0.5
       },
@@ -1911,7 +1911,7 @@
         "percent": 1.3
       },
       {
-        "ticker": "30303M102",
+        "ticker": "META",
         "name": "Meta Platforms Inc",
         "percent": 1.3
       },
@@ -2036,7 +2036,7 @@
         "percent": 0.7
       },
       {
-        "ticker": "02079K107",
+        "ticker": "GOOG",
         "name": "Alphabet Inc",
         "percent": 0.5
       },
@@ -2089,7 +2089,7 @@
         "percent": 10.6
       },
       {
-        "ticker": "02079K107",
+        "ticker": "GOOG",
         "name": "ALPHABET INC",
         "percent": 10.5
       },
@@ -2104,7 +2104,7 @@
         "percent": 8.7
       },
       {
-        "ticker": "02079K305",
+        "ticker": "GOOGL",
         "name": "ALPHABET INC",
         "percent": 8
       },
@@ -2247,7 +2247,7 @@
         "percent": 2
       },
       {
-        "ticker": "30303M102",
+        "ticker": "META",
         "name": "META PLATFORMS INC",
         "percent": 1.9
       },
@@ -2385,7 +2385,7 @@
         "percent": 3.4
       },
       {
-        "ticker": "02079K305",
+        "ticker": "GOOGL",
         "name": "ALPHABET INC",
         "percent": 2.5
       },
@@ -2663,12 +2663,12 @@
         "percent": 0.9
       },
       {
-        "ticker": "30303M102",
+        "ticker": "META",
         "name": "META PLATFORMS INC",
         "percent": 0.7
       },
       {
-        "ticker": "02079K305",
+        "ticker": "GOOGL",
         "name": "ALPHABET INC",
         "percent": 0.6
       },
@@ -2678,12 +2678,12 @@
         "percent": 0.6
       },
       {
-        "ticker": "02079K107",
+        "ticker": "GOOG",
         "name": "ALPHABET INC",
         "percent": 0.5
       },
       {
-        "ticker": "02079K305",
+        "ticker": "GOOGL",
         "name": "ALPHABET INC",
         "percent": 0.5
       },
@@ -2693,17 +2693,17 @@
         "percent": 0.5
       },
       {
-        "ticker": "11135F101",
+        "ticker": "AVGO",
         "name": "BROADCOM INC",
         "percent": 0.5
       },
       {
-        "ticker": "532457108",
+        "ticker": "LLY",
         "name": "ELI LILLY & CO",
         "percent": 0.5
       },
       {
-        "ticker": "30303M102",
+        "ticker": "META",
         "name": "META PLATFORMS INC",
         "percent": 0.5
       },
@@ -2713,7 +2713,7 @@
         "percent": 0.5
       },
       {
-        "ticker": "02079K107",
+        "ticker": "GOOG",
         "name": "ALPHABET INC",
         "percent": 0.4
       },
@@ -2728,12 +2728,12 @@
         "percent": 0.4
       },
       {
-        "ticker": "11135F101",
+        "ticker": "AVGO",
         "name": "BROADCOM INC",
         "percent": 0.4
       },
       {
-        "ticker": "532457108",
+        "ticker": "LLY",
         "name": "ELI LILLY & CO",
         "percent": 0.4
       },
@@ -2748,12 +2748,12 @@
         "percent": 0.3
       },
       {
-        "ticker": "30231G102",
+        "ticker": "XOM",
         "name": "EXXON MOBIL CORP",
         "percent": 0.3
       },
       {
-        "ticker": "30231G102",
+        "ticker": "XOM",
         "name": "EXXON MOBIL CORP",
         "percent": 0.3
       },
@@ -2763,12 +2763,12 @@
         "percent": 0.3
       },
       {
-        "ticker": "46625H100",
+        "ticker": "JPM",
         "name": "JPMORGAN CHASE & CO.",
         "percent": 0.3
       },
       {
-        "ticker": "46625H100",
+        "ticker": "JPM",
         "name": "JPMORGAN CHASE & CO.",
         "percent": 0.3
       },
@@ -2783,12 +2783,12 @@
         "percent": 0.3
       },
       {
-        "ticker": "91324P102",
+        "ticker": "UNH",
         "name": "UNITEDHEALTH GROUP INC",
         "percent": 0.3
       },
       {
-        "ticker": "92826C839",
+        "ticker": "V",
         "name": "VISA INC",
         "percent": 0.3
       },
@@ -2808,7 +2808,7 @@
         "percent": 0.2
       },
       {
-        "ticker": "02079K305",
+        "ticker": "GOOGL",
         "name": "ALPHABET INC",
         "percent": 0.2
       },
@@ -2838,12 +2838,12 @@
         "percent": 0.2
       },
       {
-        "ticker": "22160K105",
+        "ticker": "COST",
         "name": "COSTCO WHSL CORP NEW",
         "percent": 0.2
       },
       {
-        "ticker": "22160K105",
+        "ticker": "COST",
         "name": "COSTCO WHSL CORP NEW",
         "percent": 0.2
       },
@@ -2901,22 +2901,22 @@
         "percent": 2.5
       },
       {
-        "ticker": "11135F101",
+        "ticker": "AVGO",
         "name": "BROADCOM INC",
         "percent": 2.2
       },
       {
-        "ticker": "02079K305",
+        "ticker": "GOOGL",
         "name": "ALPHABET INC",
         "percent": 2.1
       },
       {
-        "ticker": "30303M102",
+        "ticker": "META",
         "name": "META PLATFORMS INC",
         "percent": 1.7
       },
       {
-        "ticker": "02079K107",
+        "ticker": "GOOG",
         "name": "ALPHABET INC",
         "percent": 1.7
       },
@@ -2926,12 +2926,12 @@
         "percent": 1.5
       },
       {
-        "ticker": "532457108",
+        "ticker": "LLY",
         "name": "ELI LILLY & CO",
         "percent": 1.2
       },
       {
-        "ticker": "46625H100",
+        "ticker": "JPM",
         "name": "JPMORGAN CHASE & CO.",
         "percent": 1.1
       },
@@ -2941,17 +2941,17 @@
         "percent": 1
       },
       {
-        "ticker": "30231G102",
+        "ticker": "XOM",
         "name": "EXXON MOBIL CORP",
         "percent": 0.7
       },
       {
-        "ticker": "92826C839",
+        "ticker": "V",
         "name": "VISA INC",
         "percent": 0.7
       },
       {
-        "ticker": "931142103",
+        "ticker": "WMT",
         "name": "WALMART INC",
         "percent": 0.6
       },
@@ -2961,7 +2961,7 @@
         "percent": 0.6
       },
       {
-        "ticker": "57636Q104",
+        "ticker": "MA",
         "name": "MASTERCARD INCORPORATED",
         "percent": 0.6
       },
@@ -2986,7 +2986,7 @@
         "percent": 0.5
       },
       {
-        "ticker": "22160K105",
+        "ticker": "COST",
         "name": "COSTCO WHSL CORP NEW",
         "percent": 0.5
       },
@@ -2996,7 +2996,7 @@
         "percent": 0.4
       },
       {
-        "ticker": "91324P102",
+        "ticker": "UNH",
         "name": "UNITEDHEALTH GROUP INC",
         "percent": 0.4
       },
