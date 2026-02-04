@@ -1,0 +1,11 @@
+{
+  "name": "portfolio-visualizer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "refresh-13f": "node scripts/refresh-13f.mjs"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^4.4.1"
+  }
+}

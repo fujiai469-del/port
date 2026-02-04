@@ -1,0 +1,23 @@
+[
+  { "name": "Nelson Peltz (Trian Fund Management)", "cik": "0001345472" },
+  { "name": "Kohlberg Kravis Roberts & Co. L.p.", "cik": "0001399770" },
+  { "name": "Oaktree Fund (Oaktree Fund Advisors, LLC)", "cik": "0001822973" },
+  { "name": "Lansdowne Partners (UK) Llp", "cik": "0001608485" },
+  { "name": "Washington State Investment Board", "cik": "0000943712" },
+  { "name": "Engine No. 1 Llc", "cik": "0001835549" },
+  { "name": "Windacre Partnership", "cik": "0001599383" },
+  { "name": "Oakcliff Capital", "cik": "0001657335" },
+  { "name": "Snow Phipps Group", "cik": "0001698661" },
+  { "name": "Foresite Capital Management V, Llc", "cik": "0001792206" },
+  { "name": "Warren Buffett (Berkshire Hathaway)", "cik": "0001067983" },
+  { "name": "Bill Gates (Bill & Melinda Gates Foundation Trust)", "cik": "0001166559" },
+  { "name": "Bridgewater Associates (Ray Dalio)", "cik": "0001350694" },
+  { "name": "Renaissance Technologies (Jim Simons / Medallion)", "cik": "0001037389" },
+  { "name": "Scion Asset Management (Michael Burry)", "cik": "0001649339" },
+  { "name": "ARK Investment Management (Cathie Wood)", "cik": "0001697748" },
+  { "name": "Pershing Square Capital Management (Bill Ackman)", "cik": "0001336528" },
+  { "name": "Third Point (Daniel Loeb)", "cik": "0001040273" },
+  { "name": "Soros Fund Management (George Soros)", "cik": "0001029160" },
+  { "name": "BlackRock Inc.", "cik": "0001060021" },
+  { "name": "Vanguard Group Inc.", "cik": "0000102909" }
+]
