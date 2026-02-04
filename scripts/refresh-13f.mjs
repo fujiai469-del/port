@@ -210,11 +210,45 @@ function extractInfoTableEntriesFromText(text) {
   return [];
 }
 
-function buildHoldings(entries, tickerMap) {
+function buildTickerLookup(tickerMap) {
+  const cusipMap = {};
+  const patterns = [];
+
+  for (const [key, ticker] of Object.entries(tickerMap || {})) {
+    if (/^[0-9A-Z]{9}$/.test(key)) {
+      cusipMap[key] = ticker;
+    } else {
+      const normalizedKey = normalizeText(key).toUpperCase();
+      if (normalizedKey) {
+        patterns.push({ key: normalizedKey, ticker, len: normalizedKey.length });
+      }
+    }
+  }
+
+  patterns.sort((a, b) => b.len - a.len);
+  return { cusipMap, patterns };
+}
+
+function matchTickerByName(name, title, lookup) {
+  if (!lookup?.patterns?.length) return '';
+  const nameKey = normalizeText(name).toUpperCase();
+  const titleKey = normalizeText(title).toUpperCase();
+
+  for (const pattern of lookup.patterns) {
+    if (nameKey.includes(pattern.key) || titleKey.includes(pattern.key)) {
+      return pattern.ticker;
+    }
+  }
+
+  return '';
+}
+
+function buildHoldings(entries, lookup) {
   const cleaned = entries
     .map((entry) => {
       const name = normalizeText(entry.nameOfIssuer);
       const cusip = normalizeText(entry.cusip);
+      const title = normalizeText(entry.titleOfClass);
       const rawTicker = normalizeText(
         entry.ticker || entry.tickerOrSymbol || entry.tickerSymbol || entry.symbol
       );
@@ -222,7 +256,8 @@ function buildHoldings(entries, tickerMap) {
       const putCall = normalizeText(entry.putCall).toUpperCase();
       if (!name || !cusip || !Number.isFinite(value) || value <= 0) return null;
       if (putCall === 'PUT' || putCall === 'CALL') return null;
-      const mappedTicker = rawTicker || tickerMap[cusip] || tickerMap[name] || '';
+      const mappedTicker =
+        rawTicker || lookup?.cusipMap?.[cusip] || matchTickerByName(name, title, lookup);
       return {
         name,
         cusip,
@@ -245,7 +280,7 @@ function buildHoldings(entries, tickerMap) {
   return holdings;
 }
 
-async function fetch13fHoldings({ name, cik }, tickerMap) {
+async function fetch13fHoldings({ name, cik }, tickerLookup) {
   const paddedCik = toPaddedCik(cik);
   const submissionsUrl = `${SEC_BASE}/submissions/CIK${paddedCik}.json`;
   const submissions = await fetchSec(submissionsUrl);
@@ -291,7 +326,7 @@ async function fetch13fHoldings({ name, cik }, tickerMap) {
     throw new Error(`No holdings parsed for ${name} (${cik}) ${latest.accessionNumber}`);
   }
 
-  const holdings = buildHoldings(entries, tickerMap);
+  const holdings = buildHoldings(entries, tickerLookup);
   return {
     name,
     cik: String(cik),
@@ -304,6 +339,7 @@ async function fetch13fHoldings({ name, cik }, tickerMap) {
 async function main() {
   const config = await readJson(CONFIG_PATH, []);
   const tickerMap = await readJson(TICKER_MAP_PATH, {});
+  const tickerLookup = buildTickerLookup(tickerMap);
   const manualFunds = await readJson(MANUAL_PATH, []);
   const existingMeta = await readJson(META_PATH, null);
 
@@ -319,7 +355,7 @@ async function main() {
     orderedNames.push(fund.name);
     if (!fund.cik) continue;
     try {
-      const dynamicFund = await fetch13fHoldings(fund, tickerMap);
+      const dynamicFund = await fetch13fHoldings(fund, tickerLookup);
       combined.set(fund.name, dynamicFund);
       dynamicCount += 1;
     } catch (err) {
