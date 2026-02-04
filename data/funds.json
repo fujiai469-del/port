@@ -6,7 +6,7 @@
     "filingDate": "2025-11-14",
     "holdings": [
       {
-        "ticker": "G4474Y214",
+        "ticker": "FERG",
         "name": "Janus Henderson Group plc",
         "percent": 34.5
       },
@@ -455,17 +455,17 @@
         "percent": 3.2
       },
       {
-        "ticker": "G25508105",
+        "ticker": "CRH",
         "name": "CRH PLC",
         "percent": 2.7
       },
       {
-        "ticker": "G25508105",
+        "ticker": "CRH",
         "name": "CRH PLC",
         "percent": 2.3
       },
       {
-        "ticker": "G8267P108",
+        "ticker": "SW",
         "name": "SMURFIT WESTROCK PLC",
         "percent": 2.1
       },
@@ -480,12 +480,12 @@
         "percent": 1.6
       },
       {
-        "ticker": "46222L108",
+        "ticker": "IONQ",
         "name": "IONQ INC",
         "percent": 1.5
       },
       {
-        "ticker": "G8267P108",
+        "ticker": "SW",
         "name": "SMURFIT WESTROCK PLC",
         "percent": 1.5
       },
@@ -520,7 +520,7 @@
         "percent": 1
       },
       {
-        "ticker": "46222L108",
+        "ticker": "IONQ",
         "name": "IONQ INC",
         "percent": 1
       },
@@ -535,7 +535,7 @@
         "percent": 0.9
       },
       {
-        "ticker": "G25508105",
+        "ticker": "CRH",
         "name": "CRH PLC",
         "percent": 0.9
       },
@@ -570,7 +570,7 @@
         "percent": 0.7
       },
       {
-        "ticker": "G25508105",
+        "ticker": "CRH",
         "name": "CRH PLC",
         "percent": 0.7
       },
@@ -580,7 +580,7 @@
         "percent": 0.6
       },
       {
-        "ticker": "G8267P108",
+        "ticker": "SW",
         "name": "SMURFIT WESTROCK PLC",
         "percent": 0.6
       },
@@ -600,7 +600,7 @@
         "percent": 0.5
       },
       {
-        "ticker": "G8267P108",
+        "ticker": "SW",
         "name": "SMURFIT WESTROCK PLC",
         "percent": 0.5
       },
@@ -610,7 +610,7 @@
         "percent": 0.4
       },
       {
-        "ticker": "46222L108",
+        "ticker": "IONQ",
         "name": "IONQ INC",
         "percent": 0.4
       },
@@ -635,7 +635,7 @@
         "percent": 0.3
       },
       {
-        "ticker": "46222L108",
+        "ticker": "IONQ",
         "name": "IONQ INC",
         "percent": 0.3
       },
@@ -1695,7 +1695,7 @@
         "percent": 0.4
       },
       {
-        "ticker": "46222L108",
+        "ticker": "IONQ",
         "name": "IONQ INC",
         "percent": 0.4
       },
@@ -2187,7 +2187,7 @@
         "percent": 3.4
       },
       {
-        "ticker": "G25508105",
+        "ticker": "CRH",
         "name": "CRH PLC",
         "percent": 3.1
       },
@@ -2370,7 +2370,7 @@
         "percent": 7.7
       },
       {
-        "ticker": "G8267P108",
+        "ticker": "SW",
         "name": "SMURFIT WESTROCK PLC",
         "percent": 5.2
       },
@@ -3071,7 +3071,7 @@
         "percent": 0.3
       },
       {
-        "ticker": "2824100",
+        "ticker": "ABT",
         "name": "ABBOTT LABS",
         "percent": 0.3
       },
