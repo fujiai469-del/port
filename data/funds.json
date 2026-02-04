@@ -470,12 +470,12 @@
         "percent": 2.1
       },
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "AMAZON COM INC",
         "percent": 1.6
       },
       {
-        "ticker": "32654105",
+        "ticker": "ADI",
         "name": "ANALOG DEVICES INC",
         "percent": 1.6
       },
@@ -530,7 +530,7 @@
         "percent": 1
       },
       {
-        "ticker": "32654105",
+        "ticker": "ADI",
         "name": "ANALOG DEVICES INC",
         "percent": 0.9
       },
@@ -550,7 +550,7 @@
         "percent": 0.9
       },
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "AMAZON COM INC",
         "percent": 0.8
       },
@@ -560,7 +560,7 @@
         "percent": 0.8
       },
       {
-        "ticker": "42068205",
+        "ticker": "ARM",
         "name": "ARM HOLDINGS PLC",
         "percent": 0.7
       },
@@ -605,7 +605,7 @@
         "percent": 0.5
       },
       {
-        "ticker": "32654105",
+        "ticker": "ADI",
         "name": "ANALOG DEVICES INC",
         "percent": 0.4
       },
@@ -620,17 +620,17 @@
         "percent": 0.4
       },
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "AMAZON COM INC",
         "percent": 0.3
       },
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "AMAZON COM INC",
         "percent": 0.3
       },
       {
-        "ticker": "32654105",
+        "ticker": "ADI",
         "name": "ANALOG DEVICES INC",
         "percent": 0.3
       },
@@ -749,7 +749,7 @@
         "percent": 9.8
       },
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "AMAZON COM INC",
         "percent": 9.6
       },
@@ -891,12 +891,12 @@
     "filingDate": "2025-11-14",
     "holdings": [
       {
-        "ticker": "25816109",
+        "ticker": "AXP",
         "name": "AMERICAN EXPRESS CO",
         "percent": 18.5
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 8.7
       },
@@ -906,12 +906,12 @@
         "percent": 7
       },
       {
-        "ticker": "60505104",
+        "ticker": "BAC",
         "name": "BANK AMER CORP",
         "percent": 6
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 5.9
       },
@@ -926,7 +926,7 @@
         "percent": 3.6
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 3.3
       },
@@ -941,7 +941,7 @@
         "percent": 3.2
       },
       {
-        "ticker": "60505104",
+        "ticker": "BAC",
         "name": "BANK AMER CORP",
         "percent": 2.4
       },
@@ -971,17 +971,17 @@
         "percent": 1.6
       },
       {
-        "ticker": "60505104",
+        "ticker": "BAC",
         "name": "BANK AMER CORP",
         "percent": 1.6
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 1.5
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 1.4
       },
@@ -1021,7 +1021,7 @@
         "percent": 0.8
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 0.7
       },
@@ -1036,7 +1036,7 @@
         "percent": 0.7
       },
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "AMAZON COM INC",
         "percent": 0.6
       },
@@ -1046,17 +1046,17 @@
         "percent": 0.5
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 0.4
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 0.4
       },
       {
-        "ticker": "60505104",
+        "ticker": "BAC",
         "name": "BANK AMER CORP",
         "percent": 0.4
       },
@@ -1086,12 +1086,12 @@
         "percent": 0.4
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 0.3
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 0.3
       },
@@ -1121,22 +1121,22 @@
         "percent": 0.2
       },
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "AMAZON COM INC",
         "percent": 0.2
       },
       {
-        "ticker": "25816109",
+        "ticker": "AXP",
         "name": "AMERICAN EXPRESS CO",
         "percent": 0.2
       },
       {
-        "ticker": "60505104",
+        "ticker": "BAC",
         "name": "BANK AMER CORP",
         "percent": 0.2
       },
       {
-        "ticker": "60505104",
+        "ticker": "BAC",
         "name": "BANK AMER CORP",
         "percent": 0.2
       }
@@ -1149,7 +1149,7 @@
     "filingDate": "2025-11-14",
     "holdings": [
       {
-        "ticker": "84670702",
+        "ticker": "BRK.B",
         "name": "BERKSHIRE HATHAWAY INC DEL",
         "percent": 29.9
       },
@@ -1337,7 +1337,7 @@
         "percent": 1.2
       },
       {
-        "ticker": "7903107",
+        "ticker": "AMD",
         "name": "ADVANCED MICRO DEVICES INC",
         "percent": 1.1
       },
@@ -1362,7 +1362,7 @@
         "percent": 1
       },
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "AMAZON COM INC",
         "percent": 1
       },
@@ -1487,12 +1487,12 @@
         "percent": 0.4
       },
       {
-        "ticker": "38222105",
+        "ticker": "AMAT",
         "name": "APPLIED MATLS INC",
         "percent": 0.4
       },
       {
-        "ticker": "40413205",
+        "ticker": "ANET",
         "name": "ARISTA NETWORKS INC",
         "percent": 0.4
       },
@@ -1755,7 +1755,7 @@
         "percent": 0.3
       },
       {
-        "ticker": "49468101",
+        "ticker": "TEAM",
         "name": "ATLASSIAN CORPORATION",
         "percent": 0.3
       },
@@ -1861,7 +1861,7 @@
         "percent": 3.4
       },
       {
-        "ticker": "7903107",
+        "ticker": "AMD",
         "name": "Advanced Micro Devices Inc",
         "percent": 2.9
       },
@@ -1891,7 +1891,7 @@
         "percent": 1.8
       },
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "Amazon.com Inc",
         "percent": 1.6
       },
@@ -2099,7 +2099,7 @@
         "percent": 10
       },
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "AMAZON COM INC",
         "percent": 8.7
       },
@@ -2142,7 +2142,7 @@
         "percent": 9
       },
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "AMAZON COM INC",
         "percent": 7.4
       },
@@ -2365,7 +2365,7 @@
     "filingDate": "2025-11-14",
     "holdings": [
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "AMAZON COM INC",
         "percent": 7.7
       },
@@ -2455,7 +2455,7 @@
         "percent": 1.5
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 1.4
       },
@@ -2628,7 +2628,7 @@
         "percent": 2
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 1.8
       },
@@ -2643,7 +2643,7 @@
         "percent": 1.6
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 1.5
       },
@@ -2653,12 +2653,12 @@
         "percent": 1.5
       },
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "AMAZON COM INC",
         "percent": 0.9
       },
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "AMAZON COM INC",
         "percent": 0.9
       },
@@ -2688,7 +2688,7 @@
         "percent": 0.5
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 0.5
       },
@@ -2718,12 +2718,12 @@
         "percent": 0.4
       },
       {
-        "ticker": "84670702",
+        "ticker": "BRK.B",
         "name": "BERKSHIRE HATHAWAY INC DEL",
         "percent": 0.4
       },
       {
-        "ticker": "84670702",
+        "ticker": "BRK.B",
         "name": "BERKSHIRE HATHAWAY INC DEL",
         "percent": 0.4
       },
@@ -2743,7 +2743,7 @@
         "percent": 0.4
       },
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "AMAZON COM INC",
         "percent": 0.3
       },
@@ -2803,7 +2803,7 @@
         "percent": 0.2
       },
       {
-        "ticker": "7903107",
+        "ticker": "AMD",
         "name": "ADVANCED MICRO DEVICES INC",
         "percent": 0.2
       },
@@ -2813,17 +2813,17 @@
         "percent": 0.2
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 0.2
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 0.2
       },
       {
-        "ticker": "38222105",
+        "ticker": "AMAT",
         "name": "APPLIED MATLS INC",
         "percent": 0.2
       },
@@ -2886,7 +2886,7 @@
         "percent": 5.5
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 5
       },
@@ -2896,7 +2896,7 @@
         "percent": 4.5
       },
       {
-        "ticker": "23135106",
+        "ticker": "AMZN",
         "name": "AMAZON COM INC",
         "percent": 2.5
       },
@@ -2936,7 +2936,7 @@
         "percent": 1.1
       },
       {
-        "ticker": "84670702",
+        "ticker": "BRK.B",
         "name": "BERKSHIRE HATHAWAY INC DEL",
         "percent": 1
       },
@@ -2976,7 +2976,7 @@
         "percent": 0.5
       },
       {
-        "ticker": "60505104",
+        "ticker": "BAC",
         "name": "BANK AMERICA CORP",
         "percent": 0.5
       },
@@ -3036,7 +3036,7 @@
         "percent": 0.4
       },
       {
-        "ticker": "7903107",
+        "ticker": "AMD",
         "name": "ADVANCED MICRO DEVICES INC",
         "percent": 0.4
       },
@@ -3106,12 +3106,12 @@
         "percent": 0.3
       },
       {
-        "ticker": "38222105",
+        "ticker": "AMAT",
         "name": "APPLIED MATLS INC",
         "percent": 0.3
       },
       {
-        "ticker": "37833100",
+        "ticker": "AAPL",
         "name": "APPLE INC",
         "percent": 0.3
       },
