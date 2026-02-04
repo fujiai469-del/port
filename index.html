@@ -1346,6 +1346,15 @@
       return holding.sector || getSector(holding.ticker);
     }
 
+    function getHoldingSectorColor(holding) {
+      return SECTOR_COLORS[getHoldingSector(holding)];
+    }
+
+    function getHoldingSectorName(holding, lang) {
+      const sector = getHoldingSector(holding);
+      return lang === 'ja' ? (SECTOR_NAMES_JP[sector] || sector) : sector;
+    }
+
     function getSectorColor(ticker) {
       return SECTOR_COLORS[getSector(ticker)];
     }
@@ -1517,7 +1526,7 @@
           type: 'doughnut',
           data: {
             labels: fund.holdings.slice(0, 5).map(h => h.ticker),
-            datasets: [{ data: fund.holdings.slice(0, 5).map(h => h.percent), backgroundColor: fund.holdings.slice(0, 5).map(h => getSectorColor(h.ticker)), borderWidth: 2, borderColor: '#fff' }]
+            datasets: [{ data: fund.holdings.slice(0, 5).map(h => h.percent), backgroundColor: fund.holdings.slice(0, 5).map(h => getHoldingSectorColor(h)), borderWidth: 2, borderColor: '#fff' }]
           },
           options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false }, tooltip: { enabled: false } }, cutout: '55%', animation: { duration: 0 } }
         });
@@ -1569,7 +1578,7 @@
             labels: fund.holdings.map(h => h.ticker),
             datasets: [{
               data: fund.holdings.map(h => h.percent),
-              backgroundColor: fund.holdings.map(h => getSectorColor(h.ticker)),
+              backgroundColor: fund.holdings.map(h => getHoldingSectorColor(h)),
               borderWidth: 2,
               borderColor: '#fff'
             }]
@@ -1587,8 +1596,8 @@
                     return items[0].label + '  ' + items[0].raw.toFixed(1) + '%';
                   },
                   label: function (ctx) {
-                    const ticker = fund.holdings[ctx.dataIndex].ticker;
-                    return getSectorName(ticker, lang);
+                    const holding = fund.holdings[ctx.dataIndex];
+                    return getHoldingSectorName(holding, lang);
                   }
                 }
               }
@@ -1650,7 +1659,8 @@
 
         Object.keys(holdingsA).forEach(ticker => {
           if (holdingsB[ticker]) {
-            common.push({ ticker, name: holdingsA[ticker].name, weightA: holdingsA[ticker].percent, weightB: holdingsB[ticker].percent });
+            const sector = holdingsA[ticker].sector || holdingsB[ticker].sector || '';
+            common.push({ ticker, name: holdingsA[ticker].name, weightA: holdingsA[ticker].percent, weightB: holdingsB[ticker].percent, sector });
           } else {
             onlyA.push(holdingsA[ticker]);
           }
@@ -1756,7 +1766,9 @@
         funds.forEach(fund => {
           fund.holdings.forEach(h => {
             if (!tickerMap[h.ticker]) {
-              tickerMap[h.ticker] = { ticker: h.ticker, name: h.name, totalWeight: 0, fundCount: 0, funds: [] };
+              tickerMap[h.ticker] = { ticker: h.ticker, name: h.name, totalWeight: 0, fundCount: 0, funds: [], sector: h.sector || '' };
+            } else if (!tickerMap[h.ticker].sector && h.sector) {
+              tickerMap[h.ticker].sector = h.sector;
             }
             tickerMap[h.ticker].totalWeight += h.percent;
             tickerMap[h.ticker].fundCount += 1;

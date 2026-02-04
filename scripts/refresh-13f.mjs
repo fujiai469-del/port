@@ -28,12 +28,22 @@ const parser = new XMLParser({
 });
 
 const SECTOR_BY_TICKER = {
-  SW: 'Industrial',
+  AU: 'Materials',
+  BV: 'Industrial',
   CRH: 'Materials',
   FERG: 'Industrial',
+  FNF: 'Financial',
+  FTAI: 'Industrial',
+  GOLF: 'Consumer',
+  IBKR: 'Financial',
+  SW: 'Industrial',
   IONQ: 'Technology',
   NVO: 'Healthcare',
-  ABT: 'Healthcare'
+  ABT: 'Healthcare',
+  POWL: 'Industrial',
+  SHCO: 'Consumer',
+  TECK: 'Materials',
+  VEL: 'Financial'
 };
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
