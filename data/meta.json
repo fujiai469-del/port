@@ -1,10 +1,10 @@
 {
   "asOf": "2025-12-31",
-  "source": "manual",
-  "generatedAt": "2026-02-04T13:53:13.560Z",
+  "source": "sec-edgar",
+  "generatedAt": "2026-02-04T14:06:32.790Z",
   "totals": {
-    "funds": 31,
-    "dynamic": 0,
-    "manual": 31
+    "funds": 40,
+    "dynamic": 21,
+    "manual": 19
   }
 }
