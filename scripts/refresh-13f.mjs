@@ -248,6 +248,8 @@ function buildHoldings(entries, lookup) {
     .map((entry) => {
       const name = normalizeText(entry.nameOfIssuer);
       const cusip = normalizeText(entry.cusip);
+      const cusipKey = cusip.replace(/\s+/g, '');
+      const paddedCusip = cusipKey.length < 9 ? cusipKey.padStart(9, '0') : cusipKey;
       const title = normalizeText(entry.titleOfClass);
       const rawTicker = normalizeText(
         entry.ticker || entry.tickerOrSymbol || entry.tickerSymbol || entry.symbol
@@ -257,7 +259,10 @@ function buildHoldings(entries, lookup) {
       if (!name || !cusip || !Number.isFinite(value) || value <= 0) return null;
       if (putCall === 'PUT' || putCall === 'CALL') return null;
       const mappedTicker =
-        rawTicker || lookup?.cusipMap?.[cusip] || matchTickerByName(name, title, lookup);
+        rawTicker ||
+        lookup?.cusipMap?.[cusipKey] ||
+        lookup?.cusipMap?.[paddedCusip] ||
+        matchTickerByName(name, title, lookup);
       return {
         name,
         cusip,
