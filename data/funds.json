@@ -1,40 +1,48 @@
 [
   {
     "name": "Nelson Peltz (Trian Fund Management)",
+    "cik": "0001345471",
+    "reportDate": "2025-09-30",
+    "filingDate": "2025-11-14",
     "holdings": [
       {
-        "ticker": "JHG",
-        "name": "Janus Henderson Group",
+        "ticker": "G4474Y214",
+        "name": "Janus Henderson Group plc",
         "percent": 34.5
       },
       {
-        "ticker": "GE",
-        "name": "General Electric",
+        "ticker": "369604301",
+        "name": "GE Aerospace",
         "percent": 29.5
       },
       {
-        "ticker": "SOLV",
-        "name": "Solventum Corp",
+        "ticker": "83444M101",
+        "name": "Solventum Corporation",
         "percent": 15
       },
       {
-        "ticker": "IVZ",
+        "ticker": "G491BT108",
         "name": "Invesco Ltd.",
         "percent": 8.2
       },
       {
-        "ticker": "WEN",
-        "name": "The Wendy's Co",
-        "percent": 6.8
+        "ticker": "G3421J106",
+        "name": "Ferguson Plc New",
+        "percent": 5.9
       },
       {
-        "ticker": "FERG",
-        "name": "Ferguson Enterprises",
-        "percent": 5.8
+        "ticker": "95058W100",
+        "name": "Wendys Co.",
+        "percent": 3.5
       },
       {
-        "ticker": "GEHC",
-        "name": "GE HealthCare",
+        "ticker": "95058W100",
+        "name": "Wendys Co.",
+        "percent": 3.3
+      },
+      {
+        "ticker": "36266G107",
+        "name": "GE HealthCare Technologies Inc.",
         "percent": 0
       }
     ]

@@ -125,6 +125,91 @@ function extractInfoTableEntries(parsed) {
   return ensureArray(entries);
 }
 
+function stripTags(text) {
+  return String(text || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function extractInfoTableXmlFromText(text) {
+  const match = text.match(/<informationTable[\s\S]*?<\/informationTable>/i);
+  if (match) return match[0];
+  return null;
+}
+
+function extractDocumentsFromText(text) {
+  const docs = [];
+  const re = /<DOCUMENT>([\s\S]*?)<\/DOCUMENT>/gi;
+  let m;
+  while ((m = re.exec(text))) {
+    docs.push(m[1]);
+  }
+  return docs.length ? docs : [text];
+}
+
+function parseSgmlInfoTable(doc) {
+  const tableMatch = doc.match(/<TABLE>[\s\S]*?<\/TABLE>/i);
+  if (!tableMatch) return [];
+  const table = tableMatch[0];
+  const rows = table.split(/<S>/i);
+  const entries = [];
+
+  for (let i = 1; i < rows.length; i += 1) {
+    const row = rows[i];
+    if (/NAME OF ISSUER/i.test(row)) continue;
+    if (!row.includes('<C>') && !row.includes('<c>')) continue;
+
+    const rawCells = row.split(/<C>/i);
+    const cells = rawCells.map(stripTags).filter(Boolean);
+    if (cells.length < 3) continue;
+
+    const cusipIndex = cells.findIndex((cell) => /^[0-9A-Z]{9}$/.test(cell.replace(/\s+/g, '')));
+    if (cusipIndex === -1) continue;
+
+    const name = cells[0];
+    const cusip = cells[cusipIndex].replace(/\s+/g, '');
+
+    let value = null;
+    for (let j = cusipIndex + 1; j < cells.length; j += 1) {
+      const digits = cells[j].replace(/[^0-9]/g, '');
+      if (digits) {
+        value = Number(digits);
+        break;
+      }
+    }
+
+    if (!name || !cusip || !Number.isFinite(value) || value <= 0) continue;
+    entries.push({ nameOfIssuer: name, cusip, value });
+  }
+
+  return entries;
+}
+
+function extractInfoTableEntriesFromText(text) {
+  const docs = extractDocumentsFromText(text);
+
+  const preferredDocs = docs.filter((doc) =>
+    /<TYPE>\s*INFORMATION TABLE/i.test(doc) || /<TYPE>\s*13F/i.test(doc)
+  );
+  const candidates = preferredDocs.length ? preferredDocs : docs;
+
+  for (const doc of candidates) {
+    const xmlSnippet = extractInfoTableXmlFromText(doc);
+    if (xmlSnippet) {
+      try {
+        const parsed = parser.parse(xmlSnippet);
+        const entries = extractInfoTableEntries(parsed);
+        if (entries.length) return entries;
+      } catch (err) {
+        // fall through to SGML parsing
+      }
+    }
+
+    const sgmlEntries = parseSgmlInfoTable(doc);
+    if (sgmlEntries.length) return sgmlEntries;
+  }
+
+  return [];
+}
+
 function buildHoldings(entries, tickerMap) {
   const cleaned = entries
     .map((entry) => {
@@ -175,14 +260,33 @@ async function fetch13fHoldings({ name, cik }, tickerMap) {
   const indexJson = await fetchSec(indexUrl);
   const items = indexJson?.directory?.item || [];
   const infoFilename = pickInfoTableFilename(items) || latest.primaryDocument;
-  if (!infoFilename) {
-    throw new Error(`Info table not found for ${name} (${cik}) ${latest.accessionNumber}`);
+  let entries = [];
+
+  if (infoFilename) {
+    const infoUrl = `${ARCHIVES_BASE}/${archiveCik}/${accessionNoNoDashes}/${infoFilename}`;
+    const xmlText = await fetchSec(infoUrl, 'text');
+    try {
+      const parsed = parser.parse(xmlText);
+      entries = extractInfoTableEntries(parsed);
+    } catch (err) {
+      entries = [];
+    }
   }
 
-  const infoUrl = `${ARCHIVES_BASE}/${archiveCik}/${accessionNoNoDashes}/${infoFilename}`;
-  const xmlText = await fetchSec(infoUrl, 'text');
-  const parsed = parser.parse(xmlText);
-  const entries = extractInfoTableEntries(parsed);
+  if (!entries.length) {
+    const textFiles = (items || [])
+      .filter((item) => item.name?.toLowerCase().endsWith('.txt'))
+      .filter((item) => !/index-headers|index\.html|index\.json|index/i.test(item.name))
+      .sort((a, b) => Number(b.size || 0) - Number(a.size || 0));
+
+    for (const file of textFiles) {
+      const textUrl = `${ARCHIVES_BASE}/${archiveCik}/${accessionNoNoDashes}/${file.name}`;
+      const text = await fetchSec(textUrl, 'text');
+      entries = extractInfoTableEntriesFromText(text);
+      if (entries.length) break;
+    }
+  }
+
   if (!entries.length) {
     throw new Error(`No holdings parsed for ${name} (${cik}) ${latest.accessionNumber}`);
   }
