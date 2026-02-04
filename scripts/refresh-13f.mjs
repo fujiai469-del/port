@@ -95,13 +95,22 @@ function pickLatest13F(recent) {
 
 function pickInfoTableFilename(items) {
   if (!Array.isArray(items)) return null;
-  const xmlItems = items.filter((item) => item.name?.toLowerCase().endsWith('.xml'));
+  const xmlItems = items
+    .filter((item) => item.name?.toLowerCase().endsWith('.xml'))
+    .map((item) => ({
+      name: item.name,
+      size: Number(item.size || 0)
+    }));
   const preferred = xmlItems.find((item) => /infotable|informationtable|form13f/i.test(item.name));
   if (preferred) return preferred.name;
   if (xmlItems.length === 1) return xmlItems[0].name;
-  const infoByType = xmlItems.find((item) => /information/i.test(item.name));
-  if (infoByType) return infoByType.name;
-  return xmlItems[0]?.name || null;
+  const holdingByName = xmlItems.find((item) => /holding|holdings/i.test(item.name));
+  if (holdingByName) return holdingByName.name;
+  const nonPrimary = xmlItems.filter((item) => item.name.toLowerCase() !== 'primary_doc.xml');
+  if (nonPrimary.length) {
+    return nonPrimary.sort((a, b) => b.size - a.size)[0].name;
+  }
+  return xmlItems.sort((a, b) => b.size - a.size)[0]?.name || null;
 }
 
 function extractInfoTableEntries(parsed) {

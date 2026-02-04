@@ -655,15 +655,18 @@
   },
   {
     "name": "Washington State Investment Board",
+    "cik": "0000943712",
+    "reportDate": "2025-09-30",
+    "filingDate": "2025-11-14",
     "holdings": [
       {
-        "ticker": "FTAI",
-        "name": "FTAI Aviation",
+        "ticker": "G3730V105",
+        "name": "FTAI AVIATION LTD",
         "percent": 82.3
       },
       {
-        "ticker": "FIP",
-        "name": "FTAI Infrastructure",
+        "ticker": "35953C106",
+        "name": "FTAI INFRASTRUCTURE INC",
         "percent": 17.7
       }
     ]
@@ -1513,6 +1516,264 @@
     ]
   },
   {
+    "name": "Renaissance Technologies (Jim Simons / Medallion)",
+    "cik": "0001037389",
+    "reportDate": "2025-09-30",
+    "filingDate": "2025-11-13",
+    "holdings": [
+      {
+        "ticker": "69608A108",
+        "name": "PALANTIR TECHNOLOGIES INC",
+        "percent": 2.1
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA CORPORATION",
+        "percent": 1.4
+      },
+      {
+        "ticker": "771049103",
+        "name": "ROBLOX CORP",
+        "percent": 1.3
+      },
+      {
+        "ticker": "91307C102",
+        "name": "UNITED THERAPEUTICS CORP DEL",
+        "percent": 1.2
+      },
+      {
+        "ticker": "9.2343e+106",
+        "name": "VERISIGN INC",
+        "percent": 1.2
+      },
+      {
+        "ticker": "03831W108",
+        "name": "APPLOVIN CORP",
+        "percent": 0.9
+      },
+      {
+        "ticker": "496902404",
+        "name": "KINROSS GOLD CORP",
+        "percent": 0.9
+      },
+      {
+        "ticker": "MSFT",
+        "name": "MICROSOFT CORP",
+        "percent": 0.9
+      },
+      {
+        "ticker": "02079K305",
+        "name": "ALPHABET INC",
+        "percent": 0.8
+      },
+      {
+        "ticker": "30161Q104",
+        "name": "EXELIXIS INC",
+        "percent": 0.8
+      },
+      {
+        "ticker": "351858105",
+        "name": "FRANCO NEV CORP",
+        "percent": 0.8
+      },
+      {
+        "ticker": "375558103",
+        "name": "GILEAD SCIENCES INC",
+        "percent": 0.8
+      },
+      {
+        "ticker": "218352102",
+        "name": "CORCEPT THERAPEUTICS INC",
+        "percent": 0.7
+      },
+      {
+        "ticker": "25809K105",
+        "name": "DOORDASH INC",
+        "percent": 0.7
+      },
+      {
+        "ticker": "433000106",
+        "name": "HIMS & HERS HEALTH INC",
+        "percent": 0.7
+      },
+      {
+        "ticker": "75734B100",
+        "name": "REDDIT INC",
+        "percent": 0.7
+      },
+      {
+        "ticker": "02079K107",
+        "name": "ALPHABET INC",
+        "percent": 0.6
+      },
+      {
+        "ticker": "345370860",
+        "name": "FORD MTR CO",
+        "percent": 0.6
+      },
+      {
+        "ticker": "36828A101",
+        "name": "GE VERNOVA INC",
+        "percent": 0.6
+      },
+      {
+        "ticker": "L8681T102",
+        "name": "SPOTIFY TECHNOLOGY S A",
+        "percent": 0.6
+      },
+      {
+        "ticker": "85208M102",
+        "name": "SPROUTS FMRS MKT INC",
+        "percent": 0.6
+      },
+      {
+        "ticker": "94419L101",
+        "name": "WAYFAIR INC",
+        "percent": 0.6
+      },
+      {
+        "ticker": "146869102",
+        "name": "CARVANA CO",
+        "percent": 0.5
+      },
+      {
+        "ticker": "29786A106",
+        "name": "ETSY INC",
+        "percent": 0.5
+      },
+      {
+        "ticker": "45337C102",
+        "name": "INCYTE CORP",
+        "percent": 0.5
+      },
+      {
+        "ticker": "30303M102",
+        "name": "META PLATFORMS INC",
+        "percent": 0.5
+      },
+      {
+        "ticker": "67059N108",
+        "name": "NUTANIX INC",
+        "percent": 0.5
+      },
+      {
+        "ticker": "874039100",
+        "name": "TAIWAN SEMICONDUCTOR MFG LTD",
+        "percent": 0.5
+      },
+      {
+        "ticker": "00724F101",
+        "name": "ADOBE INC",
+        "percent": 0.4
+      },
+      {
+        "ticker": "9066101",
+        "name": "AIRBNB INC",
+        "percent": 0.4
+      },
+      {
+        "ticker": "12503M108",
+        "name": "CBOE GLOBAL MKTS INC",
+        "percent": 0.4
+      },
+      {
+        "ticker": "204166102",
+        "name": "COMMVAULT SYS INC",
+        "percent": 0.4
+      },
+      {
+        "ticker": "26210C104",
+        "name": "DROPBOX INC",
+        "percent": 0.4
+      },
+      {
+        "ticker": "46222L108",
+        "name": "IONQ INC",
+        "percent": 0.4
+      },
+      {
+        "ticker": "64110L106",
+        "name": "NETFLIX INC",
+        "percent": 0.4
+      },
+      {
+        "ticker": "64125C109",
+        "name": "NEUROCRINE BIOSCIENCES INC",
+        "percent": 0.4
+      },
+      {
+        "ticker": "74624M102",
+        "name": "PURE STORAGE INC",
+        "percent": 0.4
+      },
+      {
+        "ticker": "770700102",
+        "name": "ROBINHOOD MKTS INC",
+        "percent": 0.4
+      },
+      {
+        "ticker": "859241101",
+        "name": "STERLING INFRASTRUCTURE INC",
+        "percent": 0.4
+      },
+      {
+        "ticker": "92532F100",
+        "name": "VERTEX PHARMACEUTICALS INC",
+        "percent": 0.4
+      },
+      {
+        "ticker": "98980L101",
+        "name": "ZOOM COMMUNICATIONS INC",
+        "percent": 0.4
+      },
+      {
+        "ticker": "00287Y109",
+        "name": "ABBVIE INC",
+        "percent": 0.3
+      },
+      {
+        "ticker": "G1151C101",
+        "name": "ACCENTURE PLC IRELAND",
+        "percent": 0.3
+      },
+      {
+        "ticker": "11532108",
+        "name": "ALAMOS GOLD INC NEW",
+        "percent": 0.3
+      },
+      {
+        "ticker": "01973R101",
+        "name": "ALLISON TRANSMISSION HLDGS I",
+        "percent": 0.3
+      },
+      {
+        "ticker": "49468101",
+        "name": "ATLASSIAN CORPORATION",
+        "percent": 0.3
+      },
+      {
+        "ticker": "128030202",
+        "name": "CAL MAINE FOODS INC",
+        "percent": 0.3
+      },
+      {
+        "ticker": "12572Q105",
+        "name": "CME GROUP INC",
+        "percent": 0.3
+      },
+      {
+        "ticker": "191216100",
+        "name": "COCA COLA CO",
+        "percent": 0.3
+      },
+      {
+        "ticker": "194162103",
+        "name": "COLGATE PALMOLIVE CO",
+        "percent": 0.3
+      }
+    ]
+  },
+  {
     "name": "Scion Asset Management (Michael Burry)",
     "cik": "0001649339",
     "reportDate": "2025-09-30",
@@ -2344,6 +2605,264 @@
         "ticker": "18915MAC1",
         "name": "CLOUDFLARE INC",
         "percent": 0.5
+      }
+    ]
+  },
+  {
+    "name": "BlackRock Inc.",
+    "cik": "0001364742",
+    "reportDate": "2024-06-30",
+    "filingDate": "2024-08-13",
+    "holdings": [
+      {
+        "ticker": "MSFT",
+        "name": "MICROSOFT CORP",
+        "percent": 2
+      },
+      {
+        "ticker": "37833100",
+        "name": "APPLE INC",
+        "percent": 1.8
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA CORPORATION",
+        "percent": 1.8
+      },
+      {
+        "ticker": "MSFT",
+        "name": "MICROSOFT CORP",
+        "percent": 1.6
+      },
+      {
+        "ticker": "37833100",
+        "name": "APPLE INC",
+        "percent": 1.5
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA CORPORATION",
+        "percent": 1.5
+      },
+      {
+        "ticker": "23135106",
+        "name": "AMAZON COM INC",
+        "percent": 0.9
+      },
+      {
+        "ticker": "23135106",
+        "name": "AMAZON COM INC",
+        "percent": 0.9
+      },
+      {
+        "ticker": "30303M102",
+        "name": "META PLATFORMS INC",
+        "percent": 0.7
+      },
+      {
+        "ticker": "02079K305",
+        "name": "ALPHABET INC",
+        "percent": 0.6
+      },
+      {
+        "ticker": "MSFT",
+        "name": "MICROSOFT CORP",
+        "percent": 0.6
+      },
+      {
+        "ticker": "02079K107",
+        "name": "ALPHABET INC",
+        "percent": 0.5
+      },
+      {
+        "ticker": "02079K305",
+        "name": "ALPHABET INC",
+        "percent": 0.5
+      },
+      {
+        "ticker": "37833100",
+        "name": "APPLE INC",
+        "percent": 0.5
+      },
+      {
+        "ticker": "11135F101",
+        "name": "BROADCOM INC",
+        "percent": 0.5
+      },
+      {
+        "ticker": "532457108",
+        "name": "ELI LILLY & CO",
+        "percent": 0.5
+      },
+      {
+        "ticker": "30303M102",
+        "name": "META PLATFORMS INC",
+        "percent": 0.5
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA CORPORATION",
+        "percent": 0.5
+      },
+      {
+        "ticker": "02079K107",
+        "name": "ALPHABET INC",
+        "percent": 0.4
+      },
+      {
+        "ticker": "84670702",
+        "name": "BERKSHIRE HATHAWAY INC DEL",
+        "percent": 0.4
+      },
+      {
+        "ticker": "84670702",
+        "name": "BERKSHIRE HATHAWAY INC DEL",
+        "percent": 0.4
+      },
+      {
+        "ticker": "11135F101",
+        "name": "BROADCOM INC",
+        "percent": 0.4
+      },
+      {
+        "ticker": "532457108",
+        "name": "ELI LILLY & CO",
+        "percent": 0.4
+      },
+      {
+        "ticker": "46432F834",
+        "name": "ISHARES TR",
+        "percent": 0.4
+      },
+      {
+        "ticker": "23135106",
+        "name": "AMAZON COM INC",
+        "percent": 0.3
+      },
+      {
+        "ticker": "30231G102",
+        "name": "EXXON MOBIL CORP",
+        "percent": 0.3
+      },
+      {
+        "ticker": "30231G102",
+        "name": "EXXON MOBIL CORP",
+        "percent": 0.3
+      },
+      {
+        "ticker": "464287200",
+        "name": "ISHARES TR",
+        "percent": 0.3
+      },
+      {
+        "ticker": "46625H100",
+        "name": "JPMORGAN CHASE & CO.",
+        "percent": 0.3
+      },
+      {
+        "ticker": "46625H100",
+        "name": "JPMORGAN CHASE & CO.",
+        "percent": 0.3
+      },
+      {
+        "ticker": "TSLA",
+        "name": "TESLA INC",
+        "percent": 0.3
+      },
+      {
+        "ticker": "TSLA",
+        "name": "TESLA INC",
+        "percent": 0.3
+      },
+      {
+        "ticker": "91324P102",
+        "name": "UNITEDHEALTH GROUP INC",
+        "percent": 0.3
+      },
+      {
+        "ticker": "92826C839",
+        "name": "VISA INC",
+        "percent": 0.3
+      },
+      {
+        "ticker": "00287Y109",
+        "name": "ABBVIE INC",
+        "percent": 0.2
+      },
+      {
+        "ticker": "00724F101",
+        "name": "ADOBE INC",
+        "percent": 0.2
+      },
+      {
+        "ticker": "7903107",
+        "name": "ADVANCED MICRO DEVICES INC",
+        "percent": 0.2
+      },
+      {
+        "ticker": "02079K305",
+        "name": "ALPHABET INC",
+        "percent": 0.2
+      },
+      {
+        "ticker": "37833100",
+        "name": "APPLE INC",
+        "percent": 0.2
+      },
+      {
+        "ticker": "37833100",
+        "name": "APPLE INC",
+        "percent": 0.2
+      },
+      {
+        "ticker": "38222105",
+        "name": "APPLIED MATLS INC",
+        "percent": 0.2
+      },
+      {
+        "ticker": "166764100",
+        "name": "CHEVRON CORP NEW",
+        "percent": 0.2
+      },
+      {
+        "ticker": "191216100",
+        "name": "COCA COLA CO",
+        "percent": 0.2
+      },
+      {
+        "ticker": "22160K105",
+        "name": "COSTCO WHSL CORP NEW",
+        "percent": 0.2
+      },
+      {
+        "ticker": "22160K105",
+        "name": "COSTCO WHSL CORP NEW",
+        "percent": 0.2
+      },
+      {
+        "ticker": "437076102",
+        "name": "HOME DEPOT INC",
+        "percent": 0.2
+      },
+      {
+        "ticker": "437076102",
+        "name": "HOME DEPOT INC",
+        "percent": 0.2
+      },
+      {
+        "ticker": "464287200",
+        "name": "ISHARES TR",
+        "percent": 0.2
+      },
+      {
+        "ticker": "478160104",
+        "name": "JOHNSON & JOHNSON",
+        "percent": 0.2
+      },
+      {
+        "ticker": "478160104",
+        "name": "JOHNSON & JOHNSON",
+        "percent": 0.2
       }
     ]
   },
