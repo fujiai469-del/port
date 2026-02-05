@@ -11,15 +11,21 @@ const META_PATH = path.join(ROOT, 'data', 'meta.json');
 
 const SEC_BASE = 'https://data.sec.gov';
 const ARCHIVES_BASE = 'https://www.sec.gov/Archives/edgar/data';
+const OPENFIGI_BASE = 'https://api.openfigi.com/v3/mapping';
 
 const USER_AGENT = process.env.SEC_USER_AGENT;
 if (!USER_AGENT) {
   console.error('SEC_USER_AGENT is required. Example: "Your Name your.email@example.com"');
   process.exit(1);
 }
+const OPENFIGI_API_KEY = process.env.OPENFIGI_API_KEY || '';
 
 const MAX_HOLDINGS = Number(process.env.MAX_HOLDINGS || 50);
 const REQUEST_DELAY_MS = Number(process.env.SEC_DELAY_MS || 200);
+const OPENFIGI_DELAY_MS = Number(process.env.OPENFIGI_DELAY_MS || 250);
+const OPENFIGI_BATCH_SIZE = Number(
+  process.env.OPENFIGI_BATCH_SIZE || (OPENFIGI_API_KEY ? 100 : 0)
+);
 
 const parser = new XMLParser({
   ignoreAttributes: false,
@@ -443,6 +449,119 @@ function buildHoldings(entries, lookup) {
   return holdings;
 }
 
+function normalizeCusip(value) {
+  return normalizeText(value).toUpperCase().replace(/[^0-9A-Z]/g, '');
+}
+
+function looksLikeCusip(value) {
+  const cleaned = normalizeCusip(value);
+  return cleaned.length > 0 && cleaned.length <= 9 && /\d/.test(cleaned);
+}
+
+function collectUnmappedCusips(funds, lookup) {
+  const missing = new Set();
+  for (const fund of funds) {
+    for (const holding of fund.holdings || []) {
+      if (!holding?.ticker) continue;
+      const cleaned = normalizeCusip(holding.ticker);
+      if (!looksLikeCusip(cleaned)) continue;
+      const padded = cleaned.padStart(9, '0');
+      if (lookup?.cusipMap?.[cleaned] || lookup?.cusipMap?.[padded]) continue;
+      missing.add(cleaned);
+    }
+  }
+  return Array.from(missing);
+}
+
+function applyCusipMappings(funds, mapping) {
+  let updated = 0;
+  if (!mapping) return updated;
+
+  for (const fund of funds) {
+    for (const holding of fund.holdings || []) {
+      if (!holding?.ticker) continue;
+      const cleaned = normalizeCusip(holding.ticker);
+      if (!looksLikeCusip(cleaned)) continue;
+      const padded = cleaned.padStart(9, '0');
+      const mapped = mapping[cleaned] || mapping[padded];
+      if (!mapped) continue;
+      holding.ticker = mapped;
+      if (!holding.sector && SECTOR_BY_TICKER[mapped]) {
+        holding.sector = SECTOR_BY_TICKER[mapped];
+      }
+      updated += 1;
+    }
+  }
+
+  return updated;
+}
+
+function updateTickerMapWithOpenFigi(tickerMap, mapping) {
+  let added = 0;
+  for (const [cusip, ticker] of Object.entries(mapping || {})) {
+    if (!ticker) continue;
+    const cleaned = normalizeCusip(cusip);
+    if (!cleaned) continue;
+    const padded = cleaned.padStart(9, '0');
+    if (!tickerMap[cleaned]) {
+      tickerMap[cleaned] = ticker;
+      added += 1;
+    }
+    if (padded !== cleaned && !tickerMap[padded]) {
+      tickerMap[padded] = ticker;
+      added += 1;
+    }
+  }
+  return added;
+}
+
+function chunkArray(values, size) {
+  if (!size || size <= 0) return [values];
+  const chunks = [];
+  for (let i = 0; i < values.length; i += size) {
+    chunks.push(values.slice(i, i + size));
+  }
+  return chunks;
+}
+
+async function fetchOpenFigiMappings(cusips) {
+  if (!OPENFIGI_API_KEY || !cusips.length || !OPENFIGI_BATCH_SIZE) return {};
+  const mapping = {};
+  const batches = chunkArray(cusips, OPENFIGI_BATCH_SIZE);
+
+  for (const batch of batches) {
+    const jobs = batch.map((cusip) => ({ idType: 'ID_CUSIP', idValue: cusip }));
+    const res = await fetch(OPENFIGI_BASE, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-OPENFIGI-APIKEY': OPENFIGI_API_KEY
+      },
+      body: JSON.stringify(jobs)
+    });
+
+    if (!res.ok) {
+      console.warn(`OpenFIGI request failed: ${res.status} ${res.statusText}`);
+      continue;
+    }
+
+    const payload = await res.json();
+    payload.forEach((item, index) => {
+      const data = item?.data;
+      if (!Array.isArray(data) || data.length === 0) return;
+      const best = data.find((entry) => entry?.ticker) || data[0];
+      const ticker = best?.ticker ? String(best.ticker).toUpperCase() : '';
+      if (ticker) {
+        mapping[batch[index]] = ticker;
+      }
+    });
+
+    await sleep(OPENFIGI_DELAY_MS);
+  }
+
+  return mapping;
+}
+
 async function fetch13fHoldings({ name, cik }, tickerLookup) {
   const paddedCik = toPaddedCik(cik);
   const submissionsUrl = `${SEC_BASE}/submissions/CIK${paddedCik}.json`;
@@ -534,6 +653,29 @@ async function main() {
     }
   }
   combined.forEach((value) => output.push(value));
+
+  const missingCusips = collectUnmappedCusips(output, tickerLookup);
+  if (missingCusips.length) {
+    if (!OPENFIGI_API_KEY) {
+      console.warn(`OpenFIGI disabled. ${missingCusips.length} CUSIP(s) still unmapped.`);
+    } else {
+      const openFigiMap = await fetchOpenFigiMappings(missingCusips);
+      const addedMappings = updateTickerMapWithOpenFigi(tickerMap, openFigiMap);
+      const updatedHoldings = applyCusipMappings(output, openFigiMap);
+
+      if (addedMappings > 0) {
+        const sortedTickerMap = Object.fromEntries(
+          Object.entries(tickerMap).sort(([a], [b]) => a.localeCompare(b))
+        );
+        await fs.writeFile(TICKER_MAP_PATH, JSON.stringify(sortedTickerMap, null, 2));
+        console.log(`OpenFIGI added ${addedMappings} ticker mapping(s).`);
+      }
+
+      if (updatedHoldings > 0) {
+        console.log(`OpenFIGI updated ${updatedHoldings} holding(s).`);
+      }
+    }
+  }
 
   const reportDates = output
     .map((fund) => fund.reportDate)

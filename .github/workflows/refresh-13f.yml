@@ -23,6 +23,7 @@ jobs:
         run: npm run refresh-13f
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+          OPENFIGI_API_KEY: ${{ secrets.OPENFIGI_API_KEY }}
       - name: Commit updates
         run: |
           if git diff --quiet; then
