@@ -29,7 +29,9 @@ const parser = new XMLParser({
 
 const SECTOR_BY_TICKER = {
   AU: 'Materials',
+  BTSG: 'Healthcare',
   BV: 'Industrial',
+  CGON: 'Healthcare',
   CRH: 'Materials',
   FERG: 'Industrial',
   FNF: 'Financial',
@@ -38,12 +40,14 @@ const SECTOR_BY_TICKER = {
   IBKR: 'Financial',
   SW: 'Industrial',
   IONQ: 'Technology',
+  MOH: 'Healthcare',
   NVO: 'Healthcare',
   ABT: 'Healthcare',
   POWL: 'Industrial',
   SHCO: 'Consumer',
   TECK: 'Materials',
-  VEL: 'Financial'
+  VEL: 'Financial',
+  VRT: 'Industrial'
 };
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
