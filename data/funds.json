@@ -17,34 +17,40 @@
         "percent": 29.5
       },
       {
-        "ticker": "83444M101",
+        "ticker": "SOLV",
         "name": "Solventum Corporation",
-        "percent": 15
+        "percent": 15,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "G491BT108",
+        "ticker": "IVZ",
         "name": "Invesco Ltd.",
-        "percent": 8.2
+        "percent": 8.2,
+        "sector": "Financial"
       },
       {
-        "ticker": "G3421J106",
+        "ticker": "FERG",
         "name": "Ferguson Plc New",
-        "percent": 5.9
+        "percent": 5.9,
+        "sector": "Industrial"
       },
       {
-        "ticker": "95058W100",
+        "ticker": "WEN",
         "name": "Wendys Co.",
-        "percent": 3.5
+        "percent": 3.5,
+        "sector": "Consumer"
       },
       {
-        "ticker": "95058W100",
+        "ticker": "WEN",
         "name": "Wendys Co.",
-        "percent": 3.3
+        "percent": 3.3,
+        "sector": "Consumer"
       },
       {
-        "ticker": "36266G107",
+        "ticker": "GEHC",
         "name": "GE HealthCare Technologies Inc.",
-        "percent": 0
+        "percent": 0,
+        "sector": "Healthcare"
       }
     ]
   },
@@ -366,9 +372,10 @@
         "sector": "Materials"
       },
       {
-        "ticker": "06849F108",
+        "ticker": "B",
         "name": "BARRICK MINING CORP",
-        "percent": 11.6
+        "percent": 11.6,
+        "sector": "Materials"
       },
       {
         "ticker": "ITUB",
@@ -377,17 +384,19 @@
         "sector": "Financial"
       },
       {
-        "ticker": "40415F101",
+        "ticker": "HDB",
         "name": "HDFC BANK LTD",
-        "percent": 8.5
+        "percent": 8.5,
+        "sector": "Financial"
       },
       {
-        "ticker": "G4124C109",
+        "ticker": "GRAB",
         "name": "GRAB HOLDINGS LTD",
-        "percent": 7.7
+        "percent": 7.7,
+        "sector": "Technology"
       },
       {
-        "ticker": "G6683N103",
+        "ticker": "NU",
         "name": "NU HOLDINGS LTD/CAYMAN ISLANDS",
         "percent": 7
       },
@@ -397,39 +406,46 @@
         "percent": 5.8
       },
       {
-        "ticker": "35969L108",
+        "ticker": "YMM",
         "name": "FULL TRUCK ALLIANCE CO LTD",
-        "percent": 5.3
+        "percent": 5.3,
+        "sector": "Technology"
       },
       {
-        "ticker": "48553T106",
+        "ticker": "BZ",
         "name": "KANZHUN LTD",
-        "percent": 4
+        "percent": 4,
+        "sector": "Communication"
       },
       {
-        "ticker": "G98239109",
+        "ticker": "XP",
         "name": "XP INC",
-        "percent": 4
+        "percent": 4,
+        "sector": "Financial"
       },
       {
-        "ticker": "880890108",
+        "ticker": "TX",
         "name": "TERNIUM SA",
-        "percent": 3.3
+        "percent": 3.3,
+        "sector": "Materials"
       },
       {
-        "ticker": "81141R100",
+        "ticker": "SE",
         "name": "SEA LTD",
-        "percent": 2.7
+        "percent": 2.7,
+        "sector": "Consumer"
       },
       {
-        "ticker": "N4732M103",
+        "ticker": "JBS",
         "name": "JBS NV",
-        "percent": 2.4
+        "percent": 2.4,
+        "sector": "Consumer"
       },
       {
-        "ticker": "L01800108",
+        "ticker": "ALVO",
         "name": "ALVOTECH SA",
-        "percent": 1.1
+        "percent": 1.1,
+        "sector": "Healthcare"
       },
       {
         "ticker": "JBLU",
@@ -444,14 +460,15 @@
         "sector": "Communication"
       },
       {
-        "ticker": "09075P204",
+        "ticker": "BTAI",
         "name": "BIOXCEL THERAPEUTICS INC",
         "percent": 0.2
       },
       {
-        "ticker": "70509VAA8",
+        "ticker": "PEB",
         "name": "PEBBLEBROOK HOTEL TRUST",
-        "percent": 0.1
+        "percent": 0.1,
+        "sector": "Financial"
       }
     ]
   },
@@ -629,9 +646,10 @@
         "percent": 0.7
       },
       {
-        "ticker": "06849F108",
+        "ticker": "B",
         "name": "BARRICK MNG CORP",
-        "percent": 0.7
+        "percent": 0.7,
+        "sector": "Materials"
       },
       {
         "ticker": "CRH",
@@ -1437,9 +1455,10 @@
         "percent": 1.1
       },
       {
-        "ticker": "81141R100",
+        "ticker": "SE",
         "name": "SEA LTD",
-        "percent": 1.1
+        "percent": 1.1,
+        "sector": "Consumer"
       },
       {
         "ticker": "NOW",
@@ -1562,9 +1581,10 @@
         "percent": 0.5
       },
       {
-        "ticker": "770700102",
+        "ticker": "HOOD",
         "name": "ROBINHOOD MKTS INC",
-        "percent": 0.5
+        "percent": 0.5,
+        "sector": "Financial"
       },
       {
         "ticker": "922042858",
@@ -1602,9 +1622,10 @@
         "percent": 0.4
       },
       {
-        "ticker": "G4124C109",
+        "ticker": "GRAB",
         "name": "GRAB HOLDINGS LIMITED",
-        "percent": 0.4
+        "percent": 0.4,
+        "sector": "Technology"
       },
       {
         "ticker": "416515104",
@@ -1807,9 +1828,10 @@
         "percent": 0.4
       },
       {
-        "ticker": "770700102",
+        "ticker": "HOOD",
         "name": "ROBINHOOD MKTS INC",
-        "percent": 0.4
+        "percent": 0.4,
+        "sector": "Financial"
       },
       {
         "ticker": "859241101",
@@ -1915,14 +1937,16 @@
         "percent": 9.5
       },
       {
-        "ticker": "19260Q107",
+        "ticker": "COIN",
         "name": "Coinbase Global Inc",
-        "percent": 4.8
+        "percent": 4.8,
+        "sector": "Financial"
       },
       {
-        "ticker": "77543R102",
+        "ticker": "ROKU",
         "name": "Roku Inc",
-        "percent": 4.4
+        "percent": 4.4,
+        "sector": "Communication"
       },
       {
         "ticker": "RBLX",
@@ -1940,14 +1964,16 @@
         "percent": 4.3
       },
       {
-        "ticker": "770700102",
+        "ticker": "HOOD",
         "name": "Robinhood Markets Inc",
-        "percent": 4.3
+        "percent": 4.3,
+        "sector": "Financial"
       },
       {
-        "ticker": "H17182108",
+        "ticker": "CRSP",
         "name": "CRISPR Therapeutics AG",
-        "percent": 3.8
+        "percent": 3.8,
+        "sector": "Healthcare"
       },
       {
         "ticker": "TEM",
@@ -1961,14 +1987,16 @@
         "percent": 2.9
       },
       {
-        "ticker": "172573107",
+        "ticker": "CRCL",
         "name": "Circle Internet Group Inc",
-        "percent": 2.3
+        "percent": 2.3,
+        "sector": "Financial"
       },
       {
-        "ticker": "09175A206",
+        "ticker": "BMNR",
         "name": "BitMine Immersion Technologies",
-        "percent": 2.3
+        "percent": 2.3,
+        "sector": "Financial"
       },
       {
         "ticker": "TER",
@@ -1981,9 +2009,10 @@
         "percent": 2
       },
       {
-        "ticker": "03945R102",
+        "ticker": "ACHR",
         "name": "Archer Aviation Inc",
-        "percent": 1.8
+        "percent": 1.8,
+        "sector": "Industrial"
       },
       {
         "ticker": "AMZN",
@@ -1991,14 +2020,15 @@
         "percent": 1.6
       },
       {
-        "ticker": "07373V105",
+        "ticker": "BEAM",
         "name": "Beam Therapeutics Inc",
         "percent": 1.6
       },
       {
-        "ticker": "40919102",
+        "ticker": "ARKB",
         "name": "ARK 21Shares Bitcoin ETF",
-        "percent": 1.4
+        "percent": 1.4,
+        "sector": "ETF"
       },
       {
         "ticker": "NVDA",
@@ -2011,19 +2041,22 @@
         "percent": 1.3
       },
       {
-        "ticker": "G13311116",
+        "ticker": "BREA",
         "name": "Brera Holdings PLC",
-        "percent": 1.3
+        "percent": 1.3,
+        "sector": "Consumer"
       },
       {
-        "ticker": "45826J105",
+        "ticker": "NTLA",
         "name": "Intellia Therapeutics Inc",
-        "percent": 1.2
+        "percent": 1.2,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "852234103",
+        "ticker": "SQ",
         "name": "Block Inc",
-        "percent": 1.2
+        "percent": 1.2,
+        "sector": "Financial"
       },
       {
         "ticker": "TSM",
@@ -2031,19 +2064,22 @@
         "percent": 1.2
       },
       {
-        "ticker": "90184D100",
+        "ticker": "TWST",
         "name": "Twist Bioscience Corp",
-        "percent": 1.1
+        "percent": 1.1,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "75629V104",
+        "ticker": "RXRX",
         "name": "Recursion Pharmaceuticals Inc",
-        "percent": 1
+        "percent": 1,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "G16910120",
+        "ticker": "BLSH",
         "name": "Bullish",
-        "percent": 1
+        "percent": 1,
+        "sector": "Technology"
       },
       {
         "ticker": "DE",
@@ -2051,14 +2087,16 @@
         "percent": 0.9
       },
       {
-        "ticker": "92337F107",
+        "ticker": "VCYT",
         "name": "Veracyte Inc",
-        "percent": 0.9
+        "percent": 0.9,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "69553P100",
+        "ticker": "PD",
         "name": "PagerDuty Inc",
-        "percent": 0.9
+        "percent": 0.9,
+        "sector": "Technology"
       },
       {
         "ticker": "PINS",
@@ -2066,9 +2104,10 @@
         "percent": 0.9
       },
       {
-        "ticker": "632307104",
+        "ticker": "NTRA",
         "name": "Natera Inc",
-        "percent": 0.9
+        "percent": 0.9,
+        "sector": "Healthcare"
       },
       {
         "ticker": "GTLB",
@@ -2076,9 +2115,10 @@
         "percent": 0.9
       },
       {
-        "ticker": "8073108",
+        "ticker": "AVAV",
         "name": "AeroVironment Inc",
-        "percent": 0.8
+        "percent": 0.8,
+        "sector": "Industrial"
       },
       {
         "ticker": "88025U109",
@@ -2175,14 +2215,16 @@
         "sector": "Technology"
       },
       {
-        "ticker": "11271J107",
+        "ticker": "BN",
         "name": "BROOKFIELD CORP",
-        "percent": 19.2
+        "percent": 19.2,
+        "sector": "Financial"
       },
       {
-        "ticker": "44267T102",
+        "ticker": "HHH",
         "name": "HOWARD HUGHES HOLDINGS INC",
-        "percent": 10.6
+        "percent": 10.6,
+        "sector": "Financial"
       },
       {
         "ticker": "GOOG",
@@ -2190,9 +2232,10 @@
         "percent": 10.5
       },
       {
-        "ticker": "76131D103",
+        "ticker": "QSR",
         "name": "RESTAURANT BRANDS INTL INC",
-        "percent": 10
+        "percent": 10,
+        "sector": "Consumer"
       },
       {
         "ticker": "AMZN",
@@ -2215,14 +2258,16 @@
         "percent": 5.4
       },
       {
-        "ticker": "812215200",
+        "ticker": "SEG",
         "name": "SEAPORT ENTMT GROUP INC",
-        "percent": 0.8
+        "percent": 0.8,
+        "sector": "Communication"
       },
       {
-        "ticker": "42806J700",
+        "ticker": "HTZ",
         "name": "HERTZ GLOBAL HLDGS INC",
-        "percent": 0.7
+        "percent": 0.7,
+        "sector": "Consumer"
       }
     ]
   },
@@ -2259,9 +2304,10 @@
         "percent": 5.9
       },
       {
-        "ticker": "11271J107",
+        "ticker": "BN",
         "name": "BROOKFIELD CORP",
-        "percent": 3.8
+        "percent": 3.8,
+        "sector": "Financial"
       },
       {
         "ticker": "TSM",
@@ -2405,9 +2451,10 @@
         "percent": 0.3
       },
       {
-        "ticker": "42806J148",
+        "ticker": "HTZWW",
         "name": "HERTZ GLOBAL HLDGS INC",
-        "percent": 0.2
+        "percent": 0.2,
+        "sector": "Consumer"
       },
       {
         "ticker": "DHR",
@@ -3806,7 +3853,8 @@
       {
         "ticker": "RXRX",
         "name": "Recursion Pharma",
-        "percent": 1.7
+        "percent": 1.7,
+        "sector": "Healthcare"
       },
       {
         "ticker": "RLYB",
@@ -3831,7 +3879,8 @@
       {
         "ticker": "B",
         "name": "Barrick Mining",
-        "percent": 10.1
+        "percent": 10.1,
+        "sector": "Materials"
       },
       {
         "ticker": "BB",
