@@ -60,9 +60,10 @@
         "sector": "Healthcare"
       },
       {
-        "ticker": "806407102",
+        "ticker": "HSIC",
         "name": "HENRY SCHEIN INC",
-        "percent": 17.4
+        "percent": 17.4,
+        "sector": "Healthcare"
       },
       {
         "ticker": "10806X102",
@@ -323,9 +324,10 @@
         "percent": 11.6
       },
       {
-        "ticker": "465562106",
+        "ticker": "ITUB",
         "name": "ITAU UNIBANCO HOLDING SA",
-        "percent": 10.2
+        "percent": 10.2,
+        "sector": "Financial"
       },
       {
         "ticker": "40415F101",
@@ -794,9 +796,10 @@
         "percent": 30.6
       },
       {
-        "ticker": "375916103",
+        "ticker": "GIL",
         "name": "GILDAN ACTIVEWEAR INC",
-        "percent": 17
+        "percent": 17,
+        "sector": "Consumer"
       },
       {
         "ticker": "TDG",
@@ -842,9 +845,10 @@
         "percent": 79
       },
       {
-        "ticker": "518613203",
+        "ticker": "LAUR",
         "name": "Laureate Education Inc",
-        "percent": 21
+        "percent": 21,
+        "sector": "Consumer"
       }
     ]
   },
@@ -861,19 +865,21 @@
         "sector": "Healthcare"
       },
       {
-        "ticker": "22307102",
+        "ticker": "ALMS",
         "name": "ALUMIS INC.",
         "percent": 21.2
       },
       {
-        "ticker": "254604101",
+        "ticker": "IRON",
         "name": "Disc Medicine, Inc.",
-        "percent": 18.2
+        "percent": 18.2,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "433000106",
+        "ticker": "HIMS",
         "name": "Hims & Hers Health, Inc.",
-        "percent": 14.2
+        "percent": 14.2,
+        "sector": "Healthcare"
       },
       {
         "ticker": "55083R203",
@@ -1162,9 +1168,10 @@
         "percent": 17.5
       },
       {
-        "ticker": "136375102",
+        "ticker": "CNI",
         "name": "CANADIAN NATL RY CO",
-        "percent": 13.4
+        "percent": 13.4,
+        "sector": "Industrial"
       },
       {
         "ticker": "MSFT",
@@ -1275,9 +1282,10 @@
     "filingDate": "2025-11-13",
     "holdings": [
       {
-        "ticker": "464287200",
+        "ticker": "IVV",
         "name": "ISHARES TR",
-        "percent": 10.6
+        "percent": 10.6,
+        "sector": "ETF"
       },
       {
         "ticker": "SPY",
@@ -1325,9 +1333,10 @@
         "percent": 1.6
       },
       {
-        "ticker": "90353T100",
+        "ticker": "UBER",
         "name": "UBER TECHNOLOGIES INC",
-        "percent": 1.4
+        "percent": 1.4,
+        "sector": "Technology"
       },
       {
         "ticker": "JNJ",
@@ -1603,9 +1612,10 @@
         "percent": 0.7
       },
       {
-        "ticker": "433000106",
+        "ticker": "HIMS",
         "name": "HIMS & HERS HEALTH INC",
-        "percent": 0.7
+        "percent": 0.7,
+        "sector": "Healthcare"
       },
       {
         "ticker": "75734B100",
@@ -1807,9 +1817,10 @@
         "percent": 19.5
       },
       {
-        "ticker": "116794207",
+        "ticker": "BRKR",
         "name": "BRUKER CORP",
-        "percent": 19.3
+        "percent": 19.3,
+        "sector": "Healthcare"
       }
     ]
   },
@@ -2078,9 +2089,10 @@
     "filingDate": "2025-11-14",
     "holdings": [
       {
-        "ticker": "90353T100",
+        "ticker": "UBER",
         "name": "UBER TECHNOLOGIES INC",
-        "percent": 20.3
+        "percent": 20.3,
+        "sector": "Technology"
       },
       {
         "ticker": "11271J107",
@@ -2141,9 +2153,10 @@
     "filingDate": "2025-11-14",
     "holdings": [
       {
-        "ticker": "69331C108",
+        "ticker": "PCG",
         "name": "PG&E CORP",
-        "percent": 9
+        "percent": 9,
+        "sector": "Energy"
       },
       {
         "ticker": "AMZN",
@@ -2762,9 +2775,10 @@
         "percent": 0.3
       },
       {
-        "ticker": "464287200",
+        "ticker": "IVV",
         "name": "ISHARES TR",
-        "percent": 0.3
+        "percent": 0.3,
+        "sector": "ETF"
       },
       {
         "ticker": "JPM",
@@ -2862,9 +2876,10 @@
         "percent": 0.2
       },
       {
-        "ticker": "464287200",
+        "ticker": "IVV",
         "name": "ISHARES TR",
-        "percent": 0.2
+        "percent": 0.2,
+        "sector": "ETF"
       },
       {
         "ticker": "JNJ",
