@@ -8,7 +8,8 @@
       {
         "ticker": "FERG",
         "name": "Janus Henderson Group plc",
-        "percent": 34.5
+        "percent": 34.5,
+        "sector": "Industrial"
       },
       {
         "ticker": "GE",
@@ -66,79 +67,93 @@
         "sector": "Healthcare"
       },
       {
-        "ticker": "10806X102",
+        "ticker": "BBIO",
         "name": "BRIDGEBIO PHARMA INC",
-        "percent": 11.5
+        "percent": 11.5,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "G63755105",
+        "ticker": "NIQ",
         "name": "NIQ GLOBAL INTELLIGENCE PLC",
-        "percent": 7.9
+        "percent": 7.9,
+        "sector": "Technology"
       },
       {
-        "ticker": "69932A204",
+        "ticker": "PSKY",
         "name": "PARAMOUNT SKYDANCE CORP",
-        "percent": 5
+        "percent": 5,
+        "sector": "Communication"
       },
       {
-        "ticker": "10948C107",
+        "ticker": "BV",
         "name": "BRIGHTVIEW HLDGS INC",
-        "percent": 4.9
+        "percent": 4.9,
+        "sector": "Industrial"
       },
       {
-        "ticker": "44952J104",
+        "ticker": "CRGY",
         "name": "CRESCENT ENERGY COMPANY",
-        "percent": 3.9
+        "percent": 3.9,
+        "sector": "Energy"
       },
       {
-        "ticker": "477143AP6",
+        "ticker": "JBLU",
         "name": "JETBLUE AIRWAYS CORP",
-        "percent": 2
+        "percent": 2,
+        "sector": "Industrial"
       },
       {
-        "ticker": "48251K100",
+        "ticker": "KREF",
         "name": "KKR REAL ESTATE FIN TR INC",
-        "percent": 1.4
+        "percent": 1.4,
+        "sector": "Financial"
       },
       {
-        "ticker": "55825T103",
+        "ticker": "MSGS",
         "name": "MADISON SQUARE GRDN SPRT COR",
         "percent": 1.2
       },
       {
-        "ticker": "81180WBL4",
+        "ticker": "STX",
         "name": "SEAGATE HDD CAYMAN",
-        "percent": 0.6
+        "percent": 0.6,
+        "sector": "Technology"
       },
       {
-        "ticker": "71734107",
+        "ticker": "BHC",
         "name": "BAUSCH HEALTH COS INC",
-        "percent": 0.6
+        "percent": 0.6,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "12685JAE5",
+        "ticker": "CABO",
         "name": "CABLE ONE INC",
-        "percent": 0.5
+        "percent": 0.5,
+        "sector": "Communication"
       },
       {
         "ticker": "DXCM",
         "name": "DEXCOM INC",
-        "percent": 0.4
+        "percent": 0.4,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "45258DAB1",
+        "ticker": "IMCR",
         "name": "IMMUNOCORE HLDGS PLC",
-        "percent": 0.4
+        "percent": 0.4,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "78573NAK8",
+        "ticker": "SABR",
         "name": "SABRE GLBL INC",
-        "percent": 0.3
+        "percent": 0.3,
+        "sector": "Technology"
       },
       {
-        "ticker": "902681AB1",
+        "ticker": "UGI",
         "name": "UGI CORP NEW",
-        "percent": 0.3
+        "percent": 0.3,
+        "sector": "Energy"
       },
       {
         "ticker": "G2891G204",
@@ -146,29 +161,34 @@
         "percent": 0.3
       },
       {
-        "ticker": "G66721104",
+        "ticker": "NCLH",
         "name": "NORWEGIAN CRUISE LINE HLDG L",
-        "percent": 0.3
+        "percent": 0.3,
+        "sector": "Consumer"
       },
       {
-        "ticker": "302635206",
+        "ticker": "FSK",
         "name": "FS KKR CAP CORP",
-        "percent": 0.2
+        "percent": 0.2,
+        "sector": "Financial"
       },
       {
-        "ticker": "69352PAS2",
+        "ticker": "PPL",
         "name": "PPL CAP FDG INC",
-        "percent": 0.2
+        "percent": 0.2,
+        "sector": "Energy"
       },
       {
-        "ticker": "75737FAE8",
+        "ticker": "RDFN",
         "name": "REDFIN CORP",
-        "percent": 0.2
+        "percent": 0.2,
+        "sector": "Consumer"
       },
       {
-        "ticker": "88023B103",
+        "ticker": "TEM",
         "name": "TEMPUS AI INC",
-        "percent": 0.2
+        "percent": 0.2,
+        "sector": "Technology"
       },
       {
         "ticker": "92939UAR7",
@@ -176,134 +196,160 @@
         "percent": 0.2
       },
       {
-        "ticker": "09239BAF6",
+        "ticker": "BL",
         "name": "BLACKLINE INC",
-        "percent": 0.1
+        "percent": 0.1,
+        "sector": "Technology"
       },
       {
-        "ticker": "15189TBD8",
+        "ticker": "CNP",
         "name": "CENTERPOINT ENERGY INC",
-        "percent": 0.1
+        "percent": 0.1,
+        "sector": "Energy"
       },
       {
-        "ticker": "19249H103",
+        "ticker": "CHRS",
         "name": "COHERUS ONCOLOGY INC",
-        "percent": 0.1
+        "percent": 0.1,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "26210CAD6",
+        "ticker": "DBX",
         "name": "DROPBOX INC",
-        "percent": 0.1
+        "percent": 0.1,
+        "sector": "Technology"
       },
       {
-        "ticker": "44952J104",
+        "ticker": "CRGY",
         "name": "CRESCENT ENERGY COMPANY",
-        "percent": 0.1
+        "percent": 0.1,
+        "sector": "Energy"
       },
       {
-        "ticker": "48251K100",
+        "ticker": "KREF",
         "name": "KKR REAL ESTATE FIN TR INC",
-        "percent": 0.1
+        "percent": 0.1,
+        "sector": "Financial"
       },
       {
-        "ticker": "67011XAB9",
+        "ticker": "NVCR",
         "name": "NOVOCURE LTD",
-        "percent": 0.1
+        "percent": 0.1,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "75606DAP6",
+        "ticker": "HOUS",
         "name": "ANYWHERE REAL ESTATE GROUP L",
-        "percent": 0.1
+        "percent": 0.1,
+        "sector": "Consumer"
       },
       {
-        "ticker": "75737FAC2",
+        "ticker": "RDFN",
         "name": "REDFIN CORP",
-        "percent": 0.1
+        "percent": 0.1,
+        "sector": "Consumer"
       },
       {
-        "ticker": "81180WBL4",
+        "ticker": "STX",
         "name": "SEAGATE HDD CAYMAN",
-        "percent": 0.1
+        "percent": 0.1,
+        "sector": "Technology"
       },
       {
-        "ticker": "83304AAH9",
+        "ticker": "SNAP",
         "name": "SNAP INC",
-        "percent": 0.1
+        "percent": 0.1,
+        "sector": "Communication"
       },
       {
-        "ticker": "833445AD1",
+        "ticker": "SNOW",
         "name": "SNOWFLAKE INC",
-        "percent": 0.1
+        "percent": 0.1,
+        "sector": "Technology"
       },
       {
-        "ticker": "87918AAF2",
+        "ticker": "TDOC",
         "name": "TELADOC HEALTH INC",
-        "percent": 0.1
+        "percent": 0.1,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "91879QAN9",
+        "ticker": "MTN",
         "name": "VAIL RESORTS INC",
-        "percent": 0.1
+        "percent": 0.1,
+        "sector": "Consumer"
       },
       {
-        "ticker": "08265TAD1",
+        "ticker": "BSY",
         "name": "BENTLEY SYS INC",
-        "percent": 0
+        "percent": 0,
+        "sector": "Technology"
       },
       {
-        "ticker": "09061GAK7",
+        "ticker": "BMRN",
         "name": "BIOMARIN PHARMACEUTICAL INC",
-        "percent": 0
+        "percent": 0,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "09239BAF6",
+        "ticker": "BL",
         "name": "BLACKLINE INC",
-        "percent": 0
+        "percent": 0,
+        "sector": "Technology"
       },
       {
-        "ticker": "10316TAD6",
+        "ticker": "BOX",
         "name": "BOX INC",
-        "percent": 0
+        "percent": 0,
+        "sector": "Technology"
       },
       {
-        "ticker": "12685JAG0",
+        "ticker": "CABO",
         "name": "CABLE ONE INC",
-        "percent": 0
+        "percent": 0,
+        "sector": "Communication"
       },
       {
-        "ticker": "15102KAA8",
+        "ticker": "CELC",
         "name": "CELCUITY INC",
-        "percent": 0
+        "percent": 0,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "194014AB2",
+        "ticker": "ENOV",
         "name": "ENOVIS CORPORATION",
-        "percent": 0
+        "percent": 0,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "252131AM9",
+        "ticker": "DXCM",
         "name": "DEXCOM INC",
-        "percent": 0
+        "percent": 0,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "29415FAD6",
+        "ticker": "NVST",
         "name": "ENVISTA HOLDINGS CORPORATION",
-        "percent": 0
+        "percent": 0,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "37940XAU6",
+        "ticker": "GPN",
         "name": "GLOBAL PMTS INC",
-        "percent": 0
+        "percent": 0,
+        "sector": "Financial"
       },
       {
-        "ticker": "40131MAD1",
+        "ticker": "GH",
         "name": "GUARDANT HEALTH INC",
-        "percent": 0
+        "percent": 0,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "405024AD2",
+        "ticker": "HAE",
         "name": "HAEMONETICS CORP MASS",
-        "percent": 0
+        "percent": 0,
+        "sector": "Healthcare"
       }
     ]
   },
@@ -316,7 +362,8 @@
       {
         "ticker": "AU",
         "name": "ANGLOGOLD ASHANTI PLC",
-        "percent": 25.3
+        "percent": 25.3,
+        "sector": "Materials"
       },
       {
         "ticker": "06849F108",
@@ -385,14 +432,16 @@
         "percent": 1.1
       },
       {
-        "ticker": "477143AP6",
+        "ticker": "JBLU",
         "name": "JETBLUE AIRWAYS CORP",
-        "percent": 0.4
+        "percent": 0.4,
+        "sector": "Industrial"
       },
       {
-        "ticker": "12685JAE5",
+        "ticker": "CABO",
         "name": "CABLE ONE INC",
-        "percent": 0.3
+        "percent": 0.3,
+        "sector": "Communication"
       },
       {
         "ticker": "09075P204",
@@ -460,17 +509,20 @@
       {
         "ticker": "CRH",
         "name": "CRH PLC",
-        "percent": 2.7
+        "percent": 2.7,
+        "sector": "Materials"
       },
       {
         "ticker": "CRH",
         "name": "CRH PLC",
-        "percent": 2.3
+        "percent": 2.3,
+        "sector": "Materials"
       },
       {
         "ticker": "SW",
         "name": "SMURFIT WESTROCK PLC",
-        "percent": 2.1
+        "percent": 2.1,
+        "sector": "Industrial"
       },
       {
         "ticker": "AMZN",
@@ -485,17 +537,20 @@
       {
         "ticker": "IONQ",
         "name": "IONQ INC",
-        "percent": 1.5
+        "percent": 1.5,
+        "sector": "Technology"
       },
       {
         "ticker": "SW",
         "name": "SMURFIT WESTROCK PLC",
-        "percent": 1.5
+        "percent": 1.5,
+        "sector": "Industrial"
       },
       {
         "ticker": "GOLF",
         "name": "ACUSHNET HLDGS CORP",
-        "percent": 1.4
+        "percent": 1.4,
+        "sector": "Consumer"
       },
       {
         "ticker": "DAL",
@@ -510,12 +565,14 @@
       {
         "ticker": "GOLF",
         "name": "ACUSHNET HLDGS CORP",
-        "percent": 1.1
+        "percent": 1.1,
+        "sector": "Consumer"
       },
       {
         "ticker": "TECK",
         "name": "TECK RESOURCES LTD",
-        "percent": 1.1
+        "percent": 1.1,
+        "sector": "Materials"
       },
       {
         "ticker": "DAL",
@@ -525,7 +582,8 @@
       {
         "ticker": "IONQ",
         "name": "IONQ INC",
-        "percent": 1
+        "percent": 1,
+        "sector": "Technology"
       },
       {
         "ticker": "UAL",
@@ -540,7 +598,8 @@
       {
         "ticker": "CRH",
         "name": "CRH PLC",
-        "percent": 0.9
+        "percent": 0.9,
+        "sector": "Materials"
       },
       {
         "ticker": "ROK",
@@ -550,7 +609,8 @@
       {
         "ticker": "TECK",
         "name": "TECK RESOURCES LTD",
-        "percent": 0.9
+        "percent": 0.9,
+        "sector": "Materials"
       },
       {
         "ticker": "AMZN",
@@ -560,7 +620,8 @@
       {
         "ticker": "SHCO",
         "name": "SOHO HOUSE & CO INC",
-        "percent": 0.8
+        "percent": 0.8,
+        "sector": "Consumer"
       },
       {
         "ticker": "ARM",
@@ -575,22 +636,26 @@
       {
         "ticker": "CRH",
         "name": "CRH PLC",
-        "percent": 0.7
+        "percent": 0.7,
+        "sector": "Materials"
       },
       {
         "ticker": "GOLF",
         "name": "ACUSHNET HLDGS CORP",
-        "percent": 0.6
+        "percent": 0.6,
+        "sector": "Consumer"
       },
       {
         "ticker": "SW",
         "name": "SMURFIT WESTROCK PLC",
-        "percent": 0.6
+        "percent": 0.6,
+        "sector": "Industrial"
       },
       {
         "ticker": "SHCO",
         "name": "SOHO HOUSE & CO INC",
-        "percent": 0.6
+        "percent": 0.6,
+        "sector": "Consumer"
       },
       {
         "ticker": "TXN",
@@ -600,12 +665,14 @@
       {
         "ticker": "GOLF",
         "name": "ACUSHNET HLDGS CORP",
-        "percent": 0.5
+        "percent": 0.5,
+        "sector": "Consumer"
       },
       {
         "ticker": "SW",
         "name": "SMURFIT WESTROCK PLC",
-        "percent": 0.5
+        "percent": 0.5,
+        "sector": "Industrial"
       },
       {
         "ticker": "ADI",
@@ -615,12 +682,14 @@
       {
         "ticker": "IONQ",
         "name": "IONQ INC",
-        "percent": 0.4
+        "percent": 0.4,
+        "sector": "Technology"
       },
       {
         "ticker": "TECK",
         "name": "TECK RESOURCES LTD",
-        "percent": 0.4
+        "percent": 0.4,
+        "sector": "Materials"
       },
       {
         "ticker": "AMZN",
@@ -640,22 +709,26 @@
       {
         "ticker": "IONQ",
         "name": "IONQ INC",
-        "percent": 0.3
+        "percent": 0.3,
+        "sector": "Technology"
       },
       {
         "ticker": "SHCO",
         "name": "SOHO HOUSE & CO INC",
-        "percent": 0.3
+        "percent": 0.3,
+        "sector": "Consumer"
       },
       {
         "ticker": "SHCO",
         "name": "SOHO HOUSE & CO INC",
-        "percent": 0.3
+        "percent": 0.3,
+        "sector": "Consumer"
       },
       {
         "ticker": "TECK",
         "name": "TECK RESOURCES LTD",
-        "percent": 0.3
+        "percent": 0.3,
+        "sector": "Materials"
       },
       {
         "ticker": "34959J108",
@@ -673,7 +746,8 @@
       {
         "ticker": "FTAI",
         "name": "FTAI AVIATION LTD",
-        "percent": 82.3
+        "percent": 82.3,
+        "sector": "Industrial"
       },
       {
         "ticker": "35953C106",
@@ -691,7 +765,8 @@
       {
         "ticker": "POWL",
         "name": "POWELL INDS INC",
-        "percent": 40.9
+        "percent": 40.9,
+        "sector": "Industrial"
       },
       {
         "ticker": "VRT",
@@ -730,7 +805,8 @@
       {
         "ticker": "FNF",
         "name": "FIDELITY NATIONAL FINANCIAL",
-        "percent": 14.3
+        "percent": 14.3,
+        "sector": "Financial"
       },
       {
         "ticker": "TDG",
@@ -793,7 +869,8 @@
       {
         "ticker": "IBKR",
         "name": "INTERACTIVE BROKERS GROUP IN",
-        "percent": 30.6
+        "percent": 30.6,
+        "sector": "Financial"
       },
       {
         "ticker": "GIL",
@@ -842,7 +919,8 @@
       {
         "ticker": "VEL",
         "name": "Velocity Financial Inc",
-        "percent": 79
+        "percent": 79,
+        "sector": "Financial"
       },
       {
         "ticker": "LAUR",
@@ -1025,7 +1103,7 @@
         "percent": 0.8
       },
       {
-        "ticker": "9.2343e+106",
+        "ticker": "9.2343E+106",
         "name": "VERISIGN INC",
         "percent": 0.8
       },
@@ -1219,7 +1297,7 @@
         "percent": 0.8
       },
       {
-        "ticker": "55825T103",
+        "ticker": "MSGS",
         "name": "MADISON SQUARE GRDN SPRT COR",
         "percent": 0.4
       },
@@ -1562,7 +1640,7 @@
         "percent": 1.2
       },
       {
-        "ticker": "9.2343e+106",
+        "ticker": "9.2343E+106",
         "name": "VERISIGN INC",
         "percent": 1.2
       },
@@ -1710,7 +1788,8 @@
       {
         "ticker": "IONQ",
         "name": "IONQ INC",
-        "percent": 0.4
+        "percent": 0.4,
+        "sector": "Technology"
       },
       {
         "ticker": "NFLX",
@@ -1871,9 +1950,10 @@
         "percent": 3.8
       },
       {
-        "ticker": "88023B103",
+        "ticker": "TEM",
         "name": "Tempus AI Inc",
-        "percent": 3.4
+        "percent": 3.4,
+        "sector": "Technology"
       },
       {
         "ticker": "AMD",
@@ -2206,7 +2286,8 @@
       {
         "ticker": "CRH",
         "name": "CRH PLC",
-        "percent": 3.1
+        "percent": 3.1,
+        "sector": "Materials"
       },
       {
         "ticker": "879433829",
@@ -2359,9 +2440,10 @@
         "percent": 0
       },
       {
-        "ticker": "71734107",
+        "ticker": "BHC",
         "name": "BAUSCH HEALTH COS INC",
-        "percent": 0
+        "percent": 0,
+        "sector": "Healthcare"
       },
       {
         "ticker": "203668108",
@@ -2389,7 +2471,8 @@
       {
         "ticker": "SW",
         "name": "SMURFIT WESTROCK PLC",
-        "percent": 5.2
+        "percent": 5.2,
+        "sector": "Industrial"
       },
       {
         "ticker": "84921RAB6",
@@ -2397,9 +2480,10 @@
         "percent": 4
       },
       {
-        "ticker": "37940XAU6",
+        "ticker": "GPN",
         "name": "GLOBAL PMTS INC",
-        "percent": 3.4
+        "percent": 3.4,
+        "sector": "Financial"
       },
       {
         "ticker": "GOOGL",
@@ -2442,14 +2526,16 @@
         "percent": 1.9
       },
       {
-        "ticker": "15189TBD8",
+        "ticker": "CNP",
         "name": "CENTERPOINT ENERGY INC",
-        "percent": 1.8
+        "percent": 1.8,
+        "sector": "Energy"
       },
       {
         "ticker": "IBKR",
         "name": "INTERACTIVE BROKERS GROUP IN",
-        "percent": 1.7
+        "percent": 1.7,
+        "sector": "Financial"
       },
       {
         "ticker": "CRM",
@@ -2462,9 +2548,10 @@
         "percent": 1.6
       },
       {
-        "ticker": "26210CAD6",
+        "ticker": "DBX",
         "name": "DROPBOX INC",
-        "percent": 1.5
+        "percent": 1.5,
+        "sector": "Technology"
       },
       {
         "ticker": "842587DZ7",
@@ -3092,7 +3179,8 @@
       {
         "ticker": "ABT",
         "name": "ABBOTT LABS",
-        "percent": 0.3
+        "percent": 0.3,
+        "sector": "Healthcare"
       },
       {
         "ticker": "MSFT",
@@ -3100,7 +3188,7 @@
         "percent": 0.3
       },
       {
-        "ticker": "7.5513e+105",
+        "ticker": "7.5513E+105",
         "name": "RTX CORPORATION",
         "percent": 0.3
       },
@@ -3287,7 +3375,8 @@
       {
         "ticker": "LAUR",
         "name": "Laureate Education",
-        "percent": 10.2
+        "percent": 10.2,
+        "sector": "Consumer"
       },
       {
         "ticker": "CVCO",

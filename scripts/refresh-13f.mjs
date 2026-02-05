@@ -29,36 +29,75 @@ const parser = new XMLParser({
 
 const SECTOR_BY_TICKER = {
   AU: 'Materials',
+  BBIO: 'Healthcare',
+  BHC: 'Healthcare',
+  BL: 'Technology',
+  BMRN: 'Healthcare',
+  BOX: 'Technology',
+  BSY: 'Technology',
   BTSG: 'Healthcare',
   BV: 'Industrial',
   BRKR: 'Healthcare',
+  CABO: 'Communication',
+  CELC: 'Healthcare',
   CGON: 'Healthcare',
+  CHRS: 'Healthcare',
+  CNP: 'Energy',
+  CRGY: 'Energy',
   CRH: 'Materials',
   CNI: 'Industrial',
+  DBX: 'Technology',
+  DEC: 'Energy',
+  DXCM: 'Healthcare',
+  ENOV: 'Healthcare',
   FERG: 'Industrial',
   FNF: 'Financial',
+  FSK: 'Financial',
   FTAI: 'Industrial',
+  GH: 'Healthcare',
   GIL: 'Consumer',
   GOLF: 'Consumer',
+  GPN: 'Financial',
+  HAE: 'Healthcare',
   HIMS: 'Healthcare',
+  HOUS: 'Consumer',
   HSIC: 'Healthcare',
   IBKR: 'Financial',
+  IMCR: 'Healthcare',
+  JBLU: 'Industrial',
   IRON: 'Healthcare',
+  KREF: 'Financial',
   ITUB: 'Financial',
   IVV: 'ETF',
   LAUR: 'Consumer',
+  MTN: 'Consumer',
+  NCLH: 'Consumer',
+  NIQ: 'Technology',
+  NVCR: 'Healthcare',
+  NVST: 'Healthcare',
   SW: 'Industrial',
   IONQ: 'Technology',
   MOH: 'Healthcare',
   NVO: 'Healthcare',
   ABT: 'Healthcare',
   PCG: 'Energy',
+  PPL: 'Energy',
   POWL: 'Industrial',
+  PSKY: 'Communication',
+  RDFN: 'Consumer',
+  SABR: 'Technology',
   SHCO: 'Consumer',
+  SNAP: 'Communication',
+  SNOW: 'Technology',
+  STX: 'Technology',
+  TDOC: 'Healthcare',
   TECK: 'Materials',
+  TEM: 'Technology',
+  UGI: 'Energy',
   UBER: 'Technology',
   VEL: 'Financial',
-  VRT: 'Industrial'
+  VRT: 'Industrial',
+  WEC: 'Energy'
 };
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -248,14 +287,16 @@ function buildTickerLookup(tickerMap) {
   const cusipMap = {};
   const patterns = [];
 
-  for (const [key, ticker] of Object.entries(tickerMap || {})) {
-    if (/^[0-9A-Z]{9}$/.test(key)) {
-      cusipMap[key] = ticker;
+  for (const [rawKey, ticker] of Object.entries(tickerMap || {})) {
+    const normalizedKey = normalizeText(rawKey).toUpperCase();
+    if (!normalizedKey) continue;
+    const cusipKey = normalizedKey.replace(/\s+/g, '');
+    if (/^[0-9A-Z]{1,9}$/.test(cusipKey)) {
+      const paddedCusip = cusipKey.padStart(9, '0');
+      cusipMap[cusipKey] = ticker;
+      cusipMap[paddedCusip] = ticker;
     } else {
-      const normalizedKey = normalizeText(key).toUpperCase();
-      if (normalizedKey) {
-        patterns.push({ key: normalizedKey, ticker, len: normalizedKey.length });
-      }
+      patterns.push({ key: normalizedKey, ticker, len: normalizedKey.length });
     }
   }
 
@@ -282,18 +323,20 @@ function buildHoldings(entries, lookup) {
     .map((entry) => {
       const name = normalizeText(entry.nameOfIssuer);
       const cusip = normalizeText(entry.cusip);
-      const cusipKey = cusip.replace(/\s+/g, '');
+      const cusipKey = cusip.replace(/\s+/g, '').toUpperCase();
       const paddedCusip = cusipKey.length < 9 ? cusipKey.padStart(9, '0') : cusipKey;
       const title = normalizeText(entry.titleOfClass);
       const rawTicker = normalizeText(
         entry.ticker || entry.tickerOrSymbol || entry.tickerSymbol || entry.symbol
       );
+      const normalizedRawTicker = rawTicker.toUpperCase();
+      const safeRawTicker = /^[0-9A-Z]{8,9}$/.test(normalizedRawTicker) ? '' : normalizedRawTicker;
       const value = Number(entry.value || 0);
       const putCall = normalizeText(entry.putCall).toUpperCase();
       if (!name || !cusip || !Number.isFinite(value) || value <= 0) return null;
       if (putCall === 'PUT' || putCall === 'CALL') return null;
       const mappedTicker =
-        rawTicker ||
+        safeRawTicker ||
         lookup?.cusipMap?.[cusipKey] ||
         lookup?.cusipMap?.[paddedCusip] ||
         matchTickerByName(name, title, lookup);
@@ -313,6 +356,7 @@ function buildHoldings(entries, lookup) {
     .map((item) => ({
       ticker: item.ticker,
       name: item.name,
+      sector: item.sector,
       percent: totalValue > 0 ? Number(((item.value / totalValue) * 100).toFixed(1)) : 0
     }))
     .sort((a, b) => b.percent - a.percent)
