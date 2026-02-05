@@ -30,8 +30,12 @@ const parser = new XMLParser({
 const SECTOR_BY_TICKER = {
   ABT: 'Healthcare',
   ACHR: 'Industrial',
+  ACN: 'Technology',
   ALVO: 'Healthcare',
+  AGI: 'Materials',
+  ALSN: 'Industrial',
   ARKB: 'ETF',
+  APP: 'Technology',
   AU: 'Materials',
   AVAV: 'Industrial',
   B: 'Materials',
@@ -50,6 +54,8 @@ const SECTOR_BY_TICKER = {
   BV: 'Industrial',
   BZ: 'Communication',
   CABO: 'Communication',
+  CALM: 'Consumer',
+  CBOE: 'Financial',
   CELC: 'Healthcare',
   CGON: 'Healthcare',
   CHRS: 'Healthcare',
@@ -60,15 +66,23 @@ const SECTOR_BY_TICKER = {
   CRH: 'Materials',
   CNI: 'Industrial',
   CRSP: 'Healthcare',
+  CORT: 'Healthcare',
+  CVLT: 'Technology',
+  CVNA: 'Consumer',
+  DASH: 'Consumer',
   DBX: 'Technology',
   DEC: 'Energy',
   DXCM: 'Healthcare',
+  ETSY: 'Consumer',
+  EXEL: 'Healthcare',
   ENOV: 'Healthcare',
+  FNV: 'Materials',
   FERG: 'Industrial',
   FNF: 'Financial',
   FSK: 'Financial',
   FTAI: 'Industrial',
   GEHC: 'Healthcare',
+  GEV: 'Industrial',
   GH: 'Healthcare',
   GIL: 'Consumer',
   GOLF: 'Consumer',
@@ -92,14 +106,17 @@ const SECTOR_BY_TICKER = {
   IVZ: 'Financial',
   JBLU: 'Industrial',
   JBS: 'Consumer',
+  KGC: 'Materials',
   KREF: 'Financial',
   LAUR: 'Consumer',
   MOH: 'Healthcare',
   MTN: 'Consumer',
   NCLH: 'Consumer',
   NIQ: 'Technology',
+  NBIX: 'Healthcare',
   NTRA: 'Healthcare',
   NTLA: 'Healthcare',
+  NTNX: 'Technology',
   NVCR: 'Healthcare',
   NVST: 'Healthcare',
   NVO: 'Healthcare',
@@ -109,30 +126,40 @@ const SECTOR_BY_TICKER = {
   POWL: 'Industrial',
   PPL: 'Energy',
   PSKY: 'Communication',
+  PSTG: 'Technology',
   QSR: 'Consumer',
   RDFN: 'Consumer',
+  RDDT: 'Communication',
   ROKU: 'Communication',
   RXRX: 'Healthcare',
   SABR: 'Technology',
   SE: 'Consumer',
+  SE: 'Consumer',
   SEG: 'Communication',
+  SFM: 'Consumer',
   SHCO: 'Consumer',
   SNAP: 'Communication',
   SNOW: 'Technology',
   SOLV: 'Healthcare',
+  SPOT: 'Communication',
   SQ: 'Financial',
   STX: 'Technology',
+  STRL: 'Industrial',
   SW: 'Industrial',
   TDOC: 'Healthcare',
   TECK: 'Materials',
   TEM: 'Technology',
   TWST: 'Healthcare',
+  TWST: 'Healthcare',
   TX: 'Materials',
+  UTHR: 'Healthcare',
   UBER: 'Technology',
   UGI: 'Energy',
   VCYT: 'Healthcare',
   VEL: 'Financial',
+  VRSN: 'Technology',
   VRT: 'Industrial',
+  W: 'Consumer',
   WEC: 'Energy',
   WEN: 'Consumer',
   XP: 'Financial',
@@ -329,8 +356,9 @@ function buildTickerLookup(tickerMap) {
   for (const [rawKey, ticker] of Object.entries(tickerMap || {})) {
     const normalizedKey = normalizeText(rawKey).toUpperCase();
     if (!normalizedKey) continue;
-    const cusipKey = normalizedKey.replace(/\s+/g, '');
-    if (/^[0-9A-Z]{1,9}$/.test(cusipKey)) {
+    const cusipKey = normalizedKey.replace(/[^0-9A-Z]/g, '');
+    const looksLikeCusip = cusipKey.length > 0 && cusipKey.length <= 9 && /\d/.test(cusipKey);
+    if (looksLikeCusip) {
       const paddedCusip = cusipKey.padStart(9, '0');
       cusipMap[cusipKey] = ticker;
       cusipMap[paddedCusip] = ticker;
@@ -362,15 +390,18 @@ function buildHoldings(entries, lookup) {
     .map((entry) => {
       const name = normalizeText(entry.nameOfIssuer);
       const cusip = normalizeText(entry.cusip);
-      const cusipKey = cusip.replace(/\s+/g, '').toUpperCase();
+      const cusipKey = cusip.replace(/[^0-9A-Z]/gi, '').toUpperCase();
       const paddedCusip = cusipKey.length < 9 ? cusipKey.padStart(9, '0') : cusipKey;
       const title = normalizeText(entry.titleOfClass);
       const rawTicker = normalizeText(
         entry.ticker || entry.tickerOrSymbol || entry.tickerSymbol || entry.symbol
       );
       const normalizedRawTicker = rawTicker.toUpperCase();
+      const sanitizedRawTicker = normalizedRawTicker.replace(/[^0-9A-Z]/g, '');
       const looksLikeCusip =
-        /^[0-9A-Z]{7,9}$/.test(normalizedRawTicker) && /\d/.test(normalizedRawTicker);
+        sanitizedRawTicker.length >= 1 &&
+        sanitizedRawTicker.length <= 9 &&
+        /\d/.test(sanitizedRawTicker);
       const safeRawTicker = looksLikeCusip ? '' : normalizedRawTicker;
       const value = Number(entry.value || 0);
       const putCall = normalizeText(entry.putCall).toUpperCase();

@@ -1121,9 +1121,10 @@
         "percent": 0.8
       },
       {
-        "ticker": "9.2343E+106",
+        "ticker": "VRSN",
         "name": "VERISIGN INC",
-        "percent": 0.8
+        "percent": 0.8,
+        "sector": "Technology"
       },
       {
         "ticker": "AAPL",
@@ -1424,9 +1425,10 @@
         "percent": 1.6
       },
       {
-        "ticker": "36828A101",
+        "ticker": "GEV",
         "name": "GE VERNOVA INC",
-        "percent": 1.6
+        "percent": 1.6,
+        "sector": "Industrial"
       },
       {
         "ticker": "UBER",
@@ -1536,9 +1538,10 @@
         "percent": 0.6
       },
       {
-        "ticker": "75734B100",
+        "ticker": "RDDT",
         "name": "REDDIT INC",
-        "percent": 0.6
+        "percent": 0.6,
+        "sector": "Communication"
       },
       {
         "ticker": "CSCO",
@@ -1656,24 +1659,28 @@
         "percent": 1.3
       },
       {
-        "ticker": "91307C102",
+        "ticker": "UTHR",
         "name": "UNITED THERAPEUTICS CORP DEL",
-        "percent": 1.2
+        "percent": 1.2,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "9.2343E+106",
+        "ticker": "VRSN",
         "name": "VERISIGN INC",
-        "percent": 1.2
+        "percent": 1.2,
+        "sector": "Technology"
       },
       {
-        "ticker": "03831W108",
+        "ticker": "APP",
         "name": "APPLOVIN CORP",
-        "percent": 0.9
+        "percent": 0.9,
+        "sector": "Technology"
       },
       {
-        "ticker": "496902404",
+        "ticker": "KGC",
         "name": "KINROSS GOLD CORP",
-        "percent": 0.9
+        "percent": 0.9,
+        "sector": "Materials"
       },
       {
         "ticker": "MSFT",
@@ -1686,14 +1693,16 @@
         "percent": 0.8
       },
       {
-        "ticker": "30161Q104",
+        "ticker": "EXEL",
         "name": "EXELIXIS INC",
-        "percent": 0.8
+        "percent": 0.8,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "351858105",
+        "ticker": "FNV",
         "name": "FRANCO NEV CORP",
-        "percent": 0.8
+        "percent": 0.8,
+        "sector": "Materials"
       },
       {
         "ticker": "GILD",
@@ -1701,14 +1710,16 @@
         "percent": 0.8
       },
       {
-        "ticker": "218352102",
+        "ticker": "CORT",
         "name": "CORCEPT THERAPEUTICS INC",
-        "percent": 0.7
+        "percent": 0.7,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "25809K105",
+        "ticker": "DASH",
         "name": "DOORDASH INC",
-        "percent": 0.7
+        "percent": 0.7,
+        "sector": "Consumer"
       },
       {
         "ticker": "HIMS",
@@ -1717,9 +1728,10 @@
         "sector": "Healthcare"
       },
       {
-        "ticker": "75734B100",
+        "ticker": "RDDT",
         "name": "REDDIT INC",
-        "percent": 0.7
+        "percent": 0.7,
+        "sector": "Communication"
       },
       {
         "ticker": "GOOG",
@@ -1732,37 +1744,43 @@
         "percent": 0.6
       },
       {
-        "ticker": "36828A101",
+        "ticker": "GEV",
         "name": "GE VERNOVA INC",
-        "percent": 0.6
+        "percent": 0.6,
+        "sector": "Industrial"
       },
       {
-        "ticker": "L8681T102",
+        "ticker": "SPOT",
         "name": "SPOTIFY TECHNOLOGY S A",
-        "percent": 0.6
+        "percent": 0.6,
+        "sector": "Communication"
       },
       {
-        "ticker": "85208M102",
+        "ticker": "SFM",
         "name": "SPROUTS FMRS MKT INC",
-        "percent": 0.6
+        "percent": 0.6,
+        "sector": "Consumer"
       },
       {
-        "ticker": "94419L101",
+        "ticker": "W",
         "name": "WAYFAIR INC",
-        "percent": 0.6
+        "percent": 0.6,
+        "sector": "Consumer"
       },
       {
-        "ticker": "146869102",
+        "ticker": "CVNA",
         "name": "CARVANA CO",
-        "percent": 0.5
+        "percent": 0.5,
+        "sector": "Consumer"
       },
       {
-        "ticker": "29786A106",
+        "ticker": "ETSY",
         "name": "ETSY INC",
-        "percent": 0.5
+        "percent": 0.5,
+        "sector": "Consumer"
       },
       {
-        "ticker": "45337C102",
+        "ticker": "INCY",
         "name": "INCYTE CORP",
         "percent": 0.5
       },
@@ -1772,9 +1790,10 @@
         "percent": 0.5
       },
       {
-        "ticker": "67059N108",
+        "ticker": "NTNX",
         "name": "NUTANIX INC",
-        "percent": 0.5
+        "percent": 0.5,
+        "sector": "Technology"
       },
       {
         "ticker": "TSM",
@@ -1787,24 +1806,27 @@
         "percent": 0.4
       },
       {
-        "ticker": "9066101",
+        "ticker": "ABNB",
         "name": "AIRBNB INC",
         "percent": 0.4
       },
       {
-        "ticker": "12503M108",
+        "ticker": "CBOE",
         "name": "CBOE GLOBAL MKTS INC",
-        "percent": 0.4
+        "percent": 0.4,
+        "sector": "Financial"
       },
       {
-        "ticker": "204166102",
+        "ticker": "CVLT",
         "name": "COMMVAULT SYS INC",
-        "percent": 0.4
+        "percent": 0.4,
+        "sector": "Technology"
       },
       {
-        "ticker": "26210C104",
+        "ticker": "DBX",
         "name": "DROPBOX INC",
-        "percent": 0.4
+        "percent": 0.4,
+        "sector": "Technology"
       },
       {
         "ticker": "IONQ",
@@ -1818,14 +1840,16 @@
         "percent": 0.4
       },
       {
-        "ticker": "64125C109",
+        "ticker": "NBIX",
         "name": "NEUROCRINE BIOSCIENCES INC",
-        "percent": 0.4
+        "percent": 0.4,
+        "sector": "Healthcare"
       },
       {
-        "ticker": "74624M102",
+        "ticker": "PSTG",
         "name": "PURE STORAGE INC",
-        "percent": 0.4
+        "percent": 0.4,
+        "sector": "Technology"
       },
       {
         "ticker": "HOOD",
@@ -1834,9 +1858,10 @@
         "sector": "Financial"
       },
       {
-        "ticker": "859241101",
+        "ticker": "STRL",
         "name": "STERLING INFRASTRUCTURE INC",
-        "percent": 0.4
+        "percent": 0.4,
+        "sector": "Industrial"
       },
       {
         "ticker": "VRTX",
@@ -1854,19 +1879,22 @@
         "percent": 0.3
       },
       {
-        "ticker": "G1151C101",
+        "ticker": "ACN",
         "name": "ACCENTURE PLC IRELAND",
-        "percent": 0.3
+        "percent": 0.3,
+        "sector": "Technology"
       },
       {
-        "ticker": "11532108",
+        "ticker": "AGI",
         "name": "ALAMOS GOLD INC NEW",
-        "percent": 0.3
+        "percent": 0.3,
+        "sector": "Materials"
       },
       {
-        "ticker": "01973R101",
+        "ticker": "ALSN",
         "name": "ALLISON TRANSMISSION HLDGS I",
-        "percent": 0.3
+        "percent": 0.3,
+        "sector": "Industrial"
       },
       {
         "ticker": "TEAM",
@@ -1874,9 +1902,10 @@
         "percent": 0.3
       },
       {
-        "ticker": "128030202",
+        "ticker": "CALM",
         "name": "CAL MAINE FOODS INC",
-        "percent": 0.3
+        "percent": 0.3,
+        "sector": "Consumer"
       },
       {
         "ticker": "CME",
@@ -2161,7 +2190,7 @@
         "percent": 0.7
       },
       {
-        "ticker": "9066101",
+        "ticker": "ABNB",
         "name": "Airbnb Inc",
         "percent": 0.7
       },
@@ -2522,9 +2551,10 @@
         "sector": "Industrial"
       },
       {
-        "ticker": "84921RAB6",
+        "ticker": "SPOT",
         "name": "SPOTIFY USA INC",
-        "percent": 4
+        "percent": 4,
+        "sector": "Communication"
       },
       {
         "ticker": "GPN",
@@ -2721,9 +2751,10 @@
         "percent": 0.7
       },
       {
-        "ticker": "204166102",
+        "ticker": "CVLT",
         "name": "COMMVAULT SYS INC",
-        "percent": 0.6
+        "percent": 0.6,
+        "sector": "Technology"
       },
       {
         "ticker": "460690100",
@@ -3235,7 +3266,7 @@
         "percent": 0.3
       },
       {
-        "ticker": "7.5513E+105",
+        "ticker": "75513E105",
         "name": "RTX CORPORATION",
         "percent": 0.3
       },
@@ -3443,7 +3474,8 @@
       {
         "ticker": "STRL",
         "name": "Sterling Infrastructure",
-        "percent": 5.8
+        "percent": 5.8,
+        "sector": "Industrial"
       },
       {
         "ticker": "AMRZ",
@@ -3668,7 +3700,8 @@
       {
         "ticker": "UTHR",
         "name": "United Therapeutics",
-        "percent": 11.8
+        "percent": 11.8,
+        "sector": "Healthcare"
       },
       {
         "ticker": "MRK",
