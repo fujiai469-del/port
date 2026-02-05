@@ -11,21 +11,17 @@ const META_PATH = path.join(ROOT, 'data', 'meta.json');
 
 const SEC_BASE = 'https://data.sec.gov';
 const ARCHIVES_BASE = 'https://www.sec.gov/Archives/edgar/data';
-const OPENFIGI_BASE = 'https://api.openfigi.com/v3/mapping';
+const ONLINE_TICKER_MAP_URL =
+  'https://raw.githubusercontent.com/datasets/s-and-p-500-companies/master/data/constituents.csv';
 
 const USER_AGENT = process.env.SEC_USER_AGENT;
 if (!USER_AGENT) {
   console.error('SEC_USER_AGENT is required. Example: "Your Name your.email@example.com"');
   process.exit(1);
 }
-const OPENFIGI_API_KEY = process.env.OPENFIGI_API_KEY || '';
 
 const MAX_HOLDINGS = Number(process.env.MAX_HOLDINGS || 50);
 const REQUEST_DELAY_MS = Number(process.env.SEC_DELAY_MS || 200);
-const OPENFIGI_DELAY_MS = Number(process.env.OPENFIGI_DELAY_MS || 250);
-const OPENFIGI_BATCH_SIZE = Number(
-  process.env.OPENFIGI_BATCH_SIZE || (OPENFIGI_API_KEY ? 100 : 0)
-);
 
 const parser = new XMLParser({
   ignoreAttributes: false,
@@ -178,6 +174,20 @@ const SECTOR_BY_TICKER = {
   YMM: 'Technology'
 };
 
+const GICS_TO_SECTOR = {
+  'COMMUNICATION SERVICES': 'Communication',
+  'CONSUMER DISCRETIONARY': 'Consumer',
+  'CONSUMER STAPLES': 'Consumer',
+  'ENERGY': 'Energy',
+  'FINANCIALS': 'Financial',
+  'HEALTH CARE': 'Healthcare',
+  'INDUSTRIALS': 'Industrial',
+  'INFORMATION TECHNOLOGY': 'Technology',
+  'MATERIALS': 'Materials',
+  'REAL ESTATE': 'Financial',
+  'UTILITIES': 'Energy'
+};
+
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function readJson(filePath, fallback) {
@@ -203,6 +213,154 @@ async function fetchSec(url, responseType = 'json') {
   const data = responseType === 'text' ? await res.text() : await res.json();
   await sleep(REQUEST_DELAY_MS);
   return data;
+}
+
+function normalizeCompanyName(value) {
+  if (!value) return '';
+  let text = normalizeText(value).toUpperCase();
+  text = text.replace(/&/g, ' AND ');
+  text = text.replace(/\b(CLASS|CL)\s+[A-Z0-9]+\b/g, ' ');
+  text = text.replace(/[^A-Z0-9 ]+/g, ' ');
+  const suffixes = new Set([
+    'INC',
+    'INCORPORATED',
+    'CORP',
+    'CORPORATION',
+    'CO',
+    'COMPANY',
+    'LTD',
+    'LIMITED',
+    'PLC',
+    'HOLDING',
+    'HOLDINGS',
+    'GROUP',
+    'SA',
+    'NV',
+    'AG',
+    'SE',
+    'THE',
+    'ORDINARY',
+    'SHS',
+    'SHARES',
+    'COMMON'
+  ]);
+  const tokens = text.split(/\s+/).filter(Boolean);
+  const filtered = tokens.filter((token) => !suffixes.has(token));
+  return filtered.join(' ');
+}
+
+function parseCsvLine(line) {
+  const values = [];
+  let current = '';
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i += 1) {
+    const ch = line[i];
+    if (ch === '"') {
+      const next = line[i + 1];
+      if (inQuotes && next === '"') {
+        current += '"';
+        i += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
+    }
+    if (ch === ',' && !inQuotes) {
+      values.push(current);
+      current = '';
+      continue;
+    }
+    current += ch;
+  }
+  values.push(current);
+  return values.map((value) => value.trim());
+}
+
+function parseCsv(text) {
+  if (!text) return [];
+  const lines = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+  const rows = [];
+  for (const line of lines) {
+    if (!line || !line.trim()) continue;
+    rows.push(parseCsvLine(line));
+  }
+  return rows;
+}
+
+function mapGicsSector(value) {
+  if (!value) return '';
+  const key = normalizeText(value).toUpperCase();
+  return GICS_TO_SECTOR[key] || '';
+}
+
+async function fetchOnlineTickerMap() {
+  try {
+    const res = await fetch(ONLINE_TICKER_MAP_URL);
+    if (!res.ok) {
+      throw new Error(`Online ticker map failed: ${res.status} ${res.statusText}`);
+    }
+    const text = await res.text();
+    const rows = parseCsv(text);
+    if (!rows.length) return { nameToTicker: {}, sectorByTicker: {} };
+
+    const header = rows[0].map((value) => value.toUpperCase());
+    const symbolIndex = header.findIndex((col) => col === 'SYMBOL');
+    const nameIndex = header.findIndex((col) => col.includes('SECURITY') || col.includes('COMPANY'));
+    const sectorIndex = header.findIndex((col) => col.includes('GICS SECTOR'));
+
+    const nameToTicker = {};
+    const sectorByTicker = {};
+
+    for (let i = 1; i < rows.length; i += 1) {
+      const row = rows[i];
+      const symbol = row[symbolIndex] ? row[symbolIndex].trim().toUpperCase() : '';
+      const company = row[nameIndex] ? row[nameIndex].trim() : '';
+      if (!symbol || !company) continue;
+      const normalizedName = normalizeCompanyName(company);
+      if (normalizedName) {
+        nameToTicker[normalizedName] = symbol;
+      }
+      if (sectorIndex >= 0) {
+        const mappedSector = mapGicsSector(row[sectorIndex] || '');
+        if (mappedSector) {
+          sectorByTicker[symbol] = mappedSector;
+        }
+      }
+    }
+
+    return { nameToTicker, sectorByTicker };
+  } catch (err) {
+    console.warn(String(err.message || err));
+    return { nameToTicker: {}, sectorByTicker: {} };
+  }
+}
+
+const FALLBACK_TICKER_GUESSES = [
+  { pattern: /APPLE/, ticker: 'AAPL' },
+  { pattern: /MICROSOFT/, ticker: 'MSFT' },
+  { pattern: /AMAZON/, ticker: 'AMZN' },
+  { pattern: /ALPHABET|GOOGLE/, ticker: 'GOOGL' },
+  { pattern: /META|FACEBOOK/, ticker: 'META' },
+  { pattern: /NVIDIA/, ticker: 'NVDA' },
+  { pattern: /TESLA/, ticker: 'TSLA' },
+  { pattern: /BERKSHIRE/, ticker: 'BRK.B' },
+  { pattern: /JPMORGAN/, ticker: 'JPM' },
+  { pattern: /JOHNSON\s*&\s*JOHNSON|JOHNSON AND JOHNSON/, ticker: 'JNJ' }
+];
+
+function guessTickerByName(name) {
+  const key = normalizeCompanyName(name);
+  if (!key) return '';
+  for (const guess of FALLBACK_TICKER_GUESSES) {
+    if (guess.pattern.test(key)) return guess.ticker;
+  }
+  return '';
+}
+
+function matchOnlineTickerByName(name, onlineLookup) {
+  const key = normalizeCompanyName(name);
+  if (!key) return '';
+  return onlineLookup?.nameToTicker?.[key] || '';
 }
 
 function toPaddedCik(cik) {
@@ -397,7 +555,7 @@ function matchTickerByName(name, title, lookup) {
   return '';
 }
 
-function buildHoldings(entries, lookup) {
+function buildHoldings(entries, lookup, onlineLookup) {
   const cleaned = entries
     .map((entry) => {
       const name = normalizeText(entry.nameOfIssuer);
@@ -424,12 +582,17 @@ function buildHoldings(entries, lookup) {
         lookup?.cusipMap?.[cusipKey] ||
         lookup?.cusipMap?.[paddedCusip] ||
         matchTickerByName(name, title, lookup);
-      const sector = mappedTicker ? SECTOR_BY_TICKER[mappedTicker] || '' : '';
+      const onlineTicker = mappedTicker ? '' : matchOnlineTickerByName(name, onlineLookup);
+      const guessedTicker = mappedTicker || onlineTicker ? '' : guessTickerByName(name);
+      const finalTicker = mappedTicker || onlineTicker || guessedTicker;
+      const sector =
+        (finalTicker && onlineLookup?.sectorByTicker?.[finalTicker]) ||
+        (finalTicker ? SECTOR_BY_TICKER[finalTicker] || '' : '');
       return {
         name,
         cusip,
         value,
-        ticker: mappedTicker || cusip,
+        ticker: finalTicker || cusip,
         sector: sector || undefined
       };
     })
@@ -449,120 +612,7 @@ function buildHoldings(entries, lookup) {
   return holdings;
 }
 
-function normalizeCusip(value) {
-  return normalizeText(value).toUpperCase().replace(/[^0-9A-Z]/g, '');
-}
-
-function looksLikeCusip(value) {
-  const cleaned = normalizeCusip(value);
-  return cleaned.length > 0 && cleaned.length <= 9 && /\d/.test(cleaned);
-}
-
-function collectUnmappedCusips(funds, lookup) {
-  const missing = new Set();
-  for (const fund of funds) {
-    for (const holding of fund.holdings || []) {
-      if (!holding?.ticker) continue;
-      const cleaned = normalizeCusip(holding.ticker);
-      if (!looksLikeCusip(cleaned)) continue;
-      const padded = cleaned.padStart(9, '0');
-      if (lookup?.cusipMap?.[cleaned] || lookup?.cusipMap?.[padded]) continue;
-      missing.add(cleaned);
-    }
-  }
-  return Array.from(missing);
-}
-
-function applyCusipMappings(funds, mapping) {
-  let updated = 0;
-  if (!mapping) return updated;
-
-  for (const fund of funds) {
-    for (const holding of fund.holdings || []) {
-      if (!holding?.ticker) continue;
-      const cleaned = normalizeCusip(holding.ticker);
-      if (!looksLikeCusip(cleaned)) continue;
-      const padded = cleaned.padStart(9, '0');
-      const mapped = mapping[cleaned] || mapping[padded];
-      if (!mapped) continue;
-      holding.ticker = mapped;
-      if (!holding.sector && SECTOR_BY_TICKER[mapped]) {
-        holding.sector = SECTOR_BY_TICKER[mapped];
-      }
-      updated += 1;
-    }
-  }
-
-  return updated;
-}
-
-function updateTickerMapWithOpenFigi(tickerMap, mapping) {
-  let added = 0;
-  for (const [cusip, ticker] of Object.entries(mapping || {})) {
-    if (!ticker) continue;
-    const cleaned = normalizeCusip(cusip);
-    if (!cleaned) continue;
-    const padded = cleaned.padStart(9, '0');
-    if (!tickerMap[cleaned]) {
-      tickerMap[cleaned] = ticker;
-      added += 1;
-    }
-    if (padded !== cleaned && !tickerMap[padded]) {
-      tickerMap[padded] = ticker;
-      added += 1;
-    }
-  }
-  return added;
-}
-
-function chunkArray(values, size) {
-  if (!size || size <= 0) return [values];
-  const chunks = [];
-  for (let i = 0; i < values.length; i += size) {
-    chunks.push(values.slice(i, i + size));
-  }
-  return chunks;
-}
-
-async function fetchOpenFigiMappings(cusips) {
-  if (!OPENFIGI_API_KEY || !cusips.length || !OPENFIGI_BATCH_SIZE) return {};
-  const mapping = {};
-  const batches = chunkArray(cusips, OPENFIGI_BATCH_SIZE);
-
-  for (const batch of batches) {
-    const jobs = batch.map((cusip) => ({ idType: 'ID_CUSIP', idValue: cusip }));
-    const res = await fetch(OPENFIGI_BASE, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-OPENFIGI-APIKEY': OPENFIGI_API_KEY
-      },
-      body: JSON.stringify(jobs)
-    });
-
-    if (!res.ok) {
-      console.warn(`OpenFIGI request failed: ${res.status} ${res.statusText}`);
-      continue;
-    }
-
-    const payload = await res.json();
-    payload.forEach((item, index) => {
-      const data = item?.data;
-      if (!Array.isArray(data) || data.length === 0) return;
-      const best = data.find((entry) => entry?.ticker) || data[0];
-      const ticker = best?.ticker ? String(best.ticker).toUpperCase() : '';
-      if (ticker) {
-        mapping[batch[index]] = ticker;
-      }
-    });
-
-    await sleep(OPENFIGI_DELAY_MS);
-  }
-
-  return mapping;
-}
-
-async function fetch13fHoldings({ name, cik }, tickerLookup) {
+async function fetch13fHoldings({ name, cik }, tickerLookup, onlineLookup) {
   const paddedCik = toPaddedCik(cik);
   const submissionsUrl = `${SEC_BASE}/submissions/CIK${paddedCik}.json`;
   const submissions = await fetchSec(submissionsUrl);
@@ -608,7 +658,7 @@ async function fetch13fHoldings({ name, cik }, tickerLookup) {
     throw new Error(`No holdings parsed for ${name} (${cik}) ${latest.accessionNumber}`);
   }
 
-  const holdings = buildHoldings(entries, tickerLookup);
+  const holdings = buildHoldings(entries, tickerLookup, onlineLookup);
   return {
     name,
     cik: String(cik),
@@ -622,6 +672,7 @@ async function main() {
   const config = await readJson(CONFIG_PATH, []);
   const tickerMap = await readJson(TICKER_MAP_PATH, {});
   const tickerLookup = buildTickerLookup(tickerMap);
+  const onlineLookup = await fetchOnlineTickerMap();
   const manualFunds = await readJson(MANUAL_PATH, []);
   const existingMeta = await readJson(META_PATH, null);
 
@@ -637,7 +688,7 @@ async function main() {
     orderedNames.push(fund.name);
     if (!fund.cik) continue;
     try {
-      const dynamicFund = await fetch13fHoldings(fund, tickerLookup);
+      const dynamicFund = await fetch13fHoldings(fund, tickerLookup, onlineLookup);
       combined.set(fund.name, dynamicFund);
       dynamicCount += 1;
     } catch (err) {
@@ -653,29 +704,6 @@ async function main() {
     }
   }
   combined.forEach((value) => output.push(value));
-
-  const missingCusips = collectUnmappedCusips(output, tickerLookup);
-  if (missingCusips.length) {
-    if (!OPENFIGI_API_KEY) {
-      console.warn(`OpenFIGI disabled. ${missingCusips.length} CUSIP(s) still unmapped.`);
-    } else {
-      const openFigiMap = await fetchOpenFigiMappings(missingCusips);
-      const addedMappings = updateTickerMapWithOpenFigi(tickerMap, openFigiMap);
-      const updatedHoldings = applyCusipMappings(output, openFigiMap);
-
-      if (addedMappings > 0) {
-        const sortedTickerMap = Object.fromEntries(
-          Object.entries(tickerMap).sort(([a], [b]) => a.localeCompare(b))
-        );
-        await fs.writeFile(TICKER_MAP_PATH, JSON.stringify(sortedTickerMap, null, 2));
-        console.log(`OpenFIGI added ${addedMappings} ticker mapping(s).`);
-      }
-
-      if (updatedHoldings > 0) {
-        console.log(`OpenFIGI updated ${updatedHoldings} holding(s).`);
-      }
-    }
-  }
 
   const reportDates = output
     .map((fund) => fund.reportDate)
