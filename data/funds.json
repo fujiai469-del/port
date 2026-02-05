@@ -54,9 +54,10 @@
     "filingDate": "2025-11-14",
     "holdings": [
       {
-        "ticker": "10950A106",
+        "ticker": "BTSG",
         "name": "BRIGHTSPRING HEALTH SVCS INC",
-        "percent": 38.2
+        "percent": 38.2,
+        "sector": "Healthcare"
       },
       {
         "ticker": "806407102",
@@ -691,9 +692,10 @@
         "percent": 40.9
       },
       {
-        "ticker": "92537N108",
+        "ticker": "VRT",
         "name": "VERTIV HOLDINGS CO",
-        "percent": 27.2
+        "percent": 27.2,
+        "sector": "Industrial"
       },
       {
         "ticker": "FSLR",
@@ -853,9 +855,10 @@
     "filingDate": "2025-11-14",
     "holdings": [
       {
-        "ticker": "156944100",
+        "ticker": "CGON",
         "name": "CG Oncology, Inc.",
-        "percent": 37.2
+        "percent": 37.2,
+        "sector": "Healthcare"
       },
       {
         "ticker": "22307102",
@@ -1788,9 +1791,10 @@
     "filingDate": "2025-11-03",
     "holdings": [
       {
-        "ticker": "60855R100",
+        "ticker": "MOH",
         "name": "MOLINA HEALTHCARE INC",
-        "percent": 35.1
+        "percent": 35.1,
+        "sector": "Healthcare"
       },
       {
         "ticker": "LULU",
