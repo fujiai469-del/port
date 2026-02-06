@@ -1516,107 +1516,356 @@
       }
     };
 
-    const FUND_PROFILES = {
-      'WARREN BUFFETT (BERKSHIRE HATHAWAY)': {
-        manager: 'Warren Buffett',
-        strategy: 'Long-term value',
-        strength: 'High-conviction, long-horizon investing',
-        aum: 'N/A',
-        description: 'Berkshire Hathaway holds concentrated, long-term positions in durable, cash-generative businesses.'
-      },
-      'BILL GATES (BILL & MELINDA GATES FOUNDATION TRUST)': {
-        manager: 'Bill Gates',
-        strategy: 'Long-term diversified',
-        strength: 'Steady, multi-sector exposure',
-        aum: 'N/A',
-        description: 'Foundation trust portfolio focused on durable, long-term holdings.'
-      },
-      'BRIDGEWATER ASSOCIATES (RAY DALIO)': {
-        manager: 'Ray Dalio',
-        strategy: 'Global macro',
-        strength: 'Macro research and diversified allocation',
-        aum: 'N/A',
-        description: 'Global macro manager focused on diversified, risk-aware positioning.'
-      },
-      'RENAISSANCE TECHNOLOGIES (JIM SIMONS / MEDALLION)': {
-        manager: 'Jim Simons',
-        strategy: 'Quantitative',
-        strength: 'Systematic models and data-driven signals',
-        aum: 'N/A',
-        description: 'Quantitative investment firm known for systematic, model-driven approaches.'
-      },
-      'SCION ASSET MANAGEMENT (MICHAEL BURRY)': {
-        manager: 'Michael Burry',
-        strategy: 'Value / opportunistic',
-        strength: 'Deep fundamental research, contrarian views',
-        aum: 'N/A',
-        description: 'Concentrated portfolio with contrarian, research-driven positions.'
-      },
-      'ARK INVESTMENT MANAGEMENT (CATHIE WOOD)': {
-        manager: 'Cathie Wood',
-        strategy: 'Innovation growth',
-        strength: 'Thematic exposure to disruptive innovation',
-        aum: 'N/A',
-        description: 'Focus on long-term disruptive innovation themes and high-growth companies.'
-      },
-      'PERSHING SQUARE CAPITAL MANAGEMENT (BILL ACKMAN)': {
-        manager: 'Bill Ackman',
-        strategy: 'Activist',
-        strength: 'High-conviction, activist positions',
-        aum: 'N/A',
-        description: 'Activist-oriented fund with concentrated, long-term positions.'
-      },
-      'THIRD POINT (DANIEL LOEB)': {
-        manager: 'Daniel Loeb',
-        strategy: 'Event-driven',
-        strength: 'Catalyst- and change-driven investing',
-        aum: 'N/A',
-        description: 'Event-driven and activist strategy across public markets.'
-      },
-      'SOROS FUND MANAGEMENT (GEORGE SOROS)': {
-        manager: 'George Soros',
-        strategy: 'Macro / multi-asset',
-        strength: 'Flexible, theme-driven allocation',
-        aum: 'N/A',
-        description: 'Family office with flexible, macro-aware positioning.'
-      },
-      'BLACKROCK INC.': {
-        manager: 'BlackRock',
-        strategy: 'Multi-strategy',
-        strength: 'Scale and diversified exposures',
-        aum: 'N/A',
-        description: 'Large asset manager with broad strategies across markets.'
-      },
-      'VANGUARD GROUP INC.': {
-        manager: 'Vanguard',
-        strategy: 'Index / passive',
-        strength: 'Low-cost, diversified portfolios',
-        aum: 'N/A',
-        description: 'Index-focused asset manager with diversified exposure.'
-      },
-      'NELSON PELTZ (TRIAN FUND MANAGEMENT)': {
-        manager: 'Nelson Peltz',
-        strategy: 'Activist',
-        strength: 'Operational improvement focus',
-        aum: 'N/A',
-        description: 'Activist fund targeting operational and capital structure improvements.'
-      },
-      'KOHLBERG KRAVIS ROBERTS & CO. L.P. (KKR)': {
-        manager: 'KKR',
-        strategy: 'Alternatives',
-        strength: 'Private markets and credit expertise',
-        aum: 'N/A',
-        description: 'Alternative asset manager with diversified strategies.'
-      }
-    };
-
     function normalizeTicker(value) {
       return String(value || '').trim().toUpperCase();
     }
 
     function normalizeFundKey(value) {
-      return String(value || '').trim().toUpperCase();
+      return String(value || '')
+        .toUpperCase()
+        .replace(/[^A-Z0-9]+/g, ' ')
+        .trim()
+        .replace(/\s+/g, ' ');
     }
+
+    function formatAumValue(valueUsd) {
+      if (valueUsd === null || valueUsd === undefined) return null;
+      const abs = Math.abs(valueUsd);
+      if (abs >= 1e12) return `$${(valueUsd / 1e12).toFixed(2)}T`;
+      if (abs >= 1e9) return `$${(valueUsd / 1e9).toFixed(1)}B`;
+      if (abs >= 1e6) return `$${(valueUsd / 1e6).toFixed(1)}M`;
+      return `$${Number(valueUsd).toLocaleString()}`;
+    }
+
+    const FUND_PROFILE_ENTRIES = [
+      {
+        key: 'Oaktree Fund (Oaktree Fund Advisors, LLC)',
+        manager: 'Oaktree Capital Management',
+        aum: { valueUsd: 223000000000, asOf: 'unknown' },
+        strategy: 'Alternative / credit-focused (distressed debt, private credit, real assets, etc.)',
+        strength: 'Deep credit expertise, distressed & opportunistic investing',
+        overview: 'Global alternative investment manager known for credit and opportunistic strategies.'
+      },
+      {
+        key: 'Nelson Peltz (Trian Fund Management)',
+        manager: 'Trian Fund Management (Nelson Peltz)',
+        aum: { valueUsd: 6300000000, asOf: '2025-07-15' },
+        strategy: 'Activist / concentrated equity',
+        strength: 'Activism, operational improvement, concentrated bets',
+        overview: 'Multi-billion dollar activist manager founded by Nelson Peltz and partners.'
+      },
+      {
+        key: 'Kohlberg Kravis Roberts & Co. L.p.',
+        manager: 'KKR',
+        aum: { valueUsd: 744000000000, asOf: '2025-12-31' },
+        strategy: 'Global alternatives (private equity, credit, infrastructure, real estate)',
+        strength: 'Scale, diversified platforms, fundraising & deployment capacity',
+        overview: 'Large global alternative asset manager operating across PE/credit/infra/real estate.'
+      },
+      {
+        key: 'Lansdowne Partners (UK) Llp',
+        manager: 'Lansdowne Partners (UK) LLP',
+        aum: { valueUsd: 8000000000, asOf: '2025-06-18' },
+        strategy: 'Fundamental equity investing (historically hedge -> more long-only)',
+        strength: 'Fundamental stock picking (Europe/Global equities)',
+        overview: 'UK-based equity investor known for fundamental research and concentrated ideas.'
+      },
+      {
+        key: 'Washington State Investment Board',
+        manager: 'Washington State Investment Board (WSIB)',
+        aum: { valueUsd: 230500000000, asOf: '2025-09-30' },
+        strategy: 'Public pension / multi-asset',
+        strength: 'Long-horizon asset allocation across public + private markets',
+        overview: 'State pension investment board managing retirement and other state funds.'
+      },
+      {
+        key: 'Engine No. 1 Llc',
+        manager: 'Engine No. 1',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Active ownership / ESG-influenced engagement (varies by vehicle)',
+        strength: 'Shareholder engagement & governance campaigns',
+        overview: 'Active ownership manager; AUM/vehicle details vary by product.'
+      },
+      {
+        key: 'Windacre Partnership',
+        manager: 'WindAcre Partnership',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Long-only concentrated equity',
+        strength: 'Concentrated stock picking, owner-oriented long-term approach',
+        overview: 'Long-only concentrated equity manager (no shorting/hedging per disclosures).'
+      },
+      {
+        key: 'Oakcliff Capital',
+        manager: 'Oakcliff Capital',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Unknown',
+        strength: 'Unknown',
+        overview: 'No reliable public AUM/strategy found quickly—leave as Unknown for now.'
+      },
+      {
+        key: 'Windacre Partnership',
+        manager: 'WindAcre Partnership',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Long-only concentrated equity',
+        strength: 'Concentrated stock picking, long-term orientation',
+        overview: 'Long-only concentrated equity; may use limited leverage depending on mandate.'
+      },
+      {
+        key: 'Snow Phipps Group',
+        manager: 'Snow Phipps Group',
+        aum: { valueUsd: 1500000000, asOf: '2025-04-29' },
+        strategy: 'Private equity (middle-market buyouts) / some public disclosures exist',
+        strength: 'Middle-market acquisitions + operating partner model',
+        overview: 'Middle-market investment firm; AUM reported around ~$1.5B in some filings.'
+      },
+      {
+        key: 'Foresite Capital Management V, Llc',
+        manager: 'Foresite Capital',
+        aum: { valueUsd: 3500000000, asOf: '2024-06-30' },
+        strategy: 'Healthcare / life sciences venture & growth equity',
+        strength: 'Deep healthcare specialization, multi-stage investing',
+        overview: 'Healthcare and life sciences investment firm, multi-stage platform.'
+      },
+      {
+        key: 'Warren Buffett (Berkshire Hathaway)',
+        manager: 'Berkshire Hathaway (Warren Buffett)',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Public holding company / long-term value & quality businesses',
+        strength: 'Capital allocation, high-quality businesses, insurance float',
+        overview: 'Not a fund; holding-company style capital allocator.'
+      },
+      {
+        key: 'Bill Gates (Bill & Melinda Gates Foundation Trust)',
+        manager: 'Bill & Melinda Gates Foundation Trust',
+        aum: { valueUsd: 86000000000, asOf: '2025-07-31' },
+        strategy: 'Endowment-style (trust invests; transfers to foundation)',
+        strength: 'Large endowment portfolio; long-term capital growth to fund grants',
+        overview: 'The Trust manages the endowment assets for the Gates Foundation.'
+      },
+      {
+        key: 'Bridgewater Associates (Ray Dalio)',
+        manager: 'Bridgewater Associates',
+        aum: { valueUsd: 92000000000, asOf: '2025-09-30' },
+        strategy: 'Global macro (Pure Alpha / All Weather style)',
+        strength: 'Macro risk-parity & systematic/ discretionary macro processes',
+        overview: 'Large global macro manager known for Pure Alpha and All Weather frameworks.'
+      },
+      {
+        key: 'Renaissance Technologies (Jim Simons / Medallion)',
+        manager: 'Renaissance Technologies',
+        aum: { valueUsd: 91958327898, asOf: '2025-03-28' },
+        strategy: 'Quant / systematic',
+        strength: 'Statistical modeling, systematic trading infrastructure',
+        overview: 'Quantitative investment firm; Medallion is famous (capacity constrained).'
+      },
+      {
+        key: 'Scion Asset Management (Michael Burry)',
+        manager: 'Scion Asset Management (Michael Burry)',
+        aum: { valueUsd: 1381198076, asOf: 'latest 13F portfolio value proxy' },
+        strategy: 'Discretionary value / opportunistic (13F reflects public equity sleeve)',
+        strength: 'Contrarian positioning; opportunistic thematic bets',
+        overview: 'Manager known for contrarian positioning; public filings reflect only part of exposure.'
+      },
+      {
+        key: 'ARK Investment Management (Cathie Wood)',
+        manager: 'ARK Investment Management',
+        aum: { valueUsd: 13007845312, asOf: '2025-05-05' },
+        strategy: 'Thematic growth (disruptive innovation)',
+        strength: 'High-conviction innovation themes (AI, genomics, robotics, etc.)',
+        overview: 'Active thematic manager focused on disruptive innovation.'
+      },
+      {
+        key: 'Pershing Square Capital Management (Bill Ackman)',
+        manager: 'Pershing Square Capital Management',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Concentrated, high-conviction equity + occasional hedges',
+        strength: 'Activism/engagement, concentrated portfolio management',
+        overview: 'Concentrated manager known for high-conviction positions and engagement.'
+      },
+      {
+        key: 'Third Point (Daniel Loeb)',
+        manager: 'Third Point LLC',
+        aum: { valueUsd: 20800000000, asOf: '2025-06' },
+        strategy: 'Event-driven / activist-tilted, multi-strategy',
+        strength: 'Activist engagement + opportunistic/event-driven allocation',
+        overview: 'Institutional investment manager led by Daniel Loeb.'
+      },
+      {
+        key: 'Soros Fund Management (George Soros)',
+        manager: 'Soros Fund Management',
+        aum: { valueUsd: 28000000000, asOf: 'unknown' },
+        strategy: 'Family office / multi-asset',
+        strength: 'Agile multi-asset positioning, global opportunity set',
+        overview: 'Global asset manager/family office serving as principal manager for OSF-related capital.'
+      },
+      {
+        key: 'BlackRock Inc.',
+        manager: 'BlackRock',
+        aum: { valueUsd: 14000000000000, asOf: '2025-12-31' },
+        strategy: 'Global asset management (index, active, alternatives, cash mgmt)',
+        strength: 'Scale, iShares ETF platform, broad distribution',
+        overview: "World's largest asset manager (AUM disclosed in earnings releases)."
+      },
+      {
+        key: 'Vanguard Group Inc.',
+        manager: 'The Vanguard Group',
+        aum: { valueUsd: 12000000000000, asOf: '2025' },
+        strategy: 'Index-focused asset management',
+        strength: 'Low-cost indexing, broad product set',
+        overview: 'Large global asset manager known for low-cost index funds and ETFs.'
+      },
+      {
+        key: 'Technology Crossover Management X, Ltd.',
+        manager: 'TCV (Technology Crossover Ventures)',
+        aum: { valueUsd: null, asOf: '2025-09-30' },
+        strategy: 'Growth equity (technology)',
+        strength: 'Late-stage/growth tech investing',
+        overview: 'Growth equity platform; AUM figure not clearly stated on the cited page.'
+      },
+      {
+        key: 'Cabot-Wellington',
+        manager: 'Cabot-Wellington, LLC',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Single-family office / multi-asset (public filings show ETF usage)',
+        strength: 'Long-horizon asset allocation',
+        overview: 'Family office style manager; public AUM not consistently available.'
+      },
+      {
+        key: 'Sharp Capital',
+        manager: 'Sharp Capital',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Unknown',
+        strength: 'Unknown',
+        overview: 'No reliable public AUM/strategy found quickly—leave Unknown for now.'
+      },
+      {
+        key: 'Vitol Holding b.v.',
+        manager: 'Vitol',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Commodity trading / energy (corporate treasury may hold securities)',
+        strength: 'Energy & commodities expertise',
+        overview: 'Primarily an energy/commodities firm; securities holdings may reflect treasury/investment entities.'
+      },
+      {
+        key: 'Washington University',
+        manager: 'Washington University (Endowment)',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'University endowment / multi-asset',
+        strength: 'Long-horizon diversified allocation',
+        overview: 'Endowment-style allocator; specific AUM not fetched here.'
+      },
+      {
+        key: 'Trustees of Dartmouth College',
+        manager: 'Dartmouth College (Endowment)',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'University endowment / multi-asset',
+        strength: 'Long-horizon diversified allocation',
+        overview: 'Endowment-style allocator; specific AUM not fetched here.'
+      },
+      {
+        key: 'VK Services, Llc',
+        manager: 'VK Services, LLC',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Unknown',
+        strength: 'Unknown',
+        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+      },
+      {
+        key: 'Trybe Capital',
+        manager: 'Trybe Capital',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Unknown',
+        strength: 'Unknown',
+        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+      },
+      {
+        key: 'Tri Locum Partners',
+        manager: 'Tri Locum Partners',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Unknown',
+        strength: 'Unknown',
+        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+      },
+      {
+        key: 'Vantage Consulting',
+        manager: 'Vantage Consulting',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Unknown',
+        strength: 'Unknown',
+        overview: 'Name overlaps with non-investment businesses; leave Unknown until verified.'
+      },
+      {
+        key: 'Pivotal Bioventure',
+        manager: 'Pivotal Bioventure',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Unknown',
+        strength: 'Unknown',
+        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+      },
+      {
+        key: 'Newgen Asset Management Ltd',
+        manager: 'Newgen Asset Management',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Unknown',
+        strength: 'Unknown',
+        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+      },
+      {
+        key: 'Moon Capital Management Lp',
+        manager: 'Moon Capital Management',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Unknown',
+        strength: 'Unknown',
+        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+      },
+      {
+        key: 'i.g.y. Ltd',
+        manager: 'i.g.y. Ltd',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Unknown',
+        strength: 'Unknown',
+        overview: 'Name overlaps with non-investment business entities; leave Unknown until verified.'
+      },
+      {
+        key: 'Hpc Germany Gmbh & Co. Kg',
+        manager: 'HPC Germany GmbH & Co. KG',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Unknown',
+        strength: 'Unknown',
+        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+      },
+      {
+        key: 'Helikon Investments',
+        manager: 'Helikon Investments',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Unknown',
+        strength: 'Unknown',
+        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+      },
+      {
+        key: 'Elemental Capital Partners Llc',
+        manager: 'Elemental Capital Partners',
+        aum: { valueUsd: null, asOf: null },
+        strategy: 'Unknown',
+        strength: 'Unknown',
+        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+      }
+    ];
+
+    const FUND_PROFILES = FUND_PROFILE_ENTRIES.reduce((acc, entry) => {
+      const key = normalizeFundKey(entry.key);
+      const aumValue = formatAumValue(entry.aum?.valueUsd);
+      const asOf = entry.aum?.asOf && entry.aum?.asOf !== 'unknown' ? entry.aum.asOf : null;
+      const aumLabel = aumValue ? (asOf ? `${aumValue} (as of ${asOf})` : aumValue) : null;
+      acc[key] = {
+        manager: entry.manager,
+        aum: aumLabel,
+        strategy: entry.strategy,
+        strength: entry.strength,
+        description: entry.overview
+      };
+      return acc;
+    }, {});
 
     function getLayoutMode(width) {
       if (width <= BREAKPOINTS.mobile) return 'mobile';
