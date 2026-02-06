@@ -1189,7 +1189,7 @@
         netBuy: 'Net Buy',
         netSell: 'Net Sell',
         neutral: 'Neutral',
-        dataAsOf: 'Data as of',
+        dataAsOf: 'Last updated',
         sectorLegend: 'Sectors',
         Financial: 'Financial',
         Technology: 'Technology',
@@ -1249,7 +1249,7 @@
         netBuy: '買い越し',
         netSell: '売り越し',
         neutral: '中立',
-        dataAsOf: 'データ基準日',
+        dataAsOf: 'データ更新日',
         sectorLegend: 'セクター',
         Financial: '金融',
         Technology: 'テクノロジー',
@@ -1412,7 +1412,8 @@
               if (!cancelled) setFunds(Array.isArray(data) ? data : []);
               if (metaRes.ok) {
                 const meta = await metaRes.json();
-                if (!cancelled && meta?.asOf) setDataAsOf(meta.asOf);
+                if (!cancelled && meta?.generatedAt) setDataAsOf(meta.generatedAt.slice(0, 10));
+                else if (!cancelled && meta?.asOf) setDataAsOf(meta.asOf);
               }
               return;
             }
