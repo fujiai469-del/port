@@ -1,10 +1,10 @@
 {
   "asOf": "2025-12-31",
   "source": "manual",
-  "generatedAt": "2026-02-06T14:16:36.581Z",
+  "generatedAt": "2026-02-06T14:30:55.310Z",
   "totals": {
-    "funds": 31,
+    "funds": 56,
     "dynamic": 0,
-    "manual": 31
+    "manual": 56
   }
 }

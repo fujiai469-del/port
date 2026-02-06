@@ -1563,5 +1563,1530 @@
         "percent": 0
       }
     ]
+  },
+  {
+    "name": "Bridgewater Associates (Ray Dalio)",
+    "holdings": [
+      {
+        "ticker": "SPY",
+        "name": "SPDR S&P 500 ETF Trust",
+        "percent": 24
+      },
+      {
+        "ticker": "IVV",
+        "name": "iShares Core S&P 500 ETF",
+        "percent": 18
+      },
+      {
+        "ticker": "VWO",
+        "name": "Vanguard FTSE Emerging Markets ETF",
+        "percent": 14
+      },
+      {
+        "ticker": "VEA",
+        "name": "Vanguard FTSE Developed Markets ETF",
+        "percent": 12
+      },
+      {
+        "ticker": "IWM",
+        "name": "iShares Russell 2000 ETF",
+        "percent": 10
+      },
+      {
+        "ticker": "TLT",
+        "name": "iShares 20+ Year Treasury Bond ETF",
+        "percent": 9
+      },
+      {
+        "ticker": "GLD",
+        "name": "SPDR Gold Shares",
+        "percent": 7
+      },
+      {
+        "ticker": "LQD",
+        "name": "iShares iBoxx $ Investment Grade Corporate Bond ETF",
+        "percent": 6
+      }
+    ]
+  },
+  {
+    "name": "Renaissance Technologies (Jim Simons / Medallion)",
+    "holdings": [
+      {
+        "ticker": "AAPL",
+        "name": "Apple Inc.",
+        "percent": 14
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 13
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "percent": 12
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 11
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 10
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 9
+      },
+      {
+        "ticker": "AVGO",
+        "name": "Broadcom Inc.",
+        "percent": 8
+      },
+      {
+        "ticker": "JPM",
+        "name": "JPMorgan Chase & Co.",
+        "percent": 7
+      },
+      {
+        "ticker": "XOM",
+        "name": "Exxon Mobil Corp",
+        "percent": 6
+      },
+      {
+        "ticker": "UNH",
+        "name": "UnitedHealth Group Inc",
+        "percent": 5
+      },
+      {
+        "ticker": "LLY",
+        "name": "Eli Lilly and Co",
+        "percent": 5
+      }
+    ]
+  },
+  {
+    "name": "Scion Asset Management (Michael Burry)",
+    "holdings": [
+      {
+        "ticker": "MOH",
+        "name": "Molina Healthcare Inc",
+        "percent": 35
+      },
+      {
+        "ticker": "LULU",
+        "name": "Lululemon Athletica Inc",
+        "percent": 26
+      },
+      {
+        "ticker": "SLM",
+        "name": "SLM Corp",
+        "percent": 20
+      },
+      {
+        "ticker": "BRKR",
+        "name": "Bruker Corp",
+        "percent": 19
+      }
+    ]
+  },
+  {
+    "name": "ARK Investment Management (Cathie Wood)",
+    "holdings": [
+      {
+        "ticker": "TSLA",
+        "name": "Tesla Inc",
+        "percent": 18
+      },
+      {
+        "ticker": "COIN",
+        "name": "Coinbase Global Inc",
+        "percent": 10
+      },
+      {
+        "ticker": "ROKU",
+        "name": "Roku Inc",
+        "percent": 9
+      },
+      {
+        "ticker": "RBLX",
+        "name": "Roblox Corp",
+        "percent": 8
+      },
+      {
+        "ticker": "PLTR",
+        "name": "Palantir Technologies Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "SHOP",
+        "name": "Shopify Inc",
+        "percent": 7
+      },
+      {
+        "ticker": "HOOD",
+        "name": "Robinhood Markets Inc",
+        "percent": 7
+      },
+      {
+        "ticker": "CRSP",
+        "name": "CRISPR Therapeutics AG",
+        "percent": 6
+      },
+      {
+        "ticker": "TEM",
+        "name": "Tempus AI Inc",
+        "percent": 6
+      },
+      {
+        "ticker": "AMD",
+        "name": "Advanced Micro Devices Inc",
+        "percent": 5
+      },
+      {
+        "ticker": "CRCL",
+        "name": "Circle Internet Group Inc",
+        "percent": 5
+      },
+      {
+        "ticker": "BMNR",
+        "name": "BitMine Immersion Technologies",
+        "percent": 5
+      },
+      {
+        "ticker": "TER",
+        "name": "Teradyne Inc",
+        "percent": 4
+      },
+      {
+        "ticker": "KTOS",
+        "name": "Kratos Defense & Security Solutions",
+        "percent": 2
+      }
+    ]
+  },
+  {
+    "name": "Pershing Square Capital Management (Bill Ackman)",
+    "holdings": [
+      {
+        "ticker": "UBER",
+        "name": "Uber Technologies Inc",
+        "percent": 20
+      },
+      {
+        "ticker": "GOOG",
+        "name": "Alphabet Inc. Class C",
+        "percent": 11
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 9
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 8
+      },
+      {
+        "ticker": "CMG",
+        "name": "Chipotle Mexican Grill Inc",
+        "percent": 6
+      },
+      {
+        "ticker": "HLT",
+        "name": "Hilton Worldwide Holdings Inc",
+        "percent": 6
+      },
+      {
+        "ticker": "QSR",
+        "name": "Restaurant Brands International Inc",
+        "percent": 5
+      },
+      {
+        "ticker": "SEAT",
+        "name": "Vivid Seats Inc",
+        "percent": 1
+      },
+      {
+        "ticker": "HTZ",
+        "name": "Hertz Global Holdings Inc",
+        "percent": 1
+      }
+    ]
+  },
+  {
+    "name": "Third Point (Daniel Loeb)",
+    "holdings": [
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 13
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 12
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "percent": 11
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 10
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 10
+      },
+      {
+        "ticker": "TSM",
+        "name": "Taiwan Semiconductor",
+        "percent": 9
+      },
+      {
+        "ticker": "DHR",
+        "name": "Danaher Corp",
+        "percent": 8
+      },
+      {
+        "ticker": "CRWD",
+        "name": "CrowdStrike Holdings Inc",
+        "percent": 7
+      },
+      {
+        "ticker": "ABNB",
+        "name": "Airbnb Inc",
+        "percent": 6
+      },
+      {
+        "ticker": "NFLX",
+        "name": "Netflix Inc",
+        "percent": 5
+      },
+      {
+        "ticker": "CMCSA",
+        "name": "Comcast Corp",
+        "percent": 5
+      },
+      {
+        "ticker": "BKNG",
+        "name": "Booking Holdings Inc",
+        "percent": 4
+      }
+    ]
+  },
+  {
+    "name": "Soros Fund Management (George Soros)",
+    "holdings": [
+      {
+        "ticker": "SPY",
+        "name": "SPDR S&P 500 ETF Trust",
+        "percent": 16
+      },
+      {
+        "ticker": "QQQ",
+        "name": "Invesco QQQ Trust",
+        "percent": 15
+      },
+      {
+        "ticker": "GLD",
+        "name": "SPDR Gold Shares",
+        "percent": 13
+      },
+      {
+        "ticker": "AAPL",
+        "name": "Apple Inc.",
+        "percent": 11
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 10
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "percent": 9
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 7
+      },
+      {
+        "ticker": "TLT",
+        "name": "iShares 20+ Year Treasury Bond ETF",
+        "percent": 6
+      },
+      {
+        "ticker": "SLV",
+        "name": "iShares Silver Trust",
+        "percent": 5
+      }
+    ]
+  },
+  {
+    "name": "BlackRock Inc.",
+    "holdings": [
+      {
+        "ticker": "AAPL",
+        "name": "Apple Inc.",
+        "percent": 14
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 13
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "percent": 11
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 9
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 8
+      },
+      {
+        "ticker": "BRK.B",
+        "name": "Berkshire Hathaway Inc. Class B",
+        "percent": 7
+      },
+      {
+        "ticker": "JPM",
+        "name": "JPMorgan Chase & Co.",
+        "percent": 6
+      },
+      {
+        "ticker": "LLY",
+        "name": "Eli Lilly and Co",
+        "percent": 5
+      },
+      {
+        "ticker": "XOM",
+        "name": "Exxon Mobil Corp",
+        "percent": 5
+      },
+      {
+        "ticker": "V",
+        "name": "Visa Inc.",
+        "percent": 4
+      },
+      {
+        "ticker": "MA",
+        "name": "Mastercard Inc.",
+        "percent": 4
+      },
+      {
+        "ticker": "UNH",
+        "name": "UnitedHealth Group Inc",
+        "percent": 3
+      },
+      {
+        "ticker": "COST",
+        "name": "Costco Wholesale Corp",
+        "percent": 3
+      }
+    ]
+  },
+  {
+    "name": "Vanguard Group Inc.",
+    "holdings": [
+      {
+        "ticker": "AAPL",
+        "name": "Apple Inc.",
+        "percent": 13
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 12
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "percent": 11
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 9
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 7
+      },
+      {
+        "ticker": "BRK.B",
+        "name": "Berkshire Hathaway Inc. Class B",
+        "percent": 7
+      },
+      {
+        "ticker": "TSLA",
+        "name": "Tesla Inc",
+        "percent": 6
+      },
+      {
+        "ticker": "JPM",
+        "name": "JPMorgan Chase & Co.",
+        "percent": 5
+      },
+      {
+        "ticker": "LLY",
+        "name": "Eli Lilly and Co",
+        "percent": 5
+      },
+      {
+        "ticker": "XOM",
+        "name": "Exxon Mobil Corp",
+        "percent": 4
+      },
+      {
+        "ticker": "V",
+        "name": "Visa Inc.",
+        "percent": 4
+      },
+      {
+        "ticker": "MA",
+        "name": "Mastercard Inc.",
+        "percent": 4
+      },
+      {
+        "ticker": "UNH",
+        "name": "UnitedHealth Group Inc",
+        "percent": 3
+      },
+      {
+        "ticker": "COST",
+        "name": "Costco Wholesale Corp",
+        "percent": 2
+      }
+    ]
+  },
+  {
+    "name": "Citadel Advisors LLC",
+    "holdings": [
+      {
+        "ticker": "SPY",
+        "name": "SPDR S&P 500 ETF Trust",
+        "percent": 18
+      },
+      {
+        "ticker": "QQQ",
+        "name": "Invesco QQQ Trust",
+        "percent": 15
+      },
+      {
+        "ticker": "AAPL",
+        "name": "Apple Inc.",
+        "percent": 9
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 8
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "percent": 8
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 7
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 6
+      },
+      {
+        "ticker": "JPM",
+        "name": "JPMorgan Chase & Co.",
+        "percent": 6
+      },
+      {
+        "ticker": "XOM",
+        "name": "Exxon Mobil Corp",
+        "percent": 6
+      },
+      {
+        "ticker": "TSLA",
+        "name": "Tesla Inc",
+        "percent": 5
+      },
+      {
+        "ticker": "AVGO",
+        "name": "Broadcom Inc.",
+        "percent": 4
+      },
+      {
+        "ticker": "UNH",
+        "name": "UnitedHealth Group Inc",
+        "percent": 4
+      },
+      {
+        "ticker": "V",
+        "name": "Visa Inc.",
+        "percent": 4
+      }
+    ]
+  },
+  {
+    "name": "D. E. Shaw & Co, L.P.",
+    "holdings": [
+      {
+        "ticker": "AAPL",
+        "name": "Apple Inc.",
+        "percent": 12
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 11
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "percent": 11
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 10
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 9
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 8
+      },
+      {
+        "ticker": "AVGO",
+        "name": "Broadcom Inc.",
+        "percent": 8
+      },
+      {
+        "ticker": "JPM",
+        "name": "JPMorgan Chase & Co.",
+        "percent": 7
+      },
+      {
+        "ticker": "XOM",
+        "name": "Exxon Mobil Corp",
+        "percent": 6
+      },
+      {
+        "ticker": "UNH",
+        "name": "UnitedHealth Group Inc",
+        "percent": 6
+      },
+      {
+        "ticker": "COST",
+        "name": "Costco Wholesale Corp",
+        "percent": 6
+      },
+      {
+        "ticker": "V",
+        "name": "Visa Inc.",
+        "percent": 6
+      }
+    ]
+  },
+  {
+    "name": "Two Sigma Investments, LP",
+    "holdings": [
+      {
+        "ticker": "SPY",
+        "name": "SPDR S&P 500 ETF Trust",
+        "percent": 20
+      },
+      {
+        "ticker": "IWM",
+        "name": "iShares Russell 2000 ETF",
+        "percent": 15
+      },
+      {
+        "ticker": "QQQ",
+        "name": "Invesco QQQ Trust",
+        "percent": 14
+      },
+      {
+        "ticker": "AAPL",
+        "name": "Apple Inc.",
+        "percent": 8
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 7
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "percent": 7
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 6
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 6
+      },
+      {
+        "ticker": "JPM",
+        "name": "JPMorgan Chase & Co.",
+        "percent": 5
+      },
+      {
+        "ticker": "XOM",
+        "name": "Exxon Mobil Corp",
+        "percent": 4
+      },
+      {
+        "ticker": "V",
+        "name": "Visa Inc.",
+        "percent": 4
+      },
+      {
+        "ticker": "MA",
+        "name": "Mastercard Inc.",
+        "percent": 4
+      }
+    ]
+  },
+  {
+    "name": "Millennium Management LLC",
+    "holdings": [
+      {
+        "ticker": "AAPL",
+        "name": "Apple Inc.",
+        "percent": 11
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 10
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "percent": 10
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 9
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 8
+      },
+      {
+        "ticker": "AVGO",
+        "name": "Broadcom Inc.",
+        "percent": 7
+      },
+      {
+        "ticker": "TSM",
+        "name": "Taiwan Semiconductor",
+        "percent": 7
+      },
+      {
+        "ticker": "JPM",
+        "name": "JPMorgan Chase & Co.",
+        "percent": 7
+      },
+      {
+        "ticker": "XOM",
+        "name": "Exxon Mobil Corp",
+        "percent": 6
+      },
+      {
+        "ticker": "UNH",
+        "name": "UnitedHealth Group Inc",
+        "percent": 6
+      },
+      {
+        "ticker": "LLY",
+        "name": "Eli Lilly and Co",
+        "percent": 6
+      },
+      {
+        "ticker": "COST",
+        "name": "Costco Wholesale Corp",
+        "percent": 5
+      }
+    ]
+  },
+  {
+    "name": "AQR Capital Management LLC",
+    "holdings": [
+      {
+        "ticker": "SPY",
+        "name": "SPDR S&P 500 ETF Trust",
+        "percent": 22
+      },
+      {
+        "ticker": "IVV",
+        "name": "iShares Core S&P 500 ETF",
+        "percent": 15
+      },
+      {
+        "ticker": "VTI",
+        "name": "Vanguard Total Stock Market ETF",
+        "percent": 14
+      },
+      {
+        "ticker": "EFA",
+        "name": "iShares MSCI EAFE ETF",
+        "percent": 10
+      },
+      {
+        "ticker": "EEM",
+        "name": "iShares MSCI Emerging Markets ETF",
+        "percent": 9
+      },
+      {
+        "ticker": "IWM",
+        "name": "iShares Russell 2000 ETF",
+        "percent": 8
+      },
+      {
+        "ticker": "TLT",
+        "name": "iShares 20+ Year Treasury Bond ETF",
+        "percent": 8
+      },
+      {
+        "ticker": "LQD",
+        "name": "iShares iBoxx $ Investment Grade Corporate Bond ETF",
+        "percent": 7
+      },
+      {
+        "ticker": "HYG",
+        "name": "iShares iBoxx $ High Yield Corporate Bond ETF",
+        "percent": 7
+      }
+    ]
+  },
+  {
+    "name": "Elliott Investment Management L.P.",
+    "holdings": [
+      {
+        "ticker": "PNC",
+        "name": "PNC Financial Services Group Inc",
+        "percent": 14
+      },
+      {
+        "ticker": "HPE",
+        "name": "Hewlett Packard Enterprise Co",
+        "percent": 12
+      },
+      {
+        "ticker": "PYPL",
+        "name": "PayPal Holdings Inc",
+        "percent": 11
+      },
+      {
+        "ticker": "GE",
+        "name": "General Electric Co",
+        "percent": 10
+      },
+      {
+        "ticker": "NOC",
+        "name": "Northrop Grumman Corp",
+        "percent": 9
+      },
+      {
+        "ticker": "LHX",
+        "name": "L3Harris Technologies Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "COP",
+        "name": "ConocoPhillips",
+        "percent": 8
+      },
+      {
+        "ticker": "VZ",
+        "name": "Verizon Communications Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "CSX",
+        "name": "CSX Corp",
+        "percent": 7
+      },
+      {
+        "ticker": "ABT",
+        "name": "Abbott Laboratories",
+        "percent": 7
+      },
+      {
+        "ticker": "RTX",
+        "name": "RTX Corp",
+        "percent": 6
+      }
+    ]
+  },
+  {
+    "name": "Baupost Group LLC/MA",
+    "holdings": [
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 16
+      },
+      {
+        "ticker": "QSR",
+        "name": "Restaurant Brands International Inc",
+        "percent": 13
+      },
+      {
+        "ticker": "WBD",
+        "name": "Warner Bros Discovery Inc",
+        "percent": 12
+      },
+      {
+        "ticker": "BMY",
+        "name": "Bristol-Myers Squibb Co",
+        "percent": 11
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 10
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 9
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "BKNG",
+        "name": "Booking Holdings Inc",
+        "percent": 7
+      },
+      {
+        "ticker": "AIG",
+        "name": "American International Group Inc",
+        "percent": 7
+      },
+      {
+        "ticker": "KR",
+        "name": "Kroger Co",
+        "percent": 7
+      }
+    ]
+  },
+  {
+    "name": "Tiger Global Management LLC",
+    "holdings": [
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 15
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 14
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 13
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "percent": 12
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 11
+      },
+      {
+        "ticker": "SHOP",
+        "name": "Shopify Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "SE",
+        "name": "Sea Ltd",
+        "percent": 8
+      },
+      {
+        "ticker": "UBER",
+        "name": "Uber Technologies Inc",
+        "percent": 7
+      },
+      {
+        "ticker": "SPOT",
+        "name": "Spotify Technology S.A.",
+        "percent": 6
+      },
+      {
+        "ticker": "ABNB",
+        "name": "Airbnb Inc",
+        "percent": 6
+      }
+    ]
+  },
+  {
+    "name": "Coatue Management LLC",
+    "holdings": [
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 14
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 13
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "percent": 12
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 11
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 9
+      },
+      {
+        "ticker": "CRWD",
+        "name": "CrowdStrike Holdings Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "SNOW",
+        "name": "Snowflake Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "ABNB",
+        "name": "Airbnb Inc",
+        "percent": 7
+      },
+      {
+        "ticker": "SHOP",
+        "name": "Shopify Inc",
+        "percent": 7
+      },
+      {
+        "ticker": "DDOG",
+        "name": "Datadog Inc",
+        "percent": 6
+      },
+      {
+        "ticker": "PANW",
+        "name": "Palo Alto Networks Inc",
+        "percent": 5
+      }
+    ]
+  },
+  {
+    "name": "Viking Global Investors LP",
+    "holdings": [
+      {
+        "ticker": "LLY",
+        "name": "Eli Lilly and Co",
+        "percent": 14
+      },
+      {
+        "ticker": "UNH",
+        "name": "UnitedHealth Group Inc",
+        "percent": 13
+      },
+      {
+        "ticker": "ISRG",
+        "name": "Intuitive Surgical Inc",
+        "percent": 11
+      },
+      {
+        "ticker": "VRTX",
+        "name": "Vertex Pharmaceuticals Inc",
+        "percent": 10
+      },
+      {
+        "ticker": "REGN",
+        "name": "Regeneron Pharmaceuticals Inc",
+        "percent": 9
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 9
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 8
+      },
+      {
+        "ticker": "DHR",
+        "name": "Danaher Corp",
+        "percent": 10
+      }
+    ]
+  },
+  {
+    "name": "Lone Pine Capital LLC",
+    "holdings": [
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 15
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 14
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 13
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "percent": 12
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 10
+      },
+      {
+        "ticker": "ADBE",
+        "name": "Adobe Inc",
+        "percent": 9
+      },
+      {
+        "ticker": "CRM",
+        "name": "Salesforce Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "UBER",
+        "name": "Uber Technologies Inc",
+        "percent": 7
+      },
+      {
+        "ticker": "INTU",
+        "name": "Intuit Inc",
+        "percent": 6
+      },
+      {
+        "ticker": "SNOW",
+        "name": "Snowflake Inc",
+        "percent": 6
+      }
+    ]
+  },
+  {
+    "name": "Maverick Capital Ltd",
+    "holdings": [
+      {
+        "ticker": "AAPL",
+        "name": "Apple Inc.",
+        "percent": 13
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 12
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 11
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 10
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 9
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "percent": 9
+      },
+      {
+        "ticker": "CRM",
+        "name": "Salesforce Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "ADBE",
+        "name": "Adobe Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "UNH",
+        "name": "UnitedHealth Group Inc",
+        "percent": 7
+      },
+      {
+        "ticker": "LLY",
+        "name": "Eli Lilly and Co",
+        "percent": 7
+      },
+      {
+        "ticker": "JPM",
+        "name": "JPMorgan Chase & Co.",
+        "percent": 6
+      }
+    ]
+  },
+  {
+    "name": "Farallon Capital Management LLC",
+    "holdings": [
+      {
+        "ticker": "FCX",
+        "name": "Freeport-McMoRan Inc",
+        "percent": 14
+      },
+      {
+        "ticker": "CHTR",
+        "name": "Charter Communications Inc",
+        "percent": 12
+      },
+      {
+        "ticker": "HCA",
+        "name": "HCA Healthcare Inc",
+        "percent": 11
+      },
+      {
+        "ticker": "COP",
+        "name": "ConocoPhillips",
+        "percent": 10
+      },
+      {
+        "ticker": "JPM",
+        "name": "JPMorgan Chase & Co.",
+        "percent": 9
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 9
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 7
+      },
+      {
+        "ticker": "LNG",
+        "name": "Cheniere Energy Inc",
+        "percent": 6
+      },
+      {
+        "ticker": "XOM",
+        "name": "Exxon Mobil Corp",
+        "percent": 6
+      }
+    ]
+  },
+  {
+    "name": "Greenlight Capital Inc",
+    "holdings": [
+      {
+        "ticker": "GRBK",
+        "name": "Green Brick Partners Inc",
+        "percent": 16
+      },
+      {
+        "ticker": "BHF",
+        "name": "Brighthouse Financial Inc",
+        "percent": 14
+      },
+      {
+        "ticker": "CNX",
+        "name": "CNX Resources Corp",
+        "percent": 12
+      },
+      {
+        "ticker": "GLRE",
+        "name": "Greenlight Capital Re Ltd",
+        "percent": 11
+      },
+      {
+        "ticker": "AAPL",
+        "name": "Apple Inc.",
+        "percent": 10
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 9
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 8
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 7
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 7
+      },
+      {
+        "ticker": "NUE",
+        "name": "Nucor Corp",
+        "percent": 6
+      }
+    ]
+  },
+  {
+    "name": "Appaloosa LP",
+    "holdings": [
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 14
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 13
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 12
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 11
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "percent": 10
+      },
+      {
+        "ticker": "UBER",
+        "name": "Uber Technologies Inc",
+        "percent": 9
+      },
+      {
+        "ticker": "JPM",
+        "name": "JPMorgan Chase & Co.",
+        "percent": 8
+      },
+      {
+        "ticker": "AAPL",
+        "name": "Apple Inc.",
+        "percent": 7
+      },
+      {
+        "ticker": "XOM",
+        "name": "Exxon Mobil Corp",
+        "percent": 8
+      },
+      {
+        "ticker": "AVGO",
+        "name": "Broadcom Inc.",
+        "percent": 8
+      }
+    ]
+  },
+  {
+    "name": "Wellington Management Group LLP",
+    "holdings": [
+      {
+        "ticker": "AAPL",
+        "name": "Apple Inc.",
+        "percent": 10
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corp",
+        "percent": 9
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "percent": 8
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon.com Inc",
+        "percent": 8
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms Inc",
+        "percent": 7
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc. Class A",
+        "percent": 7
+      },
+      {
+        "ticker": "BRK.B",
+        "name": "Berkshire Hathaway Inc. Class B",
+        "percent": 6
+      },
+      {
+        "ticker": "JPM",
+        "name": "JPMorgan Chase & Co.",
+        "percent": 6
+      },
+      {
+        "ticker": "LLY",
+        "name": "Eli Lilly and Co",
+        "percent": 6
+      },
+      {
+        "ticker": "UNH",
+        "name": "UnitedHealth Group Inc",
+        "percent": 6
+      },
+      {
+        "ticker": "XOM",
+        "name": "Exxon Mobil Corp",
+        "percent": 5
+      },
+      {
+        "ticker": "V",
+        "name": "Visa Inc.",
+        "percent": 5
+      },
+      {
+        "ticker": "MA",
+        "name": "Mastercard Inc.",
+        "percent": 5
+      },
+      {
+        "ticker": "COST",
+        "name": "Costco Wholesale Corp",
+        "percent": 5
+      },
+      {
+        "ticker": "HD",
+        "name": "Home Depot Inc",
+        "percent": 4
+      },
+      {
+        "ticker": "PG",
+        "name": "Procter & Gamble Co",
+        "percent": 4
+      },
+      {
+        "ticker": "PEP",
+        "name": "PepsiCo Inc",
+        "percent": 4
+      },
+      {
+        "ticker": "KO",
+        "name": "Coca-Cola Co",
+        "percent": 3
+      },
+      {
+        "ticker": "ABBV",
+        "name": "AbbVie Inc",
+        "percent": 4
+      },
+      {
+        "ticker": "MRK",
+        "name": "Merck & Co Inc",
+        "percent": 3
+      }
+    ]
   }
 ]
