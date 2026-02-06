@@ -60,8 +60,8 @@
     .header-content {
       max-width: 1400px;
       margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: center;
       gap: 14px;
     }
@@ -85,7 +85,7 @@
       white-space: nowrap;
       flex: 1 1 auto;
       min-width: 0;
-      margin: 0 14px 0 24px;
+      margin: 0 8px 0 14px;
       padding-right: 6px;
     }
 
@@ -94,12 +94,12 @@
     }
 
     .tab {
-      padding: 10px 24px;
+      padding: 10px 16px;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
-      letter-spacing: 1px;
+      letter-spacing: 0.6px;
       text-transform: uppercase;
       transition: all 0.3s;
       background: rgba(255, 255, 255, 0.1);
@@ -126,7 +126,7 @@
       gap: 16px;
       position: relative;
       flex: 0 0 auto;
-      margin-left: 12px;
+      margin-left: 8px;
     }
 
     .app-shell.mode-mobile .tabs {
@@ -1412,6 +1412,7 @@
       }
 
       .header-content {
+        display: flex;
         flex-wrap: wrap;
         gap: 12px;
       }
@@ -1534,6 +1535,25 @@
 
       .search-box {
         width: 260px;
+      }
+    }
+
+    @media (max-width: 1360px) and (min-width: 769px) {
+      .tab {
+        padding: 9px 12px;
+        font-size: 11px;
+      }
+
+      .search-box {
+        width: 180px;
+      }
+
+      .search-box:focus {
+        width: 210px;
+      }
+
+      .data-timestamp {
+        display: none;
       }
     }
   </style>
