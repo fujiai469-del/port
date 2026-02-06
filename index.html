@@ -1322,6 +1322,7 @@
     const DATA_URL = 'data/funds.json';
     const META_URL = 'data/meta.json';
     const FALLBACK_URL = 'data/manual-funds.json';
+    const PREVIOUS_DATA_URL = 'data/funds-prev.json';
     const BREAKPOINTS = { mobile: 768, desktop: 1024 };
 
     // Sector colors
@@ -1406,10 +1407,26 @@
         },
         flow: {
           title: 'Smart Money Flow',
-          subtitle: 'Size = number of holding funds, Color = diffusion index (buyers vs sellers)',
-          subtitleSectors: 'Sector-level fund flow (net buyers - net sellers)',
+          subtitle: 'Size = current holding fund count, Color = delta fund count (current - previous)',
+          subtitleSectors: 'Sector-level flow score = (BUY + NEW) - (SELL + EXIT)',
           stocksBreakdown: 'Stocks Breakdown',
           sectorMomentum: 'Sector Momentum',
+          currentPeriod: 'Current',
+          previousPeriod: 'Previous',
+          periodLatest: 'Latest Snapshot',
+          periodPrevious: 'Previous Snapshot',
+          score: 'Score',
+          currentFunds: 'Current funds',
+          previousFunds: 'Previous funds',
+          currentWeight: 'Current total weight',
+          previousWeight: 'Previous total weight',
+          weightDelta: 'Weight delta',
+          breakdown: 'Breakdown',
+          newPos: 'NEW',
+          exitPos: 'EXIT',
+          unchanged: 'UNCH',
+          topFlowTickers: 'Top flow tickers',
+          noData: 'No flow data available for this period pair',
           fundsUnit: 'Funds',
           sentiment: 'Sentiment',
           buys: 'Buys',
@@ -1499,10 +1516,26 @@
         },
         flow: {
           title: 'スマートマネーフロー',
-          subtitle: 'サイズ = 保有ファンド数、色 = DI（買い越し vs 売り越しファンド数）',
-          subtitleSectors: 'セクター別の資金流入/流出を表示（買い越し銘柄数 - 売り越し銘柄数）',
+          subtitle: 'サイズ = 現在の保有ファンド数、色 = 保有ファンド数の差分（現行 - 前回）',
+          subtitleSectors: 'セクタースコア = (BUY + NEW) - (SELL + EXIT)',
           stocksBreakdown: '銘柄ヒートマップ',
           sectorMomentum: 'セクター勢い',
+          currentPeriod: '比較元（現在）',
+          previousPeriod: '比較元（前回）',
+          periodLatest: '最新スナップショット',
+          periodPrevious: '前回スナップショット',
+          score: 'スコア',
+          currentFunds: '現在ファンド数',
+          previousFunds: '前回ファンド数',
+          currentWeight: '現在合計比率',
+          previousWeight: '前回合計比率',
+          weightDelta: '比率差分',
+          breakdown: '内訳',
+          newPos: 'NEW',
+          exitPos: 'EXIT',
+          unchanged: 'UNCH',
+          topFlowTickers: '上位フロー銘柄',
+          noData: 'この期間ペアではフローデータがありません',
           fundsUnit: 'ファンド',
           sentiment: 'センチメント',
           buys: '買い',
@@ -2191,7 +2224,7 @@
               {tab === 'list' && <ListView funds={filtered} selected={selected} onSelect={setSelected} searchTerm={search} />}
               {tab === 'ranking' && <RankingView funds={funds} />}
               {tab === 'overlap' && <OverlapView funds={funds} />}
-              {tab === 'flow' && <FlowView />}
+              {tab === 'flow' && <FlowView currentFunds={funds} dataAsOf={dataAsOf} />}
             </main>
           </div>
         </I18nContext.Provider>
@@ -2729,126 +2762,171 @@
       );
     }
 
-    // Mock Money Flow Data — Breadth-based (holder count + diffusion index)
-    // holders: number of funds holding this ticker
-    // buyers: funds that increased position QoQ (or new position)
-    // sellers: funds that decreased position QoQ (or exited)
-    const MOCK_MONEY_FLOW = [
-      {
-        name: 'Technology', children: [
-          { name: 'NVDA', fullName: 'NVIDIA Corp', holders: 3, buyers: 2, sellers: 0 },
-          { name: 'MSFT', fullName: 'Microsoft Corp', holders: 3, buyers: 1, sellers: 1 },
-          { name: 'GOOGL', fullName: 'Alphabet Inc.', holders: 3, buyers: 2, sellers: 1 },
-          { name: 'TSM', fullName: 'Taiwan Semiconductor', holders: 3, buyers: 2, sellers: 0 },
-          { name: 'LRCX', fullName: 'Lam Research', holders: 3, buyers: 0, sellers: 2 },
-          { name: 'AVGO', fullName: 'Broadcom Inc.', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'META', fullName: 'Meta Platforms', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'ASML', fullName: 'ASML Holding', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'KLAC', fullName: 'KLA Corp', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'ADI', fullName: 'Analog Devices', holders: 2, buyers: 1, sellers: 1 },
-          { name: 'INTC', fullName: 'Intel Corp', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'ARM', fullName: 'Arm Holdings', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'IONQ', fullName: 'IonQ, Inc.', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'RKLB', fullName: 'Rocket Lab', holders: 1, buyers: 1, sellers: 0 },
-        ]
-      },
-      {
-        name: 'Financial', children: [
-          { name: 'NU', fullName: 'Nu Holdings', holders: 4, buyers: 3, sellers: 0 },
-          { name: 'DB', fullName: 'Deutsche Bank', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'IBKR', fullName: 'Interactive Brokers', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'CME', fullName: 'CME Group', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'VEL', fullName: 'Velocity Financial', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'AXP', fullName: 'American Express', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'BAC', fullName: 'Bank of America', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'V', fullName: 'Visa Inc.', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'MCO', fullName: "Moody's Corp", holders: 2, buyers: 1, sellers: 0 },
-          { name: 'KHC', fullName: 'Kraft Heinz', holders: 2, buyers: 0, sellers: 2 },
-        ]
-      },
-      {
-        name: 'Healthcare', children: [
-          { name: 'BTSG', fullName: 'BrightSpring Health', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'JNJ', fullName: 'Johnson & Johnson', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'HIMS', fullName: 'Hims & Hers Health', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'PCVX', fullName: 'Vaxcyte, Inc.', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'CGON', fullName: 'CG Oncology', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'MRK', fullName: 'Merck & Co.', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'UTHR', fullName: 'United Therapeutics', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'BBIO', fullName: 'BridgeBio Pharma', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'MRNA', fullName: 'Moderna', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'HSIC', fullName: 'Henry Schein', holders: 1, buyers: 0, sellers: 0 },
-        ]
-      },
-      {
-        name: 'Consumer', children: [
-          { name: 'AMZN', fullName: 'Amazon.com', holders: 5, buyers: 3, sellers: 1 },
-          { name: 'COST', fullName: 'Costco Wholesale', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'KO', fullName: 'The Coca-Cola Co', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'EXPE', fullName: 'Expedia Group', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'GIL', fullName: 'Gildan Activewear', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'WEN', fullName: "The Wendy's Co", holders: 1, buyers: 0, sellers: 1 },
-          { name: 'LAUR', fullName: 'Laureate Education', holders: 2, buyers: 1, sellers: 0 },
-        ]
-      },
-      {
-        name: 'Industrial', children: [
-          { name: 'FTAI', fullName: 'FTAI Aviation', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'TDG', fullName: 'TransDigm Group', holders: 2, buyers: 2, sellers: 0 },
-          { name: 'CAT', fullName: 'Caterpillar', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'GE', fullName: 'General Electric', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'POWL', fullName: 'Powell Industries', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'VRT', fullName: 'Vertiv Holdings', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'DE', fullName: 'Deere & Company', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'DAL', fullName: 'Delta Air Lines', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'UAL', fullName: 'United Airlines', holders: 1, buyers: 1, sellers: 0 },
-        ]
-      },
-      {
-        name: 'Energy', children: [
-          { name: 'BE', fullName: 'Bloom Energy', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'CVX', fullName: 'Chevron Corp', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'OXY', fullName: 'Occidental Petroleum', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'FSLR', fullName: 'First Solar', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'XOM', fullName: 'Exxon Mobil', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'ENB', fullName: 'Enbridge Inc.', holders: 1, buyers: 0, sellers: 1 },
-        ]
-      },
-      {
-        name: 'Materials', children: [
-          { name: 'AU', fullName: 'AngloGold Ashanti', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'FCX', fullName: 'Freeport-McMoRan', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'CCJ', fullName: 'Cameco Corp', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'SKE', fullName: 'Skeena Resources', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'USAS', fullName: 'Americas Gold & Silver', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'SLSR', fullName: 'Solaris Resources', holders: 2, buyers: 1, sellers: 1 },
-        ]
-      },
-      {
-        name: 'ETF', children: [
-          { name: 'SPY', fullName: 'SPDR S&P 500', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'VTI', fullName: 'Vanguard Total Stock', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'IAU', fullName: 'iShares Gold Trust', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'GLD', fullName: 'SPDR Gold Shares', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'IEMG', fullName: 'iShares MSCI Emerging', holders: 2, buyers: 0, sellers: 1 },
-          { name: 'IBIT', fullName: 'iShares Bitcoin Trust', holders: 1, buyers: 1, sellers: 0 },
-        ]
-      },
-      {
-        name: 'Communication', children: [
-          { name: 'SIRI', fullName: 'Sirius XM', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'MSGS', fullName: 'Madison Square Garden', holders: 2, buyers: 1, sellers: 0 },
-          { name: 'GRMN', fullName: 'Garmin Ltd.', holders: 1, buyers: 0, sellers: 0 },
-        ]
-      }
-    ];
+    function buildFundTickerLookup(funds) {
+      const fundLookup = new Map();
+      (funds || []).forEach((fund) => {
+        const fundName = normalizeFundKey(fund?.name);
+        if (!fundName) return;
+        const tickerLookup = new Map();
+        (fund?.holdings || []).forEach((holding) => {
+          const ticker = normalizeTicker(holding?.ticker);
+          if (!ticker) return;
+          tickerLookup.set(ticker, {
+            ticker,
+            name: String(holding?.name || ticker).trim(),
+            sector: getHoldingSector(holding),
+            weight: Number(holding?.percent || 0)
+          });
+        });
+        fundLookup.set(fundName, tickerLookup);
+      });
+      return fundLookup;
+    }
 
-    function FlowView() {
+    function buildTickerDeltaMap(currentFunds, prevFunds) {
+      const EPSILON = 0.0001;
+      const currentLookup = buildFundTickerLookup(currentFunds);
+      const prevLookup = buildFundTickerLookup(prevFunds);
+      const allFundNames = new Set([...currentLookup.keys(), ...prevLookup.keys()]);
+      const tickerMap = new Map();
+
+      allFundNames.forEach((fundName) => {
+        const currentTickers = currentLookup.get(fundName) || new Map();
+        const prevTickers = prevLookup.get(fundName) || new Map();
+        const allTickers = new Set([...currentTickers.keys(), ...prevTickers.keys()]);
+
+        allTickers.forEach((ticker) => {
+          const currentHolding = currentTickers.get(ticker);
+          const prevHolding = prevTickers.get(ticker);
+          const currentWeight = Number(currentHolding?.weight || 0);
+          const prevWeight = Number(prevHolding?.weight || 0);
+          const reference = currentHolding || prevHolding;
+
+          if (!tickerMap.has(ticker)) {
+            tickerMap.set(ticker, {
+              ticker,
+              name: reference?.name || ticker,
+              sector: reference?.sector || 'Other',
+              currentFundCount: 0,
+              prevFundCount: 0,
+              currentTotalWeight: 0,
+              prevTotalWeight: 0,
+              buyCount: 0,
+              sellCount: 0,
+              newCount: 0,
+              exitCount: 0,
+              unchangedCount: 0
+            });
+          }
+
+          const row = tickerMap.get(ticker);
+          row.name = row.name || reference?.name || ticker;
+          row.sector = row.sector === 'Other' && reference?.sector ? reference.sector : row.sector;
+          row.currentTotalWeight += currentWeight;
+          row.prevTotalWeight += prevWeight;
+
+          if (currentWeight > EPSILON) row.currentFundCount += 1;
+          if (prevWeight > EPSILON) row.prevFundCount += 1;
+
+          if (prevWeight <= EPSILON && currentWeight > EPSILON) {
+            row.newCount += 1;
+          } else if (prevWeight > EPSILON && currentWeight <= EPSILON) {
+            row.exitCount += 1;
+          } else if (currentWeight - prevWeight > EPSILON) {
+            row.buyCount += 1;
+          } else if (prevWeight - currentWeight > EPSILON) {
+            row.sellCount += 1;
+          } else {
+            row.unchangedCount += 1;
+          }
+        });
+      });
+
+      return Array.from(tickerMap.values())
+        .map((row) => {
+          const score = row.currentFundCount - row.prevFundCount;
+          const netActionScore = (row.buyCount + row.newCount) - (row.sellCount + row.exitCount);
+          return {
+            ...row,
+            score,
+            netActionScore,
+            currentTotalWeight: Number(row.currentTotalWeight.toFixed(1)),
+            prevTotalWeight: Number(row.prevTotalWeight.toFixed(1)),
+            weightDelta: Number((row.currentTotalWeight - row.prevTotalWeight).toFixed(1))
+          };
+        })
+        .sort((a, b) => {
+          if (Math.abs(b.score) !== Math.abs(a.score)) return Math.abs(b.score) - Math.abs(a.score);
+          return b.currentFundCount - a.currentFundCount;
+        });
+    }
+
+    function buildSectorAggregates(tickerDeltaRows) {
+      const sectorMap = new Map();
+
+      (tickerDeltaRows || []).forEach((row) => {
+        const sector = row.sector || 'Other';
+        if (!sectorMap.has(sector)) {
+          sectorMap.set(sector, {
+            sector,
+            buyCount: 0,
+            sellCount: 0,
+            newCount: 0,
+            exitCount: 0,
+            totalCurrentFunds: 0,
+            totalPrevFunds: 0,
+            topTickers: []
+          });
+        }
+        const agg = sectorMap.get(sector);
+        agg.buyCount += row.buyCount;
+        agg.sellCount += row.sellCount;
+        agg.newCount += row.newCount;
+        agg.exitCount += row.exitCount;
+        agg.totalCurrentFunds += row.currentFundCount;
+        agg.totalPrevFunds += row.prevFundCount;
+        agg.topTickers.push(row);
+      });
+
+      return Array.from(sectorMap.values())
+        .map((agg) => ({
+          ...agg,
+          sectorScore: (agg.buyCount + agg.newCount) - (agg.sellCount + agg.exitCount),
+          topTickers: agg.topTickers
+            .sort((a, b) => b.score - a.score || b.netActionScore - a.netActionScore)
+            .slice(0, 10)
+        }))
+        .sort((a, b) => b.sectorScore - a.sectorScore);
+    }
+
+    function FlowView({ currentFunds, dataAsOf }) {
       const { t, language } = useI18n();
       const containerRef = React.useRef(null);
       const [tooltip, setTooltip] = React.useState(null);
       const [dims, setDims] = React.useState({ width: 1000, height: 600 });
       const [viewMode, setViewMode] = React.useState('stocks'); // 'stocks' | 'sectors'
+      const [previousFunds, setPreviousFunds] = React.useState([]);
+      const [currentPeriodId, setCurrentPeriodId] = React.useState('latest');
+      const [prevPeriodId, setPrevPeriodId] = React.useState('previous');
+      const [activeSector, setActiveSector] = React.useState(null);
+
+      React.useEffect(() => {
+        let cancelled = false;
+        const loadPreviousFunds = async () => {
+          try {
+            const response = await fetch(PREVIOUS_DATA_URL, { cache: 'no-store' });
+            if (!response.ok) throw new Error('failed');
+            const data = await response.json();
+            if (!cancelled) {
+              setPreviousFunds(Array.isArray(data) ? data : []);
+            }
+          } catch (err) {
+            if (!cancelled) setPreviousFunds([]);
+          }
+        };
+        loadPreviousFunds();
+        return () => { cancelled = true; };
+      }, []);
 
       // Measure container
       React.useEffect(() => {
@@ -2863,41 +2941,78 @@
         return () => window.removeEventListener('resize', measure);
       }, []);
 
-      // Color: Diffusion Index — normalized score = (buyers - sellers) / (buyers + sellers)
-      // Japanese style: red = net buy, green = net sell, grey = neutral
-      const getColor = (d) => {
-        const total = d.buyers + d.sellers;
-        if (total === 0) return '#B8B5AD';
-        const score = (d.buyers - d.sellers) / total; // -1 to +1
-        if (score > 0) {
-          const intensity = score; // 0..1
-          const r = Math.round(200 + 55 * intensity);
-          const g = Math.round(130 - 90 * intensity);
-          const b = Math.round(130 - 90 * intensity);
-          return `rgb(${r},${g},${b})`;
-        } else if (score < 0) {
-          const intensity = Math.abs(score); // 0..1
-          const r = Math.round(110 - 60 * intensity);
-          const g = Math.round(160 + 40 * intensity);
-          const b = Math.round(110 - 40 * intensity);
-          return `rgb(${r},${g},${b})`;
+      const periodMap = React.useMemo(() => ({
+        latest: Array.isArray(currentFunds) ? currentFunds : [],
+        previous: Array.isArray(previousFunds) ? previousFunds : []
+      }), [currentFunds, previousFunds]);
+
+      const periodOptions = React.useMemo(() => [
+        { id: 'latest', label: `${t('flow.periodLatest')} (${dataAsOf})`, count: periodMap.latest.length },
+        { id: 'previous', label: t('flow.periodPrevious'), count: periodMap.previous.length }
+      ], [periodMap, t, dataAsOf]);
+
+      const selectedCurrentFunds = periodMap[currentPeriodId] || [];
+      const selectedPrevFunds = periodMap[prevPeriodId] || [];
+
+      const tickerDeltaRows = React.useMemo(
+        () => buildTickerDeltaMap(selectedCurrentFunds, selectedPrevFunds),
+        [selectedCurrentFunds, selectedPrevFunds]
+      );
+
+      const sectorAggregates = React.useMemo(
+        () => buildSectorAggregates(tickerDeltaRows),
+        [tickerDeltaRows]
+      );
+
+      React.useEffect(() => {
+        if (!activeSector && sectorAggregates.length > 0) {
+          setActiveSector(sectorAggregates[0].sector);
         }
-        return '#B8B5AD';
-      };
+      }, [activeSector, sectorAggregates]);
 
-      // Diffusion label for cell text
-      const getDiffusionLabel = (d) => {
-        const total = d.buyers + d.sellers;
-        if (total === 0) return '—';
-        const score = d.buyers - d.sellers;
-        return (score > 0 ? '+' : '') + score;
-      };
+      const stockFlowBySector = React.useMemo(() => {
+        const grouped = {};
+        tickerDeltaRows
+          .filter((row) => row.currentFundCount > 0)
+          .forEach((row) => {
+            const sector = row.sector || 'Other';
+            if (!grouped[sector]) grouped[sector] = [];
+            grouped[sector].push({
+              name: row.ticker,
+              fullName: row.name,
+              score: row.score,
+              currentFundCount: row.currentFundCount,
+              prevFundCount: row.prevFundCount,
+              currentTotalWeight: row.currentTotalWeight,
+              prevTotalWeight: row.prevTotalWeight,
+              weightDelta: row.weightDelta,
+              buyCount: row.buyCount,
+              sellCount: row.sellCount,
+              newCount: row.newCount,
+              exitCount: row.exitCount,
+              unchangedCount: row.unchangedCount,
+              sizeMetric: row.currentFundCount
+            });
+          });
 
-      // Build treemap layout — size = holders count
+        return Object.keys(grouped).map((sector) => ({
+          name: sector,
+          children: grouped[sector].sort((a, b) => b.sizeMetric - a.sizeMetric).slice(0, 40)
+        }));
+      }, [tickerDeltaRows]);
+
+      const maxAbsTickerScore = React.useMemo(() => {
+        const maxScore = stockFlowBySector
+          .flatMap((sector) => sector.children)
+          .reduce((acc, item) => Math.max(acc, Math.abs(item.score)), 0);
+        return Math.max(maxScore, 1);
+      }, [stockFlowBySector]);
+
+      // Build treemap layout — size = current fund count
       const cells = React.useMemo(() => {
         const { width, height } = dims;
-        const root = d3.hierarchy({ name: 'root', children: MOCK_MONEY_FLOW })
-          .sum(d => d.holders || 0)
+        const root = d3.hierarchy({ name: 'root', children: stockFlowBySector })
+          .sum((d) => d.sizeMetric || 0)
           .sort((a, b) => b.value - a.value);
 
         d3.treemap()
@@ -2908,43 +3023,40 @@
           .round(true)(root);
 
         return root;
-      }, [dims]);
+      }, [dims, stockFlowBySector]);
+
+      const getColor = (row) => {
+        const score = row.score;
+        if (score === 0) return '#B8B5AD';
+        const intensity = Math.min(Math.abs(score) / maxAbsTickerScore, 1);
+        if (score > 0) {
+          const r = Math.round(210 + 45 * intensity);
+          const g = Math.round(145 - 100 * intensity);
+          const b = Math.round(145 - 100 * intensity);
+          return `rgb(${r},${g},${b})`;
+        }
+        const r = Math.round(120 - 70 * intensity);
+        const g = Math.round(165 + 40 * intensity);
+        const b = Math.round(120 - 50 * intensity);
+        return `rgb(${r},${g},${b})`;
+      };
+
+      const formatScore = (score) => {
+        if (!Number.isFinite(score)) return '0';
+        return `${score > 0 ? '+' : ''}${score}`;
+      };
 
       const handleMouseMove = (e, d) => {
         setTooltip({
           x: e.clientX + 12,
           y: e.clientY - 10,
-          ticker: d.data.name,
-          fullName: d.data.fullName,
-          holders: d.data.holders,
-          buyers: d.data.buyers,
-          sellers: d.data.sellers,
+          ...d.data
         });
       };
 
       const sectorGroups = cells.children || [];
-
-      // Calculate Sector Momentum data
-      const sectorMomentumData = React.useMemo(() => {
-        return MOCK_MONEY_FLOW.map(sector => {
-          let netBuyers = 0;
-          let netSellers = 0;
-          sector.children.forEach(stock => {
-            if (stock.buyers > stock.sellers) netBuyers++;
-            else if (stock.sellers > stock.buyers) netSellers++;
-          });
-          const score = netBuyers - netSellers;
-          return {
-            name: sector.name,
-            score,
-            netBuyers,
-            netSellers,
-            totalStocks: sector.children.length
-          };
-        }).sort((a, b) => b.score - a.score);
-      }, []);
-
-      const maxAbsScore = Math.max(...sectorMomentumData.map(d => Math.abs(d.score)), 1);
+      const activeSectorData = sectorAggregates.find((item) => item.sector === activeSector) || null;
+      const maxAbsSectorScore = Math.max(...sectorAggregates.map((d) => Math.abs(d.sectorScore)), 1);
 
       return (
         <div>
@@ -2952,6 +3064,51 @@
           <p style={{ fontSize: '12px', color: '#2A9D8F', marginBottom: '24px', marginTop: '-12px' }}>
             {viewMode === 'stocks' ? t('flow.subtitle') : t('flow.subtitleSectors')}
           </p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', marginBottom: '20px' }}>
+            <label style={{ fontSize: '11px', fontWeight: 700, color: 'var(--primary-teal)', letterSpacing: '1px' }}>
+              {t('flow.currentPeriod')}
+              <select
+                value={currentPeriodId}
+                onChange={(e) => {
+                  const next = e.target.value;
+                  setCurrentPeriodId(next);
+                  if (next === prevPeriodId) {
+                    const fallback = periodOptions.find((option) => option.id !== next);
+                    if (fallback) setPrevPeriodId(fallback.id);
+                  }
+                }}
+                style={{ marginTop: '6px', width: '100%', padding: '10px 12px', borderRadius: '10px', border: '1px solid rgba(38,70,83,0.25)', fontFamily: 'Montserrat, sans-serif' }}
+              >
+                {periodOptions.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.label} ({option.count})
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label style={{ fontSize: '11px', fontWeight: 700, color: 'var(--primary-teal)', letterSpacing: '1px' }}>
+              {t('flow.previousPeriod')}
+              <select
+                value={prevPeriodId}
+                onChange={(e) => {
+                  const next = e.target.value;
+                  setPrevPeriodId(next);
+                  if (next === currentPeriodId) {
+                    const fallback = periodOptions.find((option) => option.id !== next);
+                    if (fallback) setCurrentPeriodId(fallback.id);
+                  }
+                }}
+                style={{ marginTop: '6px', width: '100%', padding: '10px 12px', borderRadius: '10px', border: '1px solid rgba(38,70,83,0.25)', fontFamily: 'Montserrat, sans-serif' }}
+              >
+                {periodOptions.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.label} ({option.count})
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
 
           {/* View Toggle */}
           <div className="view-toggle-container">
@@ -2971,12 +3128,18 @@
             </div>
           </div>
 
+          {tickerDeltaRows.length === 0 && (
+            <div className="empty-state" style={{ height: '220px' }}>
+              <h2>{t('flow.noData')}</h2>
+            </div>
+          )}
+
           {/* Stocks Breakdown View (TreeMap) */}
-          {viewMode === 'stocks' && (
+          {viewMode === 'stocks' && tickerDeltaRows.length > 0 && (
             <div className="flow-container">
               <div className="treemap-wrapper" ref={containerRef}>
                 <svg width={dims.width} height={dims.height} style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                  {sectorGroups.map(group => (
+                  {sectorGroups.map((group) => (
                     <g key={group.data.name}>
                       <rect
                         x={group.x0} y={group.y0}
@@ -2994,14 +3157,14 @@
                       >
                         {translate(language, `sector.${group.data.name}`) || group.data.name}
                       </text>
-                      {(group.children || []).map(leaf => {
+                      {(group.children || []).map((leaf) => {
                         const w = leaf.x1 - leaf.x0;
                         const h = leaf.y1 - leaf.y0;
-                        const showTicker = w > 32 && h > 20;
-                        const showDI = w > 44 && h > 34;
+                        const showTicker = w > 40 && h > 20;
+                        const showScore = w > 48 && h > 34;
                         return (
                           <g key={leaf.data.name} className="treemap-cell"
-                            onMouseMove={e => handleMouseMove(e, leaf)}
+                            onMouseMove={(e) => handleMouseMove(e, leaf)}
                             onMouseLeave={() => setTooltip(null)}
                           >
                             <rect
@@ -3012,7 +3175,7 @@
                             />
                             {showTicker && (
                               <text
-                                x={leaf.x0 + w / 2} y={leaf.y0 + h / 2 + (showDI ? -4 : 2)}
+                                x={leaf.x0 + w / 2} y={leaf.y0 + h / 2 + (showScore ? -4 : 2)}
                                 textAnchor="middle"
                                 fontSize={w > 70 ? '12' : '10'}
                                 fontWeight="700"
@@ -3021,15 +3184,15 @@
                                 {leaf.data.name}
                               </text>
                             )}
-                            {showDI && (
+                            {showScore && (
                               <text
                                 x={leaf.x0 + w / 2} y={leaf.y0 + h / 2 + 12}
                                 textAnchor="middle"
                                 fontSize="9"
                                 fontWeight="600"
-                                fill="rgba(255,255,255,0.85)"
+                                fill="rgba(255,255,255,0.9)"
                               >
-                                {getDiffusionLabel(leaf.data)}
+                                {formatScore(leaf.data.score)}
                               </text>
                             )}
                           </g>
@@ -3040,7 +3203,6 @@
                 </svg>
               </div>
 
-              {/* Legend */}
               <div className="flow-legend">
                 <div className="flow-scale">
                   <span className="flow-scale-label">{t('flow.netSell')}</span>
@@ -3054,31 +3216,36 @@
           )}
 
           {/* Sector Momentum View (Bar Chart) */}
-          {viewMode === 'sectors' && (
+          {viewMode === 'sectors' && tickerDeltaRows.length > 0 && (
             <div className="sector-momentum-container">
               <div className="momentum-chart">
-                {sectorMomentumData.map((sector, idx) => {
-                  const barWidth = (Math.abs(sector.score) / maxAbsScore) * 45; // max 45% of half width
-                  const isPositive = sector.score > 0;
-                  const isNegative = sector.score < 0;
-                  const sectorLabel = translate(language, `sector.${sector.name}`) || sector.name;
+                {sectorAggregates.map((sector) => {
+                  const barWidth = (Math.abs(sector.sectorScore) / maxAbsSectorScore) * 45;
+                  const isPositive = sector.sectorScore > 0;
+                  const sectorLabel = translate(language, `sector.${sector.sector}`) || sector.sector;
 
                   return (
-                    <div key={sector.name} className="momentum-row">
+                    <div
+                      key={sector.sector}
+                      className="momentum-row"
+                      onMouseEnter={() => setActiveSector(sector.sector)}
+                      onClick={() => setActiveSector(sector.sector)}
+                      style={{ cursor: 'pointer', background: activeSector === sector.sector ? 'rgba(233,196,106,0.12)' : 'transparent', borderRadius: '8px', padding: '0 10px' }}
+                    >
                       <div className="momentum-label">{sectorLabel}</div>
                       <div className="momentum-bar-wrapper">
                         <div className="momentum-bar-center"></div>
-                        {sector.score !== 0 && (
+                        {sector.sectorScore !== 0 && (
                           <div
                             className={`momentum-bar ${isPositive ? 'positive' : 'negative'}`}
-                            style={{ width: barWidth + '%' }}
+                            style={{ width: `${barWidth}%` }}
                           >
                             <span className={`momentum-score ${isPositive ? 'positive' : 'negative'}`}>
-                              {isPositive ? '+' : ''}{sector.score}
+                              {formatScore(sector.sectorScore)}
                             </span>
                           </div>
                         )}
-                        {sector.score === 0 && (
+                        {sector.sectorScore === 0 && (
                           <span style={{
                             position: 'absolute',
                             left: '50%',
@@ -3094,7 +3261,6 @@
                 })}
               </div>
 
-              {/* Legend for Sector Momentum */}
               <div className="flow-legend" style={{ marginTop: '24px' }}>
                 <div className="flow-scale">
                   <span className="flow-scale-label">{t('flow.netSell')}</span>
@@ -3104,24 +3270,73 @@
                   <span className="flow-scale-label">{t('flow.netBuy')}</span>
                 </div>
               </div>
+
+              {activeSectorData && (
+                <div style={{ marginTop: '20px', borderTop: '1px solid rgba(38,70,83,0.15)', paddingTop: '16px' }}>
+                  <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--primary-teal)', marginBottom: '10px' }}>
+                    {(translate(language, `sector.${activeSectorData.sector}`) || activeSectorData.sector)} · {t('flow.score')}: {formatScore(activeSectorData.sectorScore)}
+                  </div>
+                  <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', fontSize: '12px', color: 'var(--primary-teal)' }}>
+                    <span>{t('flow.newPos')}: <b>{activeSectorData.newCount}</b></span>
+                    <span>{t('flow.buys')}: <b>{activeSectorData.buyCount}</b></span>
+                    <span>{t('flow.sells')}: <b>{activeSectorData.sellCount}</b></span>
+                    <span>{t('flow.exitPos')}: <b>{activeSectorData.exitCount}</b></span>
+                  </div>
+                  <div style={{ marginTop: '12px', fontSize: '12px', color: 'var(--primary-teal)', fontWeight: 700 }}>{t('flow.topFlowTickers')}</div>
+                  <div style={{ marginTop: '8px', display: 'grid', gap: '6px' }}>
+                    {activeSectorData.topTickers.map((item) => (
+                      <div key={item.ticker} style={{ display: 'grid', gridTemplateColumns: '80px 1fr auto', gap: '10px', alignItems: 'center', fontSize: '12px' }}>
+                        <span className="ticker">{item.ticker}</span>
+                        <span style={{ color: 'var(--primary-teal)' }}>{item.name}</span>
+                        <span style={{ fontWeight: 700, color: item.score >= 0 ? '#C0392B' : '#1E8449' }}>
+                          {formatScore(item.score)} ({item.prevFundCount}→{item.currentFundCount})
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
-          {/* Tooltip (for stocks view) */}
           {viewMode === 'stocks' && tooltip && (
             <div className="treemap-tooltip" style={{ left: tooltip.x, top: tooltip.y }}>
-              <div className="tt-ticker">{tooltip.ticker}</div>
+              <div className="tt-ticker">{tooltip.name}</div>
               <div className="tt-company">{tooltip.fullName}</div>
               <div className="tt-row">
-                <span>{t('flow.heldBy')}</span>
-                <span style={{ fontWeight: 700 }}>{tooltip.holders} {t('flow.fundsUnit')}</span>
+                <span>{t('flow.score')}</span>
+                <span style={{ fontWeight: 700 }}>{formatScore(tooltip.score)}</span>
               </div>
               <div className="tt-row">
-                <span>{t('flow.sentiment')}</span>
+                <span>{t('flow.currentFunds')}</span>
+                <span style={{ fontWeight: 700 }}>{tooltip.currentFundCount} {t('flow.fundsUnit')}</span>
+              </div>
+              <div className="tt-row">
+                <span>{t('flow.previousFunds')}</span>
+                <span style={{ fontWeight: 700 }}>{tooltip.prevFundCount} {t('flow.fundsUnit')}</span>
+              </div>
+              <div className="tt-row">
+                <span>{t('flow.currentWeight')}</span>
+                <span style={{ fontWeight: 700 }}>{tooltip.currentTotalWeight.toFixed(1)}%</span>
+              </div>
+              <div className="tt-row">
+                <span>{t('flow.previousWeight')}</span>
+                <span style={{ fontWeight: 700 }}>{tooltip.prevTotalWeight.toFixed(1)}%</span>
+              </div>
+              <div className="tt-row">
+                <span>{t('flow.weightDelta')}</span>
+                <span style={{ fontWeight: 700 }}>{formatScore(Number(tooltip.weightDelta.toFixed(1)))}%</span>
+              </div>
+              <div className="tt-row">
+                <span>{t('flow.breakdown')}</span>
                 <span>
-                  <span className="tt-change-pos">{tooltip.buyers} {t('flow.buys')}</span>
+                  <span className="tt-change-pos">{t('flow.newPos')} {tooltip.newCount}</span>
                   {' / '}
-                  <span className="tt-change-neg">{tooltip.sellers} {t('flow.sells')}</span>
+                  <span className="tt-change-pos">{t('flow.buys')} {tooltip.buyCount}</span>
+                  {' / '}
+                  <span className="tt-change-neg">{t('flow.sells')} {tooltip.sellCount}</span>
+                  {' / '}
+                  <span className="tt-change-neg">{t('flow.exitPos')} {tooltip.exitCount}</span>
                 </span>
               </div>
             </div>
