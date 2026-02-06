@@ -76,6 +76,15 @@
     .tabs {
       display: flex;
       gap: 8px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      white-space: nowrap;
+    }
+
+    .tabs::-webkit-scrollbar {
+      display: none;
     }
 
     .tab {
@@ -91,6 +100,8 @@
       color: rgba(255, 255, 255, 0.7);
       border: none;
       font-family: 'Montserrat', sans-serif;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .tab:hover {
@@ -111,12 +122,13 @@
     }
 
     .app-shell.mode-mobile .tabs {
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       width: 100%;
+      overflow-x: auto;
     }
 
     .app-shell.mode-mobile .tab {
-      flex: 1 1 140px;
+      flex: 0 0 auto;
       text-align: center;
       min-height: 44px;
     }
