@@ -58,7 +58,7 @@
     }
 
     .header-content {
-      max-width: 1400px;
+      max-width: 1520px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: auto minmax(0, 1fr) auto;
@@ -123,7 +123,7 @@
     .header-right {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
       position: relative;
       flex: 0 0 auto;
       margin-left: 8px;
@@ -157,10 +157,26 @@
       background: rgba(255, 255, 255, 0.1);
       color: #fff;
       font-size: 13px;
-      width: 220px;
+      width: 210px;
       outline: none;
       transition: all 0.3s;
       font-family: 'Montserrat', sans-serif;
+    }
+
+    .search-mode-select {
+      padding: 9px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 12px;
+      min-width: 92px;
+      font-family: 'Montserrat', sans-serif;
+      outline: none;
+    }
+
+    .search-mode-select option {
+      color: #183440;
     }
 
     .search-box::placeholder {
@@ -1430,6 +1446,10 @@
         min-width: 180px;
       }
 
+      .search-mode-select {
+        min-width: 86px;
+      }
+
       .search-box:focus {
         width: auto;
       }
@@ -1538,18 +1558,23 @@
       }
     }
 
-    @media (max-width: 1360px) and (min-width: 769px) {
+    @media (max-width: 1500px) and (min-width: 769px) {
       .tab {
         padding: 9px 12px;
         font-size: 11px;
       }
 
       .search-box {
-        width: 180px;
+        width: 165px;
+      }
+
+      .search-mode-select {
+        min-width: 80px;
+        font-size: 11px;
       }
 
       .search-box:focus {
-        width: 210px;
+        width: 190px;
       }
 
       .data-timestamp {
@@ -1589,7 +1614,14 @@
       en: {
         app: { title: 'Portfolio Visualizer' },
         nav: { home: 'Home', list: 'List', ranking: 'Ranking', overlap: 'Overlap', flow: 'Flow', watch: 'Watch' },
-        search: { placeholder: 'Search funds or tickers...' },
+        search: {
+          placeholder: 'Search funds or tickers...',
+          placeholderFund: 'Search fund name...',
+          placeholderTicker: 'Search exact ticker (e.g. AS)',
+          modeSmart: 'Auto',
+          modeFund: 'Fund',
+          modeTicker: 'Ticker'
+        },
         common: {
           backToHome: 'Back to Home',
           holdingsCount: '{{count}} holdings',
@@ -1717,7 +1749,14 @@
       ja: {
         app: { title: 'Portfolio Visualizer' },
         nav: { home: 'ホーム', list: 'リスト', ranking: 'ランキング', overlap: '重複分析', flow: 'フロー', watch: 'ウォッチ' },
-        search: { placeholder: 'ファンド名・ティッカーで検索...' },
+        search: {
+          placeholder: 'ファンド名・ティッカーで検索...',
+          placeholderFund: 'ファンド名で検索...',
+          placeholderTicker: 'ティッカー完全一致で検索（例: AS）',
+          modeSmart: '自動',
+          modeFund: 'ファンド',
+          modeTicker: 'ティッカー'
+        },
         common: {
           backToHome: 'ホームに戻る',
           holdingsCount: '{{count}} 銘柄',
@@ -1916,6 +1955,36 @@
 
     function normalizeTicker(value) {
       return String(value || '').trim().toUpperCase();
+    }
+
+    function normalizeSearchText(value) {
+      return String(value || '').trim();
+    }
+
+    function isTickerLikeQuery(value) {
+      const query = normalizeTicker(value);
+      if (!query) return false;
+      if (!/^[A-Z0-9.\-]+$/.test(query)) return false;
+      if (query.length > 8) return false;
+      return !/\s/.test(String(value || ''));
+    }
+
+    function resolveSearchIntent(query, mode) {
+      if (mode === 'fund') return 'fund';
+      if (mode === 'ticker') return 'ticker';
+      return isTickerLikeQuery(query) ? 'ticker' : 'fund';
+    }
+
+    function matchesTicker(ticker, query, mode) {
+      const intent = resolveSearchIntent(query, mode);
+      if (intent !== 'ticker') return false;
+      return normalizeTicker(ticker) === normalizeTicker(query);
+    }
+
+    function matchesFundName(name, query, mode) {
+      const intent = resolveSearchIntent(query, mode);
+      if (intent !== 'fund') return false;
+      return String(name || '').toLowerCase().includes(normalizeSearchText(query).toLowerCase());
     }
 
     function normalizeFundKey(value) {
@@ -2429,6 +2498,7 @@
       const [tab, setTab] = React.useState('home');
       const [selected, setSelected] = React.useState(null);
       const [search, setSearch] = React.useState('');
+      const [searchMode, setSearchMode] = React.useState('smart');
       const [language, setLanguage] = React.useState(getInitialLanguage);
       const [funds, setFunds] = React.useState([]);
       const [previousFunds, setPreviousFunds] = React.useState([]);
@@ -2643,12 +2713,18 @@
       }, [alerts]);
 
       const filtered = funds.filter(f => {
-        const nameMatch = String(f.name || '').toLowerCase().includes(search.toLowerCase());
-        const tickerMatch = (f.holdings || []).some(h =>
-          String(h.ticker || '').toLowerCase().includes(search.toLowerCase())
-        );
+        const query = normalizeSearchText(search);
+        if (!query) return true;
+        const nameMatch = matchesFundName(f.name, query, searchMode);
+        const tickerMatch = (f.holdings || []).some(h => matchesTicker(h.ticker, query, searchMode));
         return nameMatch || tickerMatch;
       });
+
+      const searchPlaceholder = React.useMemo(() => {
+        if (searchMode === 'ticker') return t('search.placeholderTicker');
+        if (searchMode === 'fund') return t('search.placeholderFund');
+        return t('search.placeholder');
+      }, [searchMode, t]);
 
       const handleSelectFund = (fund) => {
         setSelected(fund);
@@ -2680,7 +2756,12 @@
                   <button className={`tab ${tab === 'watch' ? 'active' : ''}`} onClick={() => setTab('watch')}>{t('nav.watch')}</button>
                 </div>
                 <div className="header-right">
-                  <input type="text" className="search-box" placeholder={t('search.placeholder')} value={search} onChange={e => setSearch(e.target.value)} />
+                  <select className="search-mode-select" value={searchMode} onChange={(e) => setSearchMode(e.target.value)}>
+                    <option value="smart">{t('search.modeSmart')}</option>
+                    <option value="fund">{t('search.modeFund')}</option>
+                    <option value="ticker">{t('search.modeTicker')}</option>
+                  </select>
+                  <input type="text" className="search-box" placeholder={searchPlaceholder} value={search} onChange={e => setSearch(e.target.value)} />
                   <div className="data-timestamp">{t('common.dataAsOf')}: {dataAsOf}</div>
                   <button className="alert-btn" onClick={() => setAlertsOpen((v) => !v)}>
                     🔔
@@ -2720,6 +2801,7 @@
                 <DetailView
                   fund={selected}
                   searchTerm={search}
+                  searchMode={searchMode}
                   onBack={handleBack}
                   watchedTickerSet={watchedTickerSet}
                   watchedFundSet={watchedFundSet}
@@ -2733,6 +2815,7 @@
                   selected={selected}
                   onSelect={setSelected}
                   searchTerm={search}
+                  searchMode={searchMode}
                   watchedTickerSet={watchedTickerSet}
                   watchedFundSet={watchedFundSet}
                   onToggleTickerWatch={toggleWatchTicker}
@@ -2845,7 +2928,7 @@
       );
     }
 
-    function ListView({ funds, selected, onSelect, searchTerm, watchedTickerSet, watchedFundSet, onToggleTickerWatch, onToggleFundWatch }) {
+    function ListView({ funds, selected, onSelect, searchTerm, searchMode, watchedTickerSet, watchedFundSet, onToggleTickerWatch, onToggleFundWatch }) {
       const { t } = useI18n();
       if (!funds || funds.length === 0) {
         return (
@@ -2869,6 +2952,7 @@
                 <DetailView
                   fund={selected}
                   searchTerm={searchTerm}
+                  searchMode={searchMode}
                   watchedTickerSet={watchedTickerSet}
                   watchedFundSet={watchedFundSet}
                   onToggleTickerWatch={onToggleTickerWatch}
@@ -2882,7 +2966,7 @@
       );
     }
 
-    function DetailView({ fund, onBack, searchTerm, watchedTickerSet, watchedFundSet, onToggleTickerWatch, onToggleFundWatch }) {
+    function DetailView({ fund, onBack, searchTerm, searchMode, watchedTickerSet, watchedFundSet, onToggleTickerWatch, onToggleFundWatch }) {
       const chartRef = React.useRef(null);
       const chartInstance = React.useRef(null);
       const matchRowRef = React.useRef(null);
@@ -2891,7 +2975,8 @@
       const [sortMode, setSortMode] = React.useState('weight');
       const [isExpanded, setIsExpanded] = React.useState(false);
       const holdings = fund?.holdings || [];
-      const normalizedSearch = normalizeTicker(searchTerm);
+      const normalizedSearch = normalizeSearchText(searchTerm);
+      const shouldHighlightTickers = resolveSearchIntent(normalizedSearch, searchMode) === 'ticker';
 
       React.useEffect(() => {
         setDetailTab('holdings');
@@ -2910,17 +2995,17 @@
       }, [holdings, sortMode]);
 
       const firstMatchIndex = React.useMemo(() => {
-        if (!normalizedSearch) return -1;
-        return sortedHoldings.findIndex(h => normalizeTicker(h.ticker).includes(normalizedSearch));
-      }, [sortedHoldings, normalizedSearch]);
+        if (!normalizedSearch || !shouldHighlightTickers) return -1;
+        return sortedHoldings.findIndex(h => normalizeTicker(h.ticker) === normalizeTicker(normalizedSearch));
+      }, [sortedHoldings, normalizedSearch, shouldHighlightTickers]);
 
       React.useEffect(() => {
         if (detailTab !== 'holdings') return;
-        if (!normalizedSearch) return;
+        if (!normalizedSearch || !shouldHighlightTickers) return;
         if (matchRowRef.current) {
           matchRowRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-      }, [normalizedSearch, detailTab, sortMode, fund?.name]);
+      }, [normalizedSearch, shouldHighlightTickers, detailTab, sortMode, fund?.name]);
 
       React.useEffect(() => {
         if (chartInstance.current) chartInstance.current.destroy();
@@ -3009,7 +3094,7 @@
                     <option value="ticker">{t('common.sortTicker')}</option>
                   </select>
                 </div>
-                {normalizedSearch && firstMatchIndex !== -1 && <div className="detail-hint">{t('common.highlightHint')}</div>}
+                {shouldHighlightTickers && normalizedSearch && firstMatchIndex !== -1 && <div className="detail-hint">{t('common.highlightHint')}</div>}
               </div>
               {holdings.length === 0 ? (
                 <div className="empty-state">
@@ -3026,7 +3111,7 @@
                         {sortedHoldings.map((h, i) => {
                           const sector = getHoldingSector(h);
                           const sectorLabel = translate(language, `sector.${sector}`) || sector;
-                          const isMatch = normalizedSearch && normalizeTicker(h.ticker).includes(normalizedSearch);
+                          const isMatch = shouldHighlightTickers && normalizedSearch && normalizeTicker(h.ticker) === normalizeTicker(normalizedSearch);
                           const rowRef = i === firstMatchIndex ? matchRowRef : null;
                           return (
                             <tr key={i} ref={rowRef} className={`holding-row ${isMatch ? 'match' : ''}`}>
