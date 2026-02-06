@@ -107,6 +107,7 @@
       display: flex;
       align-items: center;
       gap: 16px;
+      position: relative;
     }
 
     .app-shell.mode-mobile .tabs {
@@ -184,6 +185,123 @@
       color: rgba(255, 255, 255, 0.5);
       letter-spacing: 1px;
       white-space: nowrap;
+    }
+
+    .alert-btn {
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border-radius: 8px;
+      padding: 7px 10px;
+      cursor: pointer;
+      font-size: 13px;
+      min-width: 40px;
+    }
+
+    .alert-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .alert-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: var(--accent-gold);
+      color: var(--primary-teal);
+      font-size: 10px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .alerts-panel {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 10px);
+      width: min(420px, 95vw);
+      max-height: 360px;
+      overflow-y: auto;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+      padding: 12px;
+      z-index: 150;
+      color: var(--primary-teal);
+    }
+
+    .alerts-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid rgba(38, 70, 83, 0.15);
+    }
+
+    .alerts-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .alerts-clear {
+      border: none;
+      background: transparent;
+      color: var(--teal-light);
+      font-size: 11px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .alert-item {
+      border: 1px solid rgba(38, 70, 83, 0.12);
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: rgba(38, 70, 83, 0.03);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .alert-item.unread {
+      border-color: rgba(233, 196, 106, 0.7);
+      background: rgba(233, 196, 106, 0.12);
+    }
+
+    .watch-btn {
+      border: none;
+      background: transparent;
+      color: rgba(38, 70, 83, 0.5);
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 1;
+      padding: 4px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .watch-btn:hover {
+      background: rgba(233, 196, 106, 0.18);
+      color: var(--primary-teal);
+    }
+
+    .watch-btn.active {
+      color: var(--accent-gold);
+      text-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+    }
+
+    .watch-btn.compact {
+      font-size: 14px;
+      padding: 0;
+      margin-left: 6px;
     }
 
     /* Main Content */
@@ -289,6 +407,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
     }
 
     .fund-card:hover {
@@ -1181,6 +1300,89 @@
       padding-left: 10px;
     }
 
+    .watch-container {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .watch-toggle {
+      display: inline-flex;
+      border-radius: 10px;
+      background: rgba(38, 70, 83, 0.08);
+      padding: 4px;
+      margin-bottom: 16px;
+    }
+
+    .watch-toggle-btn {
+      border: none;
+      background: transparent;
+      color: var(--primary-teal);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .watch-toggle-btn.active {
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(38, 70, 83, 0.16);
+    }
+
+    .watch-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .watch-table th {
+      background: var(--primary-teal);
+      color: #fff;
+      padding: 12px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: left;
+    }
+
+    .watch-table td {
+      padding: 11px 12px;
+      border-bottom: 1px solid rgba(38, 70, 83, 0.08);
+      font-size: 13px;
+    }
+
+    .watch-table tr:hover td {
+      background: rgba(233, 196, 106, 0.12);
+    }
+
+    .watch-delta-pos {
+      color: #C0392B;
+      font-weight: 700;
+    }
+
+    .watch-delta-neg {
+      color: #1E8449;
+      font-weight: 700;
+    }
+
+    .watch-detail {
+      margin-top: 14px;
+      border: 1px solid rgba(38, 70, 83, 0.12);
+      border-radius: 10px;
+      padding: 14px;
+      background: rgba(38, 70, 83, 0.03);
+    }
+
+    .watch-detail-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--primary-teal);
+    }
+
     /* Mobile */
     @media (max-width: 768px) {
       .header {
@@ -1324,6 +1526,8 @@
     const FALLBACK_URL = 'data/manual-funds.json';
     const PREVIOUS_DATA_URL = 'data/funds-prev.json';
     const BREAKPOINTS = { mobile: 768, desktop: 1024 };
+    const WATCHLIST_STORAGE_KEY = 'pv_watchlist_v1';
+    const ALERT_READ_STORAGE_KEY = 'pv_alert_read_v1';
 
     // Sector colors
     const SECTOR_COLORS = {
@@ -1342,7 +1546,7 @@
     const LOCALES = {
       en: {
         app: { title: 'Portfolio Visualizer' },
-        nav: { home: 'Home', list: 'List', ranking: 'Ranking', overlap: 'Overlap', flow: 'Flow' },
+        nav: { home: 'Home', list: 'List', ranking: 'Ranking', overlap: 'Overlap', flow: 'Flow', watch: 'Watch' },
         search: { placeholder: 'Search funds or tickers...' },
         common: {
           backToHome: 'Back to Home',
@@ -1381,6 +1585,25 @@
           readMore: 'Read more',
           readLess: 'Show less',
           asOf: 'as of'
+        },
+        watch: {
+          title: 'Watchlist',
+          tickers: 'Ticker',
+          funds: 'Fund',
+          noTickers: 'No watched tickers yet',
+          noFunds: 'No watched funds yet',
+          currentFunds: 'Current funds',
+          deltaFunds: 'Delta funds',
+          topHolding: 'Top holding',
+          open: 'Open',
+          watchedFunds: 'Holding funds'
+        },
+        alerts: {
+          title: 'Alerts',
+          noAlerts: 'No alerts',
+          markAllRead: 'Mark all read',
+          tickerFlow: 'Ticker flow changed',
+          fundChanged: 'Fund profile changed'
         },
         fund: {
           tabs: { holdings: 'Holdings', about: 'About' },
@@ -1451,7 +1674,7 @@
       },
       ja: {
         app: { title: 'Portfolio Visualizer' },
-        nav: { home: 'ホーム', list: 'リスト', ranking: 'ランキング', overlap: '重複分析', flow: 'フロー' },
+        nav: { home: 'ホーム', list: 'リスト', ranking: 'ランキング', overlap: '重複分析', flow: 'フロー', watch: 'ウォッチ' },
         search: { placeholder: 'ファンド名・ティッカーで検索...' },
         common: {
           backToHome: 'ホームに戻る',
@@ -1490,6 +1713,25 @@
           readMore: 'もっと見る',
           readLess: '閉じる',
           asOf: '時点'
+        },
+        watch: {
+          title: 'ウォッチリスト',
+          tickers: '銘柄',
+          funds: 'ファンド',
+          noTickers: 'ウォッチ中の銘柄はありません',
+          noFunds: 'ウォッチ中のファンドはありません',
+          currentFunds: '現在ファンド数',
+          deltaFunds: '増減',
+          topHolding: '上位保有',
+          open: '開く',
+          watchedFunds: '保有ファンド'
+        },
+        alerts: {
+          title: '通知',
+          noAlerts: '通知はありません',
+          markAllRead: '既読にする',
+          tickerFlow: '銘柄フロー更新',
+          fundChanged: 'ファンド変化'
         },
         fund: {
           tabs: { holdings: '保有銘柄', about: '概要' },
@@ -1585,6 +1827,32 @@
       if (stored === 'en' || stored === 'ja') return stored;
       const browser = (navigator.language || '').toLowerCase();
       return browser.startsWith('ja') ? 'ja' : 'en';
+    }
+
+    function getInitialWatchlist() {
+      if (typeof window === 'undefined') return { tickers: [], funds: [] };
+      try {
+        const parsed = JSON.parse(window.localStorage.getItem(WATCHLIST_STORAGE_KEY) || '{}');
+        const tickers = Array.isArray(parsed.tickers) ? parsed.tickers.map(normalizeTicker).filter(Boolean) : [];
+        const funds = Array.isArray(parsed.funds) ? parsed.funds.map(v => String(v || '').trim()).filter(Boolean) : [];
+        return {
+          tickers: Array.from(new Set(tickers)),
+          funds: Array.from(new Set(funds))
+        };
+      } catch (err) {
+        return { tickers: [], funds: [] };
+      }
+    }
+
+    function getInitialReadAlerts() {
+      if (typeof window === 'undefined') return [];
+      try {
+        const parsed = JSON.parse(window.localStorage.getItem(ALERT_READ_STORAGE_KEY) || '[]');
+        if (!Array.isArray(parsed)) return [];
+        return parsed.map(v => String(v || '')).filter(Boolean);
+      } catch (err) {
+        return [];
+      }
     }
 
     function resolveLocalizedValue(value, language) {
@@ -2121,23 +2389,34 @@
       const [search, setSearch] = React.useState('');
       const [language, setLanguage] = React.useState(getInitialLanguage);
       const [funds, setFunds] = React.useState([]);
+      const [previousFunds, setPreviousFunds] = React.useState([]);
       const [dataAsOf, setDataAsOf] = React.useState(FALLBACK_AS_OF);
       const [layout, setLayout] = React.useState(
         getLayoutMode(typeof window !== 'undefined' ? window.innerWidth : BREAKPOINTS.desktop)
       );
+      const [watchlist, setWatchlist] = React.useState(getInitialWatchlist);
+      const [readAlertIds, setReadAlertIds] = React.useState(getInitialReadAlerts);
+      const [alertsOpen, setAlertsOpen] = React.useState(false);
       const t = React.useCallback((key, params) => translate(language, key, params), [language]);
 
       React.useEffect(() => {
         let cancelled = false;
         const load = async () => {
           try {
-            const [metaRes, dataRes] = await Promise.all([
+            const [metaRes, dataRes, prevRes] = await Promise.all([
               fetch(META_URL, { cache: 'no-store' }),
-              fetch(DATA_URL, { cache: 'no-store' })
+              fetch(DATA_URL, { cache: 'no-store' }),
+              fetch(PREVIOUS_DATA_URL, { cache: 'no-store' })
             ]);
             if (dataRes.ok) {
               const data = await dataRes.json();
               if (!cancelled) setFunds(Array.isArray(data) ? data : []);
+              if (prevRes.ok) {
+                const prevData = await prevRes.json();
+                if (!cancelled) setPreviousFunds(Array.isArray(prevData) ? prevData : []);
+              } else if (!cancelled) {
+                setPreviousFunds([]);
+              }
               if (metaRes.ok) {
                 const meta = await metaRes.json();
                 if (!cancelled && meta?.asOf) setDataAsOf(meta.asOf);
@@ -2153,9 +2432,13 @@
             if (fallbackRes.ok) {
               const data = await fallbackRes.json();
               if (!cancelled) setFunds(Array.isArray(data) ? data : []);
+              if (!cancelled) setPreviousFunds([]);
             }
           } catch (e) {
-            if (!cancelled) setFunds([]);
+            if (!cancelled) {
+              setFunds([]);
+              setPreviousFunds([]);
+            }
           }
 
           if (!cancelled) setDataAsOf(FALLBACK_AS_OF);
@@ -2172,10 +2455,150 @@
       }, [language]);
 
       React.useEffect(() => {
+        if (typeof window === 'undefined') return;
+        window.localStorage.setItem(WATCHLIST_STORAGE_KEY, JSON.stringify(watchlist));
+      }, [watchlist]);
+
+      React.useEffect(() => {
+        if (typeof window === 'undefined') return;
+        window.localStorage.setItem(ALERT_READ_STORAGE_KEY, JSON.stringify(readAlertIds));
+      }, [readAlertIds]);
+
+      React.useEffect(() => {
         const handleResize = () => setLayout(getLayoutMode(window.innerWidth));
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
       }, []);
+
+      const watchedTickerSet = React.useMemo(
+        () => new Set((watchlist.tickers || []).map(normalizeTicker)),
+        [watchlist]
+      );
+      const watchedFundSet = React.useMemo(
+        () => new Set((watchlist.funds || []).map(v => String(v || '').trim())),
+        [watchlist]
+      );
+
+      const tickerSummary = React.useMemo(() => {
+        const map = {};
+        (funds || []).forEach((fund) => {
+          (fund.holdings || []).forEach((holding) => {
+            const ticker = normalizeTicker(holding?.ticker);
+            if (!ticker) return;
+            if (!map[ticker]) {
+              map[ticker] = {
+                ticker,
+                name: holding?.name || ticker,
+                sector: getHoldingSector(holding),
+                fundCount: 0,
+                totalWeight: 0,
+                funds: []
+              };
+            }
+            map[ticker].fundCount += 1;
+            map[ticker].totalWeight += Number(holding?.percent || 0);
+            map[ticker].funds.push({
+              name: fund.name,
+              weight: Number(holding?.percent || 0)
+            });
+          });
+        });
+        return Object.values(map)
+          .map((row) => ({
+            ...row,
+            totalWeight: Number(row.totalWeight.toFixed(1)),
+            funds: row.funds.sort((a, b) => b.weight - a.weight)
+          }))
+          .sort((a, b) => b.fundCount - a.fundCount || b.totalWeight - a.totalWeight);
+      }, [funds]);
+
+      const tickerDeltaRows = React.useMemo(
+        () => buildTickerDeltaMap(funds, previousFunds),
+        [funds, previousFunds]
+      );
+
+      const tickerDeltaMap = React.useMemo(() => {
+        const map = new Map();
+        tickerDeltaRows.forEach((row) => map.set(normalizeTicker(row.ticker), row));
+        return map;
+      }, [tickerDeltaRows]);
+
+      const currentFundMap = React.useMemo(() => {
+        const map = new Map();
+        (funds || []).forEach((fund) => map.set(String(fund.name || '').trim(), fund));
+        return map;
+      }, [funds]);
+
+      const previousFundMap = React.useMemo(() => {
+        const map = new Map();
+        (previousFunds || []).forEach((fund) => map.set(String(fund.name || '').trim(), fund));
+        return map;
+      }, [previousFunds]);
+
+      const alerts = React.useMemo(() => {
+        const items = [];
+        watchedTickerSet.forEach((ticker) => {
+          const delta = tickerDeltaMap.get(ticker);
+          if (!delta || delta.score === 0) return;
+          items.push({
+            id: `ticker:${ticker}:${delta.score}`,
+            type: 'ticker',
+            ticker,
+            message: `${t('alerts.tickerFlow')}: ${ticker} (${delta.score > 0 ? '+' : ''}${delta.score})`
+          });
+        });
+
+        watchedFundSet.forEach((fundName) => {
+          const currentFund = currentFundMap.get(fundName);
+          const prevFund = previousFundMap.get(fundName);
+          const currentCount = (currentFund?.holdings || []).length;
+          const prevCount = (prevFund?.holdings || []).length;
+          const currentTop = currentFund?.holdings?.[0]?.ticker || '';
+          const prevTop = prevFund?.holdings?.[0]?.ticker || '';
+
+          if (!currentFund && !prevFund) return;
+          if (currentCount === prevCount && currentTop === prevTop) return;
+          items.push({
+            id: `fund:${fundName}:${currentCount}:${prevCount}:${currentTop}:${prevTop}`,
+            type: 'fund',
+            fundName,
+            message: `${t('alerts.fundChanged')}: ${fundName} (${prevCount}→${currentCount})`
+          });
+        });
+
+        return items;
+      }, [watchedTickerSet, watchedFundSet, tickerDeltaMap, currentFundMap, previousFundMap, t]);
+
+      const unreadAlertCount = React.useMemo(
+        () => alerts.filter((alert) => !readAlertIds.includes(alert.id)).length,
+        [alerts, readAlertIds]
+      );
+
+      const toggleWatchTicker = React.useCallback((ticker) => {
+        const normalized = normalizeTicker(ticker);
+        if (!normalized) return;
+        setWatchlist((prev) => {
+          const set = new Set((prev.tickers || []).map(normalizeTicker));
+          if (set.has(normalized)) set.delete(normalized);
+          else set.add(normalized);
+          return { ...prev, tickers: Array.from(set) };
+        });
+      }, []);
+
+      const toggleWatchFund = React.useCallback((fundName) => {
+        const normalized = String(fundName || '').trim();
+        if (!normalized) return;
+        setWatchlist((prev) => {
+          const set = new Set((prev.funds || []).map(v => String(v || '').trim()));
+          if (set.has(normalized)) set.delete(normalized);
+          else set.add(normalized);
+          return { ...prev, funds: Array.from(set) };
+        });
+      }, []);
+
+      const markAllAlertsRead = React.useCallback(() => {
+        setReadAlertIds(alerts.map((a) => a.id));
+      }, [alerts]);
 
       const filtered = funds.filter(f => {
         const nameMatch = String(f.name || '').toLowerCase().includes(search.toLowerCase());
@@ -2188,6 +2611,11 @@
       const handleSelectFund = (fund) => {
         setSelected(fund);
         if (tab === 'home') setTab('detail');
+      };
+
+      const handleOpenFundDetail = (fund) => {
+        setSelected(fund);
+        setTab('detail');
       };
 
       const handleBack = () => {
@@ -2207,10 +2635,29 @@
                   <button className={`tab ${tab === 'ranking' ? 'active' : ''}`} onClick={() => setTab('ranking')}>{t('nav.ranking')}</button>
                   <button className={`tab ${tab === 'overlap' ? 'active' : ''}`} onClick={() => setTab('overlap')}>{t('nav.overlap')}</button>
                   <button className={`tab ${tab === 'flow' ? 'active' : ''}`} onClick={() => setTab('flow')}>{t('nav.flow')}</button>
+                  <button className={`tab ${tab === 'watch' ? 'active' : ''}`} onClick={() => setTab('watch')}>{t('nav.watch')}</button>
                 </div>
                 <div className="header-right">
                   <input type="text" className="search-box" placeholder={t('search.placeholder')} value={search} onChange={e => setSearch(e.target.value)} />
                   <div className="data-timestamp">{t('common.dataAsOf')}: {dataAsOf}</div>
+                  <button className="alert-btn" onClick={() => setAlertsOpen((v) => !v)}>
+                    🔔
+                    {unreadAlertCount > 0 && <span className="alert-badge">{unreadAlertCount}</span>}
+                  </button>
+                  {alertsOpen && (
+                    <div className="alerts-panel">
+                      <div className="alerts-header">
+                        <div className="alerts-title">{t('alerts.title')}</div>
+                        <button className="alerts-clear" onClick={markAllAlertsRead}>{t('alerts.markAllRead')}</button>
+                      </div>
+                      {alerts.length === 0 && <div className="alert-item">{t('alerts.noAlerts')}</div>}
+                      {alerts.map((alert) => (
+                        <div key={alert.id} className={`alert-item ${readAlertIds.includes(alert.id) ? '' : 'unread'}`}>
+                          {alert.message}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   <div className="lang-toggle">
                     <button className={`lang-btn ${language === 'en' ? 'active' : ''}`} onClick={() => setLanguage('en')}>EN</button>
                     <button className={`lang-btn ${language === 'ja' ? 'active' : ''}`} onClick={() => setLanguage('ja')}>JP</button>
@@ -2219,19 +2666,61 @@
               </div>
             </header>
             <main className="main-content">
-              {tab === 'home' && <HomeView funds={filtered} onSelect={handleSelectFund} />}
-              {tab === 'detail' && selected && <DetailView fund={selected} searchTerm={search} onBack={handleBack} />}
-              {tab === 'list' && <ListView funds={filtered} selected={selected} onSelect={setSelected} searchTerm={search} />}
-              {tab === 'ranking' && <RankingView funds={funds} />}
+              {tab === 'home' && (
+                <HomeView
+                  funds={filtered}
+                  onSelect={handleSelectFund}
+                  watchedFundSet={watchedFundSet}
+                  onToggleFundWatch={toggleWatchFund}
+                />
+              )}
+              {tab === 'detail' && selected && (
+                <DetailView
+                  fund={selected}
+                  searchTerm={search}
+                  onBack={handleBack}
+                  watchedTickerSet={watchedTickerSet}
+                  watchedFundSet={watchedFundSet}
+                  onToggleTickerWatch={toggleWatchTicker}
+                  onToggleFundWatch={toggleWatchFund}
+                />
+              )}
+              {tab === 'list' && (
+                <ListView
+                  funds={filtered}
+                  selected={selected}
+                  onSelect={setSelected}
+                  searchTerm={search}
+                  watchedTickerSet={watchedTickerSet}
+                  watchedFundSet={watchedFundSet}
+                  onToggleTickerWatch={toggleWatchTicker}
+                  onToggleFundWatch={toggleWatchFund}
+                />
+              )}
+              {tab === 'ranking' && <RankingView funds={funds} watchedTickerSet={watchedTickerSet} onToggleTickerWatch={toggleWatchTicker} />}
               {tab === 'overlap' && <OverlapView funds={funds} />}
-              {tab === 'flow' && <FlowView currentFunds={funds} dataAsOf={dataAsOf} />}
+              {tab === 'flow' && <FlowView currentFunds={funds} previousFunds={previousFunds} dataAsOf={dataAsOf} />}
+              {tab === 'watch' && (
+                <WatchView
+                  currentFunds={funds}
+                  previousFunds={previousFunds}
+                  watchlist={watchlist}
+                  tickerSummary={tickerSummary}
+                  tickerDeltaRows={tickerDeltaRows}
+                  watchedTickerSet={watchedTickerSet}
+                  watchedFundSet={watchedFundSet}
+                  onToggleTickerWatch={toggleWatchTicker}
+                  onToggleFundWatch={toggleWatchFund}
+                  onOpenFund={handleOpenFundDetail}
+                />
+              )}
             </main>
           </div>
         </I18nContext.Provider>
       );
     }
 
-    function HomeView({ funds, onSelect }) {
+    function HomeView({ funds, onSelect, watchedFundSet, onToggleFundWatch }) {
       const { t } = useI18n();
       const [activeSector, setActiveSector] = React.useState(null);
 
@@ -2257,14 +2746,22 @@
       return (
         <div className="home-layout">
           <div className="funds-grid">
-            {sortedFunds.map((fund, i) => <FundCard key={fund.name} fund={fund} onClick={() => onSelect(fund)} />)}
+            {sortedFunds.map((fund, i) => (
+              <FundCard
+                key={fund.name}
+                fund={fund}
+                onClick={() => onSelect(fund)}
+                isWatched={watchedFundSet.has(fund.name)}
+                onToggleWatch={onToggleFundWatch}
+              />
+            ))}
           </div>
           <SectorLegend activeSector={activeSector} onSectorClick={setActiveSector} />
         </div>
       );
     }
 
-    function FundCard({ fund, onClick }) {
+    function FundCard({ fund, onClick, isWatched, onToggleWatch }) {
       const chartRef = React.useRef(null);
       const chartInstance = React.useRef(null);
       const { t } = useI18n();
@@ -2285,6 +2782,17 @@
 
       return (
         <div className="fund-card" onClick={onClick}>
+          <button
+            className={`watch-btn ${isWatched ? 'active' : ''}`}
+            style={{ position: 'absolute', top: '10px', right: '10px', background: 'rgba(255,255,255,0.9)' }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleWatch(fund.name);
+            }}
+            title={isWatched ? 'Unwatch' : 'Watch'}
+          >
+            ★
+          </button>
           <div className="fund-card-chart"><canvas ref={chartRef}></canvas></div>
           <div className="fund-card-name">{fund.name}</div>
           <div className="fund-card-meta">
@@ -2295,7 +2803,7 @@
       );
     }
 
-    function ListView({ funds, selected, onSelect, searchTerm }) {
+    function ListView({ funds, selected, onSelect, searchTerm, watchedTickerSet, watchedFundSet, onToggleTickerWatch, onToggleFundWatch }) {
       const { t } = useI18n();
       if (!funds || funds.length === 0) {
         return (
@@ -2314,14 +2822,25 @@
                 <div key={i} className={`list-item ${selected?.name === fund.name ? 'active' : ''}`} onClick={() => onSelect(fund)}>{fund.name}</div>
               ))}
             </div>
-            <div>{selected ? <DetailView fund={selected} searchTerm={searchTerm} /> : <div className="empty-state"><div className="empty-icon">📊</div><h2>{t('common.selectFund')}</h2><p>{t('common.selectFundDesc')}</p></div>}</div>
+            <div>
+              {selected ? (
+                <DetailView
+                  fund={selected}
+                  searchTerm={searchTerm}
+                  watchedTickerSet={watchedTickerSet}
+                  watchedFundSet={watchedFundSet}
+                  onToggleTickerWatch={onToggleTickerWatch}
+                  onToggleFundWatch={onToggleFundWatch}
+                />
+              ) : <div className="empty-state"><div className="empty-icon">📊</div><h2>{t('common.selectFund')}</h2><p>{t('common.selectFundDesc')}</p></div>}
+            </div>
           </div>
           <SectorLegend />
         </div>
       );
     }
 
-    function DetailView({ fund, onBack, searchTerm }) {
+    function DetailView({ fund, onBack, searchTerm, watchedTickerSet, watchedFundSet, onToggleTickerWatch, onToggleFundWatch }) {
       const chartRef = React.useRef(null);
       const chartInstance = React.useRef(null);
       const matchRowRef = React.useRef(null);
@@ -2422,7 +2941,16 @@
       return (
         <div className="detail-view">
           {onBack && <button className="back-btn" onClick={onBack}>← {t('common.backToHome')}</button>}
-          <h1 className="fund-title">{fund.name}</h1>
+          <h1 className="fund-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span>{fund.name}</span>
+            <button
+              className={`watch-btn ${watchedFundSet?.has(fund.name) ? 'active' : ''}`}
+              onClick={() => onToggleFundWatch && onToggleFundWatch(fund.name)}
+              title={watchedFundSet?.has(fund.name) ? 'Unwatch fund' : 'Watch fund'}
+            >
+              ★
+            </button>
+          </h1>
           <p className="fund-subtitle">{t('common.holdingsCount', { count: holdings.length })}</p>
           <div className="detail-tabs">
             <button className={`detail-tab ${detailTab === 'holdings' ? 'active' : ''}`} onClick={() => setDetailTab('holdings')}>{t('fund.tabs.holdings')}</button>
@@ -2460,7 +2988,19 @@
                           const rowRef = i === firstMatchIndex ? matchRowRef : null;
                           return (
                             <tr key={i} ref={rowRef} className={`holding-row ${isMatch ? 'match' : ''}`}>
-                              <td><span className="ticker">{h.ticker}</span></td>
+                              <td>
+                                <span className="ticker">{h.ticker}</span>
+                                <button
+                                  className={`watch-btn compact ${watchedTickerSet?.has(normalizeTicker(h.ticker)) ? 'active' : ''}`}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    onToggleTickerWatch && onToggleTickerWatch(h.ticker);
+                                  }}
+                                  title={watchedTickerSet?.has(normalizeTicker(h.ticker)) ? 'Unwatch ticker' : 'Watch ticker'}
+                                >
+                                  ★
+                                </button>
+                              </td>
                               <td>{h.name}</td>
                               <td><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
                               <td><div className="percent-bar"><div className="percent-bar-bg"><div className={`percent-bar-fill ${i === 0 ? 'top' : ''}`} style={{ width: `${h.percent}%` }}></div></div><span className="percent-value">{h.percent.toFixed(1)}%</span></div></td>
@@ -2645,7 +3185,7 @@
       );
     }
 
-    function RankingView({ funds }) {
+    function RankingView({ funds, watchedTickerSet, onToggleTickerWatch }) {
       const { t, language } = useI18n();
       const [mode, setMode] = React.useState('weight');
       const [expandedTicker, setExpandedTicker] = React.useState(null);
@@ -2712,6 +3252,7 @@
                   <th>{t('common.avgWeight')}</th>
                   <th>{t('common.totalWeight')}</th>
                   <th>{t('common.funds')}</th>
+                  <th>★</th>
                 </tr>
               </thead>
               <tbody>
@@ -2737,10 +3278,22 @@
                           <span className="weight-value">{item.totalWeight.toFixed(1)}%</span>
                         </td>
                         <td><span className="ranking-funds-count">{item.fundCount}</span></td>
+                        <td>
+                          <button
+                            className={`watch-btn compact ${watchedTickerSet?.has(normalizeTicker(item.ticker)) ? 'active' : ''}`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onToggleTickerWatch && onToggleTickerWatch(item.ticker);
+                            }}
+                            title={watchedTickerSet?.has(normalizeTicker(item.ticker)) ? 'Unwatch ticker' : 'Watch ticker'}
+                          >
+                            ★
+                          </button>
+                        </td>
                       </tr>
                       {isExpanded && (
                         <tr className="ticker-funds-panel">
-                          <td colSpan="7">
+                          <td colSpan="8">
                             <div className="ticker-funds-inner">
                               <div className="ticker-funds-label">{t('common.holdingFunds')}</div>
                               {item.funds.sort((a, b) => b.weight - a.weight).map((f, fi) => (
@@ -2757,6 +3310,224 @@
                 })}
               </tbody>
             </table>
+          </div>
+        </div>
+      );
+    }
+
+    function WatchView({
+      currentFunds,
+      previousFunds,
+      watchlist,
+      tickerSummary,
+      tickerDeltaRows,
+      watchedTickerSet,
+      watchedFundSet,
+      onToggleTickerWatch,
+      onToggleFundWatch,
+      onOpenFund
+    }) {
+      const { t, language } = useI18n();
+      const [mode, setMode] = React.useState('ticker');
+      const [selectedTicker, setSelectedTicker] = React.useState(null);
+
+      const tickerSummaryMap = React.useMemo(() => {
+        const map = new Map();
+        (tickerSummary || []).forEach((row) => map.set(normalizeTicker(row.ticker), row));
+        return map;
+      }, [tickerSummary]);
+
+      const tickerDeltaMap = React.useMemo(() => {
+        const map = new Map();
+        (tickerDeltaRows || []).forEach((row) => map.set(normalizeTicker(row.ticker), row));
+        return map;
+      }, [tickerDeltaRows]);
+
+      const watchedTickerRows = React.useMemo(() => {
+        return (watchlist.tickers || [])
+          .map((ticker) => {
+            const normalized = normalizeTicker(ticker);
+            const summary = tickerSummaryMap.get(normalized);
+            const delta = tickerDeltaMap.get(normalized);
+            if (!summary && !delta) return null;
+            return {
+              ticker: normalized,
+              name: summary?.name || delta?.name || normalized,
+              sector: summary?.sector || delta?.sector || getSector(normalized),
+              currentFundCount: summary?.fundCount ?? delta?.currentFundCount ?? 0,
+              deltaFundCount: delta?.score ?? 0,
+              funds: summary?.funds || []
+            };
+          })
+          .filter(Boolean)
+          .sort((a, b) => Math.abs(b.deltaFundCount) - Math.abs(a.deltaFundCount) || b.currentFundCount - a.currentFundCount);
+      }, [watchlist, tickerSummaryMap, tickerDeltaMap]);
+
+      const currentFundMap = React.useMemo(() => {
+        const map = new Map();
+        (currentFunds || []).forEach((fund) => map.set(String(fund.name || '').trim(), fund));
+        return map;
+      }, [currentFunds]);
+
+      const previousFundMap = React.useMemo(() => {
+        const map = new Map();
+        (previousFunds || []).forEach((fund) => map.set(String(fund.name || '').trim(), fund));
+        return map;
+      }, [previousFunds]);
+
+      const watchedFundRows = React.useMemo(() => {
+        return (watchlist.funds || [])
+          .map((fundName) => {
+            const current = currentFundMap.get(fundName);
+            if (!current) return null;
+            const previous = previousFundMap.get(fundName);
+            const currentCount = (current.holdings || []).length;
+            const previousCount = (previous?.holdings || []).length;
+            return {
+              name: fundName,
+              current,
+              currentCount,
+              previousCount,
+              delta: currentCount - previousCount,
+              topHolding: current.holdings?.[0]?.ticker || '-'
+            };
+          })
+          .filter(Boolean)
+          .sort((a, b) => b.currentCount - a.currentCount);
+      }, [watchlist, currentFundMap, previousFundMap]);
+
+      const selectedTickerDetail = watchedTickerRows.find((row) => row.ticker === selectedTicker) || null;
+
+      return (
+        <div>
+          <div className="ranking-section-title">{t('watch.title')}</div>
+          <div className="watch-container">
+            <div className="watch-toggle">
+              <button className={`watch-toggle-btn ${mode === 'ticker' ? 'active' : ''}`} onClick={() => setMode('ticker')}>
+                {t('watch.tickers')}
+              </button>
+              <button className={`watch-toggle-btn ${mode === 'fund' ? 'active' : ''}`} onClick={() => setMode('fund')}>
+                {t('watch.funds')}
+              </button>
+            </div>
+
+            {mode === 'ticker' && (
+              <>
+                {watchedTickerRows.length === 0 ? (
+                  <div className="empty-state" style={{ height: '240px' }}>
+                    <h2>{t('watch.noTickers')}</h2>
+                  </div>
+                ) : (
+                  <>
+                    <table className="watch-table">
+                      <thead>
+                        <tr>
+                          <th>{t('common.ticker')}</th>
+                          <th>{t('common.company')}</th>
+                          <th>{t('common.sector')}</th>
+                          <th>{t('watch.currentFunds')}</th>
+                          <th>{t('watch.deltaFunds')}</th>
+                          <th>★</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {watchedTickerRows.map((row) => (
+                          <tr key={row.ticker} onClick={() => setSelectedTicker(row.ticker)} style={{ cursor: 'pointer' }}>
+                            <td><span className="ticker">{row.ticker}</span></td>
+                            <td>{row.name}</td>
+                            <td><span className="sector-badge" style={{ background: SECTOR_COLORS[row.sector] || SECTOR_COLORS.Other }}>{translate(language, `sector.${row.sector}`) || row.sector}</span></td>
+                            <td>{row.currentFundCount}</td>
+                            <td>
+                              <span className={row.deltaFundCount > 0 ? 'watch-delta-pos' : row.deltaFundCount < 0 ? 'watch-delta-neg' : ''}>
+                                {row.deltaFundCount > 0 ? '+' : ''}{row.deltaFundCount}
+                              </span>
+                            </td>
+                            <td>
+                              <button
+                                className={`watch-btn compact ${watchedTickerSet.has(row.ticker) ? 'active' : ''}`}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  onToggleTickerWatch(row.ticker);
+                                }}
+                              >
+                                ★
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
+                    {selectedTickerDetail && (
+                      <div className="watch-detail">
+                        <div className="watch-detail-title">
+                          {selectedTickerDetail.ticker} · {t('watch.watchedFunds')}
+                        </div>
+                        {selectedTickerDetail.funds.length === 0 ? (
+                          <div>{t('common.notAvailable')}</div>
+                        ) : (
+                          <div style={{ display: 'grid', gap: '6px' }}>
+                            {selectedTickerDetail.funds.slice(0, 12).map((fund, index) => (
+                              <div key={`${selectedTickerDetail.ticker}-${index}`} style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', fontSize: '12px' }}>
+                                <span>{fund.name}</span>
+                                <span style={{ fontWeight: 700 }}>{fund.weight.toFixed(1)}%</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+
+            {mode === 'fund' && (
+              <>
+                {watchedFundRows.length === 0 ? (
+                  <div className="empty-state" style={{ height: '240px' }}>
+                    <h2>{t('watch.noFunds')}</h2>
+                  </div>
+                ) : (
+                  <table className="watch-table">
+                    <thead>
+                      <tr>
+                        <th>{t('common.company')}</th>
+                        <th>{t('common.funds')}</th>
+                        <th>{t('watch.deltaFunds')}</th>
+                        <th>{t('watch.topHolding')}</th>
+                        <th>{t('watch.open')}</th>
+                        <th>★</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {watchedFundRows.map((row) => (
+                        <tr key={row.name}>
+                          <td>{row.name}</td>
+                          <td>{row.currentCount}</td>
+                          <td>
+                            <span className={row.delta > 0 ? 'watch-delta-pos' : row.delta < 0 ? 'watch-delta-neg' : ''}>
+                              {row.delta > 0 ? '+' : ''}{row.delta}
+                            </span>
+                          </td>
+                          <td><span className="ticker">{row.topHolding}</span></td>
+                          <td>
+                            <button className="watch-toggle-btn" style={{ textTransform: 'none', letterSpacing: '0' }} onClick={() => onOpenFund(row.current)}>
+                              {t('watch.open')}
+                            </button>
+                          </td>
+                          <td>
+                            <button className={`watch-btn compact ${watchedFundSet.has(row.name) ? 'active' : ''}`} onClick={() => onToggleFundWatch(row.name)}>
+                              ★
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </>
+            )}
           </div>
         </div>
       );
@@ -2899,34 +3670,15 @@
         .sort((a, b) => b.sectorScore - a.sectorScore);
     }
 
-    function FlowView({ currentFunds, dataAsOf }) {
+    function FlowView({ currentFunds, previousFunds, dataAsOf }) {
       const { t, language } = useI18n();
       const containerRef = React.useRef(null);
       const [tooltip, setTooltip] = React.useState(null);
       const [dims, setDims] = React.useState({ width: 1000, height: 600 });
       const [viewMode, setViewMode] = React.useState('stocks'); // 'stocks' | 'sectors'
-      const [previousFunds, setPreviousFunds] = React.useState([]);
       const [currentPeriodId, setCurrentPeriodId] = React.useState('latest');
       const [prevPeriodId, setPrevPeriodId] = React.useState('previous');
       const [activeSector, setActiveSector] = React.useState(null);
-
-      React.useEffect(() => {
-        let cancelled = false;
-        const loadPreviousFunds = async () => {
-          try {
-            const response = await fetch(PREVIOUS_DATA_URL, { cache: 'no-store' });
-            if (!response.ok) throw new Error('failed');
-            const data = await response.json();
-            if (!cancelled) {
-              setPreviousFunds(Array.isArray(data) ? data : []);
-            }
-          } catch (err) {
-            if (!cancelled) setPreviousFunds([]);
-          }
-        };
-        loadPreviousFunds();
-        return () => { cancelled = true; };
-      }, []);
 
       // Measure container
       React.useEffect(() => {
