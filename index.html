@@ -18,6 +18,10 @@
       --accent-gold: #E9C46A;
       --teal-light: #2A9D8F;
       --teal-dark: #1D3F4A;
+      --bp-mobile: 768px;
+      --bp-desktop: 1024px;
+      --card-radius: 16px;
+      --shadow-soft: 0 4px 16px rgba(38, 70, 83, 0.08);
     }
 
     * {
@@ -30,6 +34,17 @@
       font-family: 'Montserrat', sans-serif;
       background: var(--bg-sand);
       color: var(--primary-teal);
+      min-height: 100vh;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--accent-gold);
+      outline-offset: 2px;
+    }
+
+    .app-shell {
       min-height: 100vh;
     }
 
@@ -92,6 +107,24 @@
       display: flex;
       align-items: center;
       gap: 16px;
+    }
+
+    .app-shell.mode-mobile .tabs {
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .app-shell.mode-mobile .tab {
+      flex: 1 1 140px;
+      text-align: center;
+      min-height: 44px;
+    }
+
+    .app-shell.mode-mobile .header-right {
+      width: 100%;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .search-box {
@@ -158,6 +191,14 @@
       max-width: 1400px;
       margin: 0 auto;
       padding: 40px;
+    }
+
+    .app-shell.mode-desktop .main-content {
+      padding: 48px;
+    }
+
+    .app-shell.mode-mobile .main-content {
+      padding: 20px;
     }
 
     /* Layout with legend */
@@ -332,6 +373,72 @@
       box-shadow: 0 4px 16px rgba(38, 70, 83, 0.08);
     }
 
+    .detail-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 8px 0 20px;
+    }
+
+    .detail-tab {
+      padding: 10px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: rgba(38, 70, 83, 0.08);
+      color: var(--primary-teal);
+      border: none;
+      transition: all 0.2s;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .detail-tab.active {
+      background: var(--primary-teal);
+      color: #fff;
+    }
+
+    .detail-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .detail-sort {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary-teal);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .detail-sort select {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 2px solid rgba(38, 70, 83, 0.12);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary-teal);
+      font-family: 'Montserrat', sans-serif;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .detail-hint {
+      font-size: 11px;
+      color: var(--teal-light);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
     .back-btn {
       display: inline-flex;
       align-items: center;
@@ -409,6 +516,19 @@
       background: rgba(233, 196, 106, 0.1);
     }
 
+    .holding-row.match td {
+      background: rgba(233, 196, 106, 0.18);
+    }
+
+    .holding-row.match td:first-child {
+      box-shadow: inset 4px 0 0 var(--accent-gold);
+    }
+
+    .holding-row.match .ticker {
+      background: var(--accent-gold);
+      color: var(--primary-teal);
+    }
+
     .ticker {
       font-weight: 700;
       color: var(--primary-teal);
@@ -456,6 +576,54 @@
       font-weight: 600;
       min-width: 50px;
       text-align: right;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .profile-card {
+      background: var(--bg-sand);
+      border-radius: 12px;
+      padding: 16px 18px;
+      box-shadow: inset 0 0 0 1px rgba(38, 70, 83, 0.08);
+    }
+
+    .profile-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--teal-light);
+      margin-bottom: 6px;
+    }
+
+    .profile-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary-teal);
+      line-height: 1.4;
+    }
+
+    .profile-description {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--primary-teal);
+      margin-top: 12px;
+    }
+
+    .read-more {
+      border: none;
+      background: none;
+      color: var(--teal-light);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      margin-top: 6px;
     }
 
     /* Ranking View */
@@ -1014,7 +1182,7 @@
     }
 
     /* Mobile */
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
       .header {
         padding: 16px 20px;
       }
@@ -1027,11 +1195,14 @@
       .header-right {
         width: 100%;
         justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
       }
 
       .search-box {
         flex: 1;
         width: auto;
+        min-width: 180px;
       }
 
       .search-box:focus {
@@ -1068,7 +1239,7 @@
       }
 
       .funds-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
         gap: 16px;
       }
 
@@ -1102,6 +1273,44 @@
         font-size: 18px;
         letter-spacing: 2px;
       }
+
+      .tab {
+        padding: 12px 16px;
+        min-height: 44px;
+      }
+
+      .ranking-tab,
+      .detail-tab,
+      .view-toggle-btn {
+        min-height: 44px;
+      }
+
+      .detail-tabs {
+        margin-top: 4px;
+      }
+
+      .detail-sort {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .home-layout {
+        grid-template-columns: minmax(0, 1fr) 240px;
+      }
+
+      .list-container {
+        grid-template-columns: 360px 1fr;
+      }
+
+      .funds-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      }
+
+      .search-box {
+        width: 260px;
+      }
     }
   </style>
 </head>
@@ -1113,6 +1322,7 @@
     const DATA_URL = 'data/funds.json';
     const META_URL = 'data/meta.json';
     const FALLBACK_URL = 'data/manual-funds.json';
+    const BREAKPOINTS = { mobile: 768, desktop: 1024 };
 
     // Sector colors
     const SECTOR_COLORS = {
@@ -1202,7 +1412,27 @@
         ETF: 'ETF',
         Other: 'Other',
         stocksBreakdown: 'Stocks Breakdown',
-        sectorMomentum: 'Sector Momentum'
+        sectorMomentum: 'Sector Momentum',
+        holdingsTab: 'Holdings',
+        aboutTab: 'About',
+        sortLabel: 'Sort',
+        sortWeight: 'Weight (desc)',
+        sortTicker: 'Ticker (A-Z)',
+        highlightHint: 'Matching tickers are highlighted',
+        fundInfo: 'Fund Info',
+        manager: 'Manager',
+        aum: 'AUM',
+        strategy: 'Strategy',
+        strength: 'Strength / Edge',
+        concentration: 'Top 10 Concentration',
+        description: 'Overview',
+        readMore: 'Read more',
+        readLess: 'Show less',
+        noHoldings: 'No holdings data',
+        noResults: 'No funds found',
+        unknown: 'Unknown',
+        notAvailable: 'N/A',
+        aboutPlaceholder: 'No additional fund description available yet.'
       },
       ja: {
         home: 'ホーム',
@@ -1262,9 +1492,149 @@
         ETF: 'ETF',
         Other: 'その他',
         stocksBreakdown: '銘柄ヒートマップ',
-        sectorMomentum: 'セクター勢い'
+        sectorMomentum: 'セクター勢い',
+        holdingsTab: '保有銘柄',
+        aboutTab: '概要',
+        sortLabel: '並び替え',
+        sortWeight: '比率順',
+        sortTicker: 'ティッカー順',
+        highlightHint: '一致したティッカーを強調表示',
+        fundInfo: 'ファンド情報',
+        manager: 'マネージャー',
+        aum: '運用規模',
+        strategy: '戦略',
+        strength: '強み',
+        concentration: '集中度（上位10）',
+        description: '概要',
+        readMore: 'もっと見る',
+        readLess: '閉じる',
+        noHoldings: '保有データがありません',
+        noResults: '該当するファンドがありません',
+        unknown: '不明',
+        notAvailable: 'N/A',
+        aboutPlaceholder: 'ファンドの詳細説明はまだ準備中です。'
       }
     };
+
+    const FUND_PROFILES = {
+      'WARREN BUFFETT (BERKSHIRE HATHAWAY)': {
+        manager: 'Warren Buffett',
+        strategy: 'Long-term value',
+        strength: 'High-conviction, long-horizon investing',
+        aum: 'N/A',
+        description: 'Berkshire Hathaway holds concentrated, long-term positions in durable, cash-generative businesses.'
+      },
+      'BILL GATES (BILL & MELINDA GATES FOUNDATION TRUST)': {
+        manager: 'Bill Gates',
+        strategy: 'Long-term diversified',
+        strength: 'Steady, multi-sector exposure',
+        aum: 'N/A',
+        description: 'Foundation trust portfolio focused on durable, long-term holdings.'
+      },
+      'BRIDGEWATER ASSOCIATES (RAY DALIO)': {
+        manager: 'Ray Dalio',
+        strategy: 'Global macro',
+        strength: 'Macro research and diversified allocation',
+        aum: 'N/A',
+        description: 'Global macro manager focused on diversified, risk-aware positioning.'
+      },
+      'RENAISSANCE TECHNOLOGIES (JIM SIMONS / MEDALLION)': {
+        manager: 'Jim Simons',
+        strategy: 'Quantitative',
+        strength: 'Systematic models and data-driven signals',
+        aum: 'N/A',
+        description: 'Quantitative investment firm known for systematic, model-driven approaches.'
+      },
+      'SCION ASSET MANAGEMENT (MICHAEL BURRY)': {
+        manager: 'Michael Burry',
+        strategy: 'Value / opportunistic',
+        strength: 'Deep fundamental research, contrarian views',
+        aum: 'N/A',
+        description: 'Concentrated portfolio with contrarian, research-driven positions.'
+      },
+      'ARK INVESTMENT MANAGEMENT (CATHIE WOOD)': {
+        manager: 'Cathie Wood',
+        strategy: 'Innovation growth',
+        strength: 'Thematic exposure to disruptive innovation',
+        aum: 'N/A',
+        description: 'Focus on long-term disruptive innovation themes and high-growth companies.'
+      },
+      'PERSHING SQUARE CAPITAL MANAGEMENT (BILL ACKMAN)': {
+        manager: 'Bill Ackman',
+        strategy: 'Activist',
+        strength: 'High-conviction, activist positions',
+        aum: 'N/A',
+        description: 'Activist-oriented fund with concentrated, long-term positions.'
+      },
+      'THIRD POINT (DANIEL LOEB)': {
+        manager: 'Daniel Loeb',
+        strategy: 'Event-driven',
+        strength: 'Catalyst- and change-driven investing',
+        aum: 'N/A',
+        description: 'Event-driven and activist strategy across public markets.'
+      },
+      'SOROS FUND MANAGEMENT (GEORGE SOROS)': {
+        manager: 'George Soros',
+        strategy: 'Macro / multi-asset',
+        strength: 'Flexible, theme-driven allocation',
+        aum: 'N/A',
+        description: 'Family office with flexible, macro-aware positioning.'
+      },
+      'BLACKROCK INC.': {
+        manager: 'BlackRock',
+        strategy: 'Multi-strategy',
+        strength: 'Scale and diversified exposures',
+        aum: 'N/A',
+        description: 'Large asset manager with broad strategies across markets.'
+      },
+      'VANGUARD GROUP INC.': {
+        manager: 'Vanguard',
+        strategy: 'Index / passive',
+        strength: 'Low-cost, diversified portfolios',
+        aum: 'N/A',
+        description: 'Index-focused asset manager with diversified exposure.'
+      },
+      'NELSON PELTZ (TRIAN FUND MANAGEMENT)': {
+        manager: 'Nelson Peltz',
+        strategy: 'Activist',
+        strength: 'Operational improvement focus',
+        aum: 'N/A',
+        description: 'Activist fund targeting operational and capital structure improvements.'
+      },
+      'KOHLBERG KRAVIS ROBERTS & CO. L.P. (KKR)': {
+        manager: 'KKR',
+        strategy: 'Alternatives',
+        strength: 'Private markets and credit expertise',
+        aum: 'N/A',
+        description: 'Alternative asset manager with diversified strategies.'
+      }
+    };
+
+    function normalizeTicker(value) {
+      return String(value || '').trim().toUpperCase();
+    }
+
+    function normalizeFundKey(value) {
+      return String(value || '').trim().toUpperCase();
+    }
+
+    function getLayoutMode(width) {
+      if (width <= BREAKPOINTS.mobile) return 'mobile';
+      if (width >= BREAKPOINTS.desktop) return 'desktop';
+      return 'fluid';
+    }
+
+    function getFundProfile(fund) {
+      const key = normalizeFundKey(fund?.name);
+      return FUND_PROFILES[key] || {};
+    }
+
+    function getTopConcentration(holdings) {
+      if (!holdings || holdings.length === 0) return null;
+      const top = [...holdings].sort((a, b) => b.percent - a.percent).slice(0, 10);
+      const sum = top.reduce((acc, h) => acc + (h.percent || 0), 0);
+      return sum;
+    }
 
     // Ticker -> Sector mapping
     const SECTOR_MAP = {
@@ -1397,6 +1767,9 @@
       const [lang, setLang] = React.useState('en');
       const [funds, setFunds] = React.useState([]);
       const [dataAsOf, setDataAsOf] = React.useState(FALLBACK_AS_OF);
+      const [layout, setLayout] = React.useState(
+        getLayoutMode(typeof window !== 'undefined' ? window.innerWidth : BREAKPOINTS.desktop)
+      );
       const t = I18N[lang];
 
       React.useEffect(() => {
@@ -1437,6 +1810,12 @@
         return () => { cancelled = true; };
       }, []);
 
+      React.useEffect(() => {
+        const handleResize = () => setLayout(getLayoutMode(window.innerWidth));
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+      }, []);
+
       const filtered = funds.filter(f => {
         const nameMatch = String(f.name || '').toLowerCase().includes(search.toLowerCase());
         const tickerMatch = (f.holdings || []).some(h =>
@@ -1457,7 +1836,7 @@
 
       return (
         <LangContext.Provider value={lang}>
-          <div>
+          <div className={`app-shell mode-${layout}`}>
             <header className="header">
               <div className="header-content">
                 <div className="logo">Portfolio Visualizer</div>
@@ -1480,8 +1859,8 @@
             </header>
             <main className="main-content">
               {tab === 'home' && <HomeView funds={filtered} onSelect={handleSelectFund} />}
-              {tab === 'detail' && selected && <DetailView fund={selected} onBack={handleBack} />}
-              {tab === 'list' && <ListView funds={filtered} selected={selected} onSelect={setSelected} />}
+              {tab === 'detail' && selected && <DetailView fund={selected} searchTerm={search} onBack={handleBack} />}
+              {tab === 'list' && <ListView funds={filtered} selected={selected} onSelect={setSelected} searchTerm={search} />}
               {tab === 'ranking' && <RankingView funds={funds} />}
               {tab === 'overlap' && <OverlapView funds={funds} />}
               {tab === 'flow' && <FlowView />}
@@ -1492,6 +1871,8 @@
     }
 
     function HomeView({ funds, onSelect }) {
+      const lang = React.useContext(LangContext);
+      const t = I18N[lang];
       const [activeSector, setActiveSector] = React.useState(null);
 
       const sortedFunds = React.useMemo(() => {
@@ -1502,6 +1883,16 @@
           return bWeight - aWeight;
         });
       }, [funds, activeSector]);
+
+      if (!funds || funds.length === 0) {
+        return (
+          <div className="empty-state">
+            <div className="empty-icon">🔍</div>
+            <h2>{t.noResults}</h2>
+            <p>{t.selectFundDesc}</p>
+          </div>
+        );
+      }
 
       return (
         <div className="home-layout">
@@ -1545,9 +1936,18 @@
       );
     }
 
-    function ListView({ funds, selected, onSelect }) {
+    function ListView({ funds, selected, onSelect, searchTerm }) {
       const lang = React.useContext(LangContext);
       const t = I18N[lang];
+      if (!funds || funds.length === 0) {
+        return (
+          <div className="empty-state">
+            <div className="empty-icon">🔍</div>
+            <h2>{t.noResults}</h2>
+            <p>{t.selectFundDesc}</p>
+          </div>
+        );
+      }
       return (
         <div className="list-layout-wrapper">
           <div className="list-container">
@@ -1556,29 +1956,65 @@
                 <div key={i} className={`list-item ${selected?.name === fund.name ? 'active' : ''}`} onClick={() => onSelect(fund)}>{fund.name}</div>
               ))}
             </div>
-            <div>{selected ? <DetailView fund={selected} /> : <div className="empty-state"><div className="empty-icon">📊</div><h2>{t.selectFund}</h2><p>{t.selectFundDesc}</p></div>}</div>
+            <div>{selected ? <DetailView fund={selected} searchTerm={searchTerm} /> : <div className="empty-state"><div className="empty-icon">📊</div><h2>{t.selectFund}</h2><p>{t.selectFundDesc}</p></div>}</div>
           </div>
           <SectorLegend />
         </div>
       );
     }
 
-    function DetailView({ fund, onBack }) {
+    function DetailView({ fund, onBack, searchTerm }) {
       const chartRef = React.useRef(null);
       const chartInstance = React.useRef(null);
+      const matchRowRef = React.useRef(null);
       const lang = React.useContext(LangContext);
       const t = I18N[lang];
+      const [detailTab, setDetailTab] = React.useState('holdings');
+      const [sortMode, setSortMode] = React.useState('weight');
+      const [isExpanded, setIsExpanded] = React.useState(false);
+      const holdings = fund?.holdings || [];
+      const normalizedSearch = normalizeTicker(searchTerm);
+
+      React.useEffect(() => {
+        setDetailTab('holdings');
+        setSortMode('weight');
+        setIsExpanded(false);
+      }, [fund?.name]);
+
+      const sortedHoldings = React.useMemo(() => {
+        const items = [...holdings];
+        if (sortMode === 'ticker') {
+          items.sort((a, b) => normalizeTicker(a.ticker).localeCompare(normalizeTicker(b.ticker)));
+        } else {
+          items.sort((a, b) => b.percent - a.percent);
+        }
+        return items;
+      }, [holdings, sortMode]);
+
+      const firstMatchIndex = React.useMemo(() => {
+        if (!normalizedSearch) return -1;
+        return sortedHoldings.findIndex(h => normalizeTicker(h.ticker).includes(normalizedSearch));
+      }, [sortedHoldings, normalizedSearch]);
+
+      React.useEffect(() => {
+        if (detailTab !== 'holdings') return;
+        if (!normalizedSearch) return;
+        if (matchRowRef.current) {
+          matchRowRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, [normalizedSearch, detailTab, sortMode, fund?.name]);
 
       React.useEffect(() => {
         if (chartInstance.current) chartInstance.current.destroy();
+        if (detailTab !== 'holdings' || !chartRef.current) return;
         const ctx = chartRef.current.getContext('2d');
         chartInstance.current = new Chart(ctx, {
           type: 'doughnut',
           data: {
-            labels: fund.holdings.map(h => h.ticker),
+            labels: holdings.map(h => h.ticker),
             datasets: [{
-              data: fund.holdings.map(h => h.percent),
-              backgroundColor: fund.holdings.map(h => getHoldingSectorColor(h)),
+              data: holdings.map(h => h.percent),
+              backgroundColor: holdings.map(h => getHoldingSectorColor(h)),
               borderWidth: 2,
               borderColor: '#fff'
             }]
@@ -1596,7 +2032,7 @@
                     return items[0].label + '  ' + items[0].raw.toFixed(1) + '%';
                   },
                   label: function (ctx) {
-                    const holding = fund.holdings[ctx.dataIndex];
+                    const holding = holdings[ctx.dataIndex];
                     return getHoldingSectorName(holding, lang);
                   }
                 }
@@ -1606,33 +2042,115 @@
           }
         });
         return () => chartInstance.current?.destroy();
-      }, [fund, lang]);
+      }, [holdings, lang, detailTab]);
+
+      const profile = React.useMemo(() => getFundProfile(fund), [fund]);
+      const topConcentration = React.useMemo(() => getTopConcentration(holdings), [holdings]);
+      const description = profile.description || t.aboutPlaceholder;
+      const isLongDescription = description.length > 160;
+      const visibleDescription = isExpanded || !isLongDescription ? description : `${description.slice(0, 160)}...`;
+
+      const manager = profile.manager || t.unknown;
+      const aum = profile.aum || t.notAvailable;
+      const strategy = profile.strategy || t.unknown;
+      const strength = profile.strength || t.unknown;
+      const concentration = topConcentration ? `${topConcentration.toFixed(1)}%` : t.notAvailable;
 
       return (
         <div className="detail-view">
           {onBack && <button className="back-btn" onClick={onBack}>← {t.backToHome}</button>}
           <h1 className="fund-title">{fund.name}</h1>
-          <p className="fund-subtitle">{fund.holdings.length} {t.holdings}</p>
-          <div className="chart-container"><canvas ref={chartRef}></canvas></div>
-          <div className="table-container">
-            <table className="holdings-table">
-              <thead><tr><th>{t.ticker}</th><th>{t.company}</th><th>{t.sector}</th><th>{t.allocation}</th></tr></thead>
-              <tbody>
-                {fund.holdings.map((h, i) => {
-                  const sector = getHoldingSector(h);
-                  const sectorLabel = lang === 'ja' ? (SECTOR_NAMES_JP[sector] || sector) : sector;
-                  return (
-                    <tr key={i}>
-                      <td><span className="ticker">{h.ticker}</span></td>
-                      <td>{h.name}</td>
-                      <td><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
-                      <td><div className="percent-bar"><div className="percent-bar-bg"><div className={`percent-bar-fill ${i === 0 ? 'top' : ''}`} style={{ width: `${h.percent}%` }}></div></div><span className="percent-value">{h.percent.toFixed(1)}%</span></div></td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+          <p className="fund-subtitle">{holdings.length} {t.holdings}</p>
+          <div className="detail-tabs">
+            <button className={`detail-tab ${detailTab === 'holdings' ? 'active' : ''}`} onClick={() => setDetailTab('holdings')}>{t.holdingsTab}</button>
+            <button className={`detail-tab ${detailTab === 'about' ? 'active' : ''}`} onClick={() => setDetailTab('about')}>{t.aboutTab}</button>
           </div>
+
+          {detailTab === 'holdings' && (
+            <>
+              <div className="detail-toolbar">
+                <div className="detail-sort">
+                  <span>{t.sortLabel}</span>
+                  <select value={sortMode} onChange={e => setSortMode(e.target.value)}>
+                    <option value="weight">{t.sortWeight}</option>
+                    <option value="ticker">{t.sortTicker}</option>
+                  </select>
+                </div>
+                {normalizedSearch && firstMatchIndex !== -1 && <div className="detail-hint">{t.highlightHint}</div>}
+              </div>
+              {holdings.length === 0 ? (
+                <div className="empty-state">
+                  <div className="empty-icon">📄</div>
+                  <h2>{t.noHoldings}</h2>
+                </div>
+              ) : (
+                <>
+                  <div className="chart-container"><canvas ref={chartRef}></canvas></div>
+                  <div className="table-container">
+                    <table className="holdings-table">
+                      <thead><tr><th>{t.ticker}</th><th>{t.company}</th><th>{t.sector}</th><th>{t.allocation}</th></tr></thead>
+                      <tbody>
+                        {sortedHoldings.map((h, i) => {
+                          const sector = getHoldingSector(h);
+                          const sectorLabel = lang === 'ja' ? (SECTOR_NAMES_JP[sector] || sector) : sector;
+                          const isMatch = normalizedSearch && normalizeTicker(h.ticker).includes(normalizedSearch);
+                          const rowRef = i === firstMatchIndex ? matchRowRef : null;
+                          return (
+                            <tr key={i} ref={rowRef} className={`holding-row ${isMatch ? 'match' : ''}`}>
+                              <td><span className="ticker">{h.ticker}</span></td>
+                              <td>{h.name}</td>
+                              <td><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
+                              <td><div className="percent-bar"><div className="percent-bar-bg"><div className={`percent-bar-fill ${i === 0 ? 'top' : ''}`} style={{ width: `${h.percent}%` }}></div></div><span className="percent-value">{h.percent.toFixed(1)}%</span></div></td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </>
+              )}
+            </>
+          )}
+
+          {detailTab === 'about' && (
+            <>
+              <div className="about-grid">
+                <div className="profile-card">
+                  <div className="profile-label">{t.fundInfo}</div>
+                  <div className="profile-value">{fund.name}</div>
+                </div>
+                <div className="profile-card">
+                  <div className="profile-label">{t.manager}</div>
+                  <div className="profile-value">{manager}</div>
+                </div>
+                <div className="profile-card">
+                  <div className="profile-label">{t.aum}</div>
+                  <div className="profile-value">{aum}</div>
+                </div>
+                <div className="profile-card">
+                  <div className="profile-label">{t.strategy}</div>
+                  <div className="profile-value">{strategy}</div>
+                </div>
+                <div className="profile-card">
+                  <div className="profile-label">{t.strength}</div>
+                  <div className="profile-value">{strength}</div>
+                </div>
+                <div className="profile-card">
+                  <div className="profile-label">{t.concentration}</div>
+                  <div className="profile-value">{concentration}</div>
+                </div>
+              </div>
+              <div className="profile-description">
+                <div className="profile-label">{t.description}</div>
+                <div>{visibleDescription}</div>
+                {isLongDescription && (
+                  <button className="read-more" onClick={() => setIsExpanded(v => !v)}>
+                    {isExpanded ? t.readLess : t.readMore}
+                  </button>
+                )}
+              </div>
+            </>
+          )}
         </div>
       );
     }
@@ -1642,6 +2160,16 @@
       const t = I18N[lang];
       const [fundAIndex, setFundAIndex] = React.useState('');
       const [fundBIndex, setFundBIndex] = React.useState('');
+
+      if (!funds || funds.length === 0) {
+        return (
+          <div className="empty-state">
+            <div className="empty-icon">📄</div>
+            <h2>{t.noResults}</h2>
+            <p>{t.selectFundDesc}</p>
+          </div>
+        );
+      }
 
       const fundA = fundAIndex !== '' ? funds[parseInt(fundAIndex)] : null;
       const fundB = fundBIndex !== '' ? funds[parseInt(fundBIndex)] : null;
@@ -1760,6 +2288,16 @@
       const t = I18N[lang];
       const [mode, setMode] = React.useState('weight');
       const [expandedTicker, setExpandedTicker] = React.useState(null);
+
+      if (!funds || funds.length === 0) {
+        return (
+          <div className="empty-state">
+            <div className="empty-icon">📄</div>
+            <h2>{t.noResults}</h2>
+            <p>{t.selectFundDesc}</p>
+          </div>
+        );
+      }
 
       const allData = React.useMemo(() => {
         const tickerMap = {};
