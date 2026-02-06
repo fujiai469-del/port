@@ -1,3615 +1,706 @@
 [
   {
     "name": "Nelson Peltz (Trian Fund Management)",
-    "cik": "0001345471",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-14",
     "holdings": [
       {
-        "ticker": "FERG",
-        "name": "Janus Henderson Group plc",
-        "sector": "Industrial",
+        "ticker": "JHG",
+        "name": "Janus Henderson Group",
         "percent": 34.5
       },
       {
         "ticker": "GE",
-        "name": "GE Aerospace",
-        "sector": "Industrial",
+        "name": "General Electric",
         "percent": 29.5
       },
       {
         "ticker": "SOLV",
-        "name": "Solventum Corporation",
-        "sector": "Healthcare",
+        "name": "Solventum Corp",
         "percent": 15
       },
       {
         "ticker": "IVZ",
         "name": "Invesco Ltd.",
-        "sector": "Financial",
         "percent": 8.2
       },
       {
+        "ticker": "WEN",
+        "name": "The Wendy's Co",
+        "percent": 6.8
+      },
+      {
         "ticker": "FERG",
-        "name": "Ferguson Plc New",
-        "sector": "Industrial",
-        "percent": 5.9
-      },
-      {
-        "ticker": "WEN",
-        "name": "Wendys Co.",
-        "sector": "Consumer",
-        "percent": 3.5
-      },
-      {
-        "ticker": "WEN",
-        "name": "Wendys Co.",
-        "sector": "Consumer",
-        "percent": 3.3
+        "name": "Ferguson Enterprises",
+        "percent": 5.8
       },
       {
         "ticker": "GEHC",
-        "name": "GE HealthCare Technologies Inc.",
-        "sector": "Healthcare",
+        "name": "GE HealthCare",
         "percent": 0
       }
     ]
   },
   {
     "name": "Kohlberg Kravis Roberts & Co. L.p.",
-    "cik": "0001399770",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-14",
     "holdings": [
       {
         "ticker": "BTSG",
-        "name": "BRIGHTSPRING HEALTH SVCS INC",
-        "sector": "Healthcare",
-        "percent": 38.2
+        "name": "BrightSpring Health",
+        "percent": 43.3
       },
       {
         "ticker": "HSIC",
-        "name": "HENRY SCHEIN INC",
-        "sector": "Healthcare",
-        "percent": 17.4
+        "name": "Henry Schein",
+        "percent": 19.7
       },
       {
         "ticker": "BBIO",
-        "name": "BRIDGEBIO PHARMA INC",
-        "sector": "Healthcare",
-        "percent": 11.5
+        "name": "BridgeBio Pharma",
+        "percent": 13.1
       },
       {
         "ticker": "NIQ",
-        "name": "NIQ GLOBAL INTELLIGENCE PLC",
-        "sector": "Technology",
-        "percent": 7.9
-      },
-      {
-        "ticker": "PSKY",
-        "name": "PARAMOUNT SKYDANCE CORP",
-        "sector": "Communication",
-        "percent": 5
+        "name": "NIQ Global Intelligence",
+        "percent": 8.9
       },
       {
         "ticker": "BV",
-        "name": "BRIGHTVIEW HLDGS INC",
-        "sector": "Industrial",
-        "percent": 4.9
+        "name": "BrightView Holdings",
+        "percent": 5.5
       },
       {
         "ticker": "CRGY",
-        "name": "CRESCENT ENERGY COMPANY",
-        "sector": "Energy",
-        "percent": 3.9
-      },
-      {
-        "ticker": "JBLU",
-        "name": "JETBLUE AIRWAYS CORP",
-        "sector": "Industrial",
-        "percent": 2
+        "name": "Crescent Energy",
+        "percent": 4.5
       },
       {
         "ticker": "KREF",
-        "name": "KKR REAL ESTATE FIN TR INC",
-        "sector": "Financial",
-        "percent": 1.4
+        "name": "KKR Real Estate Finance",
+        "percent": 1.7
       },
       {
         "ticker": "MSGS",
-        "name": "MADISON SQUARE GRDN SPRT COR",
-        "percent": 1.2
-      },
-      {
-        "ticker": "STX",
-        "name": "SEAGATE HDD CAYMAN",
-        "sector": "Technology",
-        "percent": 0.6
+        "name": "Madison Square Garden",
+        "percent": 1.3
       },
       {
         "ticker": "BHC",
-        "name": "BAUSCH HEALTH COS INC",
-        "sector": "Healthcare",
+        "name": "Bausch Health",
         "percent": 0.6
       },
       {
-        "ticker": "CABO",
-        "name": "CABLE ONE INC",
-        "sector": "Communication",
-        "percent": 0.5
-      },
-      {
-        "ticker": "DXCM",
-        "name": "DEXCOM INC",
-        "sector": "Healthcare",
+        "ticker": "DEC",
+        "name": "Diversified Energy",
         "percent": 0.4
-      },
-      {
-        "ticker": "IMCR",
-        "name": "IMMUNOCORE HLDGS PLC",
-        "sector": "Healthcare",
-        "percent": 0.4
-      },
-      {
-        "ticker": "SABR",
-        "name": "SABRE GLBL INC",
-        "sector": "Technology",
-        "percent": 0.3
-      },
-      {
-        "ticker": "UGI",
-        "name": "UGI CORP NEW",
-        "sector": "Energy",
-        "percent": 0.3
-      },
-      {
-        "ticker": "G2891G204",
-        "name": "DIVERSIFIED ENERGY COMPANY P",
-        "percent": 0.3
       },
       {
         "ticker": "NCLH",
-        "name": "NORWEGIAN CRUISE LINE HLDG L",
-        "sector": "Consumer",
+        "name": "Norwegian Cruise Line",
         "percent": 0.3
       },
       {
         "ticker": "FSK",
-        "name": "FS KKR CAP CORP",
-        "sector": "Financial",
-        "percent": 0.2
-      },
-      {
-        "ticker": "PPL",
-        "name": "PPL CAP FDG INC",
-        "sector": "Energy",
-        "percent": 0.2
-      },
-      {
-        "ticker": "RDFN",
-        "name": "REDFIN CORP",
-        "sector": "Consumer",
-        "percent": 0.2
+        "name": "FS KKR Capital",
+        "percent": 0.3
       },
       {
         "ticker": "TEM",
-        "name": "TEMPUS AI INC",
-        "sector": "Technology",
+        "name": "Tempus AI",
         "percent": 0.2
-      },
-      {
-        "ticker": "WEC",
-        "name": "WEC ENERGY GROUP INC",
-        "sector": "Energy",
-        "percent": 0.2
-      },
-      {
-        "ticker": "BL",
-        "name": "BLACKLINE INC",
-        "sector": "Technology",
-        "percent": 0.1
-      },
-      {
-        "ticker": "CNP",
-        "name": "CENTERPOINT ENERGY INC",
-        "sector": "Energy",
-        "percent": 0.1
-      },
-      {
-        "ticker": "CHRS",
-        "name": "COHERUS ONCOLOGY INC",
-        "sector": "Healthcare",
-        "percent": 0.1
-      },
-      {
-        "ticker": "DBX",
-        "name": "DROPBOX INC",
-        "sector": "Technology",
-        "percent": 0.1
-      },
-      {
-        "ticker": "CRGY",
-        "name": "CRESCENT ENERGY COMPANY",
-        "sector": "Energy",
-        "percent": 0.1
-      },
-      {
-        "ticker": "KREF",
-        "name": "KKR REAL ESTATE FIN TR INC",
-        "sector": "Financial",
-        "percent": 0.1
-      },
-      {
-        "ticker": "NVCR",
-        "name": "NOVOCURE LTD",
-        "sector": "Healthcare",
-        "percent": 0.1
-      },
-      {
-        "ticker": "HOUS",
-        "name": "ANYWHERE REAL ESTATE GROUP L",
-        "sector": "Consumer",
-        "percent": 0.1
-      },
-      {
-        "ticker": "RDFN",
-        "name": "REDFIN CORP",
-        "sector": "Consumer",
-        "percent": 0.1
-      },
-      {
-        "ticker": "STX",
-        "name": "SEAGATE HDD CAYMAN",
-        "sector": "Technology",
-        "percent": 0.1
-      },
-      {
-        "ticker": "SNAP",
-        "name": "SNAP INC",
-        "sector": "Communication",
-        "percent": 0.1
-      },
-      {
-        "ticker": "SNOW",
-        "name": "SNOWFLAKE INC",
-        "sector": "Technology",
-        "percent": 0.1
-      },
-      {
-        "ticker": "TDOC",
-        "name": "TELADOC HEALTH INC",
-        "sector": "Healthcare",
-        "percent": 0.1
-      },
-      {
-        "ticker": "MTN",
-        "name": "VAIL RESORTS INC",
-        "sector": "Consumer",
-        "percent": 0.1
-      },
-      {
-        "ticker": "BSY",
-        "name": "BENTLEY SYS INC",
-        "sector": "Technology",
-        "percent": 0
-      },
-      {
-        "ticker": "BMRN",
-        "name": "BIOMARIN PHARMACEUTICAL INC",
-        "sector": "Healthcare",
-        "percent": 0
-      },
-      {
-        "ticker": "BL",
-        "name": "BLACKLINE INC",
-        "sector": "Technology",
-        "percent": 0
-      },
-      {
-        "ticker": "BOX",
-        "name": "BOX INC",
-        "sector": "Technology",
-        "percent": 0
-      },
-      {
-        "ticker": "CABO",
-        "name": "CABLE ONE INC",
-        "sector": "Communication",
-        "percent": 0
-      },
-      {
-        "ticker": "CELC",
-        "name": "CELCUITY INC",
-        "sector": "Healthcare",
-        "percent": 0
-      },
-      {
-        "ticker": "ENOV",
-        "name": "ENOVIS CORPORATION",
-        "sector": "Healthcare",
-        "percent": 0
-      },
-      {
-        "ticker": "DXCM",
-        "name": "DEXCOM INC",
-        "sector": "Healthcare",
-        "percent": 0
-      },
-      {
-        "ticker": "NVST",
-        "name": "ENVISTA HOLDINGS CORPORATION",
-        "sector": "Healthcare",
-        "percent": 0
-      },
-      {
-        "ticker": "GPN",
-        "name": "GLOBAL PMTS INC",
-        "sector": "Financial",
-        "percent": 0
-      },
-      {
-        "ticker": "GH",
-        "name": "GUARDANT HEALTH INC",
-        "sector": "Healthcare",
-        "percent": 0
-      },
-      {
-        "ticker": "HAE",
-        "name": "HAEMONETICS CORP MASS",
-        "sector": "Healthcare",
-        "percent": 0
       }
     ]
   },
   {
     "name": "Oaktree Fund (Oaktree Fund Advisors, LLC)",
-    "cik": "0001822973",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-14",
     "holdings": [
       {
         "ticker": "AU",
-        "name": "ANGLOGOLD ASHANTI PLC",
-        "sector": "Materials",
-        "percent": 25.3
-      },
-      {
-        "ticker": "B",
-        "name": "BARRICK MINING CORP",
-        "sector": "Materials",
-        "percent": 11.6
+        "name": "AngloGold Ashanti",
+        "percent": 28.8
       },
       {
         "ticker": "ITUB",
-        "name": "ITAU UNIBANCO HOLDING SA",
-        "sector": "Financial",
-        "percent": 10.2
+        "name": "Itaú Unibanco",
+        "percent": 11.6
       },
       {
         "ticker": "HDB",
-        "name": "HDFC BANK LTD",
-        "sector": "Financial",
-        "percent": 8.5
+        "name": "HDFC Bank",
+        "percent": 9.8
       },
       {
         "ticker": "GRAB",
-        "name": "GRAB HOLDINGS LTD",
-        "sector": "Technology",
-        "percent": 7.7
+        "name": "Grab Holdings",
+        "percent": 8.8
       },
       {
         "ticker": "NU",
-        "name": "NU HOLDINGS LTD/CAYMAN ISLANDS",
-        "percent": 7
+        "name": "Nu Holdings",
+        "percent": 8
       },
       {
         "ticker": "FCX",
-        "name": "FREEPORT-MCMORAN INC",
-        "sector": "Materials",
-        "percent": 5.8
+        "name": "Freeport-McMoRan",
+        "percent": 6.5
       },
       {
         "ticker": "YMM",
-        "name": "FULL TRUCK ALLIANCE CO LTD",
-        "sector": "Technology",
-        "percent": 5.3
-      },
-      {
-        "ticker": "BZ",
-        "name": "KANZHUN LTD",
-        "sector": "Communication",
-        "percent": 4
+        "name": "Full Truck Alliance",
+        "percent": 6
       },
       {
         "ticker": "XP",
-        "name": "XP INC",
-        "sector": "Financial",
-        "percent": 4
+        "name": "XP Inc.",
+        "percent": 4.6
+      },
+      {
+        "ticker": "BZ",
+        "name": "Kanzhun Limited",
+        "percent": 4.6
       },
       {
         "ticker": "TX",
-        "name": "TERNIUM SA",
-        "sector": "Materials",
-        "percent": 3.3
+        "name": "Ternium S.A.",
+        "percent": 3.8
       },
       {
         "ticker": "SE",
-        "name": "SEA LTD",
-        "sector": "Consumer",
-        "percent": 2.7
+        "name": "Sea Limited",
+        "percent": 3.1
       },
       {
         "ticker": "JBS",
-        "name": "JBS NV",
-        "sector": "Consumer",
-        "percent": 2.4
+        "name": "JBS N.V.",
+        "percent": 2.8
       },
       {
         "ticker": "ALVO",
-        "name": "ALVOTECH SA",
-        "sector": "Healthcare",
-        "percent": 1.1
-      },
-      {
-        "ticker": "JBLU",
-        "name": "JETBLUE AIRWAYS CORP",
-        "sector": "Industrial",
-        "percent": 0.4
-      },
-      {
-        "ticker": "CABO",
-        "name": "CABLE ONE INC",
-        "sector": "Communication",
-        "percent": 0.3
+        "name": "Alvotech",
+        "percent": 1.3
       },
       {
         "ticker": "BTAI",
-        "name": "BIOXCEL THERAPEUTICS INC",
+        "name": "BioXcel Therapeutics",
         "percent": 0.2
-      },
-      {
-        "ticker": "PEB",
-        "name": "PEBBLEBROOK HOTEL TRUST",
-        "sector": "Financial",
-        "percent": 0.1
       }
     ]
   },
   {
     "name": "Lansdowne Partners (UK) Llp",
-    "cik": "0001608485",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-19",
     "holdings": [
       {
         "ticker": "TSM",
-        "name": "TAIWAN SEMICONDUCTOR MFG LTD",
-        "percent": 14.9
+        "name": "Taiwan Semiconductor",
+        "percent": 36.2
       },
       {
         "ticker": "LIN",
-        "name": "LINDE PLC",
-        "sector": "Materials",
-        "percent": 14.6
-      },
-      {
-        "ticker": "TSM",
-        "name": "TAIWAN SEMICONDUCTOR MFG LTD",
-        "percent": 10.9
+        "name": "Linde plc",
+        "percent": 15.8
       },
       {
         "ticker": "DAL",
-        "name": "DELTA AIR LINES INC DEL",
-        "sector": "Industrial",
-        "percent": 5.4
-      },
-      {
-        "ticker": "TSM",
-        "name": "TAIWAN SEMICONDUCTOR MFG LTD",
-        "percent": 4.2
-      },
-      {
-        "ticker": "TSM",
-        "name": "TAIWAN SEMICONDUCTOR MFG LTD",
-        "percent": 3.5
+        "name": "Delta Air Lines",
+        "percent": 11.8
       },
       {
         "ticker": "UAL",
-        "name": "UNITED AIRLS HLDGS INC",
-        "sector": "Industrial",
+        "name": "United Airlines",
+        "percent": 9.7
+      },
+      {
+        "ticker": "SW",
+        "name": "Smurfit Westrock",
+        "percent": 5
+      },
+      {
+        "ticker": "GOLF",
+        "name": "Acushnet Holdings",
+        "percent": 3.8
+      },
+      {
+        "ticker": "IONQ",
+        "name": "IonQ, Inc.",
+        "percent": 3.6
+      },
+      {
+        "ticker": "ADI",
+        "name": "Analog Devices",
         "percent": 3.4
       },
       {
-        "ticker": "DAL",
-        "name": "DELTA AIR LINES INC DEL",
-        "sector": "Industrial",
-        "percent": 3.2
-      },
-      {
-        "ticker": "UAL",
-        "name": "UNITED AIRLS HLDGS INC",
-        "sector": "Industrial",
-        "percent": 3.2
-      },
-      {
-        "ticker": "CRH",
-        "name": "CRH PLC",
-        "sector": "Materials",
-        "percent": 2.7
-      },
-      {
-        "ticker": "CRH",
-        "name": "CRH PLC",
-        "sector": "Materials",
-        "percent": 2.3
-      },
-      {
-        "ticker": "SW",
-        "name": "SMURFIT WESTROCK PLC",
-        "sector": "Materials",
-        "percent": 2.1
-      },
-      {
         "ticker": "AMZN",
-        "name": "AMAZON COM INC",
-        "sector": "Consumer",
-        "percent": 1.6
-      },
-      {
-        "ticker": "ADI",
-        "name": "ANALOG DEVICES INC",
-        "sector": "Technology",
-        "percent": 1.6
-      },
-      {
-        "ticker": "IONQ",
-        "name": "IONQ INC",
-        "sector": "Technology",
-        "percent": 1.5
-      },
-      {
-        "ticker": "SW",
-        "name": "SMURFIT WESTROCK PLC",
-        "sector": "Materials",
-        "percent": 1.5
-      },
-      {
-        "ticker": "GOLF",
-        "name": "ACUSHNET HLDGS CORP",
-        "sector": "Consumer",
-        "percent": 1.4
-      },
-      {
-        "ticker": "DAL",
-        "name": "DELTA AIR LINES INC DEL",
-        "sector": "Industrial",
-        "percent": 1.3
-      },
-      {
-        "ticker": "UAL",
-        "name": "UNITED AIRLS HLDGS INC",
-        "sector": "Industrial",
-        "percent": 1.2
-      },
-      {
-        "ticker": "GOLF",
-        "name": "ACUSHNET HLDGS CORP",
-        "sector": "Consumer",
-        "percent": 1.1
+        "name": "Amazon.com",
+        "percent": 3.4
       },
       {
         "ticker": "TECK",
-        "name": "TECK RESOURCES LTD",
-        "sector": "Materials",
-        "percent": 1.1
+        "name": "Teck Resources",
+        "percent": 2.9
       },
       {
-        "ticker": "DAL",
-        "name": "DELTA AIR LINES INC DEL",
-        "sector": "Industrial",
-        "percent": 1
-      },
-      {
-        "ticker": "IONQ",
-        "name": "IONQ INC",
-        "sector": "Technology",
-        "percent": 1
-      },
-      {
-        "ticker": "UAL",
-        "name": "UNITED AIRLS HLDGS INC",
-        "sector": "Industrial",
-        "percent": 1
-      },
-      {
-        "ticker": "ADI",
-        "name": "ANALOG DEVICES INC",
-        "sector": "Technology",
-        "percent": 0.9
-      },
-      {
-        "ticker": "CRH",
-        "name": "CRH PLC",
-        "sector": "Materials",
-        "percent": 0.9
+        "ticker": "PRTC",
+        "name": "PureTech Health",
+        "percent": 1.7
       },
       {
         "ticker": "ROK",
-        "name": "ROCKWELL AUTOMATION INC",
-        "sector": "Industrial",
+        "name": "Rockwell Automation",
         "percent": 0.9
-      },
-      {
-        "ticker": "TECK",
-        "name": "TECK RESOURCES LTD",
-        "sector": "Materials",
-        "percent": 0.9
-      },
-      {
-        "ticker": "AMZN",
-        "name": "AMAZON COM INC",
-        "sector": "Consumer",
-        "percent": 0.8
-      },
-      {
-        "ticker": "SHCO",
-        "name": "SOHO HOUSE & CO INC",
-        "sector": "Consumer",
-        "percent": 0.8
       },
       {
         "ticker": "ARM",
-        "name": "ARM HOLDINGS PLC",
-        "percent": 0.7
-      },
-      {
-        "ticker": "B",
-        "name": "BARRICK MNG CORP",
-        "sector": "Materials",
-        "percent": 0.7
-      },
-      {
-        "ticker": "CRH",
-        "name": "CRH PLC",
-        "sector": "Materials",
-        "percent": 0.7
-      },
-      {
-        "ticker": "GOLF",
-        "name": "ACUSHNET HLDGS CORP",
-        "sector": "Consumer",
-        "percent": 0.6
-      },
-      {
-        "ticker": "SW",
-        "name": "SMURFIT WESTROCK PLC",
-        "sector": "Materials",
-        "percent": 0.6
-      },
-      {
-        "ticker": "SHCO",
-        "name": "SOHO HOUSE & CO INC",
-        "sector": "Consumer",
-        "percent": 0.6
+        "name": "Arm Holdings",
+        "percent": 0.8
       },
       {
         "ticker": "TXN",
-        "name": "TEXAS INSTRS INC",
-        "sector": "Technology",
+        "name": "Texas Instruments",
         "percent": 0.6
       },
       {
-        "ticker": "GOLF",
-        "name": "ACUSHNET HLDGS CORP",
-        "sector": "Consumer",
-        "percent": 0.5
-      },
-      {
-        "ticker": "SW",
-        "name": "SMURFIT WESTROCK PLC",
-        "sector": "Materials",
-        "percent": 0.5
-      },
-      {
-        "ticker": "ADI",
-        "name": "ANALOG DEVICES INC",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "IONQ",
-        "name": "IONQ INC",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "TECK",
-        "name": "TECK RESOURCES LTD",
-        "sector": "Materials",
-        "percent": 0.4
-      },
-      {
-        "ticker": "AMZN",
-        "name": "AMAZON COM INC",
-        "sector": "Consumer",
-        "percent": 0.3
-      },
-      {
-        "ticker": "AMZN",
-        "name": "AMAZON COM INC",
-        "sector": "Consumer",
-        "percent": 0.3
-      },
-      {
-        "ticker": "ADI",
-        "name": "ANALOG DEVICES INC",
-        "sector": "Technology",
-        "percent": 0.3
-      },
-      {
-        "ticker": "IONQ",
-        "name": "IONQ INC",
-        "sector": "Technology",
-        "percent": 0.3
-      },
-      {
-        "ticker": "SHCO",
-        "name": "SOHO HOUSE & CO INC",
-        "sector": "Consumer",
-        "percent": 0.3
-      },
-      {
-        "ticker": "SHCO",
-        "name": "SOHO HOUSE & CO INC",
-        "sector": "Consumer",
-        "percent": 0.3
-      },
-      {
-        "ticker": "TECK",
-        "name": "TECK RESOURCES LTD",
-        "sector": "Materials",
-        "percent": 0.3
-      },
-      {
         "ticker": "FTV",
-        "name": "FORTIVE CORP",
-        "sector": "Industrial",
+        "name": "Fortive Corp",
         "percent": 0.2
+      },
+      {
+        "ticker": "RAL",
+        "name": "Raliant Corp",
+        "percent": 0.1
+      },
+      {
+        "ticker": "AEM",
+        "name": "Agnico Eagle Mines",
+        "percent": 0.1
       }
     ]
   },
   {
     "name": "Washington State Investment Board",
-    "cik": "0000943712",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-14",
     "holdings": [
       {
         "ticker": "FTAI",
-        "name": "FTAI AVIATION LTD",
-        "sector": "Industrial",
+        "name": "FTAI Aviation",
         "percent": 82.3
       },
       {
         "ticker": "FIP",
-        "name": "FTAI INFRASTRUCTURE INC",
-        "sector": "Industrial",
+        "name": "FTAI Infrastructure",
         "percent": 17.7
       }
     ]
   },
   {
     "name": "Engine No. 1 Llc",
-    "cik": "0001835549",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-14",
     "holdings": [
       {
         "ticker": "POWL",
-        "name": "POWELL INDS INC",
-        "sector": "Industrial",
+        "name": "Powell Industries",
         "percent": 40.9
       },
       {
         "ticker": "VRT",
-        "name": "VERTIV HOLDINGS CO",
-        "sector": "Industrial",
+        "name": "Vertiv Holdings",
         "percent": 27.2
       },
       {
         "ticker": "FSLR",
-        "name": "FIRST SOLAR INC",
-        "sector": "Technology",
+        "name": "First Solar",
         "percent": 11.9
       },
       {
-        "ticker": "42704L104",
-        "name": "HERC HLDGS INC",
-        "percent": 9.7
+        "ticker": "HRI",
+        "name": "Herc Holdings",
+        "percent": 8.7
       },
       {
         "ticker": "GLD",
-        "name": "SPDR GOLD TR",
+        "name": "SPDR Gold Shares",
         "percent": 5.3
       },
       {
         "ticker": "HUBB",
-        "name": "HUBBELL INC",
-        "sector": "Industrial",
+        "name": "Hubbell Inc.",
         "percent": 4.9
       }
     ]
   },
   {
     "name": "Windacre Partnership",
-    "cik": "0001599383",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-14",
     "holdings": [
       {
         "ticker": "FNF",
-        "name": "FIDELITY NATIONAL FINANCIAL",
-        "sector": "Financial",
-        "percent": 14.3
+        "name": "Fidelity National Financial",
+        "percent": 15.9
       },
       {
         "ticker": "TDG",
-        "name": "TRANSDIGM GROUP INC",
-        "sector": "Industrial",
-        "percent": 10.1
-      },
-      {
-        "ticker": "SGI",
-        "name": "SOMNIGROUP INTERNATIONAL INC",
-        "sector": "Consumer",
-        "percent": 9.9
+        "name": "TransDigm Group",
+        "percent": 11.2
       },
       {
         "ticker": "TSM",
-        "name": "TAIWAN SEMICONDUCTOR MFG LTD",
-        "percent": 9.9
+        "name": "Taiwan Semiconductor",
+        "percent": 11
       },
       {
         "ticker": "EXPE",
-        "name": "EXPEDIA GROUP INC",
-        "sector": "Consumer",
-        "percent": 9.8
+        "name": "Expedia Group",
+        "percent": 10.9
       },
       {
         "ticker": "AMZN",
-        "name": "AMAZON COM INC",
-        "sector": "Consumer",
-        "percent": 9.6
+        "name": "Amazon.com",
+        "percent": 10.7
       },
       {
         "ticker": "GOOGL",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
-        "percent": 9.5
+        "name": "Alphabet Inc.",
+        "percent": 10.6
       },
       {
         "ticker": "SAP",
         "name": "SAP SE",
-        "sector": "Technology",
-        "percent": 7.9
+        "percent": 8.7
       },
       {
         "ticker": "MCO",
-        "name": "MOODYS CORP",
-        "sector": "Financial",
-        "percent": 6.9
+        "name": "Moody's Corp",
+        "percent": 7.7
       },
       {
         "ticker": "PRM",
-        "name": "PERIMETER SOLUTIONS INC",
-        "sector": "Materials",
-        "percent": 6.1
+        "name": "Perimeter Solutions",
+        "percent": 6.8
       },
       {
         "ticker": "NVDA",
-        "name": "NVIDIA CORPORATION",
-        "sector": "Technology",
-        "percent": 5.9
+        "name": "NVIDIA Corp",
+        "percent": 6.6
       }
     ]
   },
   {
     "name": "Oakcliff Capital",
-    "cik": "0001657335",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-14",
     "holdings": [
       {
         "ticker": "IBKR",
-        "name": "INTERACTIVE BROKERS GROUP IN",
-        "sector": "Financial",
+        "name": "Interactive Brokers",
         "percent": 30.6
       },
       {
         "ticker": "GIL",
-        "name": "GILDAN ACTIVEWEAR INC",
-        "sector": "Consumer",
+        "name": "Gildan Activewear",
         "percent": 17
       },
       {
         "ticker": "TDG",
-        "name": "TRANSDIGM GROUP INC",
-        "sector": "Industrial",
+        "name": "TransDigm Group",
         "percent": 13.7
       },
       {
         "ticker": "GOOG",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
+        "name": "Alphabet Inc.",
         "percent": 12.4
       },
       {
-        "ticker": "63900P608",
-        "name": "NATURAL RESOURCE PARTNERS L",
+        "ticker": "NRP",
+        "name": "Natural Resource Partners",
         "percent": 7.7
-      },
-      {
-        "ticker": "40171V100",
-        "name": "GUIDEWIRE SOFTWARE INC",
-        "percent": 6.5
-      },
-      {
-        "ticker": "LEN",
-        "name": "LENNAR CORP",
-        "sector": "Consumer",
-        "percent": 6.4
-      },
-      {
-        "ticker": "85512C105",
-        "name": "STAR GROUP L P",
-        "percent": 5.6
       }
     ]
   },
   {
     "name": "Snow Phipps Group",
-    "cik": "0001698661",
-    "reportDate": "2025-12-31",
-    "filingDate": "2026-01-27",
     "holdings": [
       {
         "ticker": "VEL",
-        "name": "Velocity Financial Inc",
-        "sector": "Financial",
+        "name": "Velocity Financial",
         "percent": 79
       },
       {
         "ticker": "LAUR",
-        "name": "Laureate Education Inc",
-        "sector": "Consumer",
+        "name": "Laureate Education",
         "percent": 21
       }
     ]
   },
   {
     "name": "Foresite Capital Management V, Llc",
-    "cik": "0001792206",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-14",
     "holdings": [
       {
         "ticker": "CGON",
-        "name": "CG Oncology, Inc.",
-        "sector": "Healthcare",
+        "name": "CG Oncology",
         "percent": 37.2
       },
       {
         "ticker": "ALMS",
-        "name": "ALUMIS INC.",
+        "name": "Alumis Inc.",
         "percent": 21.2
       },
       {
         "ticker": "IRON",
-        "name": "Disc Medicine, Inc.",
-        "sector": "Healthcare",
+        "name": "Disc Medicine",
         "percent": 18.2
       },
       {
         "ticker": "HIMS",
-        "name": "Hims & Hers Health, Inc.",
-        "sector": "Healthcare",
+        "name": "Hims & Hers Health",
         "percent": 14.2
       },
       {
-        "ticker": "55083R203",
-        "name": "Lyell Immunopharma, Inc.",
+        "ticker": "LYEL",
+        "name": "Lyell Immunopharma",
         "percent": 7.1
       },
       {
-        "ticker": "578784100",
-        "name": "Maze Therapeutics, Inc.",
+        "ticker": "MAZE",
+        "name": "Maze Therapeutics",
         "percent": 2.1
       }
     ]
   },
   {
     "name": "Warren Buffett (Berkshire Hathaway)",
-    "cik": "0001067983",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-14",
     "holdings": [
       {
-        "ticker": "AXP",
-        "name": "AMERICAN EXPRESS CO",
-        "sector": "Financial",
-        "percent": 18.5
-      },
-      {
         "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 8.7
+        "name": "Apple Inc.",
+        "percent": 22.7
       },
       {
-        "ticker": "KO",
-        "name": "COCA COLA CO",
-        "sector": "Consumer",
-        "percent": 7
+        "ticker": "AXP",
+        "name": "American Express",
+        "percent": 18.8
       },
       {
         "ticker": "BAC",
-        "name": "BANK AMER CORP",
-        "sector": "Financial",
-        "percent": 6
+        "name": "Bank of America",
+        "percent": 11
       },
       {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 5.9
-      },
-      {
-        "ticker": "OXY",
-        "name": "OCCIDENTAL PETE CORP",
-        "sector": "Energy",
-        "percent": 4.7
+        "ticker": "KO",
+        "name": "The Coca-Cola Co",
+        "percent": 9.9
       },
       {
         "ticker": "CVX",
-        "name": "CHEVRON CORP NEW",
-        "sector": "Energy",
-        "percent": 3.6
+        "name": "Chevron Corp",
+        "percent": 7.1
       },
       {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 3.3
+        "ticker": "OXY",
+        "name": "Occidental Petroleum",
+        "percent": 4.7
+      },
+      {
+        "ticker": "MCO",
+        "name": "Moody's Corp",
+        "percent": 4.4
       },
       {
         "ticker": "CB",
-        "name": "CHUBB LIMITED",
-        "sector": "Financial",
+        "name": "Chubb Limited",
         "percent": 3.3
       },
       {
         "ticker": "KHC",
-        "name": "KRAFT HEINZ CO",
-        "sector": "Consumer",
+        "name": "Kraft Heinz",
         "percent": 3.2
       },
       {
-        "ticker": "BAC",
-        "name": "BANK AMER CORP",
-        "sector": "Financial",
-        "percent": 2.4
-      },
-      {
-        "ticker": "MCO",
-        "name": "MOODYS CORP",
-        "sector": "Financial",
-        "percent": 2.2
-      },
-      {
-        "ticker": "MCO",
-        "name": "MOODYS CORP",
-        "sector": "Financial",
-        "percent": 2.1
-      },
-      {
-        "ticker": "KO",
-        "name": "COCA COLA CO",
-        "sector": "Consumer",
-        "percent": 2
-      },
-      {
-        "ticker": "CVX",
-        "name": "CHEVRON CORP NEW",
-        "sector": "Energy",
-        "percent": 1.9
-      },
-      {
         "ticker": "GOOGL",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
+        "name": "Alphabet Inc.",
         "percent": 1.6
       },
       {
-        "ticker": "BAC",
-        "name": "BANK AMER CORP",
-        "sector": "Financial",
+        "ticker": "DVA",
+        "name": "DaVita Inc.",
         "percent": 1.6
       },
       {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 1.5
-      },
-      {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 1.4
-      },
-      {
-        "ticker": "V",
-        "name": "VISA INC",
-        "sector": "Financial",
-        "percent": 1.1
-      },
-      {
-        "ticker": "CVX",
-        "name": "CHEVRON CORP NEW",
-        "sector": "Energy",
-        "percent": 1
+        "ticker": "KR",
+        "name": "The Kroger Co.",
+        "percent": 1.3
       },
       {
         "ticker": "SIRI",
-        "name": "SIRIUS XM HOLDINGS INC",
-        "percent": 0.9
+        "name": "Sirius XM",
+        "percent": 1.1
       },
       {
-        "ticker": "DVA",
-        "name": "DAVITA INC",
-        "sector": "Healthcare",
-        "percent": 0.8
-      },
-      {
-        "ticker": "DVA",
-        "name": "DAVITA INC",
-        "sector": "Healthcare",
-        "percent": 0.8
-      },
-      {
-        "ticker": "MA",
-        "name": "MASTERCARD INC",
-        "sector": "Financial",
-        "percent": 0.8
+        "ticker": "V",
+        "name": "Visa Inc.",
+        "percent": 1.1
       },
       {
         "ticker": "VRSN",
-        "name": "VERISIGN INC",
-        "sector": "Technology",
+        "name": "VeriSign",
+        "percent": 0.9
+      },
+      {
+        "ticker": "MA",
+        "name": "Mastercard",
         "percent": 0.8
       },
       {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 0.7
+        "ticker": "AMZN",
+        "name": "Amazon.com",
+        "percent": 0.8
       },
       {
         "ticker": "STZ",
-        "name": "CONSTELLATION BRANDS INC",
-        "sector": "Consumer",
+        "name": "Constellation Brands",
         "percent": 0.7
       },
       {
-        "ticker": "KR",
-        "name": "KROGER CO",
-        "sector": "Consumer",
+        "ticker": "UNH",
+        "name": "UnitedHealth",
         "percent": 0.7
       },
       {
-        "ticker": "AMZN",
-        "name": "AMAZON COM INC",
-        "sector": "Consumer",
+        "ticker": "COF",
+        "name": "Capital One",
         "percent": 0.6
       },
       {
-        "ticker": "25754A201",
-        "name": "DOMINOS PIZZA INC",
+        "ticker": "AON",
+        "name": "Aon plc",
         "percent": 0.5
       },
       {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 0.4
+        "ticker": "DPZ",
+        "name": "Domino's Pizza",
+        "percent": 0.5
       },
       {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "BAC",
-        "name": "BANK AMER CORP",
-        "sector": "Financial",
-        "percent": 0.4
-      },
-      {
-        "ticker": "KO",
-        "name": "COCA COLA CO",
-        "sector": "Consumer",
-        "percent": 0.4
-      },
-      {
-        "ticker": "KO",
-        "name": "COCA COLA CO",
-        "sector": "Consumer",
-        "percent": 0.4
-      },
-      {
-        "ticker": "KR",
-        "name": "KROGER CO",
-        "sector": "Consumer",
+        "ticker": "ALLY",
+        "name": "Ally Financial",
         "percent": 0.4
       },
       {
         "ticker": "POOL",
-        "name": "POOL CORP",
-        "sector": "Consumer",
+        "name": "Pool Corp",
         "percent": 0.4
       },
       {
-        "ticker": "UNH",
-        "name": "UNITEDHEALTH GROUP INC",
-        "sector": "Healthcare",
+        "ticker": "LLYV.K",
+        "name": "Liberty Live",
         "percent": 0.4
-      },
-      {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 0.3
-      },
-      {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 0.3
-      },
-      {
-        "ticker": "LEN",
-        "name": "LENNAR CORP",
-        "sector": "Consumer",
-        "percent": 0.3
-      },
-      {
-        "ticker": "NUE",
-        "name": "NUCOR CORP",
-        "sector": "Materials",
-        "percent": 0.3
-      },
-      {
-        "ticker": "UNH",
-        "name": "UNITEDHEALTH GROUP INC",
-        "sector": "Healthcare",
-        "percent": 0.3
-      },
-      {
-        "ticker": "AON",
-        "name": "AON PLC",
-        "sector": "Financial",
-        "percent": 0.3
-      },
-      {
-        "ticker": "02005N100",
-        "name": "ALLY FINL INC",
-        "percent": 0.2
-      },
-      {
-        "ticker": "AMZN",
-        "name": "AMAZON COM INC",
-        "sector": "Consumer",
-        "percent": 0.2
-      },
-      {
-        "ticker": "AXP",
-        "name": "AMERICAN EXPRESS CO",
-        "sector": "Financial",
-        "percent": 0.2
-      },
-      {
-        "ticker": "BAC",
-        "name": "BANK AMER CORP",
-        "sector": "Financial",
-        "percent": 0.2
-      },
-      {
-        "ticker": "BAC",
-        "name": "BANK AMER CORP",
-        "sector": "Financial",
-        "percent": 0.2
       }
     ]
   },
   {
     "name": "Bill Gates (Bill & Melinda Gates Foundation Trust)",
-    "cik": "0001166559",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-14",
     "holdings": [
       {
         "ticker": "BRK.B",
-        "name": "BERKSHIRE HATHAWAY INC DEL",
-        "sector": "Financial",
-        "percent": 29.9
+        "name": "Berkshire Hathaway",
+        "percent": 30.6
       },
       {
         "ticker": "WM",
-        "name": "WASTE MGMT INC DEL",
-        "sector": "Industrial",
-        "percent": 17.5
+        "name": "Waste Management",
+        "percent": 17.9
       },
       {
         "ticker": "CNI",
-        "name": "CANADIAN NATL RY CO",
-        "sector": "Industrial",
-        "percent": 13.4
+        "name": "Canadian National Ry",
+        "percent": 13.7
       },
       {
         "ticker": "MSFT",
-        "name": "MICROSOFT CORP",
-        "sector": "Technology",
-        "percent": 13
+        "name": "Microsoft Corp",
+        "percent": 13.3
       },
       {
         "ticker": "CAT",
-        "name": "CATERPILLAR INC",
-        "sector": "Industrial",
-        "percent": 8.3
+        "name": "Caterpillar",
+        "percent": 8.5
       },
       {
         "ticker": "DE",
-        "name": "DEERE & CO",
-        "sector": "Industrial",
-        "percent": 4.4
+        "name": "Deere & Company",
+        "percent": 4.6
       },
       {
         "ticker": "ECL",
-        "name": "ECOLAB INC",
-        "sector": "Materials",
-        "percent": 3.9
-      },
-      {
-        "ticker": "WMT",
-        "name": "WALMART INC",
-        "sector": "Consumer",
-        "percent": 2.4
+        "name": "Ecolab Inc.",
+        "percent": 4
       },
       {
         "ticker": "FDX",
-        "name": "FEDEX CORP",
-        "sector": "Industrial",
-        "percent": 1.5
+        "name": "FedEx Corp",
+        "percent": 1.6
       },
       {
-        "ticker": "191241108",
-        "name": "COCA-COLA FEMSA SAB DE CV",
+        "ticker": "KOF",
+        "name": "Coca-Cola FEMSA",
         "percent": 1.4
       },
       {
-        "ticker": "94106B101",
-        "name": "WASTE CONNECTIONS INC",
+        "ticker": "WCN",
+        "name": "Waste Connections",
         "percent": 1
       },
       {
-        "ticker": "22266T109",
-        "name": "COUPANG INC",
+        "ticker": "CPNG",
+        "name": "Coupang, Inc.",
         "percent": 0.8
       },
       {
+        "ticker": "SDGR",
+        "name": "Schrödinger",
+        "percent": 0.4
+      },
+      {
         "ticker": "MSGS",
-        "name": "MADISON SQUARE GRDN SPRT COR",
+        "name": "Madison Square Garden",
         "percent": 0.4
       },
       {
-        "ticker": "80810D103",
-        "name": "SCHRODINGER INC",
-        "percent": 0.4
-      },
-      {
-        "ticker": "BUD",
-        "name": "ANHEUSER BUSCH INBEV SA/NV",
+        "ticker": "WST",
+        "name": "West Pharma",
         "percent": 0.3
       },
       {
         "ticker": "MCD",
-        "name": "MCDONALDS CORP",
-        "sector": "Consumer",
+        "name": "McDonald's",
+        "percent": 0.3
+      },
+      {
+        "ticker": "BUD",
+        "name": "Anheuser-Busch",
         "percent": 0.3
       },
       {
         "ticker": "PCAR",
-        "name": "PACCAR INC",
-        "sector": "Industrial",
-        "percent": 0.3
-      },
-      {
-        "ticker": "955306105",
-        "name": "WEST PHARMACEUTICAL SVSC INC",
+        "name": "PACCAR Inc",
         "percent": 0.3
       },
       {
         "ticker": "DHR",
-        "name": "DANAHER CORPORATION",
-        "sector": "Healthcare",
+        "name": "Danaher Corp",
         "percent": 0.2
       },
       {
         "ticker": "KHC",
-        "name": "KRAFT HEINZ CO",
-        "sector": "Consumer",
+        "name": "Kraft Heinz",
         "percent": 0.2
       },
       {
         "ticker": "HRL",
-        "name": "HORMEL FOODS CORP",
-        "sector": "Consumer",
+        "name": "Hormel Foods",
         "percent": 0.1
       },
       {
-        "ticker": "H5919C104",
-        "name": "ON HLDG AG",
+        "ticker": "ONON",
+        "name": "On Holding AG",
         "percent": 0.1
       },
       {
         "ticker": "VLTO",
-        "name": "VERALTO CORP",
-        "sector": "Industrial",
+        "name": "Veralto Corp",
         "percent": 0
-      }
-    ]
-  },
-  {
-    "name": "Bridgewater Associates (Ray Dalio)",
-    "cik": "0001350694",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-13",
-    "holdings": [
-      {
-        "ticker": "IVV",
-        "name": "ISHARES TR",
-        "sector": "ETF",
-        "percent": 10.6
-      },
-      {
-        "ticker": "SPY",
-        "name": "SPDR S&P 500 ETF TR",
-        "percent": 6.7
-      },
-      {
-        "ticker": "GOOGL",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
-        "percent": 2.5
-      },
-      {
-        "ticker": "MSFT",
-        "name": "MICROSOFT CORP",
-        "sector": "Technology",
-        "percent": 2.2
-      },
-      {
-        "ticker": "CRM",
-        "name": "SALESFORCE INC",
-        "sector": "Technology",
-        "percent": 1.9
-      },
-      {
-        "ticker": "LRCX",
-        "name": "LAM RESEARCH CORP",
-        "sector": "Technology",
-        "percent": 1.8
-      },
-      {
-        "ticker": "NVDA",
-        "name": "NVIDIA CORPORATION",
-        "sector": "Technology",
-        "percent": 1.8
-      },
-      {
-        "ticker": "ADBE",
-        "name": "ADOBE INC",
-        "sector": "Technology",
-        "percent": 1.7
-      },
-      {
-        "ticker": "BKNG",
-        "name": "BOOKING HOLDINGS INC",
-        "sector": "Consumer",
-        "percent": 1.6
-      },
-      {
-        "ticker": "GEV",
-        "name": "GE VERNOVA INC",
-        "sector": "Industrial",
-        "percent": 1.6
-      },
-      {
-        "ticker": "UBER",
-        "name": "UBER TECHNOLOGIES INC",
-        "sector": "Industrial",
-        "percent": 1.4
-      },
-      {
-        "ticker": "JNJ",
-        "name": "JOHNSON & JOHNSON",
-        "sector": "Healthcare",
-        "percent": 1.2
-      },
-      {
-        "ticker": "META",
-        "name": "META PLATFORMS INC",
-        "sector": "Communication",
-        "percent": 1.2
-      },
-      {
-        "ticker": "AMD",
-        "name": "ADVANCED MICRO DEVICES INC",
-        "sector": "Technology",
-        "percent": 1.1
-      },
-      {
-        "ticker": "AVGO",
-        "name": "BROADCOM INC",
-        "sector": "Technology",
-        "percent": 1.1
-      },
-      {
-        "ticker": "SE",
-        "name": "SEA LTD",
-        "sector": "Consumer",
-        "percent": 1.1
-      },
-      {
-        "ticker": "NOW",
-        "name": "SERVICENOW INC",
-        "sector": "Technology",
-        "percent": 1.1
-      },
-      {
-        "ticker": "MO",
-        "name": "ALTRIA GROUP INC",
-        "sector": "Consumer",
-        "percent": 1
-      },
-      {
-        "ticker": "AMZN",
-        "name": "AMAZON COM INC",
-        "sector": "Consumer",
-        "percent": 1
-      },
-      {
-        "ticker": "WDAY",
-        "name": "WORKDAY INC",
-        "sector": "Technology",
-        "percent": 1
-      },
-      {
-        "ticker": "V",
-        "name": "VISA INC",
-        "sector": "Financial",
-        "percent": 0.9
-      },
-      {
-        "ticker": "110448107",
-        "name": "BRITISH AMERN TOB PLC",
-        "percent": 0.8
-      },
-      {
-        "ticker": "CMCSA",
-        "name": "COMCAST CORP NEW",
-        "sector": "Communication",
-        "percent": 0.8
-      },
-      {
-        "ticker": "FI",
-        "name": "FISERV INC",
-        "sector": "Financial",
-        "percent": 0.8
-      },
-      {
-        "ticker": "MA",
-        "name": "MASTERCARD INCORPORATED",
-        "sector": "Financial",
-        "percent": 0.8
-      },
-      {
-        "ticker": "WFC",
-        "name": "WELLS FARGO CO NEW",
-        "sector": "Financial",
-        "percent": 0.8
-      },
-      {
-        "ticker": "PYPL",
-        "name": "PAYPAL HLDGS INC",
-        "sector": "Financial",
-        "percent": 0.7
-      },
-      {
-        "ticker": "CI",
-        "name": "THE CIGNA GROUP",
-        "sector": "Healthcare",
-        "percent": 0.7
-      },
-      {
-        "ticker": "EXPE",
-        "name": "EXPEDIA GROUP INC",
-        "sector": "Consumer",
-        "percent": 0.6
-      },
-      {
-        "ticker": "HCA",
-        "name": "HCA HEALTHCARE INC",
-        "sector": "Healthcare",
-        "percent": 0.6
-      },
-      {
-        "ticker": "464286772",
-        "name": "ISHARES INC",
-        "percent": 0.6
-      },
-      {
-        "ticker": "RDDT",
-        "name": "REDDIT INC",
-        "sector": "Communication",
-        "percent": 0.6
-      },
-      {
-        "ticker": "CSCO",
-        "name": "CISCO SYS INC",
-        "sector": "Technology",
-        "percent": 0.5
-      },
-      {
-        "ticker": "C",
-        "name": "CITIGROUP INC",
-        "sector": "Financial",
-        "percent": 0.5
-      },
-      {
-        "ticker": "464288588",
-        "name": "ISHARES TR",
-        "percent": 0.5
-      },
-      {
-        "ticker": "KLAC",
-        "name": "KLA CORP",
-        "sector": "Technology",
-        "percent": 0.5
-      },
-      {
-        "ticker": "MET",
-        "name": "METLIFE INC",
-        "sector": "Financial",
-        "percent": 0.5
-      },
-      {
-        "ticker": "NXPI",
-        "name": "NXP SEMICONDUCTORS N V",
-        "sector": "Technology",
-        "percent": 0.5
-      },
-      {
-        "ticker": "PINS",
-        "name": "PINTEREST INC",
-        "percent": 0.5
-      },
-      {
-        "ticker": "REGN",
-        "name": "REGENERON PHARMACEUTICALS",
-        "sector": "Healthcare",
-        "percent": 0.5
-      },
-      {
-        "ticker": "HOOD",
-        "name": "ROBINHOOD MKTS INC",
-        "sector": "Financial",
-        "percent": 0.5
-      },
-      {
-        "ticker": "922042858",
-        "name": "VANGUARD INTL EQUITY INDEX F",
-        "percent": 0.5
-      },
-      {
-        "ticker": "32095101",
-        "name": "AMPHENOL CORP NEW",
-        "percent": 0.4
-      },
-      {
-        "ticker": "AMAT",
-        "name": "APPLIED MATLS INC",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "ANET",
-        "name": "ARISTA NETWORKS INC",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "CVS",
-        "name": "CVS HEALTH CORP",
-        "sector": "Healthcare",
-        "percent": 0.4
-      },
-      {
-        "ticker": "EBAY",
-        "name": "EBAY INC.",
-        "sector": "Consumer",
-        "percent": 0.4
-      },
-      {
-        "ticker": "37940X102",
-        "name": "GLOBAL PMTS INC",
-        "percent": 0.4
-      },
-      {
-        "ticker": "GRAB",
-        "name": "GRAB HOLDINGS LIMITED",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "416515104",
-        "name": "HARTFORD INSURANCE GROUP INC",
-        "percent": 0.4
-      }
-    ]
-  },
-  {
-    "name": "Renaissance Technologies (Jim Simons / Medallion)",
-    "cik": "0001037389",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-13",
-    "holdings": [
-      {
-        "ticker": "PLTR",
-        "name": "PALANTIR TECHNOLOGIES INC",
-        "sector": "Technology",
-        "percent": 2.1
-      },
-      {
-        "ticker": "NVDA",
-        "name": "NVIDIA CORPORATION",
-        "sector": "Technology",
-        "percent": 1.4
-      },
-      {
-        "ticker": "RBLX",
-        "name": "ROBLOX CORP",
-        "percent": 1.3
-      },
-      {
-        "ticker": "UTHR",
-        "name": "UNITED THERAPEUTICS CORP DEL",
-        "sector": "Healthcare",
-        "percent": 1.2
-      },
-      {
-        "ticker": "VRSN",
-        "name": "VERISIGN INC",
-        "sector": "Technology",
-        "percent": 1.2
-      },
-      {
-        "ticker": "APP",
-        "name": "APPLOVIN CORP",
-        "sector": "Technology",
-        "percent": 0.9
-      },
-      {
-        "ticker": "KGC",
-        "name": "KINROSS GOLD CORP",
-        "sector": "Materials",
-        "percent": 0.9
-      },
-      {
-        "ticker": "MSFT",
-        "name": "MICROSOFT CORP",
-        "sector": "Technology",
-        "percent": 0.9
-      },
-      {
-        "ticker": "GOOGL",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
-        "percent": 0.8
-      },
-      {
-        "ticker": "EXEL",
-        "name": "EXELIXIS INC",
-        "sector": "Healthcare",
-        "percent": 0.8
-      },
-      {
-        "ticker": "FNV",
-        "name": "FRANCO NEV CORP",
-        "sector": "Materials",
-        "percent": 0.8
-      },
-      {
-        "ticker": "GILD",
-        "name": "GILEAD SCIENCES INC",
-        "sector": "Healthcare",
-        "percent": 0.8
-      },
-      {
-        "ticker": "CORT",
-        "name": "CORCEPT THERAPEUTICS INC",
-        "sector": "Healthcare",
-        "percent": 0.7
-      },
-      {
-        "ticker": "DASH",
-        "name": "DOORDASH INC",
-        "sector": "Consumer",
-        "percent": 0.7
-      },
-      {
-        "ticker": "HIMS",
-        "name": "HIMS & HERS HEALTH INC",
-        "sector": "Healthcare",
-        "percent": 0.7
-      },
-      {
-        "ticker": "RDDT",
-        "name": "REDDIT INC",
-        "sector": "Communication",
-        "percent": 0.7
-      },
-      {
-        "ticker": "GOOG",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
-        "percent": 0.6
-      },
-      {
-        "ticker": "F",
-        "name": "FORD MTR CO",
-        "sector": "Consumer",
-        "percent": 0.6
-      },
-      {
-        "ticker": "GEV",
-        "name": "GE VERNOVA INC",
-        "sector": "Industrial",
-        "percent": 0.6
-      },
-      {
-        "ticker": "SPOT",
-        "name": "SPOTIFY TECHNOLOGY S A",
-        "sector": "Communication",
-        "percent": 0.6
-      },
-      {
-        "ticker": "SFM",
-        "name": "SPROUTS FMRS MKT INC",
-        "sector": "Consumer",
-        "percent": 0.6
-      },
-      {
-        "ticker": "W",
-        "name": "WAYFAIR INC",
-        "sector": "Consumer",
-        "percent": 0.6
-      },
-      {
-        "ticker": "CVNA",
-        "name": "CARVANA CO",
-        "sector": "Consumer",
-        "percent": 0.5
-      },
-      {
-        "ticker": "ETSY",
-        "name": "ETSY INC",
-        "sector": "Consumer",
-        "percent": 0.5
-      },
-      {
-        "ticker": "INCY",
-        "name": "INCYTE CORP",
-        "sector": "Healthcare",
-        "percent": 0.5
-      },
-      {
-        "ticker": "META",
-        "name": "META PLATFORMS INC",
-        "sector": "Communication",
-        "percent": 0.5
-      },
-      {
-        "ticker": "NTNX",
-        "name": "NUTANIX INC",
-        "sector": "Technology",
-        "percent": 0.5
-      },
-      {
-        "ticker": "TSM",
-        "name": "TAIWAN SEMICONDUCTOR MFG LTD",
-        "percent": 0.5
-      },
-      {
-        "ticker": "ADBE",
-        "name": "ADOBE INC",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "ABNB",
-        "name": "AIRBNB INC",
-        "sector": "Consumer",
-        "percent": 0.4
-      },
-      {
-        "ticker": "CBOE",
-        "name": "CBOE GLOBAL MKTS INC",
-        "sector": "Financial",
-        "percent": 0.4
-      },
-      {
-        "ticker": "CVLT",
-        "name": "COMMVAULT SYS INC",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "DBX",
-        "name": "DROPBOX INC",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "IONQ",
-        "name": "IONQ INC",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "NFLX",
-        "name": "NETFLIX INC",
-        "sector": "Communication",
-        "percent": 0.4
-      },
-      {
-        "ticker": "NBIX",
-        "name": "NEUROCRINE BIOSCIENCES INC",
-        "sector": "Healthcare",
-        "percent": 0.4
-      },
-      {
-        "ticker": "PSTG",
-        "name": "PURE STORAGE INC",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "HOOD",
-        "name": "ROBINHOOD MKTS INC",
-        "sector": "Financial",
-        "percent": 0.4
-      },
-      {
-        "ticker": "STRL",
-        "name": "STERLING INFRASTRUCTURE INC",
-        "sector": "Industrial",
-        "percent": 0.4
-      },
-      {
-        "ticker": "VRTX",
-        "name": "VERTEX PHARMACEUTICALS INC",
-        "sector": "Healthcare",
-        "percent": 0.4
-      },
-      {
-        "ticker": "ZM",
-        "name": "ZOOM COMMUNICATIONS INC",
-        "percent": 0.4
-      },
-      {
-        "ticker": "ABBV",
-        "name": "ABBVIE INC",
-        "sector": "Healthcare",
-        "percent": 0.3
-      },
-      {
-        "ticker": "ACN",
-        "name": "ACCENTURE PLC IRELAND",
-        "sector": "Technology",
-        "percent": 0.3
-      },
-      {
-        "ticker": "AGI",
-        "name": "ALAMOS GOLD INC NEW",
-        "sector": "Materials",
-        "percent": 0.3
-      },
-      {
-        "ticker": "ALSN",
-        "name": "ALLISON TRANSMISSION HLDGS I",
-        "sector": "Industrial",
-        "percent": 0.3
-      },
-      {
-        "ticker": "TEAM",
-        "name": "ATLASSIAN CORPORATION",
-        "percent": 0.3
-      },
-      {
-        "ticker": "CALM",
-        "name": "CAL MAINE FOODS INC",
-        "sector": "Consumer",
-        "percent": 0.3
-      },
-      {
-        "ticker": "CME",
-        "name": "CME GROUP INC",
-        "sector": "Financial",
-        "percent": 0.3
-      },
-      {
-        "ticker": "KO",
-        "name": "COCA COLA CO",
-        "sector": "Consumer",
-        "percent": 0.3
-      },
-      {
-        "ticker": "CL",
-        "name": "COLGATE PALMOLIVE CO",
-        "sector": "Consumer",
-        "percent": 0.3
-      }
-    ]
-  },
-  {
-    "name": "Scion Asset Management (Michael Burry)",
-    "cik": "0001649339",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-03",
-    "holdings": [
-      {
-        "ticker": "MOH",
-        "name": "MOLINA HEALTHCARE INC",
-        "sector": "Healthcare",
-        "percent": 35.1
-      },
-      {
-        "ticker": "LULU",
-        "name": "LULULEMON ATHLETICA INC",
-        "sector": "Consumer",
-        "percent": 26.1
-      },
-      {
-        "ticker": "SLM",
-        "name": "SLM CORP",
-        "sector": "Financial",
-        "percent": 19.5
-      },
-      {
-        "ticker": "BRKR",
-        "name": "BRUKER CORP",
-        "sector": "Healthcare",
-        "percent": 19.3
-      }
-    ]
-  },
-  {
-    "name": "ARK Investment Management (Cathie Wood)",
-    "cik": "0001697748",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-12",
-    "holdings": [
-      {
-        "ticker": "TSLA",
-        "name": "Tesla Inc",
-        "sector": "Consumer",
-        "percent": 9.5
-      },
-      {
-        "ticker": "COIN",
-        "name": "Coinbase Global Inc",
-        "sector": "Financial",
-        "percent": 4.8
-      },
-      {
-        "ticker": "ROKU",
-        "name": "Roku Inc",
-        "sector": "Communication",
-        "percent": 4.4
-      },
-      {
-        "ticker": "RBLX",
-        "name": "ROBLOX Corp",
-        "percent": 4.4
-      },
-      {
-        "ticker": "PLTR",
-        "name": "Palantir Technologies Inc",
-        "sector": "Technology",
-        "percent": 4.4
-      },
-      {
-        "ticker": "82509L107",
-        "name": "Shopify Inc",
-        "percent": 4.3
-      },
-      {
-        "ticker": "HOOD",
-        "name": "Robinhood Markets Inc",
-        "sector": "Financial",
-        "percent": 4.3
-      },
-      {
-        "ticker": "CRSP",
-        "name": "CRISPR Therapeutics AG",
-        "sector": "Healthcare",
-        "percent": 3.8
-      },
-      {
-        "ticker": "TEM",
-        "name": "Tempus AI Inc",
-        "sector": "Technology",
-        "percent": 3.4
-      },
-      {
-        "ticker": "AMD",
-        "name": "Advanced Micro Devices Inc",
-        "sector": "Technology",
-        "percent": 2.9
-      },
-      {
-        "ticker": "CRCL",
-        "name": "Circle Internet Group Inc",
-        "sector": "Financial",
-        "percent": 2.3
-      },
-      {
-        "ticker": "BMNR",
-        "name": "BitMine Immersion Technologies",
-        "sector": "Financial",
-        "percent": 2.3
-      },
-      {
-        "ticker": "TER",
-        "name": "Teradyne Inc",
-        "sector": "Technology",
-        "percent": 2.2
-      },
-      {
-        "ticker": "KTOS",
-        "name": "Kratos Defense & Security Solu",
-        "percent": 2
-      },
-      {
-        "ticker": "ACHR",
-        "name": "Archer Aviation Inc",
-        "sector": "Industrial",
-        "percent": 1.8
-      },
-      {
-        "ticker": "AMZN",
-        "name": "Amazon.com Inc",
-        "sector": "Consumer",
-        "percent": 1.6
-      },
-      {
-        "ticker": "BEAM",
-        "name": "Beam Therapeutics Inc",
-        "percent": 1.6
-      },
-      {
-        "ticker": "ARKB",
-        "name": "ARK 21Shares Bitcoin ETF",
-        "sector": "ETF",
-        "percent": 1.4
-      },
-      {
-        "ticker": "NVDA",
-        "name": "NVIDIA Corporation",
-        "sector": "Technology",
-        "percent": 1.3
-      },
-      {
-        "ticker": "META",
-        "name": "Meta Platforms Inc",
-        "sector": "Communication",
-        "percent": 1.3
-      },
-      {
-        "ticker": "BREA",
-        "name": "Brera Holdings PLC",
-        "sector": "Consumer",
-        "percent": 1.3
-      },
-      {
-        "ticker": "NTLA",
-        "name": "Intellia Therapeutics Inc",
-        "sector": "Healthcare",
-        "percent": 1.2
-      },
-      {
-        "ticker": "SQ",
-        "name": "Block Inc",
-        "sector": "Financial",
-        "percent": 1.2
-      },
-      {
-        "ticker": "TSM",
-        "name": "Taiwan Semiconductor Manufactu",
-        "percent": 1.2
-      },
-      {
-        "ticker": "TWST",
-        "name": "Twist Bioscience Corp",
-        "sector": "Healthcare",
-        "percent": 1.1
-      },
-      {
-        "ticker": "RXRX",
-        "name": "Recursion Pharmaceuticals Inc",
-        "sector": "Healthcare",
-        "percent": 1
-      },
-      {
-        "ticker": "BLSH",
-        "name": "Bullish",
-        "sector": "Technology",
-        "percent": 1
-      },
-      {
-        "ticker": "DE",
-        "name": "Deere & Co",
-        "sector": "Industrial",
-        "percent": 0.9
-      },
-      {
-        "ticker": "VCYT",
-        "name": "Veracyte Inc",
-        "sector": "Healthcare",
-        "percent": 0.9
-      },
-      {
-        "ticker": "PD",
-        "name": "PagerDuty Inc",
-        "sector": "Technology",
-        "percent": 0.9
-      },
-      {
-        "ticker": "PINS",
-        "name": "Pinterest Inc",
-        "percent": 0.9
-      },
-      {
-        "ticker": "NTRA",
-        "name": "Natera Inc",
-        "sector": "Healthcare",
-        "percent": 0.9
-      },
-      {
-        "ticker": "GTLB",
-        "name": "Gitlab Inc",
-        "percent": 0.9
-      },
-      {
-        "ticker": "AVAV",
-        "name": "AeroVironment Inc",
-        "sector": "Industrial",
-        "percent": 0.8
-      },
-      {
-        "ticker": "88025U109",
-        "name": "10X Genomics Inc",
-        "percent": 0.8
-      },
-      {
-        "ticker": "26142V105",
-        "name": "DraftKings Inc",
-        "percent": 0.8
-      },
-      {
-        "ticker": "83406F102",
-        "name": "SoFi Technologies Inc",
-        "percent": 0.8
-      },
-      {
-        "ticker": "ILMN",
-        "name": "Illumina Inc",
-        "percent": 0.8
-      },
-      {
-        "ticker": "46269C102",
-        "name": "Iridium Communications Inc",
-        "percent": 0.7
-      },
-      {
-        "ticker": "30063P105",
-        "name": "Exact Sciences Corp",
-        "percent": 0.7
-      },
-      {
-        "ticker": "TTD",
-        "name": "Trade Desk Inc/The",
-        "sector": "Communication",
-        "percent": 0.7
-      },
-      {
-        "ticker": "BWXT",
-        "name": "BWX Technologies Inc",
-        "percent": 0.7
-      },
-      {
-        "ticker": "ABNB",
-        "name": "Airbnb Inc",
-        "sector": "Consumer",
-        "percent": 0.7
-      },
-      {
-        "ticker": "773121108",
-        "name": "Rocket Lab Corp",
-        "percent": 0.7
-      },
-      {
-        "ticker": "GOOG",
-        "name": "Alphabet Inc",
-        "sector": "Communication",
-        "percent": 0.5
-      },
-      {
-        "ticker": "58733R102",
-        "name": "MercadoLibre Inc",
-        "percent": 0.4
-      },
-      {
-        "ticker": "TRMB",
-        "name": "Trimble Inc",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "LHX",
-        "name": "L3Harris Technologies Inc",
-        "sector": "Industrial",
-        "percent": 0.4
-      },
-      {
-        "ticker": "888787108",
-        "name": "Toast Inc",
-        "percent": 0.4
-      },
-      {
-        "ticker": "CRWD",
-        "name": "Crowdstrike Holdings Inc",
-        "sector": "Technology",
-        "percent": 0.4
-      }
-    ]
-  },
-  {
-    "name": "Pershing Square Capital Management (Bill Ackman)",
-    "cik": "0001336528",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-14",
-    "holdings": [
-      {
-        "ticker": "UBER",
-        "name": "UBER TECHNOLOGIES INC",
-        "sector": "Industrial",
-        "percent": 20.3
-      },
-      {
-        "ticker": "BN",
-        "name": "BROOKFIELD CORP",
-        "sector": "Financial",
-        "percent": 19.2
-      },
-      {
-        "ticker": "HHH",
-        "name": "HOWARD HUGHES HOLDINGS INC",
-        "sector": "Financial",
-        "percent": 10.6
-      },
-      {
-        "ticker": "GOOG",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
-        "percent": 10.5
-      },
-      {
-        "ticker": "QSR",
-        "name": "RESTAURANT BRANDS INTL INC",
-        "sector": "Consumer",
-        "percent": 10
-      },
-      {
-        "ticker": "AMZN",
-        "name": "AMAZON COM INC",
-        "sector": "Consumer",
-        "percent": 8.7
-      },
-      {
-        "ticker": "GOOGL",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
-        "percent": 8
-      },
-      {
-        "ticker": "CMG",
-        "name": "CHIPOTLE MEXICAN GRILL INC",
-        "sector": "Consumer",
-        "percent": 5.8
-      },
-      {
-        "ticker": "HLT",
-        "name": "HILTON WORLDWIDE HLDGS INC",
-        "sector": "Consumer",
-        "percent": 5.4
-      },
-      {
-        "ticker": "SEG",
-        "name": "SEAPORT ENTMT GROUP INC",
-        "sector": "Communication",
-        "percent": 0.8
-      },
-      {
-        "ticker": "HTZ",
-        "name": "HERTZ GLOBAL HLDGS INC",
-        "sector": "Consumer",
-        "percent": 0.7
-      }
-    ]
-  },
-  {
-    "name": "Third Point (Daniel Loeb)",
-    "cik": "0001040273",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-14",
-    "holdings": [
-      {
-        "ticker": "PCG",
-        "name": "PG&E CORP",
-        "sector": "Energy",
-        "percent": 9
-      },
-      {
-        "ticker": "AMZN",
-        "name": "AMAZON COM INC",
-        "sector": "Consumer",
-        "percent": 7.4
-      },
-      {
-        "ticker": "MSFT",
-        "name": "MICROSOFT CORP",
-        "sector": "Technology",
-        "percent": 6.8
-      },
-      {
-        "ticker": "NVDA",
-        "name": "NVIDIA CORPORATION",
-        "sector": "Technology",
-        "percent": 6.3
-      },
-      {
-        "ticker": "NSC",
-        "name": "NORFOLK SOUTHN CORP",
-        "sector": "Industrial",
-        "percent": 5.9
-      },
-      {
-        "ticker": "BN",
-        "name": "BROOKFIELD CORP",
-        "sector": "Financial",
-        "percent": 3.8
-      },
-      {
-        "ticker": "TSM",
-        "name": "TAIWAN SEMICONDUCTOR MFG LTD",
-        "percent": 3.7
-      },
-      {
-        "ticker": "COF",
-        "name": "CAPITAL ONE FINL CORP",
-        "sector": "Financial",
-        "percent": 3.5
-      },
-      {
-        "ticker": "147528103",
-        "name": "CASEYS GEN STORES INC",
-        "percent": 3.4
-      },
-      {
-        "ticker": "G3643J108",
-        "name": "FLUTTER ENTMT PLC",
-        "percent": 3.4
-      },
-      {
-        "ticker": "CRH",
-        "name": "CRH PLC",
-        "sector": "Materials",
-        "percent": 3.1
-      },
-      {
-        "ticker": "879433829",
-        "name": "TELEPHONE & DATA SYS INC",
-        "percent": 3.1
-      },
-      {
-        "ticker": "CSGP",
-        "name": "COSTAR GROUP INC",
-        "sector": "Financial",
-        "percent": 3
-      },
-      {
-        "ticker": "SGI",
-        "name": "SOMNIGROUP INTERNATIONAL INC",
-        "sector": "Consumer",
-        "percent": 3
-      },
-      {
-        "ticker": "538034109",
-        "name": "LIVE NATION ENTERTAINMENT IN",
-        "percent": 2.6
-      },
-      {
-        "ticker": "144285103",
-        "name": "CARPENTER TECHNOLOGY CORP",
-        "percent": 2.5
-      },
-      {
-        "ticker": "UNP",
-        "name": "UNION PAC CORP",
-        "sector": "Industrial",
-        "percent": 2.5
-      },
-      {
-        "ticker": "50212V100",
-        "name": "LPL FINL HLDGS INC",
-        "percent": 2.4
-      },
-      {
-        "ticker": "62482R107",
-        "name": "MR COOPER GROUP INC",
-        "percent": 2.3
-      },
-      {
-        "ticker": "G8068L108",
-        "name": "SHARKNINJA INC",
-        "percent": 2.2
-      },
-      {
-        "ticker": "VST",
-        "name": "VISTRA CORP",
-        "sector": "Energy",
-        "percent": 2.2
-      },
-      {
-        "ticker": "199908104",
-        "name": "COMFORT SYS USA INC",
-        "percent": 2
-      },
-      {
-        "ticker": "META",
-        "name": "META PLATFORMS INC",
-        "sector": "Communication",
-        "percent": 1.9
-      },
-      {
-        "ticker": "576323109",
-        "name": "MASTEC INC",
-        "percent": 1.8
-      },
-      {
-        "ticker": "87422Q109",
-        "name": "TALEN ENERGY CORP",
-        "percent": 1.8
-      },
-      {
-        "ticker": "KVUE",
-        "name": "KENVUE INC",
-        "sector": "Consumer",
-        "percent": 1.7
-      },
-      {
-        "ticker": "J",
-        "name": "JACOBS SOLUTIONS INC",
-        "sector": "Industrial",
-        "percent": 1.6
-      },
-      {
-        "ticker": "741623102",
-        "name": "PRIMO BRANDS CORPORATION",
-        "percent": 1.5
-      },
-      {
-        "ticker": "339750101",
-        "name": "FLOOR & DECOR HLDGS INC",
-        "percent": 1.2
-      },
-      {
-        "ticker": "APO",
-        "name": "APOLLO GLOBAL MGMT INC",
-        "sector": "Financial",
-        "percent": 1
-      },
-      {
-        "ticker": "77311W101",
-        "name": "ROCKET COS INC",
-        "percent": 0.9
-      },
-      {
-        "ticker": "03769M304",
-        "name": "APOLLO GLOBAL MGMT INC",
-        "percent": 0.8
-      },
-      {
-        "ticker": "21874A106",
-        "name": "CORE SCIENTIFIC INC NEW",
-        "percent": 0.6
-      },
-      {
-        "ticker": "92667104",
-        "name": "STRATA CRITICAL MEDICAL INC",
-        "percent": 0.3
-      },
-      {
-        "ticker": "HTZWW",
-        "name": "HERTZ GLOBAL HLDGS INC",
-        "sector": "Consumer",
-        "percent": 0.2
-      },
-      {
-        "ticker": "DHR",
-        "name": "DANAHER CORPORATION",
-        "sector": "Healthcare",
-        "percent": 0.1
-      },
-      {
-        "ticker": "343928107",
-        "name": "FLYEXCLUSIVE INC",
-        "percent": 0.1
-      },
-      {
-        "ticker": "PCG",
-        "name": "PG&E CORP",
-        "sector": "Energy",
-        "percent": 0.1
-      },
-      {
-        "ticker": "PCG",
-        "name": "PG&E CORP",
-        "sector": "Energy",
-        "percent": 0.1
-      },
-      {
-        "ticker": "51774115",
-        "name": "AURORA INNOVATION INC",
-        "percent": 0
-      },
-      {
-        "ticker": "51774107",
-        "name": "AURORA INNOVATION INC",
-        "percent": 0
-      },
-      {
-        "ticker": "BHC",
-        "name": "BAUSCH HEALTH COS INC",
-        "sector": "Healthcare",
-        "percent": 0
-      },
-      {
-        "ticker": "203668108",
-        "name": "COMMUNITY HEALTH SYS INC NEW",
-        "percent": 0
-      },
-      {
-        "ticker": "343928115",
-        "name": "FLYEXCLUSIVE INC",
-        "percent": 0
-      }
-    ]
-  },
-  {
-    "name": "Soros Fund Management (George Soros)",
-    "cik": "0001029160",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-14",
-    "holdings": [
-      {
-        "ticker": "AMZN",
-        "name": "AMAZON COM INC",
-        "sector": "Consumer",
-        "percent": 7.7
-      },
-      {
-        "ticker": "SW",
-        "name": "SMURFIT WESTROCK PLC",
-        "sector": "Materials",
-        "percent": 5.2
-      },
-      {
-        "ticker": "SPOT",
-        "name": "SPOTIFY USA INC",
-        "sector": "Communication",
-        "percent": 4
-      },
-      {
-        "ticker": "GPN",
-        "name": "GLOBAL PMTS INC",
-        "sector": "Financial",
-        "percent": 3.4
-      },
-      {
-        "ticker": "GOOGL",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
-        "percent": 2.5
-      },
-      {
-        "ticker": "46137V357",
-        "name": "INVESCO EXCHANGE TRADED FD T",
-        "percent": 2.5
-      },
-      {
-        "ticker": "PCG",
-        "name": "PG&E CORP",
-        "sector": "Energy",
-        "percent": 2.5
-      },
-      {
-        "ticker": "76954AAB9",
-        "name": "RIVIAN AUTOMOTIVE INC",
-        "percent": 2.4
-      },
-      {
-        "ticker": "345370CZ1",
-        "name": "FORD MTR CO",
-        "percent": 2.2
-      },
-      {
-        "ticker": "G3643J108",
-        "name": "FLUTTER ENTMT PLC",
-        "percent": 2
-      },
-      {
-        "ticker": "TKO",
-        "name": "TKO GROUP HOLDINGS INC",
-        "sector": "Communication",
-        "percent": 2
-      },
-      {
-        "ticker": "26210CAC8",
-        "name": "DROPBOX INC",
-        "percent": 1.9
-      },
-      {
-        "ticker": "CNP",
-        "name": "CENTERPOINT ENERGY INC",
-        "sector": "Energy",
-        "percent": 1.8
-      },
-      {
-        "ticker": "IBKR",
-        "name": "INTERACTIVE BROKERS GROUP IN",
-        "sector": "Financial",
-        "percent": 1.7
-      },
-      {
-        "ticker": "CRM",
-        "name": "SALESFORCE INC",
-        "sector": "Technology",
-        "percent": 1.7
-      },
-      {
-        "ticker": "NVDA",
-        "name": "NVIDIA CORPORATION",
-        "sector": "Technology",
-        "percent": 1.6
-      },
-      {
-        "ticker": "DBX",
-        "name": "DROPBOX INC",
-        "sector": "Technology",
-        "percent": 1.5
-      },
-      {
-        "ticker": "SO",
-        "name": "SOUTHERN CO",
-        "sector": "Energy",
-        "percent": 1.5
-      },
-      {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 1.4
-      },
-      {
-        "ticker": "03852U106",
-        "name": "ARAMARK",
-        "percent": 1.4
-      },
-      {
-        "ticker": "CFLT",
-        "name": "CONFLUENT INC",
-        "percent": 1.4
-      },
-      {
-        "ticker": "349381103",
-        "name": "FIGURE TECHNOLOGY SOLUTIO",
-        "percent": 1.3
-      },
-      {
-        "ticker": "DIS",
-        "name": "DISNEY WALT CO",
-        "sector": "Communication",
-        "percent": 1.2
-      },
-      {
-        "ticker": "57164YAD9",
-        "name": "MARRIOTT VACATIONS WORLDWIDE",
-        "percent": 1.2
-      },
-      {
-        "ticker": "86771W105",
-        "name": "SUNRUN INC",
-        "percent": 1.2
-      },
-      {
-        "ticker": "500081104",
-        "name": "KODIAK AI INC.",
-        "percent": 1.1
-      },
-      {
-        "ticker": "753422AF1",
-        "name": "RAPID7 INC",
-        "percent": 1.1
-      },
-      {
-        "ticker": "21871X109",
-        "name": "COREBRIDGE FINL INC",
-        "percent": 1
-      },
-      {
-        "ticker": "DDOG",
-        "name": "DATADOG INC",
-        "sector": "Technology",
-        "percent": 1
-      },
-      {
-        "ticker": "JD",
-        "name": "JD.COM INC",
-        "percent": 1
-      },
-      {
-        "ticker": "SPY",
-        "name": "SPDR S&P 500 ETF TR",
-        "percent": 1
-      },
-      {
-        "ticker": "CMS",
-        "name": "CMS ENERGY CORP",
-        "sector": "Energy",
-        "percent": 0.9
-      },
-      {
-        "ticker": "833445109",
-        "name": "SNOWFLAKE INC",
-        "percent": 0.9
-      },
-      {
-        "ticker": "LNT",
-        "name": "ALLIANT ENERGY CORP",
-        "sector": "Energy",
-        "percent": 0.8
-      },
-      {
-        "ticker": "451107106",
-        "name": "IDACORP INC",
-        "percent": 0.8
-      },
-      {
-        "ticker": "MSFT",
-        "name": "MICROSOFT CORP",
-        "sector": "Technology",
-        "percent": 0.8
-      },
-      {
-        "ticker": "SGI",
-        "name": "SOMNIGROUP INTERNATIONAL INC",
-        "sector": "Consumer",
-        "percent": 0.8
-      },
-      {
-        "ticker": "88929104",
-        "name": "BGC GROUP INC",
-        "percent": 0.7
-      },
-      {
-        "ticker": "36168Q104",
-        "name": "GFL ENVIRONMENTAL INC",
-        "percent": 0.7
-      },
-      {
-        "ticker": "464287440",
-        "name": "ISHARES TR",
-        "percent": 0.7
-      },
-      {
-        "ticker": "732908108",
-        "name": "PONY AI INC",
-        "percent": 0.7
-      },
-      {
-        "ticker": "CVLT",
-        "name": "COMMVAULT SYS INC",
-        "sector": "Technology",
-        "percent": 0.6
-      },
-      {
-        "ticker": "460690100",
-        "name": "INTERPUBLIC GROUP COS INC",
-        "percent": 0.6
-      },
-      {
-        "ticker": "N5749R100",
-        "name": "MERUS N V",
-        "percent": 0.6
-      },
-      {
-        "ticker": "62886HBD2",
-        "name": "NCL CORP LTD",
-        "percent": 0.6
-      },
-      {
-        "ticker": "TSM",
-        "name": "TAIWAN SEMICONDUCTOR MFG LTD",
-        "percent": 0.6
-      },
-      {
-        "ticker": "02005N100",
-        "name": "ALLY FINL INC",
-        "percent": 0.5
-      },
-      {
-        "ticker": "H2927K103",
-        "name": "AMRIZE LTD",
-        "percent": 0.5
-      },
-      {
-        "ticker": "10922N103",
-        "name": "BRIGHTHOUSE FINL INC",
-        "percent": 0.5
-      },
-      {
-        "ticker": "NET",
-        "name": "CLOUDFLARE INC",
-        "percent": 0.5
-      }
-    ]
-  },
-  {
-    "name": "BlackRock Inc.",
-    "cik": "0001364742",
-    "reportDate": "2024-06-30",
-    "filingDate": "2024-08-13",
-    "holdings": [
-      {
-        "ticker": "MSFT",
-        "name": "MICROSOFT CORP",
-        "sector": "Technology",
-        "percent": 2
-      },
-      {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 1.8
-      },
-      {
-        "ticker": "NVDA",
-        "name": "NVIDIA CORPORATION",
-        "sector": "Technology",
-        "percent": 1.8
-      },
-      {
-        "ticker": "MSFT",
-        "name": "MICROSOFT CORP",
-        "sector": "Technology",
-        "percent": 1.6
-      },
-      {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 1.5
-      },
-      {
-        "ticker": "NVDA",
-        "name": "NVIDIA CORPORATION",
-        "sector": "Technology",
-        "percent": 1.5
-      },
-      {
-        "ticker": "AMZN",
-        "name": "AMAZON COM INC",
-        "sector": "Consumer",
-        "percent": 0.9
-      },
-      {
-        "ticker": "AMZN",
-        "name": "AMAZON COM INC",
-        "sector": "Consumer",
-        "percent": 0.9
-      },
-      {
-        "ticker": "META",
-        "name": "META PLATFORMS INC",
-        "sector": "Communication",
-        "percent": 0.7
-      },
-      {
-        "ticker": "GOOGL",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
-        "percent": 0.6
-      },
-      {
-        "ticker": "MSFT",
-        "name": "MICROSOFT CORP",
-        "sector": "Technology",
-        "percent": 0.6
-      },
-      {
-        "ticker": "GOOG",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
-        "percent": 0.5
-      },
-      {
-        "ticker": "GOOGL",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
-        "percent": 0.5
-      },
-      {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 0.5
-      },
-      {
-        "ticker": "AVGO",
-        "name": "BROADCOM INC",
-        "sector": "Technology",
-        "percent": 0.5
-      },
-      {
-        "ticker": "LLY",
-        "name": "ELI LILLY & CO",
-        "sector": "Healthcare",
-        "percent": 0.5
-      },
-      {
-        "ticker": "META",
-        "name": "META PLATFORMS INC",
-        "sector": "Communication",
-        "percent": 0.5
-      },
-      {
-        "ticker": "NVDA",
-        "name": "NVIDIA CORPORATION",
-        "sector": "Technology",
-        "percent": 0.5
-      },
-      {
-        "ticker": "GOOG",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
-        "percent": 0.4
-      },
-      {
-        "ticker": "BRK.B",
-        "name": "BERKSHIRE HATHAWAY INC DEL",
-        "sector": "Financial",
-        "percent": 0.4
-      },
-      {
-        "ticker": "BRK.B",
-        "name": "BERKSHIRE HATHAWAY INC DEL",
-        "sector": "Financial",
-        "percent": 0.4
-      },
-      {
-        "ticker": "AVGO",
-        "name": "BROADCOM INC",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "LLY",
-        "name": "ELI LILLY & CO",
-        "sector": "Healthcare",
-        "percent": 0.4
-      },
-      {
-        "ticker": "46432F834",
-        "name": "ISHARES TR",
-        "percent": 0.4
-      },
-      {
-        "ticker": "AMZN",
-        "name": "AMAZON COM INC",
-        "sector": "Consumer",
-        "percent": 0.3
-      },
-      {
-        "ticker": "XOM",
-        "name": "EXXON MOBIL CORP",
-        "sector": "Energy",
-        "percent": 0.3
-      },
-      {
-        "ticker": "XOM",
-        "name": "EXXON MOBIL CORP",
-        "sector": "Energy",
-        "percent": 0.3
-      },
-      {
-        "ticker": "IVV",
-        "name": "ISHARES TR",
-        "sector": "ETF",
-        "percent": 0.3
-      },
-      {
-        "ticker": "JPM",
-        "name": "JPMORGAN CHASE & CO.",
-        "sector": "Financial",
-        "percent": 0.3
-      },
-      {
-        "ticker": "JPM",
-        "name": "JPMORGAN CHASE & CO.",
-        "sector": "Financial",
-        "percent": 0.3
-      },
-      {
-        "ticker": "TSLA",
-        "name": "TESLA INC",
-        "sector": "Consumer",
-        "percent": 0.3
-      },
-      {
-        "ticker": "TSLA",
-        "name": "TESLA INC",
-        "sector": "Consumer",
-        "percent": 0.3
-      },
-      {
-        "ticker": "UNH",
-        "name": "UNITEDHEALTH GROUP INC",
-        "sector": "Healthcare",
-        "percent": 0.3
-      },
-      {
-        "ticker": "V",
-        "name": "VISA INC",
-        "sector": "Financial",
-        "percent": 0.3
-      },
-      {
-        "ticker": "ABBV",
-        "name": "ABBVIE INC",
-        "sector": "Healthcare",
-        "percent": 0.2
-      },
-      {
-        "ticker": "ADBE",
-        "name": "ADOBE INC",
-        "sector": "Technology",
-        "percent": 0.2
-      },
-      {
-        "ticker": "AMD",
-        "name": "ADVANCED MICRO DEVICES INC",
-        "sector": "Technology",
-        "percent": 0.2
-      },
-      {
-        "ticker": "GOOGL",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
-        "percent": 0.2
-      },
-      {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 0.2
-      },
-      {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 0.2
-      },
-      {
-        "ticker": "AMAT",
-        "name": "APPLIED MATLS INC",
-        "sector": "Technology",
-        "percent": 0.2
-      },
-      {
-        "ticker": "CVX",
-        "name": "CHEVRON CORP NEW",
-        "sector": "Energy",
-        "percent": 0.2
-      },
-      {
-        "ticker": "KO",
-        "name": "COCA COLA CO",
-        "sector": "Consumer",
-        "percent": 0.2
-      },
-      {
-        "ticker": "COST",
-        "name": "COSTCO WHSL CORP NEW",
-        "sector": "Consumer",
-        "percent": 0.2
-      },
-      {
-        "ticker": "COST",
-        "name": "COSTCO WHSL CORP NEW",
-        "sector": "Consumer",
-        "percent": 0.2
-      },
-      {
-        "ticker": "HD",
-        "name": "HOME DEPOT INC",
-        "sector": "Consumer",
-        "percent": 0.2
-      },
-      {
-        "ticker": "HD",
-        "name": "HOME DEPOT INC",
-        "sector": "Consumer",
-        "percent": 0.2
-      },
-      {
-        "ticker": "IVV",
-        "name": "ISHARES TR",
-        "sector": "ETF",
-        "percent": 0.2
-      },
-      {
-        "ticker": "JNJ",
-        "name": "JOHNSON & JOHNSON",
-        "sector": "Healthcare",
-        "percent": 0.2
-      },
-      {
-        "ticker": "JNJ",
-        "name": "JOHNSON & JOHNSON",
-        "sector": "Healthcare",
-        "percent": 0.2
-      }
-    ]
-  },
-  {
-    "name": "Vanguard Group Inc.",
-    "cik": "0000102909",
-    "reportDate": "2025-12-31",
-    "filingDate": "2026-01-29",
-    "holdings": [
-      {
-        "ticker": "NVDA",
-        "name": "NVIDIA CORPORATION",
-        "sector": "Technology",
-        "percent": 5.5
-      },
-      {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 5
-      },
-      {
-        "ticker": "MSFT",
-        "name": "MICROSOFT CORP",
-        "sector": "Technology",
-        "percent": 4.5
-      },
-      {
-        "ticker": "AMZN",
-        "name": "AMAZON COM INC",
-        "sector": "Consumer",
-        "percent": 2.5
-      },
-      {
-        "ticker": "AVGO",
-        "name": "BROADCOM INC",
-        "sector": "Technology",
-        "percent": 2.2
-      },
-      {
-        "ticker": "GOOGL",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
-        "percent": 2.1
-      },
-      {
-        "ticker": "META",
-        "name": "META PLATFORMS INC",
-        "sector": "Communication",
-        "percent": 1.7
-      },
-      {
-        "ticker": "GOOG",
-        "name": "ALPHABET INC",
-        "sector": "Communication",
-        "percent": 1.7
-      },
-      {
-        "ticker": "TSLA",
-        "name": "TESLA INC",
-        "sector": "Consumer",
-        "percent": 1.5
-      },
-      {
-        "ticker": "LLY",
-        "name": "ELI LILLY & CO",
-        "sector": "Healthcare",
-        "percent": 1.2
-      },
-      {
-        "ticker": "JPM",
-        "name": "JPMORGAN CHASE & CO.",
-        "sector": "Financial",
-        "percent": 1.1
-      },
-      {
-        "ticker": "BRK.B",
-        "name": "BERKSHIRE HATHAWAY INC DEL",
-        "sector": "Financial",
-        "percent": 1
-      },
-      {
-        "ticker": "XOM",
-        "name": "EXXON MOBIL CORP",
-        "sector": "Energy",
-        "percent": 0.7
-      },
-      {
-        "ticker": "V",
-        "name": "VISA INC",
-        "sector": "Financial",
-        "percent": 0.7
-      },
-      {
-        "ticker": "WMT",
-        "name": "WALMART INC",
-        "sector": "Consumer",
-        "percent": 0.6
-      },
-      {
-        "ticker": "JNJ",
-        "name": "JOHNSON & JOHNSON",
-        "sector": "Healthcare",
-        "percent": 0.6
-      },
-      {
-        "ticker": "MA",
-        "name": "MASTERCARD INCORPORATED",
-        "sector": "Financial",
-        "percent": 0.6
-      },
-      {
-        "ticker": "PLTR",
-        "name": "PALANTIR TECHNOLOGIES INC",
-        "sector": "Technology",
-        "percent": 0.5
-      },
-      {
-        "ticker": "ABBV",
-        "name": "ABBVIE INC",
-        "sector": "Healthcare",
-        "percent": 0.5
-      },
-      {
-        "ticker": "BAC",
-        "name": "BANK AMERICA CORP",
-        "sector": "Financial",
-        "percent": 0.5
-      },
-      {
-        "ticker": "NFLX",
-        "name": "NETFLIX INC",
-        "sector": "Communication",
-        "percent": 0.5
-      },
-      {
-        "ticker": "COST",
-        "name": "COSTCO WHSL CORP NEW",
-        "sector": "Consumer",
-        "percent": 0.5
-      },
-      {
-        "ticker": "WFC",
-        "name": "WELLS FARGO CO NEW",
-        "sector": "Financial",
-        "percent": 0.4
-      },
-      {
-        "ticker": "UNH",
-        "name": "UNITEDHEALTH GROUP INC",
-        "sector": "Healthcare",
-        "percent": 0.4
-      },
-      {
-        "ticker": "PG",
-        "name": "PROCTER AND GAMBLE CO",
-        "sector": "Consumer",
-        "percent": 0.4
-      },
-      {
-        "ticker": "ORCL",
-        "name": "ORACLE CORP",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "CVX",
-        "name": "CHEVRON CORP NEW",
-        "sector": "Energy",
-        "percent": 0.4
-      },
-      {
-        "ticker": "CSCO",
-        "name": "CISCO SYS INC",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "MU",
-        "name": "MICRON TECHNOLOGY INC",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "IBM",
-        "name": "INTERNATIONAL BUSINESS MACHS",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "HD",
-        "name": "HOME DEPOT INC",
-        "sector": "Consumer",
-        "percent": 0.4
-      },
-      {
-        "ticker": "AMD",
-        "name": "ADVANCED MICRO DEVICES INC",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "NVDA",
-        "name": "NVIDIA CORPORATION",
-        "sector": "Technology",
-        "percent": 0.4
-      },
-      {
-        "ticker": "GE",
-        "name": "GE AEROSPACE",
-        "sector": "Industrial",
-        "percent": 0.4
-      },
-      {
-        "ticker": "MS",
-        "name": "MORGAN STANLEY",
-        "sector": "Financial",
-        "percent": 0.3
-      },
-      {
-        "ticker": "PM",
-        "name": "PHILIP MORRIS INTL INC",
-        "sector": "Consumer",
-        "percent": 0.3
-      },
-      {
-        "ticker": "PEP",
-        "name": "PEPSICO INC",
-        "sector": "Consumer",
-        "percent": 0.3
-      },
-      {
-        "ticker": "LRCX",
-        "name": "LAM RESEARCH CORP",
-        "sector": "Technology",
-        "percent": 0.3
-      },
-      {
-        "ticker": "ABT",
-        "name": "ABBOTT LABS",
-        "sector": "Healthcare",
-        "percent": 0.3
-      },
-      {
-        "ticker": "MSFT",
-        "name": "MICROSOFT CORP",
-        "sector": "Technology",
-        "percent": 0.3
-      },
-      {
-        "ticker": "RTX",
-        "name": "RTX CORPORATION",
-        "sector": "Industrial",
-        "percent": 0.3
-      },
-      {
-        "ticker": "MRK",
-        "name": "MERCK & CO INC",
-        "sector": "Healthcare",
-        "percent": 0.3
-      },
-      {
-        "ticker": "CAT",
-        "name": "CATERPILLAR INC",
-        "sector": "Industrial",
-        "percent": 0.3
-      },
-      {
-        "ticker": "QCOM",
-        "name": "QUALCOMM INC",
-        "sector": "Technology",
-        "percent": 0.3
-      },
-      {
-        "ticker": "TMO",
-        "name": "THERMO FISHER SCIENTIFIC INC",
-        "sector": "Healthcare",
-        "percent": 0.3
-      },
-      {
-        "ticker": "AMAT",
-        "name": "APPLIED MATLS INC",
-        "sector": "Technology",
-        "percent": 0.3
-      },
-      {
-        "ticker": "AAPL",
-        "name": "APPLE INC",
-        "sector": "Technology",
-        "percent": 0.3
-      },
-      {
-        "ticker": "KO",
-        "name": "COCA COLA CO",
-        "sector": "Consumer",
-        "percent": 0.3
-      },
-      {
-        "ticker": "GS",
-        "name": "GOLDMAN SACHS GROUP INC",
-        "sector": "Financial",
-        "percent": 0.3
-      },
-      {
-        "ticker": "CRM",
-        "name": "SALESFORCE INC",
-        "sector": "Technology",
-        "percent": 0.3
       }
     ]
   },

@@ -19,5 +19,21 @@
   { "name": "Third Point (Daniel Loeb)", "cik": "0001040273" },
   { "name": "Soros Fund Management (George Soros)", "cik": "0001029160" },
   { "name": "BlackRock Inc.", "cik": "0001364742" },
-  { "name": "Vanguard Group Inc.", "cik": "0000102909" }
+  { "name": "Vanguard Group Inc.", "cik": "0000102909" },
+  { "name": "Citadel Advisors LLC", "cik": "0001423053" },
+  { "name": "D. E. Shaw & Co, L.P.", "cik": "0001009268" },
+  { "name": "Two Sigma Investments, LP", "cik": "0001179392" },
+  { "name": "Millennium Management LLC", "cik": "0001273087" },
+  { "name": "AQR Capital Management LLC", "cik": "0001167557" },
+  { "name": "Elliott Investment Management L.P.", "cik": "0001791786" },
+  { "name": "Baupost Group LLC/MA", "cik": "0001061768" },
+  { "name": "Tiger Global Management LLC", "cik": "0001167483" },
+  { "name": "Coatue Management LLC", "cik": "0001135730" },
+  { "name": "Viking Global Investors LP", "cik": "0001103804" },
+  { "name": "Lone Pine Capital LLC", "cik": "0001061165" },
+  { "name": "Maverick Capital Ltd", "cik": "0000934639" },
+  { "name": "Farallon Capital Management LLC", "cik": "0000909661" },
+  { "name": "Greenlight Capital Inc", "cik": "0001079114" },
+  { "name": "Appaloosa LP", "cik": "0001656456" },
+  { "name": "Wellington Management Group LLP", "cik": "0000902219" }
 ]
