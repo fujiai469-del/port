@@ -1338,183 +1338,238 @@
       'Other': '#264653'
     };
 
-    // Sector Japanese names
-    const SECTOR_NAMES_JP = {
-      'Financial': '金融',
-      'Technology': 'テクノロジー',
-      'Healthcare': 'ヘルスケア',
-      'Energy': 'エネルギー',
-      'Consumer': '消費財',
-      'Industrial': '産業',
-      'Communication': '通信',
-      'Materials': '素材',
-      'ETF': 'ETF',
-      'Other': 'その他'
-    };
-
-    // i18n translations
-    const I18N = {
+    const LOCALES = {
       en: {
-        home: 'Home',
-        list: 'List',
-        searchPlaceholder: 'Search funds or tickers...',
-        holdings: 'holdings',
-        top: 'Top',
-        selectFund: 'Select a Fund',
-        selectFundDesc: 'Choose a fund from the list',
-        backToHome: 'Back to Home',
-        ticker: 'Ticker',
-        company: 'Company',
-        sector: 'Sector',
-        allocation: 'Allocation',
-        ranking: 'Ranking',
-        rankingTitle: 'Top Holdings Ranking',
-        rank: '#',
-        avgWeight: 'Avg Weight',
-        totalWeight: 'Total Weight',
-        funds: 'Funds',
-        rankByWeight: 'By Weight',
-        rankByPopularity: 'By Popularity',
-        holdingFunds: 'Held by',
-        overlap: 'Overlap',
-        overlapTitle: 'Fund Overlap Analysis',
-        fundA: 'Fund A',
-        fundB: 'Fund B',
-        selectFundPlaceholder: '-- Select a fund --',
-        commonHoldings: 'Common Holdings',
-        onlyInA: 'Only in Fund A',
-        onlyInB: 'Only in Fund B',
-        weightInA: 'Weight (A)',
-        weightInB: 'Weight (B)',
-        selectBothFunds: 'Select two funds to compare their holdings',
-        noOverlap: 'No common holdings found',
-        flow: 'Flow',
-        flowTitle: 'Smart Money Flow',
-        flowSubtitle: 'Size = number of holding funds, Color = diffusion index (buyers vs sellers)',
-        heldBy: 'Held by',
-        fundsUnit: 'Funds',
-        sentiment: 'Sentiment',
-        buys: 'Buys',
-        sells: 'Sells',
-        netBuy: 'Net Buy',
-        netSell: 'Net Sell',
-        neutral: 'Neutral',
-        dataAsOf: 'Data as of',
-        sectorLegend: 'Sectors',
-        Financial: 'Financial',
-        Technology: 'Technology',
-        Healthcare: 'Healthcare',
-        Energy: 'Energy',
-        Consumer: 'Consumer',
-        Industrial: 'Industrial',
-        Communication: 'Communication',
-        Materials: 'Materials',
-        ETF: 'ETF',
-        Other: 'Other',
-        stocksBreakdown: 'Stocks Breakdown',
-        sectorMomentum: 'Sector Momentum',
-        holdingsTab: 'Holdings',
-        aboutTab: 'About',
-        sortLabel: 'Sort',
-        sortWeight: 'Weight (desc)',
-        sortTicker: 'Ticker (A-Z)',
-        highlightHint: 'Matching tickers are highlighted',
-        fundInfo: 'Fund Info',
-        manager: 'Manager',
-        aum: 'AUM',
-        strategy: 'Strategy',
-        strength: 'Strength / Edge',
-        concentration: 'Top 10 Concentration',
-        description: 'Overview',
-        readMore: 'Read more',
-        readLess: 'Show less',
-        noHoldings: 'No holdings data',
-        noResults: 'No funds found',
-        unknown: 'Unknown',
-        notAvailable: 'N/A',
-        aboutPlaceholder: 'No additional fund description available yet.'
+        app: { title: 'Portfolio Visualizer' },
+        nav: { home: 'Home', list: 'List', ranking: 'Ranking', overlap: 'Overlap', flow: 'Flow' },
+        search: { placeholder: 'Search funds or tickers...' },
+        common: {
+          backToHome: 'Back to Home',
+          holdingsCount: '{{count}} holdings',
+          top: 'Top',
+          ticker: 'Ticker',
+          company: 'Company',
+          sector: 'Sector',
+          allocation: 'Allocation',
+          rank: '#',
+          avgWeight: 'Avg Weight',
+          totalWeight: 'Total Weight',
+          funds: 'Funds',
+          holdingFunds: 'Held by',
+          vs: 'VS',
+          selectFund: 'Select a Fund',
+          selectFundDesc: 'Choose a fund from the list',
+          selectFundPlaceholder: '-- Select a fund --',
+          commonHoldings: 'Common Holdings',
+          onlyInA: 'Only in Fund A',
+          onlyInB: 'Only in Fund B',
+          weightInA: 'Weight (A)',
+          weightInB: 'Weight (B)',
+          selectBothFunds: 'Select two funds to compare their holdings',
+          noOverlap: 'No common holdings found',
+          dataAsOf: 'Data as of',
+          sectorLegend: 'Sectors',
+          sortLabel: 'Sort',
+          sortWeight: 'Weight (desc)',
+          sortTicker: 'Ticker (A-Z)',
+          highlightHint: 'Matching tickers are highlighted',
+          noHoldings: 'No holdings data',
+          noResults: 'No funds found',
+          unknown: 'Unknown',
+          notAvailable: 'N/A',
+          readMore: 'Read more',
+          readLess: 'Show less',
+          asOf: 'as of'
+        },
+        fund: {
+          tabs: { holdings: 'Holdings', about: 'About' },
+          cards: {
+            fundInfo: 'Fund Info',
+            manager: 'Manager',
+            aum: 'AUM',
+            strategy: 'Strategy',
+            strength: 'Strength / Edge',
+            top10: 'Top 10 Concentration'
+          },
+          section: { overview: 'Overview' },
+          aboutPlaceholder: 'No additional fund description available yet.'
+        },
+        ranking: {
+          title: 'Top Holdings Ranking',
+          rankByWeight: 'By Weight',
+          rankByPopularity: 'By Popularity'
+        },
+        overlap: {
+          title: 'Fund Overlap Analysis',
+          fundA: 'Fund A',
+          fundB: 'Fund B'
+        },
+        flow: {
+          title: 'Smart Money Flow',
+          subtitle: 'Size = number of holding funds, Color = diffusion index (buyers vs sellers)',
+          subtitleSectors: 'Sector-level fund flow (net buyers - net sellers)',
+          stocksBreakdown: 'Stocks Breakdown',
+          sectorMomentum: 'Sector Momentum',
+          fundsUnit: 'Funds',
+          sentiment: 'Sentiment',
+          buys: 'Buys',
+          sells: 'Sells',
+          netBuy: 'Net Buy',
+          netSell: 'Net Sell',
+          neutral: 'Neutral',
+          heldBy: 'Held by'
+        },
+        sector: {
+          Financial: 'Financial',
+          Technology: 'Technology',
+          Healthcare: 'Healthcare',
+          Energy: 'Energy',
+          Consumer: 'Consumer',
+          Industrial: 'Industrial',
+          Communication: 'Communication',
+          Materials: 'Materials',
+          ETF: 'ETF',
+          Other: 'Other'
+        }
       },
       ja: {
-        home: 'ホーム',
-        list: 'リスト',
-        searchPlaceholder: 'ファンド名・ティッカーで検索...',
-        holdings: '銘柄',
-        top: 'Top',
-        selectFund: 'ファンドを選択',
-        selectFundDesc: 'リストからファンドを選んでください',
-        backToHome: 'ホームに戻る',
-        ticker: 'ティッカー',
-        company: '企業名',
-        sector: 'セクター',
-        allocation: '配分',
-        ranking: 'ランキング',
-        rankingTitle: '保有銘柄ランキング',
-        rank: '#',
-        avgWeight: '平均比率',
-        totalWeight: '合計比率',
-        funds: 'ファンド数',
-        rankByWeight: '比率順',
-        rankByPopularity: '人気順',
-        holdingFunds: '保有ファンド',
-        overlap: '重複分析',
-        overlapTitle: 'ファンド重複分析',
-        fundA: 'ファンドA',
-        fundB: 'ファンドB',
-        selectFundPlaceholder: '-- ファンドを選択 --',
-        commonHoldings: '共通銘柄',
-        onlyInA: 'Aのみ',
-        onlyInB: 'Bのみ',
-        weightInA: '比率 (A)',
-        weightInB: '比率 (B)',
-        selectBothFunds: '2つのファンドを選んで保有銘柄を比較',
-        noOverlap: '共通銘柄がありません',
-        flow: 'フロー',
-        flowTitle: 'スマートマネーフロー',
-        flowSubtitle: 'サイズ = 保有ファンド数、色 = DI（買い越し vs 売り越しファンド数）',
-        heldBy: '保有',
-        fundsUnit: 'ファンド',
-        sentiment: 'センチメント',
-        buys: '買い',
-        sells: '売り',
-        netBuy: '買い越し',
-        netSell: '売り越し',
-        neutral: '中立',
-        dataAsOf: 'データ基準日',
-        sectorLegend: 'セクター',
-        Financial: '金融',
-        Technology: 'テクノロジー',
-        Healthcare: 'ヘルスケア',
-        Energy: 'エネルギー',
-        Consumer: '消費財',
-        Industrial: '産業',
-        Communication: '通信',
-        Materials: '素材',
-        ETF: 'ETF',
-        Other: 'その他',
-        stocksBreakdown: '銘柄ヒートマップ',
-        sectorMomentum: 'セクター勢い',
-        holdingsTab: '保有銘柄',
-        aboutTab: '概要',
-        sortLabel: '並び替え',
-        sortWeight: '比率順',
-        sortTicker: 'ティッカー順',
-        highlightHint: '一致したティッカーを強調表示',
-        fundInfo: 'ファンド情報',
-        manager: 'マネージャー',
-        aum: '運用規模',
-        strategy: '戦略',
-        strength: '強み',
-        concentration: '集中度（上位10）',
-        description: '概要',
-        readMore: 'もっと見る',
-        readLess: '閉じる',
-        noHoldings: '保有データがありません',
-        noResults: '該当するファンドがありません',
-        unknown: '不明',
-        notAvailable: 'N/A',
-        aboutPlaceholder: 'ファンドの詳細説明はまだ準備中です。'
+        app: { title: 'Portfolio Visualizer' },
+        nav: { home: 'ホーム', list: 'リスト', ranking: 'ランキング', overlap: '重複分析', flow: 'フロー' },
+        search: { placeholder: 'ファンド名・ティッカーで検索...' },
+        common: {
+          backToHome: 'ホームに戻る',
+          holdingsCount: '{{count}} 銘柄',
+          top: 'Top',
+          ticker: 'ティッカー',
+          company: '企業名',
+          sector: 'セクター',
+          allocation: '配分',
+          rank: '#',
+          avgWeight: '平均比率',
+          totalWeight: '合計比率',
+          funds: 'ファンド数',
+          holdingFunds: '保有ファンド',
+          vs: 'VS',
+          selectFund: 'ファンドを選択',
+          selectFundDesc: 'リストからファンドを選んでください',
+          selectFundPlaceholder: '-- ファンドを選択 --',
+          commonHoldings: '共通銘柄',
+          onlyInA: 'Aのみ',
+          onlyInB: 'Bのみ',
+          weightInA: '比率 (A)',
+          weightInB: '比率 (B)',
+          selectBothFunds: '2つのファンドを選んで保有銘柄を比較',
+          noOverlap: '共通銘柄がありません',
+          dataAsOf: 'データ基準日',
+          sectorLegend: 'セクター',
+          sortLabel: '並び替え',
+          sortWeight: '比率順',
+          sortTicker: 'ティッカー順',
+          highlightHint: '一致したティッカーを強調表示',
+          noHoldings: '保有データがありません',
+          noResults: '該当するファンドがありません',
+          unknown: '不明',
+          notAvailable: 'N/A',
+          readMore: 'もっと見る',
+          readLess: '閉じる',
+          asOf: '時点'
+        },
+        fund: {
+          tabs: { holdings: '保有銘柄', about: '概要' },
+          cards: {
+            fundInfo: 'ファンド情報',
+            manager: 'マネージャー',
+            aum: '運用規模',
+            strategy: '戦略',
+            strength: '強み',
+            top10: '集中度（上位10）'
+          },
+          section: { overview: '概要' },
+          aboutPlaceholder: 'ファンドの詳細説明はまだ準備中です。'
+        },
+        ranking: {
+          title: '保有銘柄ランキング',
+          rankByWeight: '比率順',
+          rankByPopularity: '人気順'
+        },
+        overlap: {
+          title: 'ファンド重複分析',
+          fundA: 'ファンドA',
+          fundB: 'ファンドB'
+        },
+        flow: {
+          title: 'スマートマネーフロー',
+          subtitle: 'サイズ = 保有ファンド数、色 = DI（買い越し vs 売り越しファンド数）',
+          subtitleSectors: 'セクター別の資金流入/流出を表示（買い越し銘柄数 - 売り越し銘柄数）',
+          stocksBreakdown: '銘柄ヒートマップ',
+          sectorMomentum: 'セクター勢い',
+          fundsUnit: 'ファンド',
+          sentiment: 'センチメント',
+          buys: '買い',
+          sells: '売り',
+          netBuy: '買い越し',
+          netSell: '売り越し',
+          neutral: '中立',
+          heldBy: '保有'
+        },
+        sector: {
+          Financial: '金融',
+          Technology: 'テクノロジー',
+          Healthcare: 'ヘルスケア',
+          Energy: 'エネルギー',
+          Consumer: '消費財',
+          Industrial: '産業',
+          Communication: '通信',
+          Materials: '素材',
+          ETF: 'ETF',
+          Other: 'その他'
+        }
       }
     };
+
+    function getNestedValue(source, path) {
+      return path.split('.').reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : undefined), source);
+    }
+
+    function interpolate(template, params) {
+      if (!params) return template;
+      return template.replace(/\{\{(\w+)\}\}/g, (match, key) => {
+        const value = params[key];
+        return value !== undefined && value !== null ? value : '';
+      });
+    }
+
+    function translate(language, key, params) {
+      const primary = getNestedValue(LOCALES[language], key);
+      const fallback = getNestedValue(LOCALES.en, key);
+      const text = typeof primary === 'string' ? primary : (typeof fallback === 'string' ? fallback : '');
+      return interpolate(text, params);
+    }
+
+    function getInitialLanguage() {
+      if (typeof window === 'undefined') return 'en';
+      const stored = window.localStorage.getItem('pv_lang');
+      if (stored === 'en' || stored === 'ja') return stored;
+      const browser = (navigator.language || '').toLowerCase();
+      return browser.startsWith('ja') ? 'ja' : 'en';
+    }
+
+    function resolveLocalizedValue(value, language) {
+      if (!value) return '';
+      if (typeof value === 'string') return value;
+      if (typeof value === 'object') return value[language] || value.en || '';
+      return '';
+    }
+
+    const I18nContext = React.createContext({
+      language: 'en',
+      setLanguage: () => {},
+      t: (key, params) => translate('en', key, params)
+    });
+
+    function useI18n() {
+      return React.useContext(I18nContext);
+    }
 
     function normalizeTicker(value) {
       return String(value || '').trim().toUpperCase();
@@ -1537,318 +1592,341 @@
       return `$${Number(valueUsd).toLocaleString()}`;
     }
 
+    const UNKNOWN_TEXT = { en: 'Unknown', ja: '不明' };
+    const NO_PUBLIC_INFO = {
+      en: 'No reliable public AUM/strategy found quickly - leave as Unknown for now.',
+      ja: '信頼できる公開情報が見つからないため、暫定で不明としています。'
+    };
+    const NO_PROFILE_INFO = {
+      en: 'No reliable public fund profile found quickly - leave Unknown.',
+      ja: '信頼できる公開プロファイルが見つからないため、暫定で不明としています。'
+    };
+    const NAME_OVERLAP_INFO = {
+      en: 'Name overlaps with non-investment business entities; leave Unknown until verified.',
+      ja: '非投資系事業体と名称が重複するため、確認できるまで不明としています。'
+    };
+
     const FUND_PROFILE_ENTRIES = [
       {
         key: 'Oaktree Fund (Oaktree Fund Advisors, LLC)',
         manager: 'Oaktree Capital Management',
         aum: { valueUsd: 223000000000, asOf: 'unknown' },
-        strategy: 'Alternative / credit-focused (distressed debt, private credit, real assets, etc.)',
-        strength: 'Deep credit expertise, distressed & opportunistic investing',
-        overview: 'Global alternative investment manager known for credit and opportunistic strategies.'
+        strategy: {
+          en: 'Alternative / credit-focused (distressed debt, private credit, real assets, etc.)',
+          ja: 'オルタナティブ/クレジット中心（ディストレスト債、プライベートクレジット、実物資産など）'
+        },
+        strength: {
+          en: 'Deep credit expertise, distressed & opportunistic investing',
+          ja: 'クレジット領域の深い専門性、ディストレストや機会投資に強み'
+        },
+        overview: {
+          en: 'Global alternative investment manager known for credit and opportunistic strategies.',
+          ja: 'クレジットやオポチュニスティック戦略で知られるグローバルなオルタナティブ運用会社。'
+        }
       },
       {
         key: 'Nelson Peltz (Trian Fund Management)',
         manager: 'Trian Fund Management (Nelson Peltz)',
         aum: { valueUsd: 6300000000, asOf: '2025-07-15' },
-        strategy: 'Activist / concentrated equity',
-        strength: 'Activism, operational improvement, concentrated bets',
-        overview: 'Multi-billion dollar activist manager founded by Nelson Peltz and partners.'
+        strategy: { en: 'Activist / concentrated equity', ja: 'アクティビスト/集中株式' },
+        strength: { en: 'Activism, operational improvement, concentrated bets', ja: 'アクティビズム、経営改善、集中投資' },
+        overview: { en: 'Multi-billion dollar activist manager founded by Nelson Peltz and partners.', ja: 'ネルソン・ペルツらが創設したアクティビスト運用会社。' }
       },
       {
         key: 'Kohlberg Kravis Roberts & Co. L.p.',
         manager: 'KKR',
         aum: { valueUsd: 744000000000, asOf: '2025-12-31' },
-        strategy: 'Global alternatives (private equity, credit, infrastructure, real estate)',
-        strength: 'Scale, diversified platforms, fundraising & deployment capacity',
-        overview: 'Large global alternative asset manager operating across PE/credit/infra/real estate.'
+        strategy: { en: 'Global alternatives (private equity, credit, infrastructure, real estate)', ja: 'グローバル・オルタナティブ（PE、クレジット、インフラ、不動産）' },
+        strength: { en: 'Scale, diversified platforms, fundraising & deployment capacity', ja: '規模、分散プラットフォーム、資金調達と投資実行力' },
+        overview: { en: 'Large global alternative asset manager operating across PE/credit/infra/real estate.', ja: 'PE/クレジット/インフラ/不動産にまたがる大手オルタナティブ運用会社。' }
       },
       {
         key: 'Lansdowne Partners (UK) Llp',
         manager: 'Lansdowne Partners (UK) LLP',
         aum: { valueUsd: 8000000000, asOf: '2025-06-18' },
-        strategy: 'Fundamental equity investing (historically hedge -> more long-only)',
-        strength: 'Fundamental stock picking (Europe/Global equities)',
-        overview: 'UK-based equity investor known for fundamental research and concentrated ideas.'
+        strategy: { en: 'Fundamental equity investing (historically hedge -> more long-only)', ja: 'ファンダメンタル株式投資（歴史的にはヘッジ、現在はロング寄り）' },
+        strength: { en: 'Fundamental stock picking (Europe/Global equities)', ja: 'ファンダメンタルな銘柄選択（欧州/グローバル株）' },
+        overview: { en: 'UK-based equity investor known for fundamental research and concentrated ideas.', ja: '英国拠点の株式投資家。ファンダメンタル分析と集中アイデアで知られる。' }
       },
       {
         key: 'Washington State Investment Board',
         manager: 'Washington State Investment Board (WSIB)',
         aum: { valueUsd: 230500000000, asOf: '2025-09-30' },
-        strategy: 'Public pension / multi-asset',
-        strength: 'Long-horizon asset allocation across public + private markets',
-        overview: 'State pension investment board managing retirement and other state funds.'
+        strategy: { en: 'Public pension / multi-asset', ja: '公的年金/マルチアセット' },
+        strength: { en: 'Long-horizon asset allocation across public + private markets', ja: '公募・私募を含む長期アセットアロケーション' },
+        overview: { en: 'State pension investment board managing retirement and other state funds.', ja: '州の年金や関連資金を運用する投資委員会。' }
       },
       {
         key: 'Engine No. 1 Llc',
         manager: 'Engine No. 1',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Active ownership / ESG-influenced engagement (varies by vehicle)',
-        strength: 'Shareholder engagement & governance campaigns',
-        overview: 'Active ownership manager; AUM/vehicle details vary by product.'
+        strategy: { en: 'Active ownership / ESG-influenced engagement (varies by vehicle)', ja: 'アクティブオーナーシップ/ESG影響型エンゲージメント（ビークルにより異なる）' },
+        strength: { en: 'Shareholder engagement & governance campaigns', ja: '株主エンゲージメントとガバナンス改革' },
+        overview: { en: 'Active ownership manager; AUM/vehicle details vary by product.', ja: 'アクティブオーナーシップ運用。AUMやビークルは商品により異なる。' }
       },
       {
         key: 'Windacre Partnership',
         manager: 'WindAcre Partnership',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Long-only concentrated equity',
-        strength: 'Concentrated stock picking, owner-oriented long-term approach',
-        overview: 'Long-only concentrated equity manager (no shorting/hedging per disclosures).'
+        strategy: { en: 'Long-only concentrated equity', ja: 'ロングオンリーの集中株式' },
+        strength: { en: 'Concentrated stock picking, owner-oriented long-term approach', ja: '集中投資・オーナー志向の長期アプローチ' },
+        overview: { en: 'Long-only concentrated equity manager (no shorting/hedging per disclosures).', ja: 'ロングオンリーの集中株式運用（開示上はショート/ヘッジなし）。' }
       },
       {
         key: 'Oakcliff Capital',
         manager: 'Oakcliff Capital',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Unknown',
-        strength: 'Unknown',
-        overview: 'No reliable public AUM/strategy found quickly—leave as Unknown for now.'
+        strategy: UNKNOWN_TEXT,
+        strength: UNKNOWN_TEXT,
+        overview: NO_PUBLIC_INFO
       },
       {
         key: 'Windacre Partnership',
         manager: 'WindAcre Partnership',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Long-only concentrated equity',
-        strength: 'Concentrated stock picking, long-term orientation',
-        overview: 'Long-only concentrated equity; may use limited leverage depending on mandate.'
+        strategy: { en: 'Long-only concentrated equity', ja: 'ロングオンリーの集中株式' },
+        strength: { en: 'Concentrated stock picking, long-term orientation', ja: '集中投資と長期志向の運用' },
+        overview: { en: 'Long-only concentrated equity; may use limited leverage depending on mandate.', ja: 'ロングオンリーの集中株式。マンデートにより限定的なレバレッジを用いる場合がある。' }
       },
       {
         key: 'Snow Phipps Group',
         manager: 'Snow Phipps Group',
         aum: { valueUsd: 1500000000, asOf: '2025-04-29' },
-        strategy: 'Private equity (middle-market buyouts) / some public disclosures exist',
-        strength: 'Middle-market acquisitions + operating partner model',
-        overview: 'Middle-market investment firm; AUM reported around ~$1.5B in some filings.'
+        strategy: { en: 'Private equity (middle-market buyouts) / some public disclosures exist', ja: 'プライベートエクイティ（ミドルマーケット・バイアウト）/一部公開開示あり' },
+        strength: { en: 'Middle-market acquisitions + operating partner model', ja: 'ミドルマーケット買収とオペレーティングパートナーモデル' },
+        overview: { en: 'Middle-market investment firm; AUM reported around ~$1.5B in some filings.', ja: 'ミドルマーケット投資会社。AUMは約15億ドルと報告されることがある。' }
       },
       {
         key: 'Foresite Capital Management V, Llc',
         manager: 'Foresite Capital',
         aum: { valueUsd: 3500000000, asOf: '2024-06-30' },
-        strategy: 'Healthcare / life sciences venture & growth equity',
-        strength: 'Deep healthcare specialization, multi-stage investing',
-        overview: 'Healthcare and life sciences investment firm, multi-stage platform.'
+        strategy: { en: 'Healthcare / life sciences venture & growth equity', ja: 'ヘルスケア/ライフサイエンスのベンチャー・グロース投資' },
+        strength: { en: 'Deep healthcare specialization, multi-stage investing', ja: 'ヘルスケア特化、マルチステージ投資' },
+        overview: { en: 'Healthcare and life sciences investment firm, multi-stage platform.', ja: 'ヘルスケア・ライフサイエンスに特化したマルチステージ投資会社。' }
       },
       {
         key: 'Warren Buffett (Berkshire Hathaway)',
         manager: 'Berkshire Hathaway (Warren Buffett)',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Public holding company / long-term value & quality businesses',
-        strength: 'Capital allocation, high-quality businesses, insurance float',
-        overview: 'Not a fund; holding-company style capital allocator.'
+        strategy: { en: 'Public holding company / long-term value & quality businesses', ja: '持株会社型/長期のバリュー・高品質ビジネス' },
+        strength: { en: 'Capital allocation, high-quality businesses, insurance float', ja: '資本配分力、高品質企業、保険フロート' },
+        overview: { en: 'Not a fund; holding-company style capital allocator.', ja: 'ファンドではなく持株会社型の資本配分者。' }
       },
       {
         key: 'Bill Gates (Bill & Melinda Gates Foundation Trust)',
         manager: 'Bill & Melinda Gates Foundation Trust',
         aum: { valueUsd: 86000000000, asOf: '2025-07-31' },
-        strategy: 'Endowment-style (trust invests; transfers to foundation)',
-        strength: 'Large endowment portfolio; long-term capital growth to fund grants',
-        overview: 'The Trust manages the endowment assets for the Gates Foundation.'
+        strategy: { en: 'Endowment-style (trust invests; transfers to foundation)', ja: 'エンダウメント型（信託が運用し財団に移転）' },
+        strength: { en: 'Large endowment portfolio; long-term capital growth to fund grants', ja: '大規模エンダウメント、長期的な資本成長' },
+        overview: { en: 'The Trust manages the endowment assets for the Gates Foundation.', ja: 'ゲイツ財団の資産を運用する信託。' }
       },
       {
         key: 'Bridgewater Associates (Ray Dalio)',
         manager: 'Bridgewater Associates',
         aum: { valueUsd: 92000000000, asOf: '2025-09-30' },
-        strategy: 'Global macro (Pure Alpha / All Weather style)',
-        strength: 'Macro risk-parity & systematic/ discretionary macro processes',
-        overview: 'Large global macro manager known for Pure Alpha and All Weather frameworks.'
+        strategy: { en: 'Global macro (Pure Alpha / All Weather style)', ja: 'グローバルマクロ（ピュア・アルファ/オールウェザー）' },
+        strength: { en: 'Macro risk-parity & systematic/ discretionary macro processes', ja: 'マクロのリスクパリティ、体系的/裁量的プロセス' },
+        overview: { en: 'Large global macro manager known for Pure Alpha and All Weather frameworks.', ja: 'ピュア・アルファやオールウェザーで知られる大手マクロ運用。' }
       },
       {
         key: 'Renaissance Technologies (Jim Simons / Medallion)',
         manager: 'Renaissance Technologies',
         aum: { valueUsd: 91958327898, asOf: '2025-03-28' },
-        strategy: 'Quant / systematic',
-        strength: 'Statistical modeling, systematic trading infrastructure',
-        overview: 'Quantitative investment firm; Medallion is famous (capacity constrained).'
+        strategy: { en: 'Quant / systematic', ja: 'クオンツ/システマティック' },
+        strength: { en: 'Statistical modeling, systematic trading infrastructure', ja: '統計モデルとシステム取引基盤' },
+        overview: { en: 'Quantitative investment firm; Medallion is famous (capacity constrained).', ja: '定量運用会社。メダリオンは有名でキャパ制約がある。' }
       },
       {
         key: 'Scion Asset Management (Michael Burry)',
         manager: 'Scion Asset Management (Michael Burry)',
         aum: { valueUsd: 1381198076, asOf: 'latest 13F portfolio value proxy' },
-        strategy: 'Discretionary value / opportunistic (13F reflects public equity sleeve)',
-        strength: 'Contrarian positioning; opportunistic thematic bets',
-        overview: 'Manager known for contrarian positioning; public filings reflect only part of exposure.'
+        strategy: { en: 'Discretionary value / opportunistic (13F reflects public equity sleeve)', ja: '裁量的バリュー/オポチュニスティック（13Fは公開株のみ）' },
+        strength: { en: 'Contrarian positioning; opportunistic thematic bets', ja: '逆張りのポジション、テーマ性のある機動的投資' },
+        overview: { en: 'Manager known for contrarian positioning; public filings reflect only part of exposure.', ja: '逆張りで知られる運用者。13Fは全体の一部のみを反映。' }
       },
       {
         key: 'ARK Investment Management (Cathie Wood)',
         manager: 'ARK Investment Management',
         aum: { valueUsd: 13007845312, asOf: '2025-05-05' },
-        strategy: 'Thematic growth (disruptive innovation)',
-        strength: 'High-conviction innovation themes (AI, genomics, robotics, etc.)',
-        overview: 'Active thematic manager focused on disruptive innovation.'
+        strategy: { en: 'Thematic growth (disruptive innovation)', ja: 'テーマ型グロース（ディスラプティブ）' },
+        strength: { en: 'High-conviction innovation themes (AI, genomics, robotics, etc.)', ja: 'AI/ゲノミクス/ロボティクスなどの高信念テーマ' },
+        overview: { en: 'Active thematic manager focused on disruptive innovation.', ja: 'ディスラプティブ・イノベーションに特化したアクティブ運用。' }
       },
       {
         key: 'Pershing Square Capital Management (Bill Ackman)',
         manager: 'Pershing Square Capital Management',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Concentrated, high-conviction equity + occasional hedges',
-        strength: 'Activism/engagement, concentrated portfolio management',
-        overview: 'Concentrated manager known for high-conviction positions and engagement.'
+        strategy: { en: 'Concentrated, high-conviction equity + occasional hedges', ja: '集中株式＋必要に応じてヘッジ' },
+        strength: { en: 'Activism/engagement, concentrated portfolio management', ja: 'アクティビズム/エンゲージメントと集中運用' },
+        overview: { en: 'Concentrated manager known for high-conviction positions and engagement.', ja: '高信念の集中投資とエンゲージメントで知られる。' }
       },
       {
         key: 'Third Point (Daniel Loeb)',
         manager: 'Third Point LLC',
         aum: { valueUsd: 20800000000, asOf: '2025-06' },
-        strategy: 'Event-driven / activist-tilted, multi-strategy',
-        strength: 'Activist engagement + opportunistic/event-driven allocation',
-        overview: 'Institutional investment manager led by Daniel Loeb.'
+        strategy: { en: 'Event-driven / activist-tilted, multi-strategy', ja: 'イベントドリブン/アクティビスト寄りのマルチストラテジー' },
+        strength: { en: 'Activist engagement + opportunistic/event-driven allocation', ja: 'アクティビスト・エンゲージメントと機会/イベント投資' },
+        overview: { en: 'Institutional investment manager led by Daniel Loeb.', ja: 'ダニエル・ローブ率いる機関投資家。' }
       },
       {
         key: 'Soros Fund Management (George Soros)',
         manager: 'Soros Fund Management',
         aum: { valueUsd: 28000000000, asOf: 'unknown' },
-        strategy: 'Family office / multi-asset',
-        strength: 'Agile multi-asset positioning, global opportunity set',
-        overview: 'Global asset manager/family office serving as principal manager for OSF-related capital.'
+        strategy: { en: 'Family office / multi-asset', ja: 'ファミリーオフィス/マルチアセット' },
+        strength: { en: 'Agile multi-asset positioning, global opportunity set', ja: 'グローバルで機動的なマルチアセット配分' },
+        overview: { en: 'Global asset manager/family office serving as principal manager for OSF-related capital.', ja: 'OSF関連資本を運用するグローバルなファミリーオフィス。' }
       },
       {
         key: 'BlackRock Inc.',
         manager: 'BlackRock',
         aum: { valueUsd: 14000000000000, asOf: '2025-12-31' },
-        strategy: 'Global asset management (index, active, alternatives, cash mgmt)',
-        strength: 'Scale, iShares ETF platform, broad distribution',
-        overview: "World's largest asset manager (AUM disclosed in earnings releases)."
+        strategy: { en: 'Global asset management (index, active, alternatives, cash mgmt)', ja: 'グローバル総合運用（指数、アクティブ、オルタ、キャッシュ）' },
+        strength: { en: 'Scale, iShares ETF platform, broad distribution', ja: '規模、iShares ETFプラットフォーム、広い販売網' },
+        overview: { en: "World's largest asset manager (AUM disclosed in earnings releases).", ja: '世界最大の資産運用会社（AUMは決算で開示）。' }
       },
       {
         key: 'Vanguard Group Inc.',
         manager: 'The Vanguard Group',
         aum: { valueUsd: 12000000000000, asOf: '2025' },
-        strategy: 'Index-focused asset management',
-        strength: 'Low-cost indexing, broad product set',
-        overview: 'Large global asset manager known for low-cost index funds and ETFs.'
+        strategy: { en: 'Index-focused asset management', ja: 'インデックス中心の運用' },
+        strength: { en: 'Low-cost indexing, broad product set', ja: '低コスト指数と幅広い商品' },
+        overview: { en: 'Large global asset manager known for low-cost index funds and ETFs.', ja: '低コスト指数で知られる大手運用会社。' }
       },
       {
         key: 'Technology Crossover Management X, Ltd.',
         manager: 'TCV (Technology Crossover Ventures)',
         aum: { valueUsd: null, asOf: '2025-09-30' },
-        strategy: 'Growth equity (technology)',
-        strength: 'Late-stage/growth tech investing',
-        overview: 'Growth equity platform; AUM figure not clearly stated on the cited page.'
+        strategy: { en: 'Growth equity (technology)', ja: '成長株（テクノロジー）' },
+        strength: { en: 'Late-stage/growth tech investing', ja: 'レイトステージ/グロースのテック投資' },
+        overview: { en: 'Growth equity platform; AUM figure not clearly stated on the cited page.', ja: '成長株投資プラットフォーム。AUMは明確に示されていない。' }
       },
       {
         key: 'Cabot-Wellington',
         manager: 'Cabot-Wellington, LLC',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Single-family office / multi-asset (public filings show ETF usage)',
-        strength: 'Long-horizon asset allocation',
-        overview: 'Family office style manager; public AUM not consistently available.'
+        strategy: { en: 'Single-family office / multi-asset (public filings show ETF usage)', ja: 'シングルファミリーオフィス/マルチアセット（開示ではETF利用）' },
+        strength: { en: 'Long-horizon asset allocation', ja: '長期視点の資産配分' },
+        overview: { en: 'Family office style manager; public AUM not consistently available.', ja: 'ファミリーオフィス型の運用者。公表AUMは一貫していない。' }
       },
       {
         key: 'Sharp Capital',
         manager: 'Sharp Capital',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Unknown',
-        strength: 'Unknown',
-        overview: 'No reliable public AUM/strategy found quickly—leave Unknown for now.'
+        strategy: UNKNOWN_TEXT,
+        strength: UNKNOWN_TEXT,
+        overview: NO_PUBLIC_INFO
       },
       {
         key: 'Vitol Holding b.v.',
         manager: 'Vitol',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Commodity trading / energy (corporate treasury may hold securities)',
-        strength: 'Energy & commodities expertise',
-        overview: 'Primarily an energy/commodities firm; securities holdings may reflect treasury/investment entities.'
+        strategy: { en: 'Commodity trading / energy (corporate treasury may hold securities)', ja: 'コモディティ/エネルギー取引（財務運用として証券保有の可能性）' },
+        strength: { en: 'Energy & commodities expertise', ja: 'エネルギー/コモディティの専門性' },
+        overview: { en: 'Primarily an energy/commodities firm; securities holdings may reflect treasury/investment entities.', ja: '主にエネルギー/コモディティ企業で、証券保有は財務投資の可能性がある。' }
       },
       {
         key: 'Washington University',
         manager: 'Washington University (Endowment)',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'University endowment / multi-asset',
-        strength: 'Long-horizon diversified allocation',
-        overview: 'Endowment-style allocator; specific AUM not fetched here.'
+        strategy: { en: 'University endowment / multi-asset', ja: '大学基金/マルチアセット' },
+        strength: { en: 'Long-horizon diversified allocation', ja: '長期分散型の資産配分' },
+        overview: { en: 'Endowment-style allocator; specific AUM not fetched here.', ja: '大学エンダウメント型。具体的なAUMは未取得。' }
       },
       {
         key: 'Trustees of Dartmouth College',
         manager: 'Dartmouth College (Endowment)',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'University endowment / multi-asset',
-        strength: 'Long-horizon diversified allocation',
-        overview: 'Endowment-style allocator; specific AUM not fetched here.'
+        strategy: { en: 'University endowment / multi-asset', ja: '大学基金/マルチアセット' },
+        strength: { en: 'Long-horizon diversified allocation', ja: '長期分散型の資産配分' },
+        overview: { en: 'Endowment-style allocator; specific AUM not fetched here.', ja: '大学エンダウメント型。具体的なAUMは未取得。' }
       },
       {
         key: 'VK Services, Llc',
         manager: 'VK Services, LLC',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Unknown',
-        strength: 'Unknown',
-        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+        strategy: UNKNOWN_TEXT,
+        strength: UNKNOWN_TEXT,
+        overview: NO_PROFILE_INFO
       },
       {
         key: 'Trybe Capital',
         manager: 'Trybe Capital',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Unknown',
-        strength: 'Unknown',
-        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+        strategy: UNKNOWN_TEXT,
+        strength: UNKNOWN_TEXT,
+        overview: NO_PROFILE_INFO
       },
       {
         key: 'Tri Locum Partners',
         manager: 'Tri Locum Partners',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Unknown',
-        strength: 'Unknown',
-        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+        strategy: UNKNOWN_TEXT,
+        strength: UNKNOWN_TEXT,
+        overview: NO_PROFILE_INFO
       },
       {
         key: 'Vantage Consulting',
         manager: 'Vantage Consulting',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Unknown',
-        strength: 'Unknown',
-        overview: 'Name overlaps with non-investment businesses; leave Unknown until verified.'
+        strategy: UNKNOWN_TEXT,
+        strength: UNKNOWN_TEXT,
+        overview: NAME_OVERLAP_INFO
       },
       {
         key: 'Pivotal Bioventure',
         manager: 'Pivotal Bioventure',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Unknown',
-        strength: 'Unknown',
-        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+        strategy: UNKNOWN_TEXT,
+        strength: UNKNOWN_TEXT,
+        overview: NO_PROFILE_INFO
       },
       {
         key: 'Newgen Asset Management Ltd',
         manager: 'Newgen Asset Management',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Unknown',
-        strength: 'Unknown',
-        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+        strategy: UNKNOWN_TEXT,
+        strength: UNKNOWN_TEXT,
+        overview: NO_PROFILE_INFO
       },
       {
         key: 'Moon Capital Management Lp',
         manager: 'Moon Capital Management',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Unknown',
-        strength: 'Unknown',
-        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+        strategy: UNKNOWN_TEXT,
+        strength: UNKNOWN_TEXT,
+        overview: NO_PROFILE_INFO
       },
       {
         key: 'i.g.y. Ltd',
         manager: 'i.g.y. Ltd',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Unknown',
-        strength: 'Unknown',
-        overview: 'Name overlaps with non-investment business entities; leave Unknown until verified.'
+        strategy: UNKNOWN_TEXT,
+        strength: UNKNOWN_TEXT,
+        overview: NAME_OVERLAP_INFO
       },
       {
         key: 'Hpc Germany Gmbh & Co. Kg',
         manager: 'HPC Germany GmbH & Co. KG',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Unknown',
-        strength: 'Unknown',
-        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+        strategy: UNKNOWN_TEXT,
+        strength: UNKNOWN_TEXT,
+        overview: NO_PROFILE_INFO
       },
       {
         key: 'Helikon Investments',
         manager: 'Helikon Investments',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Unknown',
-        strength: 'Unknown',
-        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+        strategy: UNKNOWN_TEXT,
+        strength: UNKNOWN_TEXT,
+        overview: NO_PROFILE_INFO
       },
       {
         key: 'Elemental Capital Partners Llc',
         manager: 'Elemental Capital Partners',
         aum: { valueUsd: null, asOf: null },
-        strategy: 'Unknown',
-        strength: 'Unknown',
-        overview: 'No reliable public fund profile found quickly—leave Unknown.'
+        strategy: UNKNOWN_TEXT,
+        strength: UNKNOWN_TEXT,
+        overview: NO_PROFILE_INFO
       }
     ];
 
@@ -1856,13 +1934,12 @@
       const key = normalizeFundKey(entry.key);
       const aumValue = formatAumValue(entry.aum?.valueUsd);
       const asOf = entry.aum?.asOf && entry.aum?.asOf !== 'unknown' ? entry.aum.asOf : null;
-      const aumLabel = aumValue ? (asOf ? `${aumValue} (as of ${asOf})` : aumValue) : null;
       acc[key] = {
         manager: entry.manager,
-        aum: aumLabel,
+        aum: { value: aumValue, asOf },
         strategy: entry.strategy,
         strength: entry.strength,
-        description: entry.overview
+        overview: entry.overview
       };
       return acc;
     }, {});
@@ -1969,30 +2046,26 @@
       return SECTOR_COLORS[getHoldingSector(holding)];
     }
 
-    function getHoldingSectorName(holding, lang) {
+    function getHoldingSectorName(holding, language) {
       const sector = getHoldingSector(holding);
-      return lang === 'ja' ? (SECTOR_NAMES_JP[sector] || sector) : sector;
+      return translate(language, `sector.${sector}`) || sector;
     }
 
     function getSectorColor(ticker) {
       return SECTOR_COLORS[getSector(ticker)];
     }
 
-    function getSectorName(ticker, lang) {
+    function getSectorName(ticker, language) {
       const sector = getSector(ticker);
-      return lang === 'ja' ? (SECTOR_NAMES_JP[sector] || sector) : sector;
+      return translate(language, `sector.${sector}`) || sector;
     }
 
-    // Language context
-    const LangContext = React.createContext('en');
-
     function SectorLegend({ activeSector, onSectorClick }) {
-      const lang = React.useContext(LangContext);
-      const t = I18N[lang];
+      const { t } = useI18n();
       const sectors = Object.keys(SECTOR_COLORS);
       return (
         <div className="sector-legend">
-          <div className="sector-legend-title">{t.sectorLegend}</div>
+          <div className="sector-legend-title">{t('common.sectorLegend')}</div>
           {sectors.map(s => {
             const isActive = activeSector === s;
             const isDimmed = activeSector && !isActive;
@@ -2001,7 +2074,7 @@
                 className={`sector-legend-item ${isActive ? 'active' : ''} ${isDimmed ? 'dimmed' : ''}`}
                 onClick={() => onSectorClick ? onSectorClick(isActive ? null : s) : null}>
                 <div className="sector-legend-dot" style={{ background: SECTOR_COLORS[s] }}></div>
-                <span className="sector-legend-label">{t[s] || s}</span>
+                <span className="sector-legend-label">{t(`sector.${s}`) || s}</span>
               </div>
             );
           })}
@@ -2013,13 +2086,13 @@
       const [tab, setTab] = React.useState('home');
       const [selected, setSelected] = React.useState(null);
       const [search, setSearch] = React.useState('');
-      const [lang, setLang] = React.useState('en');
+      const [language, setLanguage] = React.useState(getInitialLanguage);
       const [funds, setFunds] = React.useState([]);
       const [dataAsOf, setDataAsOf] = React.useState(FALLBACK_AS_OF);
       const [layout, setLayout] = React.useState(
         getLayoutMode(typeof window !== 'undefined' ? window.innerWidth : BREAKPOINTS.desktop)
       );
-      const t = I18N[lang];
+      const t = React.useCallback((key, params) => translate(language, key, params), [language]);
 
       React.useEffect(() => {
         let cancelled = false;
@@ -2060,6 +2133,12 @@
       }, []);
 
       React.useEffect(() => {
+        if (typeof window === 'undefined') return;
+        window.localStorage.setItem('pv_lang', language);
+        document.documentElement.lang = language;
+      }, [language]);
+
+      React.useEffect(() => {
         const handleResize = () => setLayout(getLayoutMode(window.innerWidth));
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
@@ -2084,24 +2163,24 @@
       };
 
       return (
-        <LangContext.Provider value={lang}>
+        <I18nContext.Provider value={{ language, setLanguage, t }}>
           <div className={`app-shell mode-${layout}`}>
             <header className="header">
               <div className="header-content">
-                <div className="logo">Portfolio Visualizer</div>
+                <div className="logo">{t('app.title')}</div>
                 <div className="tabs">
-                  <button className={`tab ${tab === 'home' || tab === 'detail' ? 'active' : ''}`} onClick={() => { setTab('home'); setSelected(null); }}>{t.home}</button>
-                  <button className={`tab ${tab === 'list' ? 'active' : ''}`} onClick={() => setTab('list')}>{t.list}</button>
-                  <button className={`tab ${tab === 'ranking' ? 'active' : ''}`} onClick={() => setTab('ranking')}>{t.ranking}</button>
-                  <button className={`tab ${tab === 'overlap' ? 'active' : ''}`} onClick={() => setTab('overlap')}>{t.overlap}</button>
-                  <button className={`tab ${tab === 'flow' ? 'active' : ''}`} onClick={() => setTab('flow')}>{t.flow}</button>
+                  <button className={`tab ${tab === 'home' || tab === 'detail' ? 'active' : ''}`} onClick={() => { setTab('home'); setSelected(null); }}>{t('nav.home')}</button>
+                  <button className={`tab ${tab === 'list' ? 'active' : ''}`} onClick={() => setTab('list')}>{t('nav.list')}</button>
+                  <button className={`tab ${tab === 'ranking' ? 'active' : ''}`} onClick={() => setTab('ranking')}>{t('nav.ranking')}</button>
+                  <button className={`tab ${tab === 'overlap' ? 'active' : ''}`} onClick={() => setTab('overlap')}>{t('nav.overlap')}</button>
+                  <button className={`tab ${tab === 'flow' ? 'active' : ''}`} onClick={() => setTab('flow')}>{t('nav.flow')}</button>
                 </div>
                 <div className="header-right">
-                  <input type="text" className="search-box" placeholder={t.searchPlaceholder} value={search} onChange={e => setSearch(e.target.value)} />
-                  <div className="data-timestamp">{t.dataAsOf}: {dataAsOf}</div>
+                  <input type="text" className="search-box" placeholder={t('search.placeholder')} value={search} onChange={e => setSearch(e.target.value)} />
+                  <div className="data-timestamp">{t('common.dataAsOf')}: {dataAsOf}</div>
                   <div className="lang-toggle">
-                    <button className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => setLang('en')}>EN</button>
-                    <button className={`lang-btn ${lang === 'ja' ? 'active' : ''}`} onClick={() => setLang('ja')}>JP</button>
+                    <button className={`lang-btn ${language === 'en' ? 'active' : ''}`} onClick={() => setLanguage('en')}>EN</button>
+                    <button className={`lang-btn ${language === 'ja' ? 'active' : ''}`} onClick={() => setLanguage('ja')}>JP</button>
                   </div>
                 </div>
               </div>
@@ -2115,13 +2194,12 @@
               {tab === 'flow' && <FlowView />}
             </main>
           </div>
-        </LangContext.Provider>
+        </I18nContext.Provider>
       );
     }
 
     function HomeView({ funds, onSelect }) {
-      const lang = React.useContext(LangContext);
-      const t = I18N[lang];
+      const { t } = useI18n();
       const [activeSector, setActiveSector] = React.useState(null);
 
       const sortedFunds = React.useMemo(() => {
@@ -2137,8 +2215,8 @@
         return (
           <div className="empty-state">
             <div className="empty-icon">🔍</div>
-            <h2>{t.noResults}</h2>
-            <p>{t.selectFundDesc}</p>
+            <h2>{t('common.noResults')}</h2>
+            <p>{t('common.selectFundDesc')}</p>
           </div>
         );
       }
@@ -2156,8 +2234,7 @@
     function FundCard({ fund, onClick }) {
       const chartRef = React.useRef(null);
       const chartInstance = React.useRef(null);
-      const lang = React.useContext(LangContext);
-      const t = I18N[lang];
+      const { t } = useI18n();
 
       React.useEffect(() => {
         if (chartInstance.current) chartInstance.current.destroy();
@@ -2178,22 +2255,21 @@
           <div className="fund-card-chart"><canvas ref={chartRef}></canvas></div>
           <div className="fund-card-name">{fund.name}</div>
           <div className="fund-card-meta">
-            <span>{fund.holdings.length} {t.holdings}</span>
-            <span>{t.top}: {fund.holdings[0]?.ticker}</span>
+            <span>{t('common.holdingsCount', { count: fund.holdings.length })}</span>
+            <span>{t('common.top')}: {fund.holdings[0]?.ticker}</span>
           </div>
         </div>
       );
     }
 
     function ListView({ funds, selected, onSelect, searchTerm }) {
-      const lang = React.useContext(LangContext);
-      const t = I18N[lang];
+      const { t } = useI18n();
       if (!funds || funds.length === 0) {
         return (
           <div className="empty-state">
             <div className="empty-icon">🔍</div>
-            <h2>{t.noResults}</h2>
-            <p>{t.selectFundDesc}</p>
+            <h2>{t('common.noResults')}</h2>
+            <p>{t('common.selectFundDesc')}</p>
           </div>
         );
       }
@@ -2205,7 +2281,7 @@
                 <div key={i} className={`list-item ${selected?.name === fund.name ? 'active' : ''}`} onClick={() => onSelect(fund)}>{fund.name}</div>
               ))}
             </div>
-            <div>{selected ? <DetailView fund={selected} searchTerm={searchTerm} /> : <div className="empty-state"><div className="empty-icon">📊</div><h2>{t.selectFund}</h2><p>{t.selectFundDesc}</p></div>}</div>
+            <div>{selected ? <DetailView fund={selected} searchTerm={searchTerm} /> : <div className="empty-state"><div className="empty-icon">📊</div><h2>{t('common.selectFund')}</h2><p>{t('common.selectFundDesc')}</p></div>}</div>
           </div>
           <SectorLegend />
         </div>
@@ -2216,8 +2292,7 @@
       const chartRef = React.useRef(null);
       const chartInstance = React.useRef(null);
       const matchRowRef = React.useRef(null);
-      const lang = React.useContext(LangContext);
-      const t = I18N[lang];
+      const { t, language } = useI18n();
       const [detailTab, setDetailTab] = React.useState('holdings');
       const [sortMode, setSortMode] = React.useState('weight');
       const [isExpanded, setIsExpanded] = React.useState(false);
@@ -2282,7 +2357,7 @@
                   },
                   label: function (ctx) {
                     const holding = holdings[ctx.dataIndex];
-                    return getHoldingSectorName(holding, lang);
+                    return getHoldingSectorName(holding, language);
                   }
                 }
               }
@@ -2291,57 +2366,63 @@
           }
         });
         return () => chartInstance.current?.destroy();
-      }, [holdings, lang, detailTab]);
+      }, [holdings, language, detailTab]);
 
       const profile = React.useMemo(() => getFundProfile(fund), [fund]);
       const topConcentration = React.useMemo(() => getTopConcentration(holdings), [holdings]);
-      const description = profile.description || t.aboutPlaceholder;
+      const description = resolveLocalizedValue(profile.overview, language) || t('fund.aboutPlaceholder');
       const isLongDescription = description.length > 160;
       const visibleDescription = isExpanded || !isLongDescription ? description : `${description.slice(0, 160)}...`;
 
-      const manager = profile.manager || t.unknown;
-      const aum = profile.aum || t.notAvailable;
-      const strategy = profile.strategy || t.unknown;
-      const strength = profile.strength || t.unknown;
-      const concentration = topConcentration ? `${topConcentration.toFixed(1)}%` : t.notAvailable;
+      const manager = resolveLocalizedValue(profile.manager, language) || t('common.unknown');
+      const strategy = resolveLocalizedValue(profile.strategy, language) || t('common.unknown');
+      const strength = resolveLocalizedValue(profile.strength, language) || t('common.unknown');
+      const aumValue = profile.aum?.value;
+      const aumAsOf = profile.aum?.asOf;
+      const aum = aumValue
+        ? (aumAsOf
+          ? (language === 'ja' ? `${aumValue} (${aumAsOf} ${t('common.asOf')})` : `${aumValue} (${t('common.asOf')} ${aumAsOf})`)
+          : aumValue)
+        : t('common.notAvailable');
+      const concentration = topConcentration ? `${topConcentration.toFixed(1)}%` : t('common.notAvailable');
 
       return (
         <div className="detail-view">
-          {onBack && <button className="back-btn" onClick={onBack}>← {t.backToHome}</button>}
+          {onBack && <button className="back-btn" onClick={onBack}>← {t('common.backToHome')}</button>}
           <h1 className="fund-title">{fund.name}</h1>
-          <p className="fund-subtitle">{holdings.length} {t.holdings}</p>
+          <p className="fund-subtitle">{t('common.holdingsCount', { count: holdings.length })}</p>
           <div className="detail-tabs">
-            <button className={`detail-tab ${detailTab === 'holdings' ? 'active' : ''}`} onClick={() => setDetailTab('holdings')}>{t.holdingsTab}</button>
-            <button className={`detail-tab ${detailTab === 'about' ? 'active' : ''}`} onClick={() => setDetailTab('about')}>{t.aboutTab}</button>
+            <button className={`detail-tab ${detailTab === 'holdings' ? 'active' : ''}`} onClick={() => setDetailTab('holdings')}>{t('fund.tabs.holdings')}</button>
+            <button className={`detail-tab ${detailTab === 'about' ? 'active' : ''}`} onClick={() => setDetailTab('about')}>{t('fund.tabs.about')}</button>
           </div>
 
           {detailTab === 'holdings' && (
             <>
               <div className="detail-toolbar">
                 <div className="detail-sort">
-                  <span>{t.sortLabel}</span>
+                  <span>{t('common.sortLabel')}</span>
                   <select value={sortMode} onChange={e => setSortMode(e.target.value)}>
-                    <option value="weight">{t.sortWeight}</option>
-                    <option value="ticker">{t.sortTicker}</option>
+                    <option value="weight">{t('common.sortWeight')}</option>
+                    <option value="ticker">{t('common.sortTicker')}</option>
                   </select>
                 </div>
-                {normalizedSearch && firstMatchIndex !== -1 && <div className="detail-hint">{t.highlightHint}</div>}
+                {normalizedSearch && firstMatchIndex !== -1 && <div className="detail-hint">{t('common.highlightHint')}</div>}
               </div>
               {holdings.length === 0 ? (
                 <div className="empty-state">
                   <div className="empty-icon">📄</div>
-                  <h2>{t.noHoldings}</h2>
+                  <h2>{t('common.noHoldings')}</h2>
                 </div>
               ) : (
                 <>
                   <div className="chart-container"><canvas ref={chartRef}></canvas></div>
                   <div className="table-container">
                     <table className="holdings-table">
-                      <thead><tr><th>{t.ticker}</th><th>{t.company}</th><th>{t.sector}</th><th>{t.allocation}</th></tr></thead>
+                      <thead><tr><th>{t('common.ticker')}</th><th>{t('common.company')}</th><th>{t('common.sector')}</th><th>{t('common.allocation')}</th></tr></thead>
                       <tbody>
                         {sortedHoldings.map((h, i) => {
                           const sector = getHoldingSector(h);
-                          const sectorLabel = lang === 'ja' ? (SECTOR_NAMES_JP[sector] || sector) : sector;
+                          const sectorLabel = translate(language, `sector.${sector}`) || sector;
                           const isMatch = normalizedSearch && normalizeTicker(h.ticker).includes(normalizedSearch);
                           const rowRef = i === firstMatchIndex ? matchRowRef : null;
                           return (
@@ -2365,36 +2446,36 @@
             <>
               <div className="about-grid">
                 <div className="profile-card">
-                  <div className="profile-label">{t.fundInfo}</div>
+                  <div className="profile-label">{t('fund.cards.fundInfo')}</div>
                   <div className="profile-value">{fund.name}</div>
                 </div>
                 <div className="profile-card">
-                  <div className="profile-label">{t.manager}</div>
+                  <div className="profile-label">{t('fund.cards.manager')}</div>
                   <div className="profile-value">{manager}</div>
                 </div>
                 <div className="profile-card">
-                  <div className="profile-label">{t.aum}</div>
+                  <div className="profile-label">{t('fund.cards.aum')}</div>
                   <div className="profile-value">{aum}</div>
                 </div>
                 <div className="profile-card">
-                  <div className="profile-label">{t.strategy}</div>
+                  <div className="profile-label">{t('fund.cards.strategy')}</div>
                   <div className="profile-value">{strategy}</div>
                 </div>
                 <div className="profile-card">
-                  <div className="profile-label">{t.strength}</div>
+                  <div className="profile-label">{t('fund.cards.strength')}</div>
                   <div className="profile-value">{strength}</div>
                 </div>
                 <div className="profile-card">
-                  <div className="profile-label">{t.concentration}</div>
+                  <div className="profile-label">{t('fund.cards.top10')}</div>
                   <div className="profile-value">{concentration}</div>
                 </div>
               </div>
               <div className="profile-description">
-                <div className="profile-label">{t.description}</div>
+                <div className="profile-label">{t('fund.section.overview')}</div>
                 <div>{visibleDescription}</div>
                 {isLongDescription && (
                   <button className="read-more" onClick={() => setIsExpanded(v => !v)}>
-                    {isExpanded ? t.readLess : t.readMore}
+                    {isExpanded ? t('common.readLess') : t('common.readMore')}
                   </button>
                 )}
               </div>
@@ -2405,8 +2486,7 @@
     }
 
     function OverlapView({ funds }) {
-      const lang = React.useContext(LangContext);
-      const t = I18N[lang];
+      const { t, language } = useI18n();
       const [fundAIndex, setFundAIndex] = React.useState('');
       const [fundBIndex, setFundBIndex] = React.useState('');
 
@@ -2414,8 +2494,8 @@
         return (
           <div className="empty-state">
             <div className="empty-icon">📄</div>
-            <h2>{t.noResults}</h2>
-            <p>{t.selectFundDesc}</p>
+            <h2>{t('common.noResults')}</h2>
+            <p>{t('common.selectFundDesc')}</p>
           </div>
         );
       }
@@ -2452,20 +2532,20 @@
 
       return (
         <div>
-          <div className="ranking-section-title">{t.overlapTitle}</div>
+          <div className="ranking-section-title">{t('overlap.title')}</div>
           <div className="overlap-controls">
             <div className="overlap-select-group">
-              <label className="overlap-select-label">{t.fundA}</label>
+              <label className="overlap-select-label">{t('overlap.fundA')}</label>
               <select className="overlap-select" value={fundAIndex} onChange={e => setFundAIndex(e.target.value)}>
-                <option value="">{t.selectFundPlaceholder}</option>
+                <option value="">{t('common.selectFundPlaceholder')}</option>
                 {funds.map((f, i) => <option key={i} value={i}>{f.name}</option>)}
               </select>
             </div>
-            <div className="overlap-vs">VS</div>
+            <div className="overlap-vs">{t('common.vs')}</div>
             <div className="overlap-select-group">
-              <label className="overlap-select-label">{t.fundB}</label>
+              <label className="overlap-select-label">{t('overlap.fundB')}</label>
               <select className="overlap-select" value={fundBIndex} onChange={e => setFundBIndex(e.target.value)}>
-                <option value="">{t.selectFundPlaceholder}</option>
+                <option value="">{t('common.selectFundPlaceholder')}</option>
                 {funds.map((f, i) => <option key={i} value={i}>{f.name}</option>)}
               </select>
             </div>
@@ -2473,7 +2553,7 @@
 
           {!analysis && (
             <div className="overlap-result">
-              <div className="overlap-empty">{t.selectBothFunds}</div>
+              <div className="overlap-empty">{t('common.selectBothFunds')}</div>
             </div>
           )}
 
@@ -2482,15 +2562,15 @@
               <div className="overlap-summary">
                 <div className="overlap-stat">
                   <div className="overlap-stat-value">{analysis.common.length}</div>
-                  <div className="overlap-stat-label">{t.commonHoldings}</div>
+                  <div className="overlap-stat-label">{t('common.commonHoldings')}</div>
                 </div>
                 <div className="overlap-stat">
                   <div className="overlap-stat-value">{analysis.onlyA.length}</div>
-                  <div className="overlap-stat-label">{t.onlyInA}</div>
+                  <div className="overlap-stat-label">{t('common.onlyInA')}</div>
                 </div>
                 <div className="overlap-stat">
                   <div className="overlap-stat-value">{analysis.onlyB.length}</div>
-                  <div className="overlap-stat-label">{t.onlyInB}</div>
+                  <div className="overlap-stat-label">{t('common.onlyInB')}</div>
                 </div>
               </div>
 
@@ -2499,17 +2579,17 @@
                   <table className="overlap-table">
                     <thead>
                       <tr>
-                        <th>{t.ticker}</th>
-                        <th>{t.company}</th>
-                        <th>{t.sector}</th>
-                        <th>{t.weightInA}</th>
-                        <th>{t.weightInB}</th>
+                        <th>{t('common.ticker')}</th>
+                        <th>{t('common.company')}</th>
+                        <th>{t('common.sector')}</th>
+                        <th>{t('common.weightInA')}</th>
+                        <th>{t('common.weightInB')}</th>
                       </tr>
                     </thead>
                     <tbody>
                       {analysis.common.map(item => {
                         const sector = item.sector || getSector(item.ticker);
-                        const sectorLabel = lang === 'ja' ? (SECTOR_NAMES_JP[sector] || sector) : sector;
+                        const sectorLabel = translate(language, `sector.${sector}`) || sector;
                         return (
                           <tr key={item.ticker}>
                             <td><span className="ticker">{item.ticker}</span></td>
@@ -2524,7 +2604,7 @@
                   </table>
                 </div>
               ) : (
-                <div className="overlap-empty">{t.noOverlap}</div>
+                <div className="overlap-empty">{t('common.noOverlap')}</div>
               )}
             </div>
           )}
@@ -2533,8 +2613,7 @@
     }
 
     function RankingView({ funds }) {
-      const lang = React.useContext(LangContext);
-      const t = I18N[lang];
+      const { t, language } = useI18n();
       const [mode, setMode] = React.useState('weight');
       const [expandedTicker, setExpandedTicker] = React.useState(null);
 
@@ -2542,8 +2621,8 @@
         return (
           <div className="empty-state">
             <div className="empty-icon">📄</div>
-            <h2>{t.noResults}</h2>
-            <p>{t.selectFundDesc}</p>
+            <h2>{t('common.noResults')}</h2>
+            <p>{t('common.selectFundDesc')}</p>
           </div>
         );
       }
@@ -2584,28 +2663,28 @@
 
       return (
         <div>
-          <div className="ranking-section-title">{t.rankingTitle}</div>
+          <div className="ranking-section-title">{t('ranking.title')}</div>
           <div className="ranking-tabs">
-            <button className={`ranking-tab ${mode === 'weight' ? 'active' : ''}`} onClick={() => { setMode('weight'); setExpandedTicker(null); }}>{t.rankByWeight}</button>
-            <button className={`ranking-tab ${mode === 'popularity' ? 'active' : ''}`} onClick={() => { setMode('popularity'); setExpandedTicker(null); }}>{t.rankByPopularity}</button>
+            <button className={`ranking-tab ${mode === 'weight' ? 'active' : ''}`} onClick={() => { setMode('weight'); setExpandedTicker(null); }}>{t('ranking.rankByWeight')}</button>
+            <button className={`ranking-tab ${mode === 'popularity' ? 'active' : ''}`} onClick={() => { setMode('popularity'); setExpandedTicker(null); }}>{t('ranking.rankByPopularity')}</button>
           </div>
           <div className="ranking-table-container">
             <table className="ranking-table">
               <thead>
                 <tr>
-                  <th>{t.rank}</th>
-                  <th>{t.ticker}</th>
-                  <th>{t.company}</th>
-                  <th>{t.sector}</th>
-                  <th>{t.avgWeight}</th>
-                  <th>{t.totalWeight}</th>
-                  <th>{t.funds}</th>
+                  <th>{t('common.rank')}</th>
+                  <th>{t('common.ticker')}</th>
+                  <th>{t('common.company')}</th>
+                  <th>{t('common.sector')}</th>
+                  <th>{t('common.avgWeight')}</th>
+                  <th>{t('common.totalWeight')}</th>
+                  <th>{t('common.funds')}</th>
                 </tr>
               </thead>
               <tbody>
                 {rankingData.map((item, i) => {
                   const sector = item.sector || getSector(item.ticker);
-                  const sectorLabel = lang === 'ja' ? (SECTOR_NAMES_JP[sector] || sector) : sector;
+                  const sectorLabel = translate(language, `sector.${sector}`) || sector;
                   const totalBarWidth = (item.totalWeight / maxTotal) * 100;
                   const avgBarWidth = (item.avgWeight / maxAvg) * 100;
                   const isExpanded = expandedTicker === item.ticker;
@@ -2630,7 +2709,7 @@
                         <tr className="ticker-funds-panel">
                           <td colSpan="7">
                             <div className="ticker-funds-inner">
-                              <div className="ticker-funds-label">{t.holdingFunds}</div>
+                              <div className="ticker-funds-label">{t('common.holdingFunds')}</div>
                               {item.funds.sort((a, b) => b.weight - a.weight).map((f, fi) => (
                                 <span key={fi} className="ticker-fund-chip">
                                   {f.name}<span className="chip-weight">{f.weight.toFixed(1)}%</span>
@@ -2765,8 +2844,7 @@
     ];
 
     function FlowView() {
-      const lang = React.useContext(LangContext);
-      const t = I18N[lang];
+      const { t, language } = useI18n();
       const containerRef = React.useRef(null);
       const [tooltip, setTooltip] = React.useState(null);
       const [dims, setDims] = React.useState({ width: 1000, height: 600 });
@@ -2870,9 +2948,9 @@
 
       return (
         <div>
-          <div className="ranking-section-title">{t.flowTitle}</div>
+          <div className="ranking-section-title">{t('flow.title')}</div>
           <p style={{ fontSize: '12px', color: '#2A9D8F', marginBottom: '24px', marginTop: '-12px' }}>
-            {viewMode === 'stocks' ? t.flowSubtitle : (lang === 'ja' ? 'セクター別の資金流入/流出を表示（買い越し銘柄数 - 売り越し銘柄数）' : 'Sector-level fund flow (net buyers - net sellers)')}
+            {viewMode === 'stocks' ? t('flow.subtitle') : t('flow.subtitleSectors')}
           </p>
 
           {/* View Toggle */}
@@ -2882,13 +2960,13 @@
                 className={`view-toggle-btn ${viewMode === 'stocks' ? 'active' : ''}`}
                 onClick={() => setViewMode('stocks')}
               >
-                {t.stocksBreakdown}
+                {t('flow.stocksBreakdown')}
               </button>
               <button
                 className={`view-toggle-btn ${viewMode === 'sectors' ? 'active' : ''}`}
                 onClick={() => setViewMode('sectors')}
               >
-                {t.sectorMomentum}
+                {t('flow.sectorMomentum')}
               </button>
             </div>
           </div>
@@ -2914,7 +2992,7 @@
                         textAnchor="start" letterSpacing="1.5"
                         style={{ textTransform: 'uppercase' }}
                       >
-                        {lang === 'ja' ? (SECTOR_NAMES_JP[group.data.name] || group.data.name) : group.data.name}
+                        {translate(language, `sector.${group.data.name}`) || group.data.name}
                       </text>
                       {(group.children || []).map(leaf => {
                         const w = leaf.x1 - leaf.x0;
@@ -2965,11 +3043,11 @@
               {/* Legend */}
               <div className="flow-legend">
                 <div className="flow-scale">
-                  <span className="flow-scale-label">{t.netSell}</span>
+                  <span className="flow-scale-label">{t('flow.netSell')}</span>
                   <div className="flow-scale-bar" style={{
                     background: 'linear-gradient(90deg, rgb(50,200,70), rgb(110,160,110), #B8B5AD, rgb(200,130,130), rgb(255,40,40))'
                   }}></div>
-                  <span className="flow-scale-label">{t.netBuy}</span>
+                  <span className="flow-scale-label">{t('flow.netBuy')}</span>
                 </div>
               </div>
             </div>
@@ -2983,7 +3061,7 @@
                   const barWidth = (Math.abs(sector.score) / maxAbsScore) * 45; // max 45% of half width
                   const isPositive = sector.score > 0;
                   const isNegative = sector.score < 0;
-                  const sectorLabel = lang === 'ja' ? (SECTOR_NAMES_JP[sector.name] || sector.name) : sector.name;
+                  const sectorLabel = translate(language, `sector.${sector.name}`) || sector.name;
 
                   return (
                     <div key={sector.name} className="momentum-row">
@@ -3019,11 +3097,11 @@
               {/* Legend for Sector Momentum */}
               <div className="flow-legend" style={{ marginTop: '24px' }}>
                 <div className="flow-scale">
-                  <span className="flow-scale-label">{t.netSell}</span>
+                  <span className="flow-scale-label">{t('flow.netSell')}</span>
                   <div className="flow-scale-bar" style={{
                     background: 'linear-gradient(90deg, #4CAF50, #B8B5AD, #FF6B6B)'
                   }}></div>
-                  <span className="flow-scale-label">{t.netBuy}</span>
+                  <span className="flow-scale-label">{t('flow.netBuy')}</span>
                 </div>
               </div>
             </div>
@@ -3035,15 +3113,15 @@
               <div className="tt-ticker">{tooltip.ticker}</div>
               <div className="tt-company">{tooltip.fullName}</div>
               <div className="tt-row">
-                <span>{t.heldBy}</span>
-                <span style={{ fontWeight: 700 }}>{tooltip.holders} {t.fundsUnit}</span>
+                <span>{t('flow.heldBy')}</span>
+                <span style={{ fontWeight: 700 }}>{tooltip.holders} {t('flow.fundsUnit')}</span>
               </div>
               <div className="tt-row">
-                <span>{t.sentiment}</span>
+                <span>{t('flow.sentiment')}</span>
                 <span>
-                  <span className="tt-change-pos">{tooltip.buyers} {t.buys}</span>
+                  <span className="tt-change-pos">{tooltip.buyers} {t('flow.buys')}</span>
                   {' / '}
-                  <span className="tt-change-neg">{tooltip.sellers} {t.sells}</span>
+                  <span className="tt-change-neg">{tooltip.sellers} {t('flow.sells')}</span>
                 </span>
               </div>
             </div>
