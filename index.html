@@ -4143,7 +4143,15 @@
       }, [fundTopTickers, loadTickerMetrics]);
 
       const sortedFunds = React.useMemo(() => {
-        if (sortKey === 'default' || !funds) return funds;
+        if (!funds) return funds;
+        if (sortKey === 'default') {
+          return [...funds].sort((a, b) => {
+            const countA = a?.holdings?.length || 0;
+            const countB = b?.holdings?.length || 0;
+            if (countB !== countA) return countB - countA;
+            return String(a?.name || '').localeCompare(String(b?.name || ''));
+          });
+        }
 
         return [...funds].sort((a, b) => {
           const tickerA = fundTopTickers.get(a.name);
@@ -4714,7 +4722,7 @@
       const { sortedFunds: perfSorted, sortKey, setSortKey, perfCache, fundTopTickers } = useFundPerformanceSort(funds);
 
       const sortedFunds = React.useMemo(() => {
-        const base = sortKey !== 'default' ? perfSorted : funds;
+        const base = perfSorted || funds;
         if (!activeSector) return base;
         return [...base].sort((a, b) => {
           const aWeight = a.holdings.reduce((sum, h) => getHoldingSector(h) === activeSector ? sum + h.percent : sum, 0);
