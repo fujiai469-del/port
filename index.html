@@ -798,8 +798,13 @@
       padding: 3px 8px;
       border-radius: 4px;
       color: #fff;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       margin-left: 8px;
+      white-space: nowrap;
+      word-break: keep-all;
+      line-height: 1.1;
     }
 
     .percent-bar {
@@ -1012,8 +1017,8 @@
     }
 
     .ticker-funds-panel {
-      background: var(--bg-sand);
-      border-radius: 0 0 12px 12px;
+      background: rgba(38, 70, 83, 0.03);
+      border-bottom: 1px solid rgba(38, 70, 83, 0.1);
     }
 
     .ticker-funds-panel td {
@@ -1022,7 +1027,11 @@
     }
 
     .ticker-funds-inner {
-      padding: 12px 20px 16px 60px;
+      margin: 10px 14px 14px;
+      padding: 14px 16px;
+      border: 1px solid rgba(38, 70, 83, 0.14);
+      border-radius: 12px;
+      background: #fcfaf6;
     }
 
     .ticker-funds-label {
@@ -1034,28 +1043,37 @@
       margin-bottom: 8px;
     }
 
+    .ticker-fund-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
     .ticker-fund-chip {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: #fff;
-      border: 1px solid rgba(38, 70, 83, 0.1);
-      border-radius: 6px;
-      padding: 5px 12px;
+      border: 1px solid rgba(38, 70, 83, 0.16);
+      border-radius: 999px;
+      padding: 6px 12px;
       font-size: 11px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--primary-teal);
-      margin: 3px 4px 3px 0;
+      cursor: pointer;
       transition: all 0.2s;
+      font-family: 'Montserrat', sans-serif;
+      white-space: nowrap;
     }
 
     .ticker-fund-chip:hover {
-      background: var(--accent-gold);
+      background: rgba(233, 196, 106, 0.28);
       border-color: var(--accent-gold);
     }
 
     .ticker-fund-chip .chip-weight {
       font-weight: 700;
       color: var(--teal-light);
-      margin-left: 6px;
     }
 
     /* Overlap Analysis */
@@ -3120,7 +3138,14 @@
                   onToggleFundWatch={toggleWatchFund}
                 />
               )}
-              {tab === 'ranking' && <RankingView funds={funds} watchedTickerSet={watchedTickerSet} onToggleTickerWatch={toggleWatchTicker} />}
+              {tab === 'ranking' && (
+                <RankingView
+                  funds={funds}
+                  watchedTickerSet={watchedTickerSet}
+                  onToggleTickerWatch={toggleWatchTicker}
+                  onOpenFund={handleOpenFundDetail}
+                />
+              )}
               {tab === 'overlap' && <OverlapView funds={funds} />}
               {tab === 'flow' && <FlowView currentFunds={funds} previousFunds={previousFunds} dataAsOf={dataAsOf} />}
               {tab === 'watch' && (
@@ -3398,7 +3423,6 @@
                     <option value="ticker">{t('common.sortTicker')}</option>
                   </select>
                 </div>
-                {shouldHighlightTickers && normalizedSearch && firstMatchIndex !== -1 && <div className="detail-hint">{t('common.highlightHint')}</div>}
               </div>
               {holdings.length === 0 ? (
                 <div className="empty-state">
@@ -3616,7 +3640,7 @@
       );
     }
 
-    function RankingView({ funds, watchedTickerSet, onToggleTickerWatch }) {
+    function RankingView({ funds, watchedTickerSet, onToggleTickerWatch, onOpenFund }) {
       const { t, language } = useI18n();
       const [mode, setMode] = React.useState('weight');
       const [expandedTicker, setExpandedTicker] = React.useState(null);
@@ -3663,7 +3687,11 @@
 
       const maxTotal = rankingData.length > 0 ? Math.max(...rankingData.map(d => d.totalWeight)) : 1;
       const maxAvg = rankingData.length > 0 ? Math.max(...rankingData.map(d => d.avgWeight)) : 1;
-      const maxFunds = rankingData.length > 0 ? Math.max(...rankingData.map(d => d.fundCount)) : 1;
+      const fundByName = React.useMemo(() => {
+        const map = new Map();
+        (funds || []).forEach((fund) => map.set(String(fund.name || '').trim(), fund));
+        return map;
+      }, [funds]);
 
       return (
         <div>
@@ -3727,11 +3755,23 @@
                           <td colSpan="8">
                             <div className="ticker-funds-inner">
                               <div className="ticker-funds-label">{t('common.holdingFunds')}</div>
-                              {item.funds.sort((a, b) => b.weight - a.weight).map((f, fi) => (
-                                <span key={fi} className="ticker-fund-chip">
-                                  {f.name}<span className="chip-weight">{f.weight.toFixed(1)}%</span>
-                                </span>
-                              ))}
+                              <div className="ticker-fund-list">
+                                {[...item.funds].sort((a, b) => b.weight - a.weight).map((f, fi) => (
+                                  <button
+                                    key={fi}
+                                    className="ticker-fund-chip"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      const fund = fundByName.get(String(f.name || '').trim());
+                                      if (fund && onOpenFund) onOpenFund(fund);
+                                    }}
+                                    title={f.name}
+                                  >
+                                    <span>{f.name}</span>
+                                    <span className="chip-weight">{f.weight.toFixed(1)}%</span>
+                                  </button>
+                                ))}
+                              </div>
                             </div>
                           </td>
                         </tr>
