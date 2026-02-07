@@ -694,26 +694,50 @@ async function main() {
   const tickerLookup = buildTickerLookup(tickerMap);
   const onlineLookup = await fetchOnlineTickerMap();
   const manualFunds = await readJson(MANUAL_PATH, []);
+  const existingFunds = await readJson(OUTPUT_PATH, []);
   const existingMeta = await readJson(META_PATH, null);
 
   const manualByName = new Map(manualFunds.map((fund) => [fund.name, fund]));
+  const existingByName = new Map(existingFunds.map((fund) => [fund.name, fund]));
   const combined = new Map();
+  existingByName.forEach((value, key) => combined.set(key, value));
   manualByName.forEach((value, key) => combined.set(key, value));
 
   const orderedNames = [];
+  const seenNames = new Set();
   let dynamicCount = 0;
+  const pushOrderedName = (name) => {
+    if (!name || seenNames.has(name)) return;
+    seenNames.add(name);
+    orderedNames.push(name);
+  };
 
   for (const fund of config) {
     if (!fund?.name) continue;
-    orderedNames.push(fund.name);
-    if (!fund.cik) continue;
+    pushOrderedName(fund.name);
+    if (!fund.cik) {
+      if (!combined.has(fund.name)) {
+        combined.set(fund.name, { name: fund.name, holdings: [] });
+      }
+      continue;
+    }
     try {
       const dynamicFund = await fetch13fHoldings(fund, tickerLookup, onlineLookup);
       combined.set(fund.name, dynamicFund);
       dynamicCount += 1;
     } catch (err) {
       console.warn(String(err.message || err));
+      if (!combined.has(fund.name)) {
+        combined.set(fund.name, { name: fund.name, holdings: [] });
+      }
     }
+  }
+
+  for (const fund of manualFunds) {
+    pushOrderedName(fund?.name);
+  }
+  for (const fund of existingFunds) {
+    pushOrderedName(fund?.name);
   }
 
   const output = [];

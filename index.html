@@ -225,6 +225,39 @@
       white-space: nowrap;
     }
 
+    .refresh-btn {
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      white-space: nowrap;
+      min-width: 86px;
+    }
+
+    .refresh-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .refresh-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .refresh-status {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.75);
+      white-space: nowrap;
+    }
+
+    .refresh-status.error {
+      color: #FFD2D2;
+    }
+
     .alert-btn {
       position: relative;
       border: 1px solid rgba(255, 255, 255, 0.35);
@@ -1446,6 +1479,11 @@
         min-width: 180px;
       }
 
+      .refresh-btn {
+        min-width: 76px;
+        padding: 8px 10px;
+      }
+
       .search-mode-select {
         min-width: 86px;
       }
@@ -1573,6 +1611,12 @@
         font-size: 11px;
       }
 
+      .refresh-btn {
+        min-width: 76px;
+        font-size: 10px;
+        padding: 8px 9px;
+      }
+
       .search-box:focus {
         width: 190px;
       }
@@ -1678,6 +1722,16 @@
           markAllRead: 'Mark all read',
           tickerFlow: 'Ticker flow changed',
           fundChanged: 'Fund profile changed'
+        },
+        refresh: {
+          button: 'Refresh',
+          requesting: 'Requesting...',
+          queued: 'Queued',
+          waiting: 'Waiting for update...',
+          done: 'Updated',
+          failed: 'Failed',
+          generatedAt: 'Updated at',
+          timeout: 'Timeout'
         },
         fund: {
           tabs: { holdings: 'Holdings', about: 'About' },
@@ -1813,6 +1867,16 @@
           markAllRead: '既読にする',
           tickerFlow: '銘柄フロー更新',
           fundChanged: 'ファンド変化'
+        },
+        refresh: {
+          button: '更新',
+          requesting: '送信中...',
+          queued: '受付済み',
+          waiting: '更新待機中...',
+          done: '更新完了',
+          failed: '失敗',
+          generatedAt: '更新日時',
+          timeout: 'タイムアウト'
         },
         fund: {
           tabs: { holdings: '保有銘柄', about: '概要' },
@@ -1985,6 +2049,20 @@
       const intent = resolveSearchIntent(query, mode);
       if (intent !== 'fund') return false;
       return String(name || '').toLowerCase().includes(normalizeSearchText(query).toLowerCase());
+    }
+
+    function formatGeneratedAt(value, language) {
+      if (!value) return '';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return String(value);
+      const locale = language === 'ja' ? 'ja-JP' : 'en-US';
+      return date.toLocaleString(locale, {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
     }
 
     function normalizeFundKey(value) {
@@ -2503,22 +2581,28 @@
       const [funds, setFunds] = React.useState([]);
       const [previousFunds, setPreviousFunds] = React.useState([]);
       const [dataAsOf, setDataAsOf] = React.useState(FALLBACK_AS_OF);
+      const [dataGeneratedAt, setDataGeneratedAt] = React.useState('');
+      const [reloadSeq, setReloadSeq] = React.useState(0);
+      const [refreshState, setRefreshState] = React.useState('idle');
+      const [refreshLabel, setRefreshLabel] = React.useState('');
       const [layout, setLayout] = React.useState(
         getLayoutMode(typeof window !== 'undefined' ? window.innerWidth : BREAKPOINTS.desktop)
       );
       const [watchlist, setWatchlist] = React.useState(getInitialWatchlist);
       const [readAlertIds, setReadAlertIds] = React.useState(getInitialReadAlerts);
       const [alertsOpen, setAlertsOpen] = React.useState(false);
+      const refreshPollRef = React.useRef(null);
       const t = React.useCallback((key, params) => translate(language, key, params), [language]);
 
       React.useEffect(() => {
         let cancelled = false;
         const load = async () => {
+          const cacheBust = `ts=${Date.now()}`;
           try {
             const [metaRes, dataRes, prevRes] = await Promise.all([
-              fetch(META_URL, { cache: 'no-store' }),
-              fetch(DATA_URL, { cache: 'no-store' }),
-              fetch(PREVIOUS_DATA_URL, { cache: 'no-store' })
+              fetch(`${META_URL}?${cacheBust}`, { cache: 'no-store' }),
+              fetch(`${DATA_URL}?${cacheBust}`, { cache: 'no-store' }),
+              fetch(`${PREVIOUS_DATA_URL}?${cacheBust}`, { cache: 'no-store' })
             ]);
             if (dataRes.ok) {
               const data = await dataRes.json();
@@ -2532,6 +2616,7 @@
               if (metaRes.ok) {
                 const meta = await metaRes.json();
                 if (!cancelled && meta?.asOf) setDataAsOf(meta.asOf);
+                if (!cancelled) setDataGeneratedAt(String(meta?.generatedAt || ''));
               }
               return;
             }
@@ -2545,20 +2630,25 @@
               const data = await fallbackRes.json();
               if (!cancelled) setFunds(Array.isArray(data) ? data : []);
               if (!cancelled) setPreviousFunds([]);
+              if (!cancelled) setDataGeneratedAt('');
             }
           } catch (e) {
             if (!cancelled) {
               setFunds([]);
               setPreviousFunds([]);
+              setDataGeneratedAt('');
             }
           }
 
-          if (!cancelled) setDataAsOf(FALLBACK_AS_OF);
+          if (!cancelled) {
+            setDataAsOf(FALLBACK_AS_OF);
+            setDataGeneratedAt('');
+          }
         };
 
         load();
         return () => { cancelled = true; };
-      }, []);
+      }, [reloadSeq]);
 
       React.useEffect(() => {
         if (typeof window === 'undefined') return;
@@ -2580,6 +2670,15 @@
         const handleResize = () => setLayout(getLayoutMode(window.innerWidth));
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
+      }, []);
+
+      React.useEffect(() => {
+        return () => {
+          if (refreshPollRef.current) {
+            window.clearInterval(refreshPollRef.current);
+            refreshPollRef.current = null;
+          }
+        };
       }, []);
 
       const watchedTickerSet = React.useMemo(
@@ -2712,6 +2811,98 @@
         setReadAlertIds(alerts.map((a) => a.id));
       }, [alerts]);
 
+      const refreshButtonLabel = React.useMemo(() => {
+        if (refreshState === 'requesting') return t('refresh.requesting');
+        if (refreshState === 'queued') return t('refresh.queued');
+        if (refreshState === 'done') return t('refresh.done');
+        if (refreshState === 'error') return t('refresh.failed');
+        return t('refresh.button');
+      }, [refreshState, t]);
+
+      const generatedAtText = React.useMemo(
+        () => formatGeneratedAt(dataGeneratedAt, language),
+        [dataGeneratedAt, language]
+      );
+
+      const triggerDataRefresh = React.useCallback(async () => {
+        if (refreshState === 'requesting' || refreshState === 'queued') return;
+        if (refreshPollRef.current) {
+          window.clearInterval(refreshPollRef.current);
+          refreshPollRef.current = null;
+        }
+
+        setRefreshState('requesting');
+        setRefreshLabel(t('refresh.requesting'));
+        const baselineGeneratedAt = dataGeneratedAt;
+
+        try {
+          const headers = { 'Content-Type': 'application/json' };
+          if (typeof window !== 'undefined') {
+            const refreshKey = window.localStorage.getItem('pv_refresh_key');
+            if (refreshKey) headers['x-refresh-key'] = refreshKey;
+          }
+
+          const res = await fetch('/api/refresh-13f', {
+            method: 'POST',
+            headers
+          });
+          const payload = await res.json().catch(() => ({}));
+          if (!res.ok || !payload?.ok) {
+            throw new Error(payload?.error || 'dispatch failed');
+          }
+
+          setRefreshState('queued');
+          setRefreshLabel(t('refresh.queued'));
+
+          let checks = 0;
+          refreshPollRef.current = window.setInterval(async () => {
+            checks += 1;
+            try {
+              const metaRes = await fetch(`${META_URL}?ts=${Date.now()}`, { cache: 'no-store' });
+              if (metaRes.ok) {
+                const meta = await metaRes.json();
+                const nextGeneratedAt = String(meta?.generatedAt || '');
+                const changed = nextGeneratedAt && nextGeneratedAt !== baselineGeneratedAt;
+                if (changed) {
+                  window.clearInterval(refreshPollRef.current);
+                  refreshPollRef.current = null;
+                  setDataAsOf(meta?.asOf || FALLBACK_AS_OF);
+                  setDataGeneratedAt(nextGeneratedAt);
+                  setRefreshState('done');
+                  setRefreshLabel(t('refresh.done'));
+                  setReloadSeq((prev) => prev + 1);
+                  window.setTimeout(() => {
+                    setRefreshState('idle');
+                    setRefreshLabel('');
+                  }, 6000);
+                  return;
+                }
+              }
+            } catch (err) {
+              // keep polling
+            }
+
+            if (checks % 3 === 0) {
+              setRefreshLabel(t('refresh.waiting'));
+            }
+
+            if (checks >= 54) {
+              window.clearInterval(refreshPollRef.current);
+              refreshPollRef.current = null;
+              setRefreshState('error');
+              setRefreshLabel(t('refresh.timeout'));
+            }
+          }, 10000);
+        } catch (err) {
+          setRefreshState('error');
+          setRefreshLabel(t('refresh.failed'));
+          window.setTimeout(() => {
+            setRefreshState('idle');
+            setRefreshLabel('');
+          }, 6000);
+        }
+      }, [dataGeneratedAt, refreshState, t]);
+
       const filtered = funds.filter(f => {
         const query = normalizeSearchText(search);
         if (!query) return true;
@@ -2756,13 +2947,29 @@
                   <button className={`tab ${tab === 'watch' ? 'active' : ''}`} onClick={() => setTab('watch')}>{t('nav.watch')}</button>
                 </div>
                 <div className="header-right">
+                  <button
+                    className="refresh-btn"
+                    onClick={triggerDataRefresh}
+                    disabled={refreshState === 'requesting' || refreshState === 'queued'}
+                    title={t('refresh.button')}
+                  >
+                    {refreshButtonLabel}
+                  </button>
                   <select className="search-mode-select" value={searchMode} onChange={(e) => setSearchMode(e.target.value)}>
                     <option value="smart">{t('search.modeSmart')}</option>
                     <option value="fund">{t('search.modeFund')}</option>
                     <option value="ticker">{t('search.modeTicker')}</option>
                   </select>
                   <input type="text" className="search-box" placeholder={searchPlaceholder} value={search} onChange={e => setSearch(e.target.value)} />
-                  <div className="data-timestamp">{t('common.dataAsOf')}: {dataAsOf}</div>
+                  <div className="data-timestamp">
+                    {t('common.dataAsOf')}: {dataAsOf}
+                    {generatedAtText ? ` · ${t('refresh.generatedAt')}: ${generatedAtText}` : ''}
+                  </div>
+                  {refreshLabel && (
+                    <div className={`refresh-status ${refreshState === 'error' ? 'error' : ''}`}>
+                      {refreshLabel}
+                    </div>
+                  )}
                   <button className="alert-btn" onClick={() => setAlertsOpen((v) => !v)}>
                     🔔
                     {unreadAlertCount > 0 && <span className="alert-badge">{unreadAlertCount}</span>}
