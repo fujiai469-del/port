@@ -1013,6 +1013,264 @@
       padding-left: 10px;
     }
 
+    /* Signals */
+    .signals-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .signal-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 16px rgba(38, 70, 83, 0.08);
+    }
+
+    .signal-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary-teal);
+      margin-bottom: 4px;
+    }
+
+    .signal-card-desc {
+      font-size: 11px;
+      color: var(--teal-light);
+      margin-bottom: 16px;
+    }
+
+    .signal-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      transition: background 0.2s;
+    }
+
+    .signal-item:hover {
+      background: rgba(38, 70, 83, 0.04);
+    }
+
+    .signal-ticker {
+      font-weight: 700;
+      font-size: 13px;
+      min-width: 60px;
+    }
+
+    .signal-name {
+      flex: 1;
+      font-size: 12px;
+      color: #555;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .signal-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: #fff;
+    }
+
+    .signal-badge.buy { background: #E74C3C; }
+    .signal-badge.sell { background: #27AE60; }
+    .signal-badge.up { background: #E74C3C; }
+    .signal-badge.down { background: #27AE60; }
+
+    .signal-funds {
+      font-size: 10px;
+      color: var(--teal-light);
+      margin-top: 4px;
+    }
+
+    .signal-fund-chip {
+      display: inline-block;
+      background: var(--bg-sand);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      margin: 2px 3px 2px 0;
+      color: var(--primary-teal);
+    }
+
+    .signal-delta {
+      font-weight: 700;
+      font-size: 12px;
+      min-width: 60px;
+      text-align: right;
+    }
+
+    .signal-delta.positive { color: #E74C3C; }
+    .signal-delta.negative { color: #27AE60; }
+
+    .signal-count {
+      background: var(--accent-gold);
+      color: var(--primary-teal);
+      font-weight: 700;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      min-width: 24px;
+      text-align: center;
+    }
+
+    /* Conviction Chart */
+    .conviction-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .conviction-bar-label {
+      min-width: 55px;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .conviction-bar-track {
+      flex: 1;
+      height: 20px;
+      background: rgba(38, 70, 83, 0.06);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .conviction-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #fff;
+      transition: width 0.5s;
+    }
+
+    .conviction-bar-fill.increase {
+      background: linear-gradient(90deg, #E74C3C, #FF6B6B);
+    }
+
+    .conviction-bar-fill.decrease {
+      background: linear-gradient(90deg, #27AE60, #6BCB77);
+    }
+
+    /* Performance */
+    .perf-container {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 16px rgba(38, 70, 83, 0.08);
+    }
+
+    .perf-controls {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .perf-select {
+      flex: 1;
+      min-width: 240px;
+      padding: 12px 16px;
+      border: 2px solid rgba(38, 70, 83, 0.15);
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary-teal);
+      background: #fff;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .perf-chart-wrapper {
+      height: 350px;
+      margin-bottom: 24px;
+    }
+
+    .perf-stats {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .perf-stat {
+      background: var(--bg-sand);
+      border-radius: 12px;
+      padding: 16px 24px;
+      text-align: center;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .perf-stat-value {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .perf-stat-value.positive { color: #E74C3C; }
+    .perf-stat-value.negative { color: #27AE60; }
+
+    .perf-stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--teal-light);
+      margin-top: 4px;
+    }
+
+    .perf-note {
+      font-size: 11px;
+      color: var(--teal-light);
+      font-style: italic;
+    }
+
+    .perf-holdings-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+
+    .perf-holdings-table th {
+      background: var(--primary-teal);
+      color: #fff;
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .perf-holdings-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(38, 70, 83, 0.08);
+      font-size: 12px;
+    }
+
+    .perf-holdings-table tr:hover td {
+      background: rgba(233, 196, 106, 0.1);
+    }
+
+    @media (max-width: 900px) {
+      .signals-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Mobile */
     @media (max-width: 900px) {
       .header {
@@ -1111,6 +1369,7 @@
   <script type="text/babel">
     const FALLBACK_AS_OF = '2026-02-01';
     const DATA_URL = 'data/funds.json';
+    const PREV_DATA_URL = 'data/funds-prev.json';
     const META_URL = 'data/meta.json';
     const FALLBACK_URL = 'data/manual-funds.json';
 
@@ -1202,7 +1461,34 @@
         ETF: 'ETF',
         Other: 'Other',
         stocksBreakdown: 'Stocks Breakdown',
-        sectorMomentum: 'Sector Momentum'
+        sectorMomentum: 'Sector Momentum',
+        signals: 'Signals',
+        signalsTitle: 'Smart Money Signals',
+        consensusBuys: 'Consensus New Buys',
+        consensusBuysDesc: 'Stocks newly added by multiple funds',
+        consensusSells: 'Consensus Exits',
+        consensusSellsDesc: 'Stocks dropped by multiple funds',
+        convictionUp: 'Conviction Increases',
+        convictionUpDesc: 'Largest weight increases across funds',
+        convictionDown: 'Conviction Decreases',
+        convictionDownDesc: 'Largest weight decreases across funds',
+        fundName: 'Fund',
+        weight: 'Weight',
+        change: 'Change',
+        prev: 'Prev',
+        current: 'Current',
+        noSignals: 'No signals available (need at least 2 quarters of data)',
+        newPosition: 'NEW',
+        exited: 'EXIT',
+        performance: 'Perf',
+        perfTitle: 'Portfolio Performance',
+        perfDesc: 'Hypothetical returns if you copied each fund',
+        selectFundPerf: 'Select a fund to view performance',
+        fundReturn: 'Fund Return',
+        benchmark: 'S&P 500',
+        period: 'Period',
+        perfNote: 'Returns based on 13F holdings at report date. Does not account for trading between filings.',
+        m1: '1M', m3: '3M', m6: '6M', y1: '1Y'
       },
       ja: {
         home: 'ホーム',
@@ -1262,7 +1548,34 @@
         ETF: 'ETF',
         Other: 'その他',
         stocksBreakdown: '銘柄ヒートマップ',
-        sectorMomentum: 'セクター勢い'
+        sectorMomentum: 'セクター勢い',
+        signals: 'シグナル',
+        signalsTitle: 'スマートマネーシグナル',
+        consensusBuys: 'コンセンサス新規買い',
+        consensusBuysDesc: '複数ファンドが同時に新規追加した銘柄',
+        consensusSells: 'コンセンサス売却',
+        consensusSellsDesc: '複数ファンドが同時にポジション解消した銘柄',
+        convictionUp: '確信度UP',
+        convictionUpDesc: 'ウェイトを最も増やした銘柄',
+        convictionDown: '確信度DOWN',
+        convictionDownDesc: 'ウェイトを最も減らした銘柄',
+        fundName: 'ファンド',
+        weight: 'ウェイト',
+        change: '変化',
+        prev: '前期',
+        current: '今期',
+        noSignals: 'シグナルなし（2四半期以上のデータが必要）',
+        newPosition: '新規',
+        exited: '売却',
+        performance: '成績',
+        perfTitle: 'ポートフォリオ成績',
+        perfDesc: '各ファンドをコピーした場合の仮想リターン',
+        selectFundPerf: 'ファンドを選択して成績を確認',
+        fundReturn: 'ファンドリターン',
+        benchmark: 'S&P 500',
+        period: '期間',
+        perfNote: '13F報告時点の保有銘柄に基づくリターン。報告間の売買は考慮していません。',
+        m1: '1ヶ月', m3: '3ヶ月', m6: '6ヶ月', y1: '1年'
       }
     };
 
@@ -1396,6 +1709,7 @@
       const [search, setSearch] = React.useState('');
       const [lang, setLang] = React.useState('en');
       const [funds, setFunds] = React.useState([]);
+      const [prevFunds, setPrevFunds] = React.useState([]);
       const [dataAsOf, setDataAsOf] = React.useState(FALLBACK_AS_OF);
       const t = I18N[lang];
 
@@ -1403,13 +1717,18 @@
         let cancelled = false;
         const load = async () => {
           try {
-            const [metaRes, dataRes] = await Promise.all([
+            const [metaRes, dataRes, prevRes] = await Promise.all([
               fetch(META_URL, { cache: 'no-store' }),
-              fetch(DATA_URL, { cache: 'no-store' })
+              fetch(DATA_URL, { cache: 'no-store' }),
+              fetch(PREV_DATA_URL, { cache: 'no-store' }).catch(() => null)
             ]);
             if (dataRes.ok) {
               const data = await dataRes.json();
               if (!cancelled) setFunds(Array.isArray(data) ? data : []);
+              if (prevRes?.ok) {
+                const prev = await prevRes.json();
+                if (!cancelled) setPrevFunds(Array.isArray(prev) ? prev : []);
+              }
               if (metaRes.ok) {
                 const meta = await metaRes.json();
                 if (!cancelled && meta?.generatedAt) setDataAsOf(meta.generatedAt.slice(0, 10));
@@ -1468,6 +1787,8 @@
                   <button className={`tab ${tab === 'ranking' ? 'active' : ''}`} onClick={() => setTab('ranking')}>{t.ranking}</button>
                   <button className={`tab ${tab === 'overlap' ? 'active' : ''}`} onClick={() => setTab('overlap')}>{t.overlap}</button>
                   <button className={`tab ${tab === 'flow' ? 'active' : ''}`} onClick={() => setTab('flow')}>{t.flow}</button>
+                  <button className={`tab ${tab === 'signals' ? 'active' : ''}`} onClick={() => setTab('signals')}>{t.signals}</button>
+                  <button className={`tab ${tab === 'performance' ? 'active' : ''}`} onClick={() => setTab('performance')}>{t.performance}</button>
                 </div>
                 <div className="header-right">
                   <input type="text" className="search-box" placeholder={t.searchPlaceholder} value={search} onChange={e => setSearch(e.target.value)} />
@@ -1485,7 +1806,9 @@
               {tab === 'list' && <ListView funds={filtered} selected={selected} onSelect={setSelected} />}
               {tab === 'ranking' && <RankingView funds={funds} />}
               {tab === 'overlap' && <OverlapView funds={funds} />}
-              {tab === 'flow' && <FlowView />}
+              {tab === 'flow' && <FlowView funds={funds} prevFunds={prevFunds} />}
+              {tab === 'signals' && <SignalsView funds={funds} prevFunds={prevFunds} />}
+              {tab === 'performance' && <PerformanceView funds={funds} />}
             </main>
           </div>
         </LangContext.Provider>
@@ -1864,123 +2187,85 @@
       );
     }
 
-    // Mock Money Flow Data — Breadth-based (holder count + diffusion index)
-    // holders: number of funds holding this ticker
-    // buyers: funds that increased position QoQ (or new position)
-    // sellers: funds that decreased position QoQ (or exited)
-    const MOCK_MONEY_FLOW = [
-      {
-        name: 'Technology', children: [
-          { name: 'NVDA', fullName: 'NVIDIA Corp', holders: 3, buyers: 2, sellers: 0 },
-          { name: 'MSFT', fullName: 'Microsoft Corp', holders: 3, buyers: 1, sellers: 1 },
-          { name: 'GOOGL', fullName: 'Alphabet Inc.', holders: 3, buyers: 2, sellers: 1 },
-          { name: 'TSM', fullName: 'Taiwan Semiconductor', holders: 3, buyers: 2, sellers: 0 },
-          { name: 'LRCX', fullName: 'Lam Research', holders: 3, buyers: 0, sellers: 2 },
-          { name: 'AVGO', fullName: 'Broadcom Inc.', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'META', fullName: 'Meta Platforms', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'ASML', fullName: 'ASML Holding', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'KLAC', fullName: 'KLA Corp', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'ADI', fullName: 'Analog Devices', holders: 2, buyers: 1, sellers: 1 },
-          { name: 'INTC', fullName: 'Intel Corp', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'ARM', fullName: 'Arm Holdings', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'IONQ', fullName: 'IonQ, Inc.', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'RKLB', fullName: 'Rocket Lab', holders: 1, buyers: 1, sellers: 0 },
-        ]
-      },
-      {
-        name: 'Financial', children: [
-          { name: 'NU', fullName: 'Nu Holdings', holders: 4, buyers: 3, sellers: 0 },
-          { name: 'DB', fullName: 'Deutsche Bank', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'IBKR', fullName: 'Interactive Brokers', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'CME', fullName: 'CME Group', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'VEL', fullName: 'Velocity Financial', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'AXP', fullName: 'American Express', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'BAC', fullName: 'Bank of America', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'V', fullName: 'Visa Inc.', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'MCO', fullName: "Moody's Corp", holders: 2, buyers: 1, sellers: 0 },
-          { name: 'KHC', fullName: 'Kraft Heinz', holders: 2, buyers: 0, sellers: 2 },
-        ]
-      },
-      {
-        name: 'Healthcare', children: [
-          { name: 'BTSG', fullName: 'BrightSpring Health', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'JNJ', fullName: 'Johnson & Johnson', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'HIMS', fullName: 'Hims & Hers Health', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'PCVX', fullName: 'Vaxcyte, Inc.', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'CGON', fullName: 'CG Oncology', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'MRK', fullName: 'Merck & Co.', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'UTHR', fullName: 'United Therapeutics', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'BBIO', fullName: 'BridgeBio Pharma', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'MRNA', fullName: 'Moderna', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'HSIC', fullName: 'Henry Schein', holders: 1, buyers: 0, sellers: 0 },
-        ]
-      },
-      {
-        name: 'Consumer', children: [
-          { name: 'AMZN', fullName: 'Amazon.com', holders: 5, buyers: 3, sellers: 1 },
-          { name: 'COST', fullName: 'Costco Wholesale', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'KO', fullName: 'The Coca-Cola Co', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'EXPE', fullName: 'Expedia Group', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'GIL', fullName: 'Gildan Activewear', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'WEN', fullName: "The Wendy's Co", holders: 1, buyers: 0, sellers: 1 },
-          { name: 'LAUR', fullName: 'Laureate Education', holders: 2, buyers: 1, sellers: 0 },
-        ]
-      },
-      {
-        name: 'Industrial', children: [
-          { name: 'FTAI', fullName: 'FTAI Aviation', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'TDG', fullName: 'TransDigm Group', holders: 2, buyers: 2, sellers: 0 },
-          { name: 'CAT', fullName: 'Caterpillar', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'GE', fullName: 'General Electric', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'POWL', fullName: 'Powell Industries', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'VRT', fullName: 'Vertiv Holdings', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'DE', fullName: 'Deere & Company', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'DAL', fullName: 'Delta Air Lines', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'UAL', fullName: 'United Airlines', holders: 1, buyers: 1, sellers: 0 },
-        ]
-      },
-      {
-        name: 'Energy', children: [
-          { name: 'BE', fullName: 'Bloom Energy', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'CVX', fullName: 'Chevron Corp', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'OXY', fullName: 'Occidental Petroleum', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'FSLR', fullName: 'First Solar', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'XOM', fullName: 'Exxon Mobil', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'ENB', fullName: 'Enbridge Inc.', holders: 1, buyers: 0, sellers: 1 },
-        ]
-      },
-      {
-        name: 'Materials', children: [
-          { name: 'AU', fullName: 'AngloGold Ashanti', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'FCX', fullName: 'Freeport-McMoRan', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'CCJ', fullName: 'Cameco Corp', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'SKE', fullName: 'Skeena Resources', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'USAS', fullName: 'Americas Gold & Silver', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'SLSR', fullName: 'Solaris Resources', holders: 2, buyers: 1, sellers: 1 },
-        ]
-      },
-      {
-        name: 'ETF', children: [
-          { name: 'SPY', fullName: 'SPDR S&P 500', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'VTI', fullName: 'Vanguard Total Stock', holders: 1, buyers: 0, sellers: 0 },
-          { name: 'IAU', fullName: 'iShares Gold Trust', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'GLD', fullName: 'SPDR Gold Shares', holders: 1, buyers: 1, sellers: 0 },
-          { name: 'IEMG', fullName: 'iShares MSCI Emerging', holders: 2, buyers: 0, sellers: 1 },
-          { name: 'IBIT', fullName: 'iShares Bitcoin Trust', holders: 1, buyers: 1, sellers: 0 },
-        ]
-      },
-      {
-        name: 'Communication', children: [
-          { name: 'SIRI', fullName: 'Sirius XM', holders: 1, buyers: 0, sellers: 1 },
-          { name: 'MSGS', fullName: 'Madison Square Garden', holders: 2, buyers: 1, sellers: 0 },
-          { name: 'GRMN', fullName: 'Garmin Ltd.', holders: 1, buyers: 0, sellers: 0 },
-        ]
-      }
-    ];
+    // Compute signals from current vs previous fund data
+    function computeSignals(funds, prevFunds) {
+      const prevLookup = {};
+      prevFunds.forEach(fund => {
+        prevLookup[fund.name] = {};
+        (fund.holdings || []).forEach(h => { prevLookup[fund.name][h.ticker] = h; });
+      });
 
-    function FlowView() {
+      const signals = {};
+      const ensure = (ticker, name, sector) => {
+        if (!signals[ticker]) signals[ticker] = { ticker, name: name || ticker, sector: sector || '', newBuys: [], exits: [], increases: [], decreases: [] };
+        if (!signals[ticker].name || signals[ticker].name === ticker) signals[ticker].name = name || signals[ticker].name;
+        if (!signals[ticker].sector && sector) signals[ticker].sector = sector;
+      };
+
+      funds.forEach(fund => {
+        const prev = prevLookup[fund.name] || {};
+        const currentTickers = new Set((fund.holdings || []).map(h => h.ticker));
+        const prevTickers = new Set(Object.keys(prev));
+
+        (fund.holdings || []).forEach(h => {
+          ensure(h.ticker, h.name, h.sector);
+          if (!prevTickers.has(h.ticker)) {
+            signals[h.ticker].newBuys.push({ fund: fund.name, weight: h.percent });
+          } else {
+            const delta = h.percent - prev[h.ticker].percent;
+            if (delta > 0.3) signals[h.ticker].increases.push({ fund: fund.name, delta, current: h.percent, prev: prev[h.ticker].percent });
+            else if (delta < -0.3) signals[h.ticker].decreases.push({ fund: fund.name, delta, current: h.percent, prev: prev[h.ticker].percent });
+          }
+        });
+
+        prevTickers.forEach(ticker => {
+          if (!currentTickers.has(ticker)) {
+            ensure(ticker, prev[ticker].name, prev[ticker].sector);
+            signals[ticker].exits.push({ fund: fund.name, prevWeight: prev[ticker].percent });
+          }
+        });
+      });
+
+      return signals;
+    }
+
+    // Build flow data from real signals
+    function buildFlowData(funds, prevFunds) {
+      const signals = computeSignals(funds, prevFunds);
+      const sectorGroups = {};
+
+      // Collect all tickers from current holdings
+      funds.forEach(fund => {
+        (fund.holdings || []).forEach(h => {
+          const sector = getHoldingSector(h);
+          if (!sectorGroups[sector]) sectorGroups[sector] = {};
+          if (!sectorGroups[sector][h.ticker]) {
+            const sig = signals[h.ticker] || { newBuys: [], exits: [], increases: [], decreases: [] };
+            sectorGroups[sector][h.ticker] = {
+              name: h.ticker,
+              fullName: h.name,
+              holders: 0,
+              buyers: sig.newBuys.length + sig.increases.length,
+              sellers: sig.exits.length + sig.decreases.length
+            };
+          }
+          sectorGroups[sector][h.ticker].holders++;
+        });
+      });
+
+      return Object.entries(sectorGroups)
+        .map(([name, tickers]) => ({
+          name,
+          children: Object.values(tickers).sort((a, b) => b.holders - a.holders).slice(0, 15)
+        }))
+        .filter(g => g.children.length > 0)
+        .sort((a, b) => b.children.reduce((s, c) => s + c.holders, 0) - a.children.reduce((s, c) => s + c.holders, 0));
+    }
+
+    function FlowView({ funds, prevFunds }) {
       const lang = React.useContext(LangContext);
       const t = I18N[lang];
+      const FLOW_DATA = React.useMemo(() => buildFlowData(funds, prevFunds), [funds, prevFunds]);
       const containerRef = React.useRef(null);
       const [tooltip, setTooltip] = React.useState(null);
       const [dims, setDims] = React.useState({ width: 1000, height: 600 });
@@ -2032,7 +2317,7 @@
       // Build treemap layout — size = holders count
       const cells = React.useMemo(() => {
         const { width, height } = dims;
-        const root = d3.hierarchy({ name: 'root', children: MOCK_MONEY_FLOW })
+        const root = d3.hierarchy({ name: 'root', children: FLOW_DATA })
           .sum(d => d.holders || 0)
           .sort((a, b) => b.value - a.value);
 
@@ -2062,7 +2347,7 @@
 
       // Calculate Sector Momentum data
       const sectorMomentumData = React.useMemo(() => {
-        return MOCK_MONEY_FLOW.map(sector => {
+        return FLOW_DATA.map(sector => {
           let netBuyers = 0;
           let netSellers = 0;
           sector.children.forEach(stock => {
@@ -2262,6 +2547,349 @@
               </div>
             </div>
           )}
+        </div>
+      );
+    }
+
+    function SignalsView({ funds, prevFunds }) {
+      const lang = React.useContext(LangContext);
+      const t = I18N[lang];
+
+      const analysis = React.useMemo(() => {
+        if (!prevFunds.length) return null;
+        const signals = computeSignals(funds, prevFunds);
+        const all = Object.values(signals);
+
+        // Consensus buys: stocks with 2+ new buyers
+        const consensusBuys = all
+          .filter(s => s.newBuys.length >= 2)
+          .sort((a, b) => b.newBuys.length - a.newBuys.length)
+          .slice(0, 15);
+
+        // Consensus exits: stocks with 2+ exits
+        const consensusSells = all
+          .filter(s => s.exits.length >= 2)
+          .sort((a, b) => b.exits.length - a.exits.length)
+          .slice(0, 15);
+
+        // Conviction increases: stocks with biggest avg weight increase
+        const convictionUp = all
+          .filter(s => s.increases.length > 0)
+          .map(s => ({
+            ...s,
+            avgDelta: s.increases.reduce((sum, i) => sum + i.delta, 0) / s.increases.length,
+            totalDelta: s.increases.reduce((sum, i) => sum + i.delta, 0)
+          }))
+          .sort((a, b) => b.totalDelta - a.totalDelta)
+          .slice(0, 15);
+
+        // Conviction decreases
+        const convictionDown = all
+          .filter(s => s.decreases.length > 0)
+          .map(s => ({
+            ...s,
+            avgDelta: s.decreases.reduce((sum, i) => sum + i.delta, 0) / s.decreases.length,
+            totalDelta: s.decreases.reduce((sum, i) => sum + i.delta, 0)
+          }))
+          .sort((a, b) => a.totalDelta - b.totalDelta)
+          .slice(0, 15);
+
+        return { consensusBuys, consensusSells, convictionUp, convictionDown };
+      }, [funds, prevFunds]);
+
+      if (!analysis) {
+        return (
+          <div>
+            <div className="ranking-section-title">{t.signalsTitle}</div>
+            <div className="perf-container"><div className="overlap-empty">{t.noSignals}</div></div>
+          </div>
+        );
+      }
+
+      const maxConvUp = analysis.convictionUp.length > 0 ? Math.max(...analysis.convictionUp.map(s => s.totalDelta)) : 1;
+      const maxConvDown = analysis.convictionDown.length > 0 ? Math.max(...analysis.convictionDown.map(s => Math.abs(s.totalDelta))) : 1;
+
+      return (
+        <div>
+          <div className="ranking-section-title">{t.signalsTitle}</div>
+          <div className="signals-grid">
+            {/* Consensus Buys */}
+            <div className="signal-card">
+              <div className="signal-card-title">{t.consensusBuys}</div>
+              <div className="signal-card-desc">{t.consensusBuysDesc}</div>
+              {analysis.consensusBuys.length === 0 && <div className="overlap-empty" style={{height: 'auto', padding: '20px'}}>{lang === 'ja' ? 'なし' : 'None'}</div>}
+              {analysis.consensusBuys.map(s => (
+                <div key={s.ticker} className="signal-item">
+                  <span className="signal-ticker" style={{color: getHoldingSectorColor(s)}}>{s.ticker}</span>
+                  <span className="signal-name">{s.name}</span>
+                  <span className="signal-count">{s.newBuys.length}</span>
+                  <span className="signal-badge buy">{t.newPosition}</span>
+                  <div className="signal-funds">
+                    {s.newBuys.map((b, i) => <span key={i} className="signal-fund-chip">{b.fund.split('(')[0].trim()} {b.weight.toFixed(1)}%</span>)}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Consensus Exits */}
+            <div className="signal-card">
+              <div className="signal-card-title">{t.consensusSells}</div>
+              <div className="signal-card-desc">{t.consensusSellsDesc}</div>
+              {analysis.consensusSells.length === 0 && <div className="overlap-empty" style={{height: 'auto', padding: '20px'}}>{lang === 'ja' ? 'なし' : 'None'}</div>}
+              {analysis.consensusSells.map(s => (
+                <div key={s.ticker} className="signal-item">
+                  <span className="signal-ticker" style={{color: getHoldingSectorColor(s)}}>{s.ticker}</span>
+                  <span className="signal-name">{s.name}</span>
+                  <span className="signal-count">{s.exits.length}</span>
+                  <span className="signal-badge sell">{t.exited}</span>
+                  <div className="signal-funds">
+                    {s.exits.map((b, i) => <span key={i} className="signal-fund-chip">{b.fund.split('(')[0].trim()}</span>)}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Conviction Up */}
+            <div className="signal-card">
+              <div className="signal-card-title">{t.convictionUp}</div>
+              <div className="signal-card-desc">{t.convictionUpDesc}</div>
+              {analysis.convictionUp.map(s => (
+                <div key={s.ticker}>
+                  <div className="conviction-bar-row">
+                    <span className="conviction-bar-label" style={{color: getHoldingSectorColor(s)}}>{s.ticker}</span>
+                    <div className="conviction-bar-track">
+                      <div className="conviction-bar-fill increase" style={{width: (s.totalDelta / maxConvUp * 100) + '%'}}>
+                        +{s.totalDelta.toFixed(1)}%
+                      </div>
+                    </div>
+                    <span className="signal-count">{s.increases.length}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Conviction Down */}
+            <div className="signal-card">
+              <div className="signal-card-title">{t.convictionDown}</div>
+              <div className="signal-card-desc">{t.convictionDownDesc}</div>
+              {analysis.convictionDown.map(s => (
+                <div key={s.ticker}>
+                  <div className="conviction-bar-row">
+                    <span className="conviction-bar-label" style={{color: getHoldingSectorColor(s)}}>{s.ticker}</span>
+                    <div className="conviction-bar-track">
+                      <div className="conviction-bar-fill decrease" style={{width: (Math.abs(s.totalDelta) / maxConvDown * 100) + '%'}}>
+                        {s.totalDelta.toFixed(1)}%
+                      </div>
+                    </div>
+                    <span className="signal-count">{s.decreases.length}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function PerformanceView({ funds }) {
+      const lang = React.useContext(LangContext);
+      const t = I18N[lang];
+      const [selectedFundIdx, setSelectedFundIdx] = React.useState('');
+      const [perfData, setPerfData] = React.useState(null);
+      const [loading, setLoading] = React.useState(false);
+      const chartRef = React.useRef(null);
+      const chartInstance = React.useRef(null);
+
+      const selectedFund = selectedFundIdx !== '' ? funds[parseInt(selectedFundIdx)] : null;
+
+      // Fetch price data for a ticker using Yahoo Finance
+      const fetchPrices = React.useCallback(async (ticker, period) => {
+        try {
+          const cleanTicker = ticker.replace('.', '-');
+          const range = period === '1m' ? '1mo' : period === '3m' ? '3mo' : period === '6m' ? '6mo' : '1y';
+          const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${cleanTicker}?range=${range}&interval=1d`);
+          if (!res.ok) return null;
+          const data = await res.json();
+          const result = data?.chart?.result?.[0];
+          if (!result?.indicators?.quote?.[0]?.close) return null;
+          const closes = result.indicators.quote[0].close.filter(v => v != null);
+          if (closes.length < 2) return null;
+          return (closes[closes.length - 1] / closes[0] - 1) * 100;
+        } catch { return null; }
+      }, []);
+
+      const [period, setPeriod] = React.useState('3m');
+
+      React.useEffect(() => {
+        if (!selectedFund) { setPerfData(null); return; }
+        let cancelled = false;
+        setLoading(true);
+
+        const compute = async () => {
+          const holdings = selectedFund.holdings.slice(0, 20);
+          const tickers = holdings.map(h => h.ticker);
+          tickers.push('SPY');
+
+          const returns = {};
+          // Fetch in batches of 5
+          for (let i = 0; i < tickers.length; i += 5) {
+            const batch = tickers.slice(i, i + 5);
+            const results = await Promise.all(batch.map(t => fetchPrices(t, period)));
+            batch.forEach((ticker, j) => { returns[ticker] = results[j]; });
+          }
+
+          if (cancelled) return;
+
+          const holdingReturns = holdings.map(h => ({
+            ticker: h.ticker,
+            name: h.name,
+            weight: h.percent,
+            ret: returns[h.ticker],
+            contribution: returns[h.ticker] != null ? (h.percent / 100) * returns[h.ticker] : null
+          }));
+
+          const totalWeight = holdingReturns.filter(h => h.ret != null).reduce((s, h) => s + h.weight, 0);
+          const portfolioReturn = totalWeight > 0 ? holdingReturns.filter(h => h.ret != null).reduce((s, h) => s + (h.weight / totalWeight) * h.ret, 0) : null;
+          const spyReturn = returns['SPY'];
+
+          setPerfData({
+            holdings: holdingReturns.sort((a, b) => (b.contribution || 0) - (a.contribution || 0)),
+            portfolioReturn,
+            spyReturn
+          });
+          setLoading(false);
+        };
+
+        compute();
+        return () => { cancelled = true; };
+      }, [selectedFund, period, fetchPrices]);
+
+      // Chart
+      React.useEffect(() => {
+        if (chartInstance.current) chartInstance.current.destroy();
+        if (!perfData || perfData.portfolioReturn == null) return;
+
+        const ctx = chartRef.current?.getContext('2d');
+        if (!ctx) return;
+
+        const positiveHoldings = perfData.holdings.filter(h => h.contribution != null && h.contribution > 0);
+        const negativeHoldings = perfData.holdings.filter(h => h.contribution != null && h.contribution < 0);
+        const combined = [...positiveHoldings.slice(0, 10), ...negativeHoldings.slice(-5)].sort((a, b) => (b.contribution || 0) - (a.contribution || 0));
+
+        chartInstance.current = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: combined.map(h => h.ticker),
+            datasets: [{
+              label: lang === 'ja' ? '寄与度 (%)' : 'Contribution (%)',
+              data: combined.map(h => h.contribution?.toFixed(2) || 0),
+              backgroundColor: combined.map(h => (h.contribution || 0) >= 0 ? 'rgba(231, 76, 60, 0.7)' : 'rgba(39, 174, 96, 0.7)'),
+              borderRadius: 4
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: { titleFont: { family: 'Montserrat' }, bodyFont: { family: 'Montserrat' } }
+            },
+            scales: {
+              y: { title: { display: true, text: lang === 'ja' ? '寄与度 (%)' : 'Contribution (%)' }, grid: { color: 'rgba(38,70,83,0.08)' } },
+              x: { grid: { display: false } }
+            }
+          }
+        });
+        return () => chartInstance.current?.destroy();
+      }, [perfData, lang]);
+
+      return (
+        <div>
+          <div className="ranking-section-title">{t.perfTitle}</div>
+          <p style={{ fontSize: '12px', color: '#2A9D8F', marginBottom: '24px', marginTop: '-12px' }}>{t.perfDesc}</p>
+
+          <div className="perf-container">
+            <div className="perf-controls">
+              <select className="perf-select" value={selectedFundIdx} onChange={e => setSelectedFundIdx(e.target.value)}>
+                <option value="">{t.selectFundPlaceholder}</option>
+                {funds.map((f, i) => <option key={i} value={i}>{f.name}</option>)}
+              </select>
+              <div className="ranking-tabs">
+                {[['1m','m1'],['3m','m3'],['6m','m6'],['1y','y1']].map(([p, k]) => (
+                  <button key={p} className={`ranking-tab ${period === p ? 'active' : ''}`} onClick={() => setPeriod(p)}>
+                    {t[k] || p}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {!selectedFund && <div className="overlap-empty">{t.selectFundPerf}</div>}
+
+            {loading && selectedFund && (
+              <div className="overlap-empty" style={{height: 'auto', padding: '40px'}}>
+                {lang === 'ja' ? '価格データを取得中...' : 'Fetching price data...'}
+              </div>
+            )}
+
+            {perfData && !loading && (
+              <div>
+                <div className="perf-stats">
+                  <div className="perf-stat">
+                    <div className={`perf-stat-value ${(perfData.portfolioReturn || 0) >= 0 ? 'positive' : 'negative'}`}>
+                      {perfData.portfolioReturn != null ? ((perfData.portfolioReturn >= 0 ? '+' : '') + perfData.portfolioReturn.toFixed(2) + '%') : 'N/A'}
+                    </div>
+                    <div className="perf-stat-label">{t.fundReturn}</div>
+                  </div>
+                  <div className="perf-stat">
+                    <div className={`perf-stat-value ${(perfData.spyReturn || 0) >= 0 ? 'positive' : 'negative'}`}>
+                      {perfData.spyReturn != null ? ((perfData.spyReturn >= 0 ? '+' : '') + perfData.spyReturn.toFixed(2) + '%') : 'N/A'}
+                    </div>
+                    <div className="perf-stat-label">{t.benchmark}</div>
+                  </div>
+                  {perfData.portfolioReturn != null && perfData.spyReturn != null && (
+                    <div className="perf-stat">
+                      <div className={`perf-stat-value ${(perfData.portfolioReturn - perfData.spyReturn) >= 0 ? 'positive' : 'negative'}`}>
+                        {((perfData.portfolioReturn - perfData.spyReturn) >= 0 ? '+' : '') + (perfData.portfolioReturn - perfData.spyReturn).toFixed(2) + '%'}
+                      </div>
+                      <div className="perf-stat-label">Alpha</div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="perf-chart-wrapper"><canvas ref={chartRef}></canvas></div>
+
+                <div style={{borderRadius: '12px', overflow: 'hidden'}}>
+                  <table className="perf-holdings-table">
+                    <thead>
+                      <tr>
+                        <th>{t.ticker}</th>
+                        <th>{t.company}</th>
+                        <th>{t.weight}</th>
+                        <th>{lang === 'ja' ? 'リターン' : 'Return'}</th>
+                        <th>{lang === 'ja' ? '寄与度' : 'Contribution'}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {perfData.holdings.map(h => (
+                        <tr key={h.ticker}>
+                          <td><span className="ticker">{h.ticker}</span></td>
+                          <td>{h.name}</td>
+                          <td style={{fontWeight: 600}}>{h.weight.toFixed(1)}%</td>
+                          <td style={{fontWeight: 600, color: h.ret == null ? '#999' : h.ret >= 0 ? '#E74C3C' : '#27AE60'}}>
+                            {h.ret != null ? ((h.ret >= 0 ? '+' : '') + h.ret.toFixed(2) + '%') : 'N/A'}
+                          </td>
+                          <td style={{fontWeight: 600, color: h.contribution == null ? '#999' : h.contribution >= 0 ? '#E74C3C' : '#27AE60'}}>
+                            {h.contribution != null ? ((h.contribution >= 0 ? '+' : '') + h.contribution.toFixed(2) + '%') : 'N/A'}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="perf-note" style={{marginTop: '16px'}}>{t.perfNote}</p>
+              </div>
+            )}
+          </div>
         </div>
       );
     }

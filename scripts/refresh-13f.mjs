@@ -7,6 +7,7 @@ const CONFIG_PATH = path.join(ROOT, 'config', 'funds.json');
 const TICKER_MAP_PATH = path.join(ROOT, 'config', 'ticker-map.json');
 const MANUAL_PATH = path.join(ROOT, 'data', 'manual-funds.json');
 const OUTPUT_PATH = path.join(ROOT, 'data', 'funds.json');
+const PREV_OUTPUT_PATH = path.join(ROOT, 'data', 'funds-prev.json');
 const META_PATH = path.join(ROOT, 'data', 'meta.json');
 
 const SEC_BASE = 'https://data.sec.gov';
@@ -801,6 +802,16 @@ async function main() {
   };
 
   await fs.mkdir(path.dirname(OUTPUT_PATH), { recursive: true });
+
+  // Rotate: save current as previous before overwriting
+  try {
+    await fs.access(OUTPUT_PATH);
+    await fs.copyFile(OUTPUT_PATH, PREV_OUTPUT_PATH);
+    console.log(`Rotated previous data to ${PREV_OUTPUT_PATH}`);
+  } catch {
+    // No existing data to rotate
+  }
+
   await fs.writeFile(OUTPUT_PATH, JSON.stringify(output, null, 2));
   await fs.writeFile(META_PATH, JSON.stringify(meta, null, 2));
 
