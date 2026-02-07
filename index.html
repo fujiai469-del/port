@@ -225,27 +225,46 @@
       white-space: nowrap;
     }
 
-    .refresh-btn {
+    .tab-refresh-btn {
       border: 1px solid rgba(255, 255, 255, 0.35);
       background: rgba(255, 255, 255, 0.08);
       color: #fff;
       border-radius: 8px;
-      padding: 8px 12px;
+      padding: 0;
       cursor: pointer;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.6px;
-      white-space: nowrap;
-      min-width: 86px;
+      width: 38px;
+      min-width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+      text-transform: none;
     }
 
-    .refresh-btn:hover {
+    .tab-refresh-btn:hover {
       background: rgba(255, 255, 255, 0.18);
     }
 
-    .refresh-btn:disabled {
+    .tab-refresh-btn:disabled {
       opacity: 0.65;
       cursor: not-allowed;
+    }
+
+    .refresh-icon.spinning {
+      animation: spin-refresh 1s linear infinite;
+    }
+
+    @keyframes spin-refresh {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .refresh-status {
@@ -1479,9 +1498,10 @@
         min-width: 180px;
       }
 
-      .refresh-btn {
-        min-width: 76px;
-        padding: 8px 10px;
+      .tab-refresh-btn {
+        width: 40px;
+        min-width: 40px;
+        height: 40px;
       }
 
       .search-mode-select {
@@ -1611,10 +1631,11 @@
         font-size: 11px;
       }
 
-      .refresh-btn {
-        min-width: 76px;
-        font-size: 10px;
-        padding: 8px 9px;
+      .tab-refresh-btn {
+        width: 34px;
+        min-width: 34px;
+        height: 34px;
+        font-size: 15px;
       }
 
       .search-box:focus {
@@ -1730,8 +1751,12 @@
           waiting: 'Waiting for update...',
           done: 'Updated',
           failed: 'Failed',
+          failedReason: 'Failed: {{reason}}',
           generatedAt: 'Updated at',
-          timeout: 'Timeout'
+          timeout: 'Timeout',
+          errMissingToken: 'Server token missing',
+          errUnauthorized: 'Unauthorized',
+          errDispatch: 'GitHub dispatch error'
         },
         fund: {
           tabs: { holdings: 'Holdings', about: 'About' },
@@ -1875,8 +1900,12 @@
           waiting: '更新待機中...',
           done: '更新完了',
           failed: '失敗',
+          failedReason: '失敗: {{reason}}',
           generatedAt: '更新日時',
-          timeout: 'タイムアウト'
+          timeout: 'タイムアウト',
+          errMissingToken: 'サーバーのトークン未設定',
+          errUnauthorized: '認証エラー',
+          errDispatch: 'GitHub起動エラー'
         },
         fund: {
           tabs: { holdings: '保有銘柄', about: '概要' },
@@ -2063,6 +2092,22 @@
         hour: '2-digit',
         minute: '2-digit'
       });
+    }
+
+    function formatRefreshErrorMessage(error, t) {
+      const text = String(error || '').trim();
+      if (!text) return t('refresh.failed');
+      if (text.includes('Missing GITHUB_REFRESH_TOKEN') || text.includes('Missing GITHUB_TOKEN')) {
+        return t('refresh.errMissingToken');
+      }
+      if (text.includes('Unauthorized')) {
+        return t('refresh.errUnauthorized');
+      }
+      if (text.includes('GitHub dispatch failed')) {
+        return t('refresh.errDispatch');
+      }
+      const compact = text.length > 42 ? `${text.slice(0, 42)}...` : text;
+      return t('refresh.failedReason', { reason: compact });
     }
 
     function normalizeFundKey(value) {
@@ -2811,14 +2856,6 @@
         setReadAlertIds(alerts.map((a) => a.id));
       }, [alerts]);
 
-      const refreshButtonLabel = React.useMemo(() => {
-        if (refreshState === 'requesting') return t('refresh.requesting');
-        if (refreshState === 'queued') return t('refresh.queued');
-        if (refreshState === 'done') return t('refresh.done');
-        if (refreshState === 'error') return t('refresh.failed');
-        return t('refresh.button');
-      }, [refreshState, t]);
-
       const generatedAtText = React.useMemo(
         () => formatGeneratedAt(dataGeneratedAt, language),
         [dataGeneratedAt, language]
@@ -2848,7 +2885,7 @@
           });
           const payload = await res.json().catch(() => ({}));
           if (!res.ok || !payload?.ok) {
-            throw new Error(payload?.error || 'dispatch failed');
+            throw new Error(payload?.error || payload?.details || `dispatch failed (${res.status})`);
           }
 
           setRefreshState('queued');
@@ -2895,7 +2932,7 @@
           }, 10000);
         } catch (err) {
           setRefreshState('error');
-          setRefreshLabel(t('refresh.failed'));
+          setRefreshLabel(formatRefreshErrorMessage(err?.message || err, t));
           window.setTimeout(() => {
             setRefreshState('idle');
             setRefreshLabel('');
@@ -2945,16 +2982,17 @@
                   <button className={`tab ${tab === 'overlap' ? 'active' : ''}`} onClick={() => setTab('overlap')}>{t('nav.overlap')}</button>
                   <button className={`tab ${tab === 'flow' ? 'active' : ''}`} onClick={() => setTab('flow')}>{t('nav.flow')}</button>
                   <button className={`tab ${tab === 'watch' ? 'active' : ''}`} onClick={() => setTab('watch')}>{t('nav.watch')}</button>
-                </div>
-                <div className="header-right">
                   <button
-                    className="refresh-btn"
+                    className="tab tab-refresh-btn"
                     onClick={triggerDataRefresh}
                     disabled={refreshState === 'requesting' || refreshState === 'queued'}
                     title={t('refresh.button')}
+                    aria-label={t('refresh.button')}
                   >
-                    {refreshButtonLabel}
+                    <span className={`refresh-icon ${(refreshState === 'requesting' || refreshState === 'queued') ? 'spinning' : ''}`}>↻</span>
                   </button>
+                </div>
+                <div className="header-right">
                   <select className="search-mode-select" value={searchMode} onChange={(e) => setSearchMode(e.target.value)}>
                     <option value="smart">{t('search.modeSmart')}</option>
                     <option value="fund">{t('search.modeFund')}</option>
