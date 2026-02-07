@@ -3318,13 +3318,33 @@
       return { status, message, provider: provider || null };
     }
 
+    function toStooqSymbol(ticker) {
+      const raw = normalizeTicker(ticker);
+      if (!raw) return '';
+      if (!/^[A-Z0-9.\-]+$/.test(raw)) return '';
+      const parts = raw.split('.');
+      if (parts.length === 2 && /^[A-Z]{2,3}$/.test(parts[1])) {
+        const base = parts[0].replace(/\./g, '-').toLowerCase();
+        return `${base}.${parts[1].toLowerCase()}`;
+      }
+      const base = raw.replace(/\./g, '-').toLowerCase();
+      return `${base}.us`;
+    }
+
     // --- Stooq Provider ---
     async function fetchStooqPriceSeries(ticker) {
-      const symbol = ticker.toLowerCase().replace('.', '-');
+      const symbol = toStooqSymbol(ticker);
+      if (!symbol) {
+        return { series: null, error: makeDataError(DATA_STATUS.FETCH_ERROR, 'Invalid ticker symbol', 'stooq') };
+      }
       try {
         const res = await fetch(`/api/stooq-proxy?s=${encodeURIComponent(symbol)}`);
         if (res.status === 429) {
           return { series: null, error: makeDataError(DATA_STATUS.RATE_LIMIT, 'Rate limited', 'stooq') };
+        }
+        if (res.status === 404) {
+          const body = await res.json().catch(() => ({}));
+          return { series: null, error: makeDataError(DATA_STATUS.FETCH_ERROR, body.error || 'No data', 'stooq') };
         }
         if (res.status === 503) {
           const body = await res.json().catch(() => ({}));

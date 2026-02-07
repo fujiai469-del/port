@@ -51,13 +51,21 @@ export default async function handler(req, res) {
     }
 
     const csv = await stooqRes.text();
+    const trimmed = csv.trim();
+
+    if (trimmed.toLowerCase() === 'no data') {
+      return json(res, 404, {
+        ok: false,
+        error: 'No data for symbol'
+      });
+    }
 
     // Detect CAPTCHA / error pages
-    if (csv.includes('<html') || csv.includes('Exceeded') || csv.length < 30) {
+    if (trimmed.startsWith('<') || /captcha|exceeded/i.test(trimmed)) {
       return json(res, 503, {
         ok: false,
         error: 'Stooq rate limit or CAPTCHA triggered',
-        detail: csv.slice(0, 200)
+        detail: trimmed.slice(0, 200)
       });
     }
 
