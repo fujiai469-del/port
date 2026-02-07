@@ -2042,6 +2042,9 @@
     const META_URL = 'data/meta.json';
     const FALLBACK_URL = 'data/manual-funds.json';
     const PREVIOUS_DATA_URL = 'data/funds-prev.json';
+    const TICKER_MAP_URL = 'data/ticker-map.json';
+    const MANUAL_CUSIP_THRESHOLD = 0.4;
+    let TICKER_MAP = {};
     const BREAKPOINTS = { mobile: 768, desktop: 1024 };
     const WATCHLIST_STORAGE_KEY = 'pv_watchlist_v1';
     const ALERT_READ_STORAGE_KEY = 'pv_alert_read_v1';
@@ -2565,11 +2568,67 @@
       return String(value || '').trim();
     }
 
+    function normalizeTickerMap(raw) {
+      const map = {};
+      if (!raw || typeof raw !== 'object') return map;
+      Object.entries(raw).forEach(([key, value]) => {
+        const normalizedKey = normalizeTicker(key);
+        const normalizedValue = normalizeTicker(value);
+        if (!normalizedKey || !normalizedValue) return;
+        map[normalizedKey] = normalizedValue;
+        if (/^\d{1,8}$/.test(normalizedKey)) {
+          map[normalizedKey.padStart(9, '0')] = normalizedValue;
+        }
+      });
+      return map;
+    }
+
+    function isCusipLike(value) {
+      const key = normalizeTicker(value);
+      if (!key) return false;
+      if (!/^[0-9A-Z]{8,9}$/.test(key)) return false;
+      return /\d/.test(key);
+    }
+
+    function mapCusipToTicker(value) {
+      const key = normalizeTicker(value);
+      if (!key) return '';
+      if (!isCusipLike(key)) return key;
+      if (TICKER_MAP[key]) return TICKER_MAP[key];
+      const padded = key.padStart(9, '0');
+      if (TICKER_MAP[padded]) return TICKER_MAP[padded];
+      const trimmed = key.replace(/^0+/, '');
+      if (trimmed && TICKER_MAP[trimmed]) return TICKER_MAP[trimmed];
+      return key;
+    }
+
+    function shouldUseManualHoldings(currentHoldings, manualHoldings) {
+      if (!Array.isArray(manualHoldings) || manualHoldings.length === 0) return false;
+      if (!Array.isArray(currentHoldings) || currentHoldings.length === 0) return true;
+      const cusipCount = currentHoldings.filter((h) => isCusipLike(h?.ticker)).length;
+      return cusipCount / currentHoldings.length >= MANUAL_CUSIP_THRESHOLD;
+    }
+
+    function mergeManualHoldings(funds, manualFunds) {
+      if (!Array.isArray(funds)) return [];
+      const manualMap = new Map(
+        (manualFunds || []).map((fund) => [String(fund?.name || '').trim(), fund])
+      );
+      return funds.map((fund) => {
+        const name = String(fund?.name || '').trim();
+        const manualFund = manualMap.get(name);
+        if (manualFund && shouldUseManualHoldings(fund?.holdings, manualFund?.holdings)) {
+          return { ...fund, holdings: manualFund.holdings };
+        }
+        return fund;
+      });
+    }
+
     function normalizeHoldings(rawHoldings) {
       if (!Array.isArray(rawHoldings)) return [];
       const map = new Map();
       for (const holding of rawHoldings) {
-        const ticker = normalizeTicker(holding?.ticker);
+        const ticker = mapCusipToTicker(holding?.ticker);
         if (!ticker) continue;
         const percentValue = Number(holding?.percent);
         const percent = Number.isFinite(percentValue) ? percentValue : 0;
@@ -3145,32 +3204,34 @@
       Technology: [
         /SEMICONDUCTOR/i, /SOFTWARE/i, /TECH/i, /TECHNOLOGY/i, /INFORMATION/i, /DATA/i, /ELECTRONIC/i,
         /CLOUD/i, /SYSTEMS?/i, /COMPUTER/i, /DIGITAL/i, /INTERNET/i, /ROBOTICS?/i, /CYBER/i,
-        /NETWORK/i, /PLATFORMS?/i
+        /NETWORK/i, /PLATFORMS?/i, /HARDWARE/i
       ],
       Healthcare: [
         /PHARMA/i, /PHARMACEUTICAL/i, /BIOTECH/i, /THERAPEUTIC/i, /HEALTH/i, /MEDICAL/i, /ONCOLOGY/i,
-        /CLINIC/i, /HOSPITAL/i, /SURGICAL/i, /MEDICINE/i, /IMMUNO/i
+        /CLINIC/i, /HOSPITAL/i, /SURGICAL/i, /MEDICINE/i, /IMMUNO/i, /DIAGNOSTIC/i, /LABS?/i
       ],
       Financial: [
-        /BANK/i, /BANC/i, /FINANC/i, /FINL/i, /INSURANCE/i, /CAPITAL/i, /BROKER/i, /CREDIT/i,
-        /PAYMENTS?/i, /CARD/i, /MORTGAGE/i, /REIT/i, /LENDING/i, /INVEST/i
+        /BANK/i, /BANC/i, /BANCSHARES/i, /BANCORP/i, /FINANC/i, /FINL/i, /INSURANCE/i, /CAPITAL/i,
+        /BROKER/i, /CREDIT/i, /PAYMENTS?/i, /CARD/i, /MORTGAGE/i, /REIT/i, /LENDING/i, /INVEST/i,
+        /HOLDINGS?/i
       ],
       Energy: [
-        /ENERGY/i, /OIL/i, /GAS/i, /PETROLEUM/i, /PIPELINE/i, /SOLAR/i, /WIND/i, /POWER\b/i, /UTILITIES?/i
+        /ENERGY/i, /OIL/i, /GAS/i, /PETROLEUM/i, /PIPELINE/i, /SOLAR/i, /WIND/i, /POWER\b/i,
+        /UTILITIES?/i, /DRILL/i, /OILFIELD/i, /OFFSHORE/i
       ],
       Industrial: [
         /INDUSTRIAL/i, /AEROSPACE/i, /DEFENSE/i, /AIR\s?LINES?/i, /AIRCRAFT/i, /LOGISTICS/i, /TRANSPORT/i,
         /RAIL/i, /MACHIN/i, /AUTOMATION/i, /ENGINE/i, /MANUFACTUR/i, /EQUIPMENT/i, /WASTE/i,
-        /CONSTRUCTION/i, /BUILD(ING)?/i
+        /CONSTRUCTION/i, /BUILD(ING)?/i, /RENTAL/i, /SERVICES?/i
       ],
       Materials: [
         /MINING/i, /GOLD/i, /SILVER/i, /COPPER/i, /STEEL/i, /MATERIALS?/i, /CHEMICAL/i, /ALUMIN/i,
-        /RESOURCE/i, /PAPER/i, /CEMENT/i
+        /RESOURCE/i, /PAPER/i, /CEMENT/i, /PACKAG/i, /BRICK/i, /LUMBER/i
       ],
       Consumer: [
         /RETAIL/i, /FOOD/i, /BEVERAGE/i, /CONSUMER/i, /APPAREL/i, /RESTAURANTS?/i, /HOTELS?/i,
         /LEISURE/i, /AUTO\b/i, /AUTOMOTIVE/i, /SHOP/i, /MARKET/i, /BREW/i, /CRUISE/i, /BRANDS?/i,
-        /PIZZA/i
+        /PIZZA/i, /STORE/i, /OUTLET/i
       ],
       Communication: [
         /COMMUNICATION/i, /TELECOM/i, /MEDIA/i, /BROADCAST/i, /STREAM/i, /ENTERTAIN/i, /WIRELESS/i,
@@ -3179,7 +3240,7 @@
     };
 
     function getSectorFromMap(ticker) {
-      const key = normalizeTicker(ticker);
+      const key = mapCusipToTicker(ticker);
       return SECTOR_MAP[key] || '';
     }
 
@@ -4144,14 +4205,24 @@
         const load = async () => {
           const cacheBust = `ts=${Date.now()}`;
           try {
-            const [metaRes, dataRes, prevRes] = await Promise.all([
+            const [metaRes, dataRes, prevRes, manualRes, tickerMapRes] = await Promise.all([
               fetch(`${META_URL}?${cacheBust}`, { cache: 'no-store' }),
               fetch(`${DATA_URL}?${cacheBust}`, { cache: 'no-store' }),
-              fetch(`${PREVIOUS_DATA_URL}?${cacheBust}`, { cache: 'no-store' })
+              fetch(`${PREVIOUS_DATA_URL}?${cacheBust}`, { cache: 'no-store' }),
+              fetch(`${FALLBACK_URL}?${cacheBust}`, { cache: 'no-store' }),
+              fetch(`${TICKER_MAP_URL}?${cacheBust}`, { cache: 'no-store' })
             ]);
+            const manualData = manualRes.ok ? await manualRes.json() : [];
+            if (tickerMapRes.ok) {
+              const rawMap = await tickerMapRes.json();
+              TICKER_MAP = normalizeTickerMap(rawMap);
+            } else {
+              TICKER_MAP = {};
+            }
             if (dataRes.ok) {
               const data = await dataRes.json();
-              if (!cancelled) setFunds(normalizeFunds(data));
+              const merged = mergeManualHoldings(data, manualData);
+              if (!cancelled) setFunds(normalizeFunds(merged));
               if (prevRes.ok) {
                 const prevData = await prevRes.json();
                 if (!cancelled) setPreviousFunds(normalizeFunds(prevData));
