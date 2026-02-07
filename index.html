@@ -2578,7 +2578,7 @@
           map.set(ticker, {
             ticker,
             name: holding?.name || '',
-            sector: holding?.sector || 'Other',
+            sector: holding?.sector || '',
             percent,
             _maxPercent: percent
           });
@@ -3118,13 +3118,88 @@
       'IRS': 'Financial', 'RAL': 'Other', 'ADES': 'Consumer'
     };
 
-    function getSector(ticker) {
-      return SECTOR_MAP[ticker] || 'Other';
+    const ETF_NAME_PATTERNS = [
+      /\bETF\b/i,
+      /\bETN\b/i,
+      /\bETC\b/i,
+      /\bINDEX\b/i,
+      /\bFUND\b/i,
+      /\bTRUST\b/i,
+      /\bSPDR\b/i,
+      /\bISHARES\b/i,
+      /\bVANGUARD\b/i,
+      /\bINVESCO\b/i,
+      /\bSCHWAB\b/i,
+      /\bPROSHARES\b/i,
+      /\bVANECK\b/i,
+      /\bGLOBAL X\b/i,
+      /\bDIREXION\b/i,
+      /\bWISDOMTREE\b/i,
+      /\bPOWERSHARES\b/i,
+      /\bSELECT SECTOR\b/i,
+      /\bINDEX FDS?\b/i,
+      /\bEXCHANGE TRADED\b/i
+    ];
+
+    const SECTOR_NAME_PATTERNS = {
+      Technology: [
+        /SEMICONDUCTOR/i, /SOFTWARE/i, /TECH/i, /TECHNOLOGY/i, /INFORMATION/i, /DATA/i, /ELECTRONIC/i,
+        /CLOUD/i, /SYSTEMS?/i, /COMPUTER/i, /DIGITAL/i, /INTERNET/i, /ROBOTICS?/i, /CYBER/i,
+        /NETWORK/i, /PLATFORMS?/i
+      ],
+      Healthcare: [
+        /PHARMA/i, /PHARMACEUTICAL/i, /BIOTECH/i, /THERAPEUTIC/i, /HEALTH/i, /MEDICAL/i, /ONCOLOGY/i,
+        /CLINIC/i, /HOSPITAL/i, /SURGICAL/i, /MEDICINE/i, /IMMUNO/i
+      ],
+      Financial: [
+        /BANK/i, /BANC/i, /FINANC/i, /FINL/i, /INSURANCE/i, /CAPITAL/i, /BROKER/i, /CREDIT/i,
+        /PAYMENTS?/i, /CARD/i, /MORTGAGE/i, /REIT/i, /LENDING/i, /INVEST/i
+      ],
+      Energy: [
+        /ENERGY/i, /OIL/i, /GAS/i, /PETROLEUM/i, /PIPELINE/i, /SOLAR/i, /WIND/i, /POWER\b/i, /UTILITIES?/i
+      ],
+      Industrial: [
+        /INDUSTRIAL/i, /AEROSPACE/i, /DEFENSE/i, /AIR\s?LINES?/i, /AIRCRAFT/i, /LOGISTICS/i, /TRANSPORT/i,
+        /RAIL/i, /MACHIN/i, /AUTOMATION/i, /ENGINE/i, /MANUFACTUR/i, /EQUIPMENT/i, /WASTE/i,
+        /CONSTRUCTION/i, /BUILD(ING)?/i
+      ],
+      Materials: [
+        /MINING/i, /GOLD/i, /SILVER/i, /COPPER/i, /STEEL/i, /MATERIALS?/i, /CHEMICAL/i, /ALUMIN/i,
+        /RESOURCE/i, /PAPER/i, /CEMENT/i
+      ],
+      Consumer: [
+        /RETAIL/i, /FOOD/i, /BEVERAGE/i, /CONSUMER/i, /APPAREL/i, /RESTAURANTS?/i, /HOTELS?/i,
+        /LEISURE/i, /AUTO\b/i, /AUTOMOTIVE/i, /SHOP/i, /MARKET/i, /BREW/i, /CRUISE/i, /BRANDS?/i,
+        /PIZZA/i
+      ],
+      Communication: [
+        /COMMUNICATION/i, /TELECOM/i, /MEDIA/i, /BROADCAST/i, /STREAM/i, /ENTERTAIN/i, /WIRELESS/i,
+        /CABLE/i, /SATELLITE/i
+      ]
+    };
+
+    function getSectorFromMap(ticker) {
+      const key = normalizeTicker(ticker);
+      return SECTOR_MAP[key] || '';
+    }
+
+    function inferSectorByName(name) {
+      if (!name) return '';
+      const value = String(name);
+      if (ETF_NAME_PATTERNS.some((re) => re.test(value))) return 'ETF';
+      for (const [sector, patterns] of Object.entries(SECTOR_NAME_PATTERNS)) {
+        if (patterns.some((re) => re.test(value))) return sector;
+      }
+      return '';
+    }
+
+    function resolveSector({ ticker, sector, name } = {}) {
+      return sector || getSectorFromMap(ticker) || inferSectorByName(name) || 'Other';
     }
 
     function getHoldingSector(holding) {
       if (!holding) return 'Other';
-      return holding.sector || getSector(holding.ticker);
+      return resolveSector(holding);
     }
 
     function getHoldingSectorColor(holding) {
@@ -3137,11 +3212,11 @@
     }
 
     function getSectorColor(ticker) {
-      return SECTOR_COLORS[getSector(ticker)];
+      return SECTOR_COLORS[resolveSector({ ticker })];
     }
 
     function getSectorName(ticker, language) {
-      const sector = getSector(ticker);
+      const sector = resolveSector({ ticker });
       return translate(language, `sector.${sector}`) || sector;
     }
 
@@ -5082,7 +5157,7 @@
                     </thead>
                     <tbody>
                       {analysis.common.map(item => {
-                        const sector = item.sector || getSector(item.ticker);
+                        const sector = resolveSector(item);
                         const sectorLabel = translate(language, `sector.${sector}`) || sector;
                         return (
                           <tr key={item.ticker}>
@@ -5182,7 +5257,7 @@
               </thead>
               <tbody>
                 {rankingData.map((item, i) => {
-                  const sector = item.sector || getSector(item.ticker);
+                  const sector = resolveSector(item);
                   const sectorLabel = translate(language, `sector.${sector}`) || sector;
                   const totalBarWidth = (item.totalWeight / maxTotal) * 100;
                   const avgBarWidth = (item.avgWeight / maxAvg) * 100;
@@ -5290,7 +5365,11 @@
             return {
               ticker: normalized,
               name: summary?.name || delta?.name || normalized,
-              sector: summary?.sector || delta?.sector || getSector(normalized),
+              sector: resolveSector({
+                ticker: normalized,
+                sector: summary?.sector || delta?.sector,
+                name: summary?.name || delta?.name
+              }),
               currentFundCount: summary?.fundCount ?? delta?.currentFundCount ?? 0,
               deltaFundCount: delta?.score ?? 0,
               funds: summary?.funds || []
