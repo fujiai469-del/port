@@ -3286,6 +3286,7 @@
     // ═══════════════════════════════════════════════════════
 
     const PERF_CACHE_KEY = 'pv_perf_cache_v1';
+    const HOME_SORT_KEY_STORAGE = 'pv_home_sort_key_v1';
     const CSV_IMPORT_KEY = 'pv_csv_import_v1';
     const SETTINGS_KEY = 'pv_datasource_settings_v1';
     const TRADING_DAYS_PER_YEAR = 252;
@@ -3587,6 +3588,8 @@
 
     // Per-ticker price cache in memory (session only)
     const priceSeriesCache = new Map();
+    // Per-ticker computed metrics cache (session only)
+    const tickerMetricsCache = new Map();
 
     async function fetchTickerPriceSeries(ticker, settings) {
       const cacheKey = `stooq:${ticker}`;
@@ -4063,8 +4066,7 @@
     }
 
     // --- Fund Performance Sort Logic ---
-    function useFundPerformanceSort(funds) {
-      const [sortKey, setSortKey] = React.useState('default');
+    function useFundPerformanceSort(funds, sortKey) {
       const [perfCache, setPerfCache] = React.useState(new Map());
       const [loadingTickers, setLoadingTickers] = React.useState(new Set());
       const perfCacheRef = React.useRef(perfCache);
@@ -4115,6 +4117,7 @@
               const result = await fetchTickerPriceSeries(ticker, settings);
               if (cancelled) break;
               const metrics = result.series ? computeMetrics(result.series) : null;
+              tickerMetricsCache.set(ticker, { metrics, error: result.error });
               setPerfCache((prev) => {
                 const next = new Map(prev);
                 next.set(ticker, { metrics, error: result.error });
@@ -4203,7 +4206,7 @@
         });
       }, [funds, sortKey, perfCache, fundTopTickers]);
 
-      return { sortedFunds, sortKey, setSortKey, perfCache, fundTopTickers };
+      return { sortedFunds, perfCache, fundTopTickers };
     }
 
     function SectorLegend({ activeSector, onSectorClick }) {
@@ -4247,6 +4250,11 @@
       const [watchlist, setWatchlist] = React.useState(getInitialWatchlist);
       const [readAlertIds, setReadAlertIds] = React.useState(getInitialReadAlerts);
       const [alertsOpen, setAlertsOpen] = React.useState(false);
+      const [homeSortKey, setHomeSortKey] = React.useState(() => {
+        if (typeof window === 'undefined') return 'default';
+        const saved = window.localStorage.getItem(HOME_SORT_KEY_STORAGE);
+        return saved || 'default';
+      });
       const refreshPollRef = React.useRef(null);
       const t = React.useCallback((key, params) => translate(language, key, params), [language]);
 
@@ -4331,6 +4339,11 @@
         if (typeof window === 'undefined') return;
         window.localStorage.setItem(ALERT_READ_STORAGE_KEY, JSON.stringify(readAlertIds));
       }, [readAlertIds]);
+
+      React.useEffect(() => {
+        if (typeof window === 'undefined') return;
+        window.localStorage.setItem(HOME_SORT_KEY_STORAGE, homeSortKey);
+      }, [homeSortKey]);
 
       React.useEffect(() => {
         const handleResize = () => setLayout(getLayoutMode(window.innerWidth));
@@ -4575,6 +4588,8 @@
         return t('search.placeholder');
       }, [searchMode, t]);
 
+      const homePerfSort = useFundPerformanceSort(filtered, homeSortKey);
+
       const handleSelectFund = (fund) => {
         setSelected(fund);
         if (tab === 'home') setTab('detail');
@@ -4661,6 +4676,11 @@
               {tab === 'home' && (
                 <HomeView
                   funds={filtered}
+                  sortKey={homeSortKey}
+                  onSortKeyChange={setHomeSortKey}
+                  perfSorted={homePerfSort.sortedFunds}
+                  perfCache={homePerfSort.perfCache}
+                  fundTopTickers={homePerfSort.fundTopTickers}
                   onSelect={handleSelectFund}
                   watchedFundSet={watchedFundSet}
                   onToggleFundWatch={toggleWatchFund}
@@ -4724,10 +4744,19 @@
       );
     }
 
-    function HomeView({ funds, onSelect, watchedFundSet, onToggleFundWatch }) {
+    function HomeView({
+      funds,
+      sortKey,
+      onSortKeyChange,
+      perfSorted,
+      perfCache,
+      fundTopTickers,
+      onSelect,
+      watchedFundSet,
+      onToggleFundWatch
+    }) {
       const { t } = useI18n();
       const [activeSector, setActiveSector] = React.useState(null);
-      const { sortedFunds: perfSorted, sortKey, setSortKey, perfCache, fundTopTickers } = useFundPerformanceSort(funds);
 
       const sortedFunds = React.useMemo(() => {
         const base = perfSorted || funds;
@@ -4737,7 +4766,7 @@
           const bWeight = b.holdings.reduce((sum, h) => getHoldingSector(h) === activeSector ? sum + h.percent : sum, 0);
           return bWeight - aWeight;
         });
-      }, [funds, perfSorted, sortKey, activeSector]);
+      }, [funds, perfSorted, activeSector]);
 
       if (!funds || funds.length === 0) {
         return (
@@ -4759,7 +4788,7 @@
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--primary-teal)' }}>{t('perf.sortBy')}</span>
-                <select className="perf-sort-select" value={sortKey} onChange={e => setSortKey(e.target.value)}>
+                <select className="perf-sort-select" value={sortKey} onChange={e => onSortKeyChange(e.target.value)}>
                   <option value="default">{t('perf.sortDefault')}</option>
                   <option value="1Y">{t('perf.sort1Y')}</option>
                   <option value="6M">{t('perf.sort6M')}</option>
@@ -4908,15 +4937,67 @@
       const [detailTab, setDetailTab] = React.useState('holdings');
       const [sortMode, setSortMode] = React.useState('weight');
       const [isExpanded, setIsExpanded] = React.useState(false);
+      const [holdingPerfMap, setHoldingPerfMap] = React.useState(new Map());
+      const [loadingHoldingPerf, setLoadingHoldingPerf] = React.useState(new Set());
       const holdings = fund?.holdings || [];
       const normalizedSearch = normalizeSearchText(searchTerm);
       const shouldHighlightTickers = resolveSearchIntent(normalizedSearch, searchMode) === 'ticker';
+      const holdingTickers = React.useMemo(
+        () => [...new Set(holdings.map((h) => normalizeTicker(h.ticker)).filter(Boolean))],
+        [holdings]
+      );
 
       React.useEffect(() => {
         setDetailTab('holdings');
         setSortMode('weight');
         setIsExpanded(false);
       }, [fund?.name]);
+
+      React.useEffect(() => {
+        let cancelled = false;
+        const fromCache = new Map();
+        holdingTickers.forEach((ticker) => {
+          const cached = tickerMetricsCache.get(ticker);
+          if (cached) fromCache.set(ticker, cached);
+        });
+        setHoldingPerfMap(fromCache);
+
+        const settings = getDataSourceSettings();
+        const toLoad = holdingTickers.filter((ticker) => !fromCache.has(ticker));
+        if (toLoad.length === 0) {
+          setLoadingHoldingPerf(new Set());
+          return () => { cancelled = true; };
+        }
+
+        setLoadingHoldingPerf(new Set(toLoad));
+        const queue = [...toLoad];
+        const maxConcurrency = Math.min(6, queue.length);
+
+        const workers = Array.from({ length: maxConcurrency }, async () => {
+          while (!cancelled) {
+            const ticker = queue.shift();
+            if (!ticker) break;
+            const result = await fetchTickerPriceSeries(ticker, settings);
+            if (cancelled) break;
+            const metrics = result.series ? computeMetrics(result.series) : null;
+            const payload = { metrics, error: result.error };
+            tickerMetricsCache.set(ticker, payload);
+            setHoldingPerfMap((prev) => {
+              const next = new Map(prev);
+              next.set(ticker, payload);
+              return next;
+            });
+            setLoadingHoldingPerf((prev) => {
+              const next = new Set(prev);
+              next.delete(ticker);
+              return next;
+            });
+          }
+        });
+
+        Promise.all(workers).catch(() => {});
+        return () => { cancelled = true; };
+      }, [holdingTickers, fund?.name]);
 
       const sortedHoldings = React.useMemo(() => {
         const items = [...holdings];
@@ -4998,6 +5079,14 @@
           : aumValue)
         : t('common.notAvailable');
       const concentration = topConcentration ? `${topConcentration.toFixed(1)}%` : t('common.notAvailable');
+      const getHoldingPeriodReturn = (ticker, period) => {
+        const normalized = normalizeTicker(ticker);
+        const perf = holdingPerfMap.get(normalized);
+        if (!perf && loadingHoldingPerf.has(normalized)) return { text: '…', cls: 'na' };
+        const value = perf?.metrics?.totalReturn?.[period];
+        if (value === null || value === undefined || !Number.isFinite(value)) return { text: '—', cls: 'na' };
+        return { text: formatPercent(value), cls: value >= 0 ? 'positive' : 'negative' };
+      };
 
       return (
         <div className="detail-view">
@@ -5040,13 +5129,26 @@
                   <div className="chart-container"><canvas ref={chartRef}></canvas></div>
                   <div className="table-container">
                     <table className="holdings-table">
-                      <thead><tr><th>{t('common.ticker')}</th><th>{t('common.company')}</th><th>{t('common.sector')}</th><th>{t('common.allocation')}</th></tr></thead>
+                      <thead>
+                        <tr>
+                          <th>{t('common.ticker')}</th>
+                          <th>{t('common.company')}</th>
+                          <th>{t('common.sector')}</th>
+                          <th>{t('perf.period1M')}</th>
+                          <th>{t('perf.period3M')}</th>
+                          <th>{t('perf.period1Y')}</th>
+                          <th>{t('common.allocation')}</th>
+                        </tr>
+                      </thead>
                       <tbody>
                         {sortedHoldings.map((h, i) => {
                           const sector = getHoldingSector(h);
                           const sectorLabel = translate(language, `sector.${sector}`) || sector;
                           const isMatch = shouldHighlightTickers && normalizedSearch && normalizeTicker(h.ticker) === normalizeTicker(normalizedSearch);
                           const rowRef = i === firstMatchIndex ? matchRowRef : null;
+                          const ret1M = getHoldingPeriodReturn(h.ticker, '1M');
+                          const ret3M = getHoldingPeriodReturn(h.ticker, '3M');
+                          const ret1Y = getHoldingPeriodReturn(h.ticker, '1Y');
                           return (
                             <tr key={i} ref={rowRef} className={`holding-row ${isMatch ? 'match' : ''}`}>
                               <td>
@@ -5064,6 +5166,9 @@
                               </td>
                               <td>{h.name}</td>
                               <td><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
+                              <td><span className={`perf-inline ${ret1M.cls}`}>{ret1M.text}</span></td>
+                              <td><span className={`perf-inline ${ret3M.cls}`}>{ret3M.text}</span></td>
+                              <td><span className={`perf-inline ${ret1Y.cls}`}>{ret1Y.text}</span></td>
                               <td><div className="percent-bar"><div className="percent-bar-bg"><div className={`percent-bar-fill ${i === 0 ? 'top' : ''}`} style={{ width: `${h.percent}%` }}></div></div><span className="percent-value">{h.percent.toFixed(1)}%</span></div></td>
                             </tr>
                           );
