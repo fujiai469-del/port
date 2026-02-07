@@ -1536,6 +1536,328 @@
       color: var(--primary-teal);
     }
 
+    /* Performance */
+    .perf-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .perf-card {
+      background: var(--bg-sand);
+      border-radius: 12px;
+      padding: 14px 16px;
+      text-align: center;
+    }
+
+    .perf-card-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--teal-light);
+      margin-bottom: 4px;
+    }
+
+    .perf-card-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary-teal);
+    }
+
+    .perf-card-value.positive { color: #C0392B; }
+    .perf-card-value.negative { color: #1E8449; }
+    .perf-card-value.na { color: rgba(38,70,83,0.35); font-size: 14px; }
+
+    .perf-chart-wrap {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 20px;
+    }
+
+    .perf-chart-periods {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .perf-period-btn {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(38,70,83,0.18);
+      background: transparent;
+      color: var(--primary-teal);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .perf-period-btn:hover { border-color: var(--teal-light); }
+
+    .perf-period-btn.active {
+      background: var(--primary-teal);
+      color: #fff;
+      border-color: var(--primary-teal);
+    }
+
+    .perf-toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .perf-toggle-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary-teal);
+    }
+
+    .perf-toggle-switch {
+      position: relative;
+      width: 36px;
+      height: 20px;
+      background: rgba(38,70,83,0.2);
+      border-radius: 10px;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      transition: background 0.2s;
+    }
+
+    .perf-toggle-switch.on { background: var(--teal-light); }
+
+    .perf-toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform 0.2s;
+    }
+
+    .perf-toggle-switch.on::after { transform: translateX(16px); }
+
+    .perf-error-box {
+      background: rgba(231,76,60,0.08);
+      border: 1px solid rgba(231,76,60,0.25);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--primary-teal);
+      margin-bottom: 16px;
+    }
+
+    .perf-error-icon { font-size: 16px; flex-shrink: 0; }
+
+    .perf-error-text { flex: 1; line-height: 1.5; }
+
+    .perf-error-reason {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .perf-retry-btn {
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(38,70,83,0.25);
+      background: #fff;
+      color: var(--primary-teal);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      margin-top: 8px;
+    }
+
+    .perf-retry-btn:hover { background: rgba(38,70,83,0.05); }
+
+    .perf-skeleton {
+      background: linear-gradient(90deg, rgba(38,70,83,0.06) 25%, rgba(38,70,83,0.12) 50%, rgba(38,70,83,0.06) 75%);
+      background-size: 200% 100%;
+      animation: skeleton-shimmer 1.5s ease-in-out infinite;
+      border-radius: 8px;
+    }
+
+    @keyframes skeleton-shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .perf-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .perf-inline.positive { color: #C0392B; }
+    .perf-inline.negative { color: #1E8449; }
+    .perf-inline.na { color: rgba(38,70,83,0.35); }
+
+    .perf-sort-select {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 2px solid rgba(38,70,83,0.12);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary-teal);
+      font-family: 'Montserrat', sans-serif;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .perf-warn-icon {
+      color: #E67E22;
+      cursor: help;
+      font-size: 13px;
+      position: relative;
+    }
+
+    .perf-warn-tooltip {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary-teal);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      white-space: nowrap;
+      z-index: 50;
+      pointer-events: none;
+    }
+
+    .settings-container {
+      max-width: 700px;
+    }
+
+    .settings-section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 20px;
+    }
+
+    .settings-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary-teal);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--bg-sand);
+    }
+
+    .settings-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 0;
+      font-size: 13px;
+    }
+
+    .settings-label {
+      font-weight: 600;
+      color: var(--primary-teal);
+    }
+
+    .settings-desc {
+      font-size: 12px;
+      color: var(--teal-light);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    .settings-input {
+      padding: 8px 12px;
+      border: 2px solid rgba(38,70,83,0.15);
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary-teal);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .settings-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      background: var(--primary-teal);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .settings-btn:hover { opacity: 0.9; }
+
+    .settings-btn.secondary {
+      background: transparent;
+      border: 2px solid rgba(38,70,83,0.2);
+      color: var(--primary-teal);
+    }
+
+    .csv-drop-zone {
+      border: 2px dashed rgba(38,70,83,0.25);
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--teal-light);
+      font-size: 13px;
+    }
+
+    .csv-drop-zone:hover,
+    .csv-drop-zone.drag-over {
+      border-color: var(--teal-light);
+      background: rgba(42,157,143,0.05);
+    }
+
+    .csv-mapping-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .csv-mapping-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary-teal);
+    }
+
+    .csv-mapping-select {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(38,70,83,0.2);
+      font-size: 12px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary-teal);
+      width: 100%;
+    }
+
     /* Mobile */
     @media (max-width: 768px) {
       .header {
@@ -1889,6 +2211,66 @@
           Materials: 'Materials',
           ETF: 'ETF',
           Other: 'Other'
+        },
+        perf: {
+          title: 'Performance',
+          totalReturn: 'Total Return',
+          annualized: 'Annualized',
+          volatility: 'Volatility',
+          maxDrawdown: 'Max Drawdown',
+          sharpe: 'Sharpe',
+          period1M: '1M', period3M: '3M', period6M: '6M', period1Y: '1Y', periodYTD: 'YTD', periodMAX: 'MAX',
+          indexToggle: 'Index (100)',
+          priceChart: 'Price Chart',
+          sortBy: 'Sort by',
+          sortDefault: 'Default (Holdings)',
+          sort1Y: '1Y Return',
+          sort6M: '6M Return',
+          sort3M: '3M Return',
+          sort1M: '1M Return',
+          sortYTD: 'YTD Return',
+          sortSharpe: 'Sharpe Ratio',
+          sortMDD: 'Max Drawdown',
+          sortVol: 'Volatility',
+          noData: '—',
+          loading: 'Loading price data...',
+          errorFetch: 'Failed to fetch price data',
+          errorProvider: 'Provider unavailable',
+          errorUnsupported: 'No price data available for this fund type',
+          reasonNoTicker: 'No ticker mapping found for this fund',
+          reasonFetchFail: 'Price data fetch failed',
+          reasonRateLimit: 'Rate limited — try again later',
+          reasonCaptcha: 'Provider blocked (CAPTCHA)',
+          reasonNoProvider: 'No data provider configured for this fund',
+          reasonCsvNeeded: 'Upload CSV from your broker to see performance',
+          retry: 'Retry',
+          settings: 'Data Settings',
+          csvImport: 'CSV Import',
+          fundPerf: 'Fund Performance'
+        },
+        settings: {
+          title: 'Data Source Settings',
+          stooq: 'Stooq (Equities / ETFs)',
+          stooqDesc: 'Free daily OHLCV data for US equities and ETFs. No API key required.',
+          stooqEnabled: 'Enabled',
+          mufg: 'MUFG AM NAV API',
+          mufgDesc: 'Mutual fund NAV data from Mitsubishi UFJ Asset Management. Requires API endpoint configuration.',
+          mufgEndpoint: 'API Endpoint URL',
+          mufgAgree: 'I agree to the MUFG AM API terms of use',
+          csv: 'CSV Import (Broker Data)',
+          csvDesc: 'Upload portfolio CSV from your broker (SBI, Rakuten, etc.) to calculate your actual realized performance.',
+          csvUpload: 'Upload CSV',
+          csvDrop: 'Drop CSV file here or click to browse',
+          csvMapping: 'Column Mapping',
+          csvColDate: 'Date column',
+          csvColTicker: 'Ticker / Fund column',
+          csvColPrice: 'Price / NAV column',
+          csvColQuantity: 'Quantity column',
+          csvColAmount: 'Amount column',
+          csvLoaded: '{{count}} records loaded',
+          csvClear: 'Clear imported data',
+          csvNote: 'This is your personal performance data, stored locally in your browser only.',
+          back: 'Back'
         }
       },
       ja: {
@@ -2041,6 +2423,66 @@
           Materials: '素材',
           ETF: 'ETF',
           Other: 'その他'
+        },
+        perf: {
+          title: 'パフォーマンス',
+          totalReturn: 'トータルリターン',
+          annualized: '年率',
+          volatility: 'ボラティリティ',
+          maxDrawdown: '最大ドローダウン',
+          sharpe: 'シャープ比率',
+          period1M: '1ヶ月', period3M: '3ヶ月', period6M: '6ヶ月', period1Y: '1年', periodYTD: 'YTD', periodMAX: '全期間',
+          indexToggle: '指数化 (100)',
+          priceChart: '価格推移',
+          sortBy: '並び替え',
+          sortDefault: 'デフォルト（保有銘柄数）',
+          sort1Y: '1年リターン',
+          sort6M: '6ヶ月リターン',
+          sort3M: '3ヶ月リターン',
+          sort1M: '1ヶ月リターン',
+          sortYTD: 'YTDリターン',
+          sortSharpe: 'シャープ比率',
+          sortMDD: '最大ドローダウン',
+          sortVol: 'ボラティリティ',
+          noData: '—',
+          loading: '価格データを取得中...',
+          errorFetch: '価格データの取得に失敗',
+          errorProvider: 'プロバイダーが利用不可',
+          errorUnsupported: 'このファンド種別では価格データを取得できません',
+          reasonNoTicker: 'ティッカーマッピングが見つかりません',
+          reasonFetchFail: '価格データの取得に失敗しました',
+          reasonRateLimit: 'レート制限中 — しばらく後に再試行してください',
+          reasonCaptcha: 'プロバイダーにブロックされました（CAPTCHA）',
+          reasonNoProvider: 'このファンドのデータプロバイダーが未設定です',
+          reasonCsvNeeded: '成績を見るには証券口座のCSVをアップロードしてください',
+          retry: '再試行',
+          settings: 'データ設定',
+          csvImport: 'CSV取込',
+          fundPerf: 'ファンド成績'
+        },
+        settings: {
+          title: 'データソース設定',
+          stooq: 'Stooq（株式 / ETF）',
+          stooqDesc: '米国株式・ETFの無料日次OHLCVデータ。APIキー不要。',
+          stooqEnabled: '有効',
+          mufg: 'MUFG AM NAV API',
+          mufgDesc: '三菱UFJアセットマネジメントの投信NAVデータ。APIエンドポイントの設定が必要です。',
+          mufgEndpoint: 'APIエンドポイントURL',
+          mufgAgree: 'MUFG AM API利用規約に同意します',
+          csv: 'CSV取込（証券口座データ）',
+          csvDesc: '証券口座（SBI、楽天など）からエクスポートしたCSVをアップロードして実績パフォーマンスを計算します。',
+          csvUpload: 'CSVをアップロード',
+          csvDrop: 'CSVファイルをドラッグ＆ドロップまたはクリックして選択',
+          csvMapping: '列マッピング',
+          csvColDate: '日付列',
+          csvColTicker: 'ティッカー/ファンド列',
+          csvColPrice: '価格/基準価額列',
+          csvColQuantity: '数量列',
+          csvColAmount: '金額列',
+          csvLoaded: '{{count}} 件のレコードを読込済み',
+          csvClear: '取込データをクリア',
+          csvNote: 'このデータはブラウザのローカルストレージにのみ保存されます。',
+          back: '戻る'
         }
       }
     };
@@ -2664,6 +3106,861 @@
       return translate(language, `sector.${sector}`) || sector;
     }
 
+    // ═══════════════════════════════════════════════════════
+    // Performance Module: Metrics, Providers, Services
+    // ═══════════════════════════════════════════════════════
+
+    const PERF_CACHE_KEY = 'pv_perf_cache_v1';
+    const CSV_IMPORT_KEY = 'pv_csv_import_v1';
+    const SETTINGS_KEY = 'pv_datasource_settings_v1';
+    const TRADING_DAYS_PER_YEAR = 252;
+
+    // --- Data Source Settings ---
+    function getDataSourceSettings() {
+      try {
+        return JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+      } catch { return {}; }
+    }
+    function saveDataSourceSettings(settings) {
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    }
+
+    // --- CSV Import Storage ---
+    function getCsvImportData() {
+      try {
+        return JSON.parse(localStorage.getItem(CSV_IMPORT_KEY) || 'null');
+      } catch { return null; }
+    }
+    function saveCsvImportData(data) {
+      localStorage.setItem(CSV_IMPORT_KEY, JSON.stringify(data));
+    }
+    function clearCsvImportData() {
+      localStorage.removeItem(CSV_IMPORT_KEY);
+    }
+
+    // --- Performance Metrics Calculation ---
+    function computeMetrics(priceSeries) {
+      if (!priceSeries || priceSeries.length < 2) return null;
+
+      // Filter invalid prices
+      const valid = priceSeries
+        .filter(p => p && p.date && typeof p.price === 'number' && p.price > 0)
+        .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+      if (valid.length < 2) return null;
+
+      const firstDate = new Date(valid[0].date);
+      const lastDate = new Date(valid[valid.length - 1].date);
+      const firstPrice = valid[0].price;
+      const lastPrice = valid[valid.length - 1].price;
+
+      // Daily returns
+      const dailyReturns = [];
+      for (let i = 1; i < valid.length; i++) {
+        const ret = (valid[i].price - valid[i - 1].price) / valid[i - 1].price;
+        dailyReturns.push(ret);
+      }
+
+      // Total Return for period
+      function totalReturnSince(startDate) {
+        const startPoint = findAsOfPoint(valid, startDate);
+        if (!startPoint) return null;
+        return (lastPrice - startPoint.price) / startPoint.price;
+      }
+
+      // Find as-of point (closest past date)
+      function findAsOfPoint(series, targetDate) {
+        const target = new Date(targetDate).getTime();
+        let best = null;
+        for (const p of series) {
+          const d = new Date(p.date).getTime();
+          if (d <= target) {
+            if (!best || d > new Date(best.date).getTime()) best = p;
+          }
+        }
+        return best;
+      }
+
+      const now = lastDate;
+      const y = now.getFullYear();
+      const m = now.getMonth();
+      const d = now.getDate();
+
+      const date1M = new Date(y, m - 1, d);
+      const date3M = new Date(y, m - 3, d);
+      const date6M = new Date(y, m - 6, d);
+      const date1Y = new Date(y - 1, m, d);
+      const dateYTD = new Date(y, 0, 1);
+
+      const totalReturn = {
+        '1M': totalReturnSince(date1M),
+        '3M': totalReturnSince(date3M),
+        '6M': totalReturnSince(date6M),
+        '1Y': totalReturnSince(date1Y),
+        'YTD': totalReturnSince(dateYTD),
+        'MAX': (lastPrice - firstPrice) / firstPrice
+      };
+
+      // Annualized Return (1Y+ only)
+      const totalDays = (lastDate - firstDate) / (1000 * 60 * 60 * 24);
+      const totalYears = totalDays / 365.25;
+      const annualizedReturn = totalYears >= 1
+        ? Math.pow(lastPrice / firstPrice, 1 / totalYears) - 1
+        : null;
+
+      // Volatility (annualized, daily returns * sqrt(252))
+      let volatility = null;
+      if (dailyReturns.length >= 5) {
+        const mean = dailyReturns.reduce((s, r) => s + r, 0) / dailyReturns.length;
+        const variance = dailyReturns.reduce((s, r) => s + (r - mean) ** 2, 0) / (dailyReturns.length - 1);
+        volatility = Math.sqrt(variance) * Math.sqrt(TRADING_DAYS_PER_YEAR);
+      }
+
+      // Max Drawdown
+      let maxDrawdown = 0;
+      let peak = valid[0].price;
+      for (const p of valid) {
+        if (p.price > peak) peak = p.price;
+        const dd = (p.price - peak) / peak;
+        if (dd < maxDrawdown) maxDrawdown = dd;
+      }
+
+      // Sharpe Ratio (rf=0)
+      let sharpe = null;
+      if (annualizedReturn !== null && volatility !== null && volatility > 0) {
+        sharpe = annualizedReturn / volatility;
+      }
+
+      return {
+        totalReturn,
+        annualizedReturn,
+        volatility,
+        maxDrawdown,
+        sharpe,
+        firstDate: valid[0].date,
+        lastDate: valid[valid.length - 1].date,
+        dataPoints: valid.length
+      };
+    }
+
+    function formatPercent(value) {
+      if (value === null || value === undefined || !Number.isFinite(value)) return null;
+      const pct = value * 100;
+      const sign = pct >= 0 ? '+' : '';
+      return `${sign}${pct.toFixed(1)}%`;
+    }
+
+    function formatRatio(value) {
+      if (value === null || value === undefined || !Number.isFinite(value)) return null;
+      return value.toFixed(2);
+    }
+
+    // --- Stooq CSV Parser ---
+    function parseStooqCsv(csvText) {
+      const lines = csvText.trim().split('\n');
+      if (lines.length < 2) return [];
+      const header = lines[0].toLowerCase();
+      if (!header.includes('date') || !header.includes('close')) return [];
+      const cols = lines[0].split(',').map(c => c.trim().toLowerCase());
+      const dateIdx = cols.indexOf('date');
+      const closeIdx = cols.indexOf('close');
+      if (dateIdx < 0 || closeIdx < 0) return [];
+
+      const series = [];
+      for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(',');
+        if (parts.length <= Math.max(dateIdx, closeIdx)) continue;
+        const date = parts[dateIdx].trim();
+        const price = parseFloat(parts[closeIdx].trim());
+        if (!date || isNaN(price) || price <= 0) continue;
+        series.push({ date, price });
+      }
+      return series.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
+    // --- Broker CSV Parser (generic) ---
+    function parseBrokerCsv(csvText, columnMapping) {
+      const lines = csvText.trim().split('\n');
+      if (lines.length < 2) return [];
+      const headers = lines[0].split(',').map(c => c.trim());
+      const dateCol = columnMapping?.date || headers.find(h => /date|日付/i.test(h));
+      const priceCol = columnMapping?.price || headers.find(h => /price|基準価額|nav|終値/i.test(h));
+      const tickerCol = columnMapping?.ticker || headers.find(h => /ticker|銘柄|ファンド|fund/i.test(h));
+
+      if (!dateCol || !priceCol) return [];
+      const dateIdx = headers.indexOf(dateCol);
+      const priceIdx = headers.indexOf(priceCol);
+      const tickerIdx = tickerCol ? headers.indexOf(tickerCol) : -1;
+
+      const records = [];
+      for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(',');
+        const date = parts[dateIdx]?.trim();
+        const price = parseFloat(parts[priceIdx]?.trim());
+        const ticker = tickerIdx >= 0 ? parts[tickerIdx]?.trim() : '';
+        if (!date || isNaN(price) || price <= 0) continue;
+        records.push({ date, price, ticker });
+      }
+      return records.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
+    // --- Data Status Types ---
+    const DATA_STATUS = {
+      OK: 'OK',
+      MISSING_MAPPING: 'MISSING_MAPPING',
+      PROVIDER_UNAVAILABLE: 'PROVIDER_UNAVAILABLE',
+      FETCH_ERROR: 'FETCH_ERROR',
+      RATE_LIMIT: 'RATE_LIMIT',
+      UNSUPPORTED: 'UNSUPPORTED'
+    };
+
+    function makeDataError(status, message, provider) {
+      return { status, message, provider: provider || null };
+    }
+
+    // --- Stooq Provider ---
+    async function fetchStooqPriceSeries(ticker) {
+      const symbol = ticker.toLowerCase().replace('.', '-');
+      try {
+        const res = await fetch(`/api/stooq-proxy?s=${encodeURIComponent(symbol)}`);
+        if (res.status === 429) {
+          return { series: null, error: makeDataError(DATA_STATUS.RATE_LIMIT, 'Rate limited', 'stooq') };
+        }
+        if (res.status === 503) {
+          const body = await res.json().catch(() => ({}));
+          return { series: null, error: makeDataError(DATA_STATUS.RATE_LIMIT, body.error || 'CAPTCHA', 'stooq') };
+        }
+        if (!res.ok) {
+          return { series: null, error: makeDataError(DATA_STATUS.FETCH_ERROR, `HTTP ${res.status}`, 'stooq') };
+        }
+        const csv = await res.text();
+        const series = parseStooqCsv(csv);
+        if (series.length === 0) {
+          return { series: null, error: makeDataError(DATA_STATUS.FETCH_ERROR, 'Empty or invalid CSV response', 'stooq') };
+        }
+        return { series, error: null };
+      } catch (err) {
+        return { series: null, error: makeDataError(DATA_STATUS.FETCH_ERROR, String(err?.message || err), 'stooq') };
+      }
+    }
+
+    // --- MUFG AM NAV Provider (placeholder - requires user config) ---
+    async function fetchMufgNavSeries(fundCode, endpoint) {
+      if (!endpoint) {
+        return { series: null, error: makeDataError(DATA_STATUS.PROVIDER_UNAVAILABLE, 'MUFG AM API endpoint not configured', 'mufg') };
+      }
+      try {
+        const res = await fetch(`${endpoint}?fundCode=${encodeURIComponent(fundCode)}`);
+        if (!res.ok) {
+          return { series: null, error: makeDataError(DATA_STATUS.FETCH_ERROR, `HTTP ${res.status}`, 'mufg') };
+        }
+        const data = await res.json();
+        if (!Array.isArray(data) || data.length === 0) {
+          return { series: null, error: makeDataError(DATA_STATUS.FETCH_ERROR, 'No NAV data returned', 'mufg') };
+        }
+        const series = data
+          .map(d => ({ date: d.date, price: Number(d.nav || d.price) }))
+          .filter(d => d.date && d.price > 0)
+          .sort((a, b) => new Date(a.date) - new Date(b.date));
+        return { series: series.length > 0 ? series : null, error: series.length > 0 ? null : makeDataError(DATA_STATUS.FETCH_ERROR, 'Invalid NAV data', 'mufg') };
+      } catch (err) {
+        return { series: null, error: makeDataError(DATA_STATUS.FETCH_ERROR, String(err?.message || err), 'mufg') };
+      }
+    }
+
+    // --- CSV Import Provider ---
+    function getCsvPriceSeries(ticker) {
+      const imported = getCsvImportData();
+      if (!imported || !imported.records) return { series: null, error: makeDataError(DATA_STATUS.UNSUPPORTED, 'No CSV data imported', 'csv') };
+      const matching = imported.records.filter(r =>
+        !ticker || !r.ticker || r.ticker.toUpperCase() === ticker.toUpperCase()
+      );
+      if (matching.length < 2) {
+        return { series: null, error: makeDataError(DATA_STATUS.FETCH_ERROR, 'Insufficient CSV data for this ticker', 'csv') };
+      }
+      return { series: matching.map(r => ({ date: r.date, price: r.price })), error: null };
+    }
+
+    // --- MarketDataFacade ---
+    function resolveTickersForFund(fund) {
+      if (!fund || !fund.holdings || fund.holdings.length === 0) return [];
+      return fund.holdings
+        .map(h => normalizeTicker(h.ticker))
+        .filter(Boolean)
+        .filter((v, i, arr) => arr.indexOf(v) === i);
+    }
+
+    // Per-ticker price cache in memory (session only)
+    const priceSeriesCache = new Map();
+
+    async function fetchTickerPriceSeries(ticker, settings) {
+      const cacheKey = `stooq:${ticker}`;
+      if (priceSeriesCache.has(cacheKey)) return priceSeriesCache.get(cacheKey);
+
+      // Try Stooq for equities/ETFs
+      const stooqEnabled = settings?.stooqEnabled !== false;
+      if (stooqEnabled) {
+        const result = await fetchStooqPriceSeries(ticker);
+        if (result.series) {
+          priceSeriesCache.set(cacheKey, result);
+        }
+        return result;
+      }
+
+      return { series: null, error: makeDataError(DATA_STATUS.PROVIDER_UNAVAILABLE, 'No provider enabled', null) };
+    }
+
+    // --- Price Series Filtering by Period ---
+    function filterSeriesByPeriod(series, period) {
+      if (!series || series.length === 0) return series;
+      const last = new Date(series[series.length - 1].date);
+      const y = last.getFullYear();
+      const m = last.getMonth();
+      const d = last.getDate();
+      let startDate;
+      switch (period) {
+        case '1M': startDate = new Date(y, m - 1, d); break;
+        case '3M': startDate = new Date(y, m - 3, d); break;
+        case '6M': startDate = new Date(y, m - 6, d); break;
+        case '1Y': startDate = new Date(y - 1, m, d); break;
+        case 'YTD': startDate = new Date(y, 0, 1); break;
+        case 'MAX': default: return series;
+      }
+      const startTime = startDate.getTime();
+      return series.filter(p => new Date(p.date).getTime() >= startTime);
+    }
+
+    // --- Performance for a single ticker (top holding representative) ---
+    function useTickerPerformance(ticker, retryKey) {
+      const [state, setState] = React.useState({ loading: false, series: null, metrics: null, error: null });
+
+      React.useEffect(() => {
+        if (!ticker) {
+          setState({ loading: false, series: null, metrics: null, error: makeDataError(DATA_STATUS.MISSING_MAPPING, 'No ticker', null) });
+          return;
+        }
+        let cancelled = false;
+        setState(prev => ({ ...prev, loading: true, error: null }));
+        const settings = getDataSourceSettings();
+
+        fetchTickerPriceSeries(ticker, settings).then(result => {
+          if (cancelled) return;
+          if (result.error) {
+            setState({ loading: false, series: null, metrics: null, error: result.error });
+          } else {
+            const metrics = computeMetrics(result.series);
+            setState({ loading: false, series: result.series, metrics, error: null });
+          }
+        });
+
+        return () => { cancelled = true; };
+      }, [ticker, retryKey]);
+
+      return state;
+    }
+
+    // --- Performance Cards Component ---
+    function PerformanceCards({ metrics, loading, error, onRetry, onSettings, t }) {
+      if (loading) {
+        return (
+          <div className="perf-cards">
+            {[1,2,3,4,5,6].map(i => (
+              <div key={i} className="perf-card">
+                <div className="perf-card-label">&nbsp;</div>
+                <div className="perf-skeleton" style={{ height: '24px', width: '60%', margin: '0 auto' }}></div>
+              </div>
+            ))}
+          </div>
+        );
+      }
+
+      if (error) {
+        const reasonKey = {
+          [DATA_STATUS.MISSING_MAPPING]: 'perf.reasonNoTicker',
+          [DATA_STATUS.FETCH_ERROR]: 'perf.reasonFetchFail',
+          [DATA_STATUS.RATE_LIMIT]: 'perf.reasonRateLimit',
+          [DATA_STATUS.PROVIDER_UNAVAILABLE]: 'perf.reasonNoProvider',
+          [DATA_STATUS.UNSUPPORTED]: 'perf.reasonCsvNeeded',
+        }[error.status] || 'perf.errorFetch';
+
+        return (
+          <div className="perf-error-box">
+            <span className="perf-error-icon">⚠</span>
+            <div className="perf-error-text">
+              <span className="perf-error-reason">{t(reasonKey)}</span>
+              {error.message && <span>{error.message}</span>}
+              <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+                {onRetry && <button className="perf-retry-btn" onClick={onRetry}>{t('perf.retry')}</button>}
+                {onSettings && <button className="perf-retry-btn" onClick={onSettings}>{t('perf.settings')}</button>}
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      if (!metrics) {
+        return (
+          <div className="perf-cards">
+            {['1Y','YTD','Vol','MDD','Sharpe','Ann'].map(label => (
+              <div key={label} className="perf-card">
+                <div className="perf-card-label">{label}</div>
+                <div className="perf-card-value na">—</div>
+              </div>
+            ))}
+          </div>
+        );
+      }
+
+      const items = [
+        { label: t('perf.period1Y'), value: formatPercent(metrics.totalReturn['1Y']), raw: metrics.totalReturn['1Y'] },
+        { label: t('perf.periodYTD'), value: formatPercent(metrics.totalReturn['YTD']), raw: metrics.totalReturn['YTD'] },
+        { label: t('perf.volatility'), value: formatPercent(metrics.volatility), raw: metrics.volatility, invert: true },
+        { label: t('perf.maxDrawdown'), value: formatPercent(metrics.maxDrawdown), raw: metrics.maxDrawdown },
+        { label: t('perf.sharpe'), value: formatRatio(metrics.sharpe), raw: metrics.sharpe },
+        { label: t('perf.annualized'), value: formatPercent(metrics.annualizedReturn), raw: metrics.annualizedReturn },
+      ];
+
+      return (
+        <div className="perf-cards">
+          {items.map(item => {
+            const cls = item.value === null ? 'na'
+              : (item.raw >= 0 && !item.invert ? 'positive' : 'negative');
+            return (
+              <div key={item.label} className="perf-card">
+                <div className="perf-card-label">{item.label}</div>
+                <div className={`perf-card-value ${cls}`}>{item.value || '—'}</div>
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+
+    // --- Performance Chart Component ---
+    function PerformanceChart({ series, loading, error, t }) {
+      const chartRef = React.useRef(null);
+      const chartInstance = React.useRef(null);
+      const [period, setPeriod] = React.useState('1Y');
+      const [indexed, setIndexed] = React.useState(false);
+
+      const filteredSeries = React.useMemo(
+        () => filterSeriesByPeriod(series, period),
+        [series, period]
+      );
+
+      React.useEffect(() => {
+        if (chartInstance.current) { chartInstance.current.destroy(); chartInstance.current = null; }
+        if (!filteredSeries || filteredSeries.length < 2 || !chartRef.current) return;
+
+        const basePrice = indexed ? filteredSeries[0].price : 1;
+        const labels = filteredSeries.map(p => p.date);
+        const data = indexed
+          ? filteredSeries.map(p => (p.price / basePrice) * 100)
+          : filteredSeries.map(p => p.price);
+
+        const ctx = chartRef.current.getContext('2d');
+        chartInstance.current = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels,
+            datasets: [{
+              data,
+              borderColor: '#2A9D8F',
+              backgroundColor: 'rgba(42,157,143,0.08)',
+              fill: true,
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHitRadius: 8,
+              tension: 0.1
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: '#264653',
+                titleFont: { family: 'Montserrat', weight: '600', size: 11 },
+                bodyFont: { family: 'Montserrat', size: 12 },
+                callbacks: {
+                  label: (ctx) => indexed
+                    ? `${ctx.parsed.y.toFixed(1)}`
+                    : `$${ctx.parsed.y.toFixed(2)}`
+                }
+              }
+            },
+            scales: {
+              x: {
+                display: true,
+                grid: { display: false },
+                ticks: {
+                  maxTicksLimit: 8,
+                  font: { family: 'Montserrat', size: 10 },
+                  color: 'rgba(38,70,83,0.5)'
+                }
+              },
+              y: {
+                display: true,
+                grid: { color: 'rgba(38,70,83,0.06)' },
+                ticks: {
+                  font: { family: 'Montserrat', size: 10 },
+                  color: 'rgba(38,70,83,0.5)',
+                  callback: (v) => indexed ? v.toFixed(0) : v.toFixed(2)
+                }
+              }
+            },
+            interaction: { intersect: false, mode: 'index' }
+          }
+        });
+
+        return () => { chartInstance.current?.destroy(); chartInstance.current = null; };
+      }, [filteredSeries, indexed]);
+
+      if (loading) {
+        return (
+          <div className="perf-chart-wrap">
+            <div className="perf-skeleton" style={{ height: '250px' }}></div>
+          </div>
+        );
+      }
+
+      if (error || !series || series.length < 2) return null;
+
+      const periods = ['1M', '3M', '6M', '1Y', 'YTD', 'MAX'];
+      const periodLabels = {
+        '1M': t('perf.period1M'), '3M': t('perf.period3M'), '6M': t('perf.period6M'),
+        '1Y': t('perf.period1Y'), 'YTD': t('perf.periodYTD'), 'MAX': t('perf.periodMAX')
+      };
+
+      return (
+        <div className="perf-chart-wrap">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px', marginBottom: '12px' }}>
+            <div className="perf-chart-periods">
+              {periods.map(p => (
+                <button key={p} className={`perf-period-btn ${period === p ? 'active' : ''}`} onClick={() => setPeriod(p)}>
+                  {periodLabels[p]}
+                </button>
+              ))}
+            </div>
+            <div className="perf-toggle-row">
+              <span className="perf-toggle-label">{t('perf.indexToggle')}</span>
+              <button className={`perf-toggle-switch ${indexed ? 'on' : ''}`} onClick={() => setIndexed(v => !v)} />
+            </div>
+          </div>
+          <div style={{ height: '280px', position: 'relative' }}>
+            <canvas ref={chartRef}></canvas>
+          </div>
+        </div>
+      );
+    }
+
+    // --- Inline Performance Badge (for home cards / ranking rows) ---
+    function PerfBadge({ ticker }) {
+      const { t } = useI18n();
+      const perf = useTickerPerformance(ticker, 0);
+      const [showTooltip, setShowTooltip] = React.useState(false);
+
+      if (perf.loading) {
+        return <span className="perf-inline na" style={{ width: '50px' }}><span className="perf-skeleton" style={{ display: 'inline-block', width: '40px', height: '14px' }}></span></span>;
+      }
+
+      if (perf.error) {
+        return (
+          <span className="perf-warn-icon"
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+          >
+            ⚠
+            {showTooltip && <span className="perf-warn-tooltip">{perf.error.message || t('perf.errorFetch')}</span>}
+          </span>
+        );
+      }
+
+      if (!perf.metrics) return <span className="perf-inline na">—</span>;
+
+      // Show best available return: 1Y > 6M > 3M > 1M
+      const ret = perf.metrics.totalReturn['1Y']
+        ?? perf.metrics.totalReturn['6M']
+        ?? perf.metrics.totalReturn['3M']
+        ?? perf.metrics.totalReturn['1M'];
+
+      if (ret === null || ret === undefined) return <span className="perf-inline na">—</span>;
+
+      const formatted = formatPercent(ret);
+      const cls = ret >= 0 ? 'positive' : 'negative';
+      return <span className={`perf-inline ${cls}`}>{formatted}</span>;
+    }
+
+    // --- Settings / Data Sources Page ---
+    function SettingsDataSources({ onBack }) {
+      const { t } = useI18n();
+      const [settings, setSettings] = React.useState(getDataSourceSettings);
+      const [csvData, setCsvData] = React.useState(getCsvImportData);
+      const [csvHeaders, setCsvHeaders] = React.useState([]);
+      const [csvMapping, setCsvMapping] = React.useState({});
+      const [dragOver, setDragOver] = React.useState(false);
+      const fileInputRef = React.useRef(null);
+
+      const updateSetting = (key, value) => {
+        const next = { ...settings, [key]: value };
+        setSettings(next);
+        saveDataSourceSettings(next);
+      };
+
+      const handleCsvFile = (file) => {
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const text = e.target.result;
+          const lines = text.trim().split('\n');
+          if (lines.length < 2) return;
+          const headers = lines[0].split(',').map(h => h.trim());
+          setCsvHeaders(headers);
+
+          // Auto-detect mapping
+          const autoMapping = {};
+          headers.forEach(h => {
+            if (/date|日付/i.test(h)) autoMapping.date = h;
+            if (/price|基準価額|nav|終値|単価/i.test(h)) autoMapping.price = h;
+            if (/ticker|銘柄|ファンド|fund|コード/i.test(h)) autoMapping.ticker = h;
+          });
+          setCsvMapping(autoMapping);
+
+          const records = parseBrokerCsv(text, autoMapping);
+          const data = { records, headers, fileName: file.name, importedAt: new Date().toISOString() };
+          saveCsvImportData(data);
+          setCsvData(data);
+        };
+        reader.readAsText(file);
+      };
+
+      const handleDrop = (e) => {
+        e.preventDefault();
+        setDragOver(false);
+        const file = e.dataTransfer?.files?.[0];
+        if (file && (file.name.endsWith('.csv') || file.type === 'text/csv')) handleCsvFile(file);
+      };
+
+      const handleFileSelect = (e) => {
+        const file = e.target?.files?.[0];
+        if (file) handleCsvFile(file);
+      };
+
+      const handleClearCsv = () => {
+        clearCsvImportData();
+        setCsvData(null);
+        setCsvHeaders([]);
+        setCsvMapping({});
+      };
+
+      return (
+        <div className="settings-container">
+          <button className="back-btn" onClick={onBack}>← {t('settings.back')}</button>
+          <div className="ranking-section-title">{t('settings.title')}</div>
+
+          {/* Stooq */}
+          <div className="settings-section">
+            <div className="settings-section-title">{t('settings.stooq')}</div>
+            <p className="settings-desc">{t('settings.stooqDesc')}</p>
+            <div className="settings-row">
+              <span className="settings-label">{t('settings.stooqEnabled')}</span>
+              <button
+                className={`perf-toggle-switch ${settings.stooqEnabled !== false ? 'on' : ''}`}
+                onClick={() => updateSetting('stooqEnabled', settings.stooqEnabled === false)}
+              />
+            </div>
+          </div>
+
+          {/* MUFG AM */}
+          <div className="settings-section">
+            <div className="settings-section-title">{t('settings.mufg')}</div>
+            <p className="settings-desc">{t('settings.mufgDesc')}</p>
+            <div style={{ marginTop: '12px' }}>
+              <label className="settings-label" style={{ display: 'block', marginBottom: '6px' }}>{t('settings.mufgEndpoint')}</label>
+              <input
+                className="settings-input"
+                type="text"
+                placeholder="https://..."
+                value={settings.mufgEndpoint || ''}
+                onChange={(e) => updateSetting('mufgEndpoint', e.target.value)}
+              />
+            </div>
+            <div className="settings-row" style={{ marginTop: '8px' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', cursor: 'pointer' }}>
+                <input
+                  type="checkbox"
+                  checked={!!settings.mufgAgreed}
+                  onChange={(e) => updateSetting('mufgAgreed', e.target.checked)}
+                />
+                {t('settings.mufgAgree')}
+              </label>
+            </div>
+          </div>
+
+          {/* CSV Import */}
+          <div className="settings-section">
+            <div className="settings-section-title">{t('settings.csv')}</div>
+            <p className="settings-desc">{t('settings.csvDesc')}</p>
+            <p className="settings-desc" style={{ fontWeight: 600, marginTop: '8px' }}>{t('settings.csvNote')}</p>
+
+            {!csvData ? (
+              <div
+                className={`csv-drop-zone ${dragOver ? 'drag-over' : ''}`}
+                style={{ marginTop: '16px' }}
+                onClick={() => fileInputRef.current?.click()}
+                onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                onDragLeave={() => setDragOver(false)}
+                onDrop={handleDrop}
+              >
+                {t('settings.csvDrop')}
+                <input ref={fileInputRef} type="file" accept=".csv" style={{ display: 'none' }} onChange={handleFileSelect} />
+              </div>
+            ) : (
+              <div style={{ marginTop: '16px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '12px' }}>
+                  <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--teal-light)' }}>
+                    {t('settings.csvLoaded', { count: csvData.records?.length || 0 })}
+                    {csvData.fileName ? ` — ${csvData.fileName}` : ''}
+                  </span>
+                  <button className="settings-btn secondary" style={{ fontSize: '11px', padding: '6px 12px' }} onClick={handleClearCsv}>
+                    {t('settings.csvClear')}
+                  </button>
+                </div>
+
+                {csvHeaders.length > 0 && (
+                  <>
+                    <div className="settings-label" style={{ marginBottom: '8px' }}>{t('settings.csvMapping')}</div>
+                    <div className="csv-mapping-grid">
+                      {[
+                        { key: 'date', label: t('settings.csvColDate') },
+                        { key: 'ticker', label: t('settings.csvColTicker') },
+                        { key: 'price', label: t('settings.csvColPrice') },
+                      ].map(({ key, label }) => (
+                        <React.Fragment key={key}>
+                          <span className="csv-mapping-label">{label}</span>
+                          <select
+                            className="csv-mapping-select"
+                            value={csvMapping[key] || ''}
+                            onChange={(e) => {
+                              const next = { ...csvMapping, [key]: e.target.value };
+                              setCsvMapping(next);
+                              // Re-parse with new mapping
+                              if (csvData.records) {
+                                const text = localStorage.getItem(CSV_IMPORT_KEY);
+                                // We already have the records, just update mapping
+                              }
+                            }}
+                          >
+                            <option value="">—</option>
+                            {csvHeaders.map(h => <option key={h} value={h}>{h}</option>)}
+                          </select>
+                        </React.Fragment>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    // --- Fund Performance Sort Logic ---
+    function useFundPerformanceSort(funds) {
+      const [sortKey, setSortKey] = React.useState('default');
+      const [perfCache, setPerfCache] = React.useState(new Map());
+      const [loadingTickers, setLoadingTickers] = React.useState(new Set());
+
+      // Extract top ticker for each fund (representative performance)
+      const fundTopTickers = React.useMemo(() => {
+        const map = new Map();
+        (funds || []).forEach(fund => {
+          const top = fund.holdings?.[0]?.ticker;
+          if (top) map.set(fund.name, normalizeTicker(top));
+        });
+        return map;
+      }, [funds]);
+
+      // Load perf data for all unique top tickers
+      React.useEffect(() => {
+        if (sortKey === 'default') return;
+        const settings = getDataSourceSettings();
+        const tickers = new Set(fundTopTickers.values());
+        const toLoad = [...tickers].filter(t => !perfCache.has(t) && !loadingTickers.has(t));
+
+        if (toLoad.length === 0) return;
+        setLoadingTickers(prev => new Set([...prev, ...toLoad]));
+
+        // Sequential with delay to avoid rate limiting
+        let cancelled = false;
+        (async () => {
+          for (const ticker of toLoad) {
+            if (cancelled) break;
+            const result = await fetchTickerPriceSeries(ticker, settings);
+            if (cancelled) break;
+            const metrics = result.series ? computeMetrics(result.series) : null;
+            setPerfCache(prev => {
+              const next = new Map(prev);
+              next.set(ticker, { metrics, error: result.error });
+              return next;
+            });
+            // Rate limit: wait 500ms between requests
+            await new Promise(r => setTimeout(r, 500));
+          }
+        })();
+        return () => { cancelled = true; };
+      }, [sortKey, fundTopTickers]);
+
+      const sortedFunds = React.useMemo(() => {
+        if (sortKey === 'default' || !funds) return funds;
+
+        return [...funds].sort((a, b) => {
+          const tickerA = fundTopTickers.get(a.name);
+          const tickerB = fundTopTickers.get(b.name);
+          const perfA = tickerA ? perfCache.get(tickerA)?.metrics : null;
+          const perfB = tickerB ? perfCache.get(tickerB)?.metrics : null;
+
+          // No data goes to end
+          if (!perfA && !perfB) return 0;
+          if (!perfA) return 1;
+          if (!perfB) return -1;
+
+          let valA, valB;
+          switch (sortKey) {
+            case '1Y': valA = perfA.totalReturn['1Y']; valB = perfB.totalReturn['1Y']; break;
+            case '6M': valA = perfA.totalReturn['6M']; valB = perfB.totalReturn['6M']; break;
+            case '3M': valA = perfA.totalReturn['3M']; valB = perfB.totalReturn['3M']; break;
+            case '1M': valA = perfA.totalReturn['1M']; valB = perfB.totalReturn['1M']; break;
+            case 'YTD': valA = perfA.totalReturn['YTD']; valB = perfB.totalReturn['YTD']; break;
+            case 'sharpe': valA = perfA.sharpe; valB = perfB.sharpe; break;
+            case 'mdd':
+              valA = perfA.maxDrawdown; valB = perfB.maxDrawdown;
+              // Higher (less negative) is better for MDD
+              if (valA === null && valB === null) return 0;
+              if (valA === null) return 1;
+              if (valB === null) return -1;
+              return valB - valA; // ascending: less negative is better
+            case 'vol':
+              valA = perfA.volatility; valB = perfB.volatility;
+              if (valA === null && valB === null) return 0;
+              if (valA === null) return 1;
+              if (valB === null) return -1;
+              return valA - valB; // ascending: lower is better
+            default: return 0;
+          }
+
+          if (valA === null && valB === null) return 0;
+          if (valA === null) return 1;
+          if (valB === null) return -1;
+          return valB - valA; // descending for returns and sharpe
+        });
+      }, [funds, sortKey, perfCache, fundTopTickers]);
+
+      return { sortedFunds, sortKey, setSortKey, perfCache, fundTopTickers };
+    }
+
     function SectorLegend({ activeSector, onSectorClick }) {
       const { t } = useI18n();
       const sectors = Object.keys(SECTOR_COLORS);
@@ -3052,6 +4349,7 @@
                     <button className={`tab ${tab === 'overlap' ? 'active' : ''}`} onClick={() => setTab('overlap')}>{t('nav.overlap')}</button>
                     <button className={`tab ${tab === 'flow' ? 'active' : ''}`} onClick={() => setTab('flow')}>{t('nav.flow')}</button>
                     <button className={`tab ${tab === 'watch' ? 'active' : ''}`} onClick={() => setTab('watch')}>{t('nav.watch')}</button>
+                    <button className={`tab ${tab === 'settings' ? 'active' : ''}`} onClick={() => setTab('settings')}>⚙</button>
                   </div>
                   <button
                     className="tab-refresh-btn"
@@ -3162,6 +4460,9 @@
                   onOpenFund={handleOpenFundDetail}
                 />
               )}
+              {tab === 'settings' && (
+                <SettingsDataSources onBack={() => setTab('home')} />
+              )}
             </main>
           </div>
         </I18nContext.Provider>
@@ -3171,15 +4472,17 @@
     function HomeView({ funds, onSelect, watchedFundSet, onToggleFundWatch }) {
       const { t } = useI18n();
       const [activeSector, setActiveSector] = React.useState(null);
+      const { sortedFunds: perfSorted, sortKey, setSortKey, perfCache, fundTopTickers } = useFundPerformanceSort(funds);
 
       const sortedFunds = React.useMemo(() => {
-        if (!activeSector) return funds;
-        return [...funds].sort((a, b) => {
+        const base = sortKey !== 'default' ? perfSorted : funds;
+        if (!activeSector) return base;
+        return [...base].sort((a, b) => {
           const aWeight = a.holdings.reduce((sum, h) => getHoldingSector(h) === activeSector ? sum + h.percent : sum, 0);
           const bWeight = b.holdings.reduce((sum, h) => getHoldingSector(h) === activeSector ? sum + h.percent : sum, 0);
           return bWeight - aWeight;
         });
-      }, [funds, activeSector]);
+      }, [funds, perfSorted, sortKey, activeSector]);
 
       if (!funds || funds.length === 0) {
         return (
@@ -3194,20 +4497,43 @@
       return (
         <div className="home-layout">
           <div className="home-main">
-            <div className="home-summary">
-              <span className="home-summary-label">{t('home.totalFunds')}</span>
-              <span className="home-summary-value">{sortedFunds.length}</span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap', marginBottom: '8px' }}>
+              <div className="home-summary">
+                <span className="home-summary-label">{t('home.totalFunds')}</span>
+                <span className="home-summary-value">{sortedFunds.length}</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--primary-teal)' }}>{t('perf.sortBy')}</span>
+                <select className="perf-sort-select" value={sortKey} onChange={e => setSortKey(e.target.value)}>
+                  <option value="default">{t('perf.sortDefault')}</option>
+                  <option value="1Y">{t('perf.sort1Y')}</option>
+                  <option value="6M">{t('perf.sort6M')}</option>
+                  <option value="3M">{t('perf.sort3M')}</option>
+                  <option value="1M">{t('perf.sort1M')}</option>
+                  <option value="YTD">{t('perf.sortYTD')}</option>
+                  <option value="sharpe">{t('perf.sortSharpe')}</option>
+                  <option value="mdd">{t('perf.sortMDD')}</option>
+                  <option value="vol">{t('perf.sortVol')}</option>
+                </select>
+              </div>
             </div>
             <div className="funds-grid">
-              {sortedFunds.map((fund) => (
-                <FundCard
-                  key={fund.name}
-                  fund={fund}
-                  onClick={() => onSelect(fund)}
-                  isWatched={watchedFundSet.has(fund.name)}
-                  onToggleWatch={onToggleFundWatch}
-                />
-              ))}
+              {sortedFunds.map((fund) => {
+                const topTicker = fundTopTickers.get(fund.name);
+                const perf = topTicker ? perfCache.get(topTicker) : null;
+                return (
+                  <FundCard
+                    key={fund.name}
+                    fund={fund}
+                    onClick={() => onSelect(fund)}
+                    isWatched={watchedFundSet.has(fund.name)}
+                    onToggleWatch={onToggleFundWatch}
+                    perfMetrics={perf?.metrics}
+                    perfError={perf?.error}
+                    showPerf={sortKey !== 'default'}
+                  />
+                );
+              })}
             </div>
           </div>
           <SectorLegend activeSector={activeSector} onSectorClick={setActiveSector} />
@@ -3215,7 +4541,7 @@
       );
     }
 
-    function FundCard({ fund, onClick, isWatched, onToggleWatch }) {
+    function FundCard({ fund, onClick, isWatched, onToggleWatch, perfMetrics, perfError, showPerf }) {
       const chartRef = React.useRef(null);
       const chartInstance = React.useRef(null);
       const { t } = useI18n();
@@ -3233,6 +4559,29 @@
         });
         return () => chartInstance.current?.destroy();
       }, [fund]);
+
+      // Performance summary line
+      let perfLine = null;
+      if (showPerf) {
+        if (perfMetrics) {
+          const ret1Y = perfMetrics.totalReturn['1Y'] ?? perfMetrics.totalReturn['6M'] ?? perfMetrics.totalReturn['3M'] ?? perfMetrics.totalReturn['1M'];
+          const mdd = perfMetrics.maxDrawdown;
+          const vol = perfMetrics.volatility;
+          const sh = perfMetrics.sharpe;
+          const retStr = formatPercent(ret1Y);
+          const retCls = ret1Y != null ? (ret1Y >= 0 ? 'positive' : 'negative') : 'na';
+          perfLine = (
+            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '6px' }}>
+              <span className={`perf-inline ${retCls}`} style={{ fontSize: '10px' }}>{retStr || '—'}</span>
+              {mdd != null && <span className="perf-inline" style={{ fontSize: '10px', color: 'var(--teal-light)' }}>MDD {formatPercent(mdd)}</span>}
+              {vol != null && <span className="perf-inline" style={{ fontSize: '10px', color: 'var(--teal-light)' }}>Vol {formatPercent(vol)}</span>}
+              {sh != null && <span className="perf-inline" style={{ fontSize: '10px', color: 'var(--teal-light)' }}>SR {formatRatio(sh)}</span>}
+            </div>
+          );
+        } else if (perfError) {
+          perfLine = <div style={{ fontSize: '10px', color: '#E67E22', marginTop: '4px', textAlign: 'center' }}>⚠ {t('perf.noData')}</div>;
+        }
+      }
 
       return (
         <div className="fund-card" onClick={onClick}>
@@ -3253,6 +4602,7 @@
             <span>{t('common.holdingsCount', { count: fund.holdings.length })}</span>
             <span>{t('common.top')}: {fund.holdings[0]?.ticker}</span>
           </div>
+          {perfLine}
         </div>
       );
     }
@@ -3410,6 +4760,7 @@
           <p className="fund-subtitle">{t('common.holdingsCount', { count: holdings.length })}</p>
           <div className="detail-tabs">
             <button className={`detail-tab ${detailTab === 'holdings' ? 'active' : ''}`} onClick={() => setDetailTab('holdings')}>{t('fund.tabs.holdings')}</button>
+            <button className={`detail-tab ${detailTab === 'performance' ? 'active' : ''}`} onClick={() => setDetailTab('performance')}>{t('perf.title')}</button>
             <button className={`detail-tab ${detailTab === 'about' ? 'active' : ''}`} onClick={() => setDetailTab('about')}>{t('fund.tabs.about')}</button>
           </div>
 
@@ -3470,6 +4821,10 @@
             </>
           )}
 
+          {detailTab === 'performance' && (
+            <DetailPerfTab fund={fund} t={t} />
+          )}
+
           {detailTab === 'about' && (
             <>
               <div className="about-grid">
@@ -3509,6 +4864,58 @@
               </div>
             </>
           )}
+        </div>
+      );
+    }
+
+    function DetailPerfTab({ fund, t }) {
+      const topTicker = fund?.holdings?.[0]?.ticker ? normalizeTicker(fund.holdings[0].ticker) : null;
+      const [retryKey, setRetryKey] = React.useState(0);
+      const perfState = useTickerPerformance(topTicker, retryKey);
+
+      const handleRetry = () => {
+        if (topTicker) priceSeriesCache.delete(`stooq:${topTicker}`);
+        setRetryKey(k => k + 1);
+      };
+
+      return (
+        <div>
+          <div style={{ fontSize: '12px', color: 'var(--teal-light)', marginBottom: '16px', fontWeight: 600 }}>
+            {t('perf.fundPerf')} — {t('common.top')}: <span className="ticker">{topTicker || '—'}</span>
+          </div>
+
+          <PerformanceCards
+            metrics={perfState.metrics}
+            loading={perfState.loading}
+            error={perfState.error}
+            onRetry={handleRetry}
+            t={t}
+          />
+
+          {perfState.metrics && (
+            <div style={{ marginTop: '8px' }}>
+              <div className="perf-cards" style={{ marginBottom: '16px' }}>
+                {['1M', '3M', '6M', '1Y', 'YTD', 'MAX'].map(period => {
+                  const val = perfState.metrics.totalReturn[period];
+                  const str = formatPercent(val);
+                  const cls = str === null ? 'na' : (val >= 0 ? 'positive' : 'negative');
+                  return (
+                    <div key={period} className="perf-card">
+                      <div className="perf-card-label">{t(`perf.period${period}`)}</div>
+                      <div className={`perf-card-value ${cls}`}>{str || '—'}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          <PerformanceChart
+            series={perfState.series}
+            loading={perfState.loading}
+            error={perfState.error}
+            t={t}
+          />
         </div>
       );
     }
