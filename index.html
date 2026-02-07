@@ -4142,6 +4142,14 @@
         return loadTickerMetrics(tickers, settings);
       }, [fundTopTickers, loadTickerMetrics]);
 
+      // Ensure non-default sort always triggers metric loading after refresh.
+      React.useEffect(() => {
+        if (sortKey === 'default') return;
+        const settings = getDataSourceSettings();
+        const tickers = [...fundTopTickers.values()];
+        return loadTickerMetrics(tickers, settings);
+      }, [sortKey, fundTopTickers, loadTickerMetrics]);
+
       const sortedFunds = React.useMemo(() => {
         if (!funds) return funds;
         if (sortKey === 'default') {
