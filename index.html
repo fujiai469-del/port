@@ -4067,6 +4067,17 @@
       const [sortKey, setSortKey] = React.useState('default');
       const [perfCache, setPerfCache] = React.useState(new Map());
       const [loadingTickers, setLoadingTickers] = React.useState(new Set());
+      const perfCacheRef = React.useRef(perfCache);
+      const loadingTickersRef = React.useRef(loadingTickers);
+      const MAX_PERF_FETCH_CONCURRENCY = 6;
+
+      React.useEffect(() => {
+        perfCacheRef.current = perfCache;
+      }, [perfCache]);
+
+      React.useEffect(() => {
+        loadingTickersRef.current = loadingTickers;
+      }, [loadingTickers]);
 
       // Extract top ticker for each fund (representative performance)
       const fundTopTickers = React.useMemo(() => {
@@ -4078,35 +4089,58 @@
         return map;
       }, [funds]);
 
-      // Load perf data for all unique top tickers
-      React.useEffect(() => {
-        if (sortKey === 'default') return;
-        const settings = getDataSourceSettings();
-        const tickers = new Set(fundTopTickers.values());
-        const toLoad = [...tickers].filter(t => !perfCache.has(t) && !loadingTickers.has(t));
+      const loadTickerMetrics = React.useCallback((tickers, settings) => {
+        const uniqueTickers = [...new Set(tickers)].filter(Boolean);
+        const toLoad = uniqueTickers.filter((ticker) =>
+          !perfCacheRef.current.has(ticker) && !loadingTickersRef.current.has(ticker)
+        );
 
-        if (toLoad.length === 0) return;
-        setLoadingTickers(prev => new Set([...prev, ...toLoad]));
+        if (toLoad.length === 0) return () => {};
 
-        // Sequential with delay to avoid rate limiting
+        setLoadingTickers((prev) => {
+          const next = new Set(prev);
+          toLoad.forEach((ticker) => next.add(ticker));
+          loadingTickersRef.current = next;
+          return next;
+        });
+
         let cancelled = false;
-        (async () => {
-          for (const ticker of toLoad) {
-            if (cancelled) break;
-            const result = await fetchTickerPriceSeries(ticker, settings);
-            if (cancelled) break;
-            const metrics = result.series ? computeMetrics(result.series) : null;
-            setPerfCache(prev => {
-              const next = new Map(prev);
-              next.set(ticker, { metrics, error: result.error });
-              return next;
-            });
-            // Rate limit: wait 500ms between requests
-            await new Promise(r => setTimeout(r, 500));
+        const queue = [...toLoad];
+        const workers = Array.from(
+          { length: Math.min(MAX_PERF_FETCH_CONCURRENCY, queue.length) },
+          async () => {
+            while (!cancelled) {
+              const ticker = queue.shift();
+              if (!ticker) break;
+              const result = await fetchTickerPriceSeries(ticker, settings);
+              if (cancelled) break;
+              const metrics = result.series ? computeMetrics(result.series) : null;
+              setPerfCache((prev) => {
+                const next = new Map(prev);
+                next.set(ticker, { metrics, error: result.error });
+                perfCacheRef.current = next;
+                return next;
+              });
+              setLoadingTickers((prev) => {
+                const next = new Set(prev);
+                next.delete(ticker);
+                loadingTickersRef.current = next;
+                return next;
+              });
+            }
           }
-        })();
+        );
+
+        Promise.all(workers).catch(() => {});
         return () => { cancelled = true; };
-      }, [sortKey, fundTopTickers]);
+      }, []);
+
+      // Warm cache in background so first performance sort feels instant.
+      React.useEffect(() => {
+        const settings = getDataSourceSettings();
+        const tickers = [...fundTopTickers.values()];
+        return loadTickerMetrics(tickers, settings);
+      }, [fundTopTickers, loadTickerMetrics]);
 
       const sortedFunds = React.useMemo(() => {
         if (sortKey === 'default' || !funds) return funds;
