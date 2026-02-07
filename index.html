@@ -2565,6 +2565,45 @@
       return String(value || '').trim();
     }
 
+    function normalizeHoldings(rawHoldings) {
+      if (!Array.isArray(rawHoldings)) return [];
+      const map = new Map();
+      for (const holding of rawHoldings) {
+        const ticker = normalizeTicker(holding?.ticker);
+        if (!ticker) continue;
+        const percentValue = Number(holding?.percent);
+        const percent = Number.isFinite(percentValue) ? percentValue : 0;
+        const existing = map.get(ticker);
+        if (!existing) {
+          map.set(ticker, {
+            ticker,
+            name: holding?.name || '',
+            sector: holding?.sector || 'Other',
+            percent,
+            _maxPercent: percent
+          });
+        } else {
+          existing.percent += percent;
+          if ((!existing.name && holding?.name) || percent > existing._maxPercent) {
+            existing.name = holding?.name || existing.name;
+            existing.sector = holding?.sector || existing.sector;
+          }
+          if (percent > existing._maxPercent) existing._maxPercent = percent;
+        }
+      }
+      const aggregated = Array.from(map.values()).map(({ _maxPercent, ...rest }) => rest);
+      aggregated.sort((a, b) => b.percent - a.percent);
+      return aggregated;
+    }
+
+    function normalizeFunds(rawFunds) {
+      if (!Array.isArray(rawFunds)) return [];
+      return rawFunds.map(fund => ({
+        ...fund,
+        holdings: normalizeHoldings(fund?.holdings)
+      }));
+    }
+
     function isTickerLikeQuery(value) {
       const query = normalizeTicker(value);
       if (!query) return false;
@@ -4037,10 +4076,10 @@
             ]);
             if (dataRes.ok) {
               const data = await dataRes.json();
-              if (!cancelled) setFunds(Array.isArray(data) ? data : []);
+              if (!cancelled) setFunds(normalizeFunds(data));
               if (prevRes.ok) {
                 const prevData = await prevRes.json();
-                if (!cancelled) setPreviousFunds(Array.isArray(prevData) ? prevData : []);
+                if (!cancelled) setPreviousFunds(normalizeFunds(prevData));
               } else if (!cancelled) {
                 setPreviousFunds([]);
               }
@@ -4059,7 +4098,7 @@
             const fallbackRes = await fetch(FALLBACK_URL, { cache: 'no-store' });
             if (fallbackRes.ok) {
               const data = await fallbackRes.json();
-              if (!cancelled) setFunds(Array.isArray(data) ? data : []);
+              if (!cancelled) setFunds(normalizeFunds(data));
               if (!cancelled) setPreviousFunds([]);
               if (!cancelled) setDataGeneratedAt('');
             }
