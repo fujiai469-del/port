@@ -1721,6 +1721,57 @@
       cursor: pointer;
     }
 
+    .perf-compare-panel {
+      border: 1px solid rgba(38, 70, 83, 0.14);
+      border-radius: 12px;
+      padding: 14px;
+      margin: 14px 0 16px;
+      background: rgba(38, 70, 83, 0.02);
+      display: grid;
+      gap: 12px;
+    }
+
+    .perf-compare-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .perf-compare-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--primary-teal);
+      min-width: 120px;
+    }
+
+    .perf-compare-checks {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .perf-compare-check {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary-teal);
+      background: #fff;
+      border: 1px solid rgba(38, 70, 83, 0.14);
+      border-radius: 999px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    .perf-compare-check input {
+      margin: 0;
+      accent-color: var(--teal-light);
+    }
+
     .perf-warn-icon {
       color: #E67E22;
       cursor: help;
@@ -1981,6 +2032,11 @@
         width: 100%;
         justify-content: space-between;
       }
+
+      .perf-compare-label {
+        min-width: 0;
+        width: 100%;
+      }
     }
 
     @media (min-width: 1024px) {
@@ -2165,7 +2221,8 @@
         ranking: {
           title: 'Top Holdings Ranking',
           rankByWeight: 'By Weight',
-          rankByPopularity: 'By Popularity'
+          rankByPopularity: 'By Popularity',
+          rankByPerformance: 'By Performance'
         },
         overlap: {
           title: 'Fund Overlap Analysis',
@@ -2235,6 +2292,13 @@
           sortSharpe: 'Sharpe Ratio',
           sortMDD: 'Max Drawdown',
           sortVol: 'Volatility',
+          compareBenchmarks: 'Benchmarks',
+          compareFundA: 'Compare Fund A',
+          compareFundB: 'Compare Fund B',
+          benchmarkSP500: 'S&P 500 (SPY)',
+          benchmarkNasdaq100: 'NASDAQ 100 (QQQ)',
+          benchmarkDow: 'Dow Jones (DIA)',
+          comparePerf: 'Comparison Performance',
           noData: '—',
           loading: 'Loading price data...',
           errorFetch: 'Failed to fetch price data',
@@ -2377,7 +2441,8 @@
         ranking: {
           title: '保有銘柄ランキング',
           rankByWeight: '比率順',
-          rankByPopularity: '人気順'
+          rankByPopularity: '人気順',
+          rankByPerformance: 'パフォーマンス順'
         },
         overlap: {
           title: 'ファンド重複分析',
@@ -2447,6 +2512,13 @@
           sortSharpe: 'シャープ比率',
           sortMDD: '最大ドローダウン',
           sortVol: 'ボラティリティ',
+          compareBenchmarks: '比較指数',
+          compareFundA: '比較ファンドA',
+          compareFundB: '比較ファンドB',
+          benchmarkSP500: 'S&P500 (SPY)',
+          benchmarkNasdaq100: 'NASDAQ100 (QQQ)',
+          benchmarkDow: 'ダウ平均 (DIA)',
+          comparePerf: '比較パフォーマンス',
           noData: '—',
           loading: '価格データを取得中...',
           errorFetch: '価格データの取得に失敗',
@@ -3290,6 +3362,17 @@
     const CSV_IMPORT_KEY = 'pv_csv_import_v1';
     const SETTINGS_KEY = 'pv_datasource_settings_v1';
     const TRADING_DAYS_PER_YEAR = 252;
+    const HOME_SORT_KEYS = new Set(['default', '1Y', '6M', '3M', '1M', 'YTD', 'sharpe', 'mdd', 'vol']);
+    const BENCHMARK_COMPARE_OPTIONS = [
+      { ticker: 'SPY', labelKey: 'perf.benchmarkSP500', color: '#E9C46A' },
+      { ticker: 'QQQ', labelKey: 'perf.benchmarkNasdaq100', color: '#3A9AD9' },
+      { ticker: 'DIA', labelKey: 'perf.benchmarkDow', color: '#F08C24' }
+    ];
+
+    function normalizeHomeSortKey(value) {
+      if (!value) return 'default';
+      return HOME_SORT_KEYS.has(value) ? value : 'default';
+    }
 
     // --- Data Source Settings ---
     function getDataSourceSettings() {
@@ -3735,7 +3818,7 @@
     }
 
     // --- Performance Chart Component ---
-    function PerformanceChart({ series, loading, error, t }) {
+    function PerformanceChart({ series, compareSeries = [], loading, error, t, primaryLabel }) {
       const chartRef = React.useRef(null);
       const chartInstance = React.useRef(null);
       const [period, setPeriod] = React.useState('1Y');
@@ -3745,46 +3828,83 @@
         () => filterSeriesByPeriod(series, period),
         [series, period]
       );
+      const filteredCompareSeries = React.useMemo(
+        () => (compareSeries || [])
+          .map((item) => ({ ...item, series: filterSeriesByPeriod(item.series, period) }))
+          .filter((item) => item.series && item.series.length >= 2),
+        [compareSeries, period]
+      );
 
       React.useEffect(() => {
         if (chartInstance.current) { chartInstance.current.destroy(); chartInstance.current = null; }
         if (!filteredSeries || filteredSeries.length < 2 || !chartRef.current) return;
 
-        const basePrice = indexed ? filteredSeries[0].price : 1;
         const labels = filteredSeries.map(p => p.date);
-        const data = indexed
-          ? filteredSeries.map(p => (p.price / basePrice) * 100)
-          : filteredSeries.map(p => p.price);
+        const buildAlignedData = (targetSeries) => {
+          const byDate = new Map(targetSeries.map((p) => [p.date, Number(p.price)]));
+          const raw = labels.map((date) => {
+            const value = byDate.get(date);
+            return Number.isFinite(value) ? value : null;
+          });
+          if (!indexed) return raw;
+          const basePrice = raw.find((value) => value !== null && value > 0);
+          if (!basePrice) return raw.map(() => null);
+          return raw.map((value) => (value === null ? null : (value / basePrice) * 100));
+        };
+
+        const datasets = [{
+          label: primaryLabel || t('perf.fundPerf'),
+          data: buildAlignedData(filteredSeries),
+          borderColor: '#2A9D8F',
+          backgroundColor: 'rgba(42,157,143,0.08)',
+          fill: filteredCompareSeries.length === 0,
+          borderWidth: 2,
+          pointRadius: 0,
+          pointHitRadius: 8,
+          tension: 0.1
+        }];
+
+        filteredCompareSeries.forEach((item) => {
+          datasets.push({
+            label: item.label,
+            data: buildAlignedData(item.series),
+            borderColor: item.color || '#3498DB',
+            backgroundColor: 'rgba(0,0,0,0)',
+            fill: false,
+            borderWidth: 2,
+            pointRadius: 0,
+            pointHitRadius: 8,
+            tension: 0.1
+          });
+        });
 
         const ctx = chartRef.current.getContext('2d');
         chartInstance.current = new Chart(ctx, {
           type: 'line',
           data: {
             labels,
-            datasets: [{
-              data,
-              borderColor: '#2A9D8F',
-              backgroundColor: 'rgba(42,157,143,0.08)',
-              fill: true,
-              borderWidth: 2,
-              pointRadius: 0,
-              pointHitRadius: 8,
-              tension: 0.1
-            }]
+            datasets
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-              legend: { display: false },
+              legend: {
+                display: filteredCompareSeries.length > 0,
+                labels: { boxWidth: 12, usePointStyle: true, pointStyle: 'line' }
+              },
               tooltip: {
                 backgroundColor: '#264653',
                 titleFont: { family: 'Montserrat', weight: '600', size: 11 },
                 bodyFont: { family: 'Montserrat', size: 12 },
                 callbacks: {
-                  label: (ctx) => indexed
-                    ? `${ctx.parsed.y.toFixed(1)}`
-                    : `$${ctx.parsed.y.toFixed(2)}`
+                  label: (ctx) => {
+                    const label = ctx.dataset?.label ? `${ctx.dataset.label}: ` : '';
+                    if (ctx.parsed.y === null || ctx.parsed.y === undefined) return `${label}—`;
+                    return indexed
+                      ? `${label}${ctx.parsed.y.toFixed(1)}`
+                      : `${label}$${ctx.parsed.y.toFixed(2)}`;
+                  }
                 }
               }
             },
@@ -3813,7 +3933,7 @@
         });
 
         return () => { chartInstance.current?.destroy(); chartInstance.current = null; };
-      }, [filteredSeries, indexed]);
+      }, [filteredSeries, filteredCompareSeries, indexed, primaryLabel, t]);
 
       if (loading) {
         return (
@@ -4253,7 +4373,7 @@
       const [homeSortKey, setHomeSortKey] = React.useState(() => {
         if (typeof window === 'undefined') return 'default';
         const saved = window.localStorage.getItem(HOME_SORT_KEY_STORAGE);
-        return saved || 'default';
+        return normalizeHomeSortKey(saved);
       });
       const refreshPollRef = React.useRef(null);
       const t = React.useCallback((key, params) => translate(language, key, params), [language]);
@@ -4342,7 +4462,12 @@
 
       React.useEffect(() => {
         if (typeof window === 'undefined') return;
-        window.localStorage.setItem(HOME_SORT_KEY_STORAGE, homeSortKey);
+        const normalized = normalizeHomeSortKey(homeSortKey);
+        if (normalized !== homeSortKey) {
+          setHomeSortKey(normalized);
+          return;
+        }
+        window.localStorage.setItem(HOME_SORT_KEY_STORAGE, normalized);
       }, [homeSortKey]);
 
       React.useEffect(() => {
@@ -4691,6 +4816,7 @@
               {tab === 'detail' && selected && (
                 <DetailView
                   fund={selected}
+                  allFunds={funds}
                   searchTerm={search}
                   searchMode={searchMode}
                   onBack={handleBack}
@@ -4703,6 +4829,7 @@
               {tab === 'list' && (
                 <ListView
                   funds={filtered}
+                  allFunds={funds}
                   selected={selected}
                   onSelect={setSelected}
                   searchTerm={search}
@@ -4893,7 +5020,7 @@
       );
     }
 
-    function ListView({ funds, selected, onSelect, searchTerm, searchMode, watchedTickerSet, watchedFundSet, onToggleTickerWatch, onToggleFundWatch }) {
+    function ListView({ funds, allFunds, selected, onSelect, searchTerm, searchMode, watchedTickerSet, watchedFundSet, onToggleTickerWatch, onToggleFundWatch }) {
       const { t } = useI18n();
       if (!funds || funds.length === 0) {
         return (
@@ -4916,6 +5043,7 @@
               {selected ? (
                 <DetailView
                   fund={selected}
+                  allFunds={allFunds || funds}
                   searchTerm={searchTerm}
                   searchMode={searchMode}
                   watchedTickerSet={watchedTickerSet}
@@ -4931,7 +5059,7 @@
       );
     }
 
-    function DetailView({ fund, onBack, searchTerm, searchMode, watchedTickerSet, watchedFundSet, onToggleTickerWatch, onToggleFundWatch }) {
+    function DetailView({ fund, allFunds, onBack, searchTerm, searchMode, watchedTickerSet, watchedFundSet, onToggleTickerWatch, onToggleFundWatch }) {
       const chartRef = React.useRef(null);
       const chartInstance = React.useRef(null);
       const matchRowRef = React.useRef(null);
@@ -5184,7 +5312,7 @@
           )}
 
           {detailTab === 'performance' && (
-            <DetailPerfTab fund={fund} t={t} />
+            <DetailPerfTab fund={fund} allFunds={allFunds} t={t} />
           )}
 
           {detailTab === 'about' && (
@@ -5230,14 +5358,189 @@
       );
     }
 
-    function DetailPerfTab({ fund, t }) {
+    function DetailPerfTab({ fund, allFunds, t }) {
       const topTicker = fund?.holdings?.[0]?.ticker ? normalizeTicker(fund.holdings[0].ticker) : null;
       const [retryKey, setRetryKey] = React.useState(0);
+      const [selectedBenchmarks, setSelectedBenchmarks] = React.useState(['SPY', 'QQQ']);
+      const [compareFundAName, setCompareFundAName] = React.useState('');
+      const [compareFundBName, setCompareFundBName] = React.useState('');
+      const [compareDataMap, setCompareDataMap] = React.useState(new Map());
+      const [loadingCompareTickers, setLoadingCompareTickers] = React.useState(new Set());
+      const compareDataMapRef = React.useRef(compareDataMap);
+      const loadingCompareRef = React.useRef(loadingCompareTickers);
       const perfState = useTickerPerformance(topTicker, retryKey);
 
+      React.useEffect(() => {
+        compareDataMapRef.current = compareDataMap;
+      }, [compareDataMap]);
+
+      React.useEffect(() => {
+        loadingCompareRef.current = loadingCompareTickers;
+      }, [loadingCompareTickers]);
+
+      React.useEffect(() => {
+        setCompareFundAName('');
+        setCompareFundBName('');
+      }, [fund?.name]);
+
+      const benchmarkOptions = React.useMemo(
+        () => BENCHMARK_COMPARE_OPTIONS.map((item) => ({
+          ...item,
+          label: t(item.labelKey)
+        })),
+        [t]
+      );
+
+      const compareFundOptions = React.useMemo(
+        () => (allFunds || [])
+          .filter((item) => item?.name && item.name !== fund?.name && item?.holdings?.[0]?.ticker)
+          .sort((a, b) => String(a.name || '').localeCompare(String(b.name || ''))),
+        [allFunds, fund?.name]
+      );
+
+      React.useEffect(() => {
+        if (compareFundAName && !compareFundOptions.some((item) => item.name === compareFundAName)) {
+          setCompareFundAName('');
+        }
+        if (compareFundBName && !compareFundOptions.some((item) => item.name === compareFundBName)) {
+          setCompareFundBName('');
+        }
+      }, [compareFundAName, compareFundBName, compareFundOptions]);
+
+      const compareTargets = React.useMemo(() => {
+        const usedTickers = new Set(topTicker ? [topTicker] : []);
+        const items = [];
+
+        benchmarkOptions.forEach((item) => {
+          if (!selectedBenchmarks.includes(item.ticker)) return;
+          if (!item.ticker || usedTickers.has(item.ticker)) return;
+          usedTickers.add(item.ticker);
+          items.push({
+            id: `benchmark:${item.ticker}`,
+            ticker: item.ticker,
+            label: item.label,
+            color: item.color
+          });
+        });
+
+        const selectedFundA = compareFundOptions.find((item) => item.name === compareFundAName);
+        const selectedFundB = compareFundOptions.find((item) => item.name === compareFundBName);
+
+        const appendFundTarget = (fundItem, labelKey, color, suffix) => {
+          const ticker = fundItem?.holdings?.[0]?.ticker ? normalizeTicker(fundItem.holdings[0].ticker) : '';
+          if (!ticker || usedTickers.has(ticker)) return;
+          usedTickers.add(ticker);
+          items.push({
+            id: `fund:${suffix}:${ticker}`,
+            ticker,
+            label: `${t(labelKey)}: ${fundItem.name}`,
+            color
+          });
+        };
+
+        appendFundTarget(selectedFundA, 'perf.compareFundA', '#E76F51', 'a');
+        appendFundTarget(selectedFundB, 'perf.compareFundB', '#5B7C99', 'b');
+
+        return items;
+      }, [benchmarkOptions, compareFundAName, compareFundBName, compareFundOptions, selectedBenchmarks, t, topTicker]);
+
+      React.useEffect(() => {
+        const settings = getDataSourceSettings();
+        const toLoad = compareTargets
+          .map((item) => item.ticker)
+          .filter((ticker) =>
+            ticker &&
+            !compareDataMapRef.current.has(ticker) &&
+            !loadingCompareRef.current.has(ticker)
+          );
+
+        if (toLoad.length === 0) return;
+        setLoadingCompareTickers((prev) => {
+          const next = new Set(prev);
+          toLoad.forEach((ticker) => next.add(ticker));
+          loadingCompareRef.current = next;
+          return next;
+        });
+
+        let cancelled = false;
+        const queue = [...toLoad];
+        const workers = Array.from({ length: Math.min(4, queue.length) }, async () => {
+          while (!cancelled) {
+            const ticker = queue.shift();
+            if (!ticker) break;
+            const result = await fetchTickerPriceSeries(ticker, settings);
+            if (cancelled) break;
+            const metrics = result.series ? computeMetrics(result.series) : null;
+            setCompareDataMap((prev) => {
+              const next = new Map(prev);
+              next.set(ticker, { series: result.series, metrics, error: result.error });
+              compareDataMapRef.current = next;
+              return next;
+            });
+            setLoadingCompareTickers((prev) => {
+              const next = new Set(prev);
+              next.delete(ticker);
+              loadingCompareRef.current = next;
+              return next;
+            });
+          }
+        });
+
+        Promise.all(workers).catch(() => {});
+        return () => { cancelled = true; };
+      }, [compareTargets]);
+
+      const compareSeries = React.useMemo(
+        () => compareTargets
+          .map((item) => {
+            const payload = compareDataMap.get(item.ticker);
+            if (!payload?.series || payload.series.length < 2) return null;
+            return {
+              label: item.label,
+              color: item.color,
+              series: payload.series
+            };
+          })
+          .filter(Boolean),
+        [compareTargets, compareDataMap]
+      );
+
+      const compareSummary = React.useMemo(
+        () => compareTargets.map((item) => {
+          const payload = compareDataMap.get(item.ticker);
+          const value = payload?.metrics?.totalReturn?.['1Y'];
+          const loading = !payload && loadingCompareTickers.has(item.ticker);
+          return {
+            id: item.id,
+            label: item.label,
+            value,
+            loading
+          };
+        }),
+        [compareTargets, compareDataMap, loadingCompareTickers]
+      );
+
       const handleRetry = () => {
-        if (topTicker) priceSeriesCache.delete(`stooq:${topTicker}`);
-        setRetryKey(k => k + 1);
+        if (topTicker) {
+          priceSeriesCache.delete(`stooq:${topTicker}`);
+          tickerMetricsCache.delete(topTicker);
+        }
+        compareTargets.forEach((item) => {
+          if (!item.ticker) return;
+          priceSeriesCache.delete(`stooq:${item.ticker}`);
+          tickerMetricsCache.delete(item.ticker);
+        });
+        setCompareDataMap(new Map());
+        setRetryKey((k) => k + 1);
+      };
+
+      const toggleBenchmark = (ticker) => {
+        setSelectedBenchmarks((prev) => {
+          const next = new Set(prev);
+          if (next.has(ticker)) next.delete(ticker);
+          else next.add(ticker);
+          return Array.from(next);
+        });
       };
 
       return (
@@ -5272,11 +5575,61 @@
             </div>
           )}
 
+          <div className="perf-compare-panel">
+            <div className="perf-compare-row">
+              <span className="perf-compare-label">{t('perf.compareBenchmarks')}</span>
+              <div className="perf-compare-checks">
+                {benchmarkOptions.map((item) => (
+                  <label key={item.ticker} className="perf-compare-check">
+                    <input
+                      type="checkbox"
+                      checked={selectedBenchmarks.includes(item.ticker)}
+                      onChange={() => toggleBenchmark(item.ticker)}
+                    />
+                    <span>{item.label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="perf-compare-row">
+              <span className="perf-compare-label">{t('perf.comparePerf')}</span>
+              <select className="perf-sort-select" value={compareFundAName} onChange={(e) => setCompareFundAName(e.target.value)}>
+                <option value="">{t('perf.compareFundA')}</option>
+                {compareFundOptions.map((item) => (
+                  <option key={`a-${item.name}`} value={item.name}>{item.name}</option>
+                ))}
+              </select>
+              <select className="perf-sort-select" value={compareFundBName} onChange={(e) => setCompareFundBName(e.target.value)}>
+                <option value="">{t('perf.compareFundB')}</option>
+                {compareFundOptions.map((item) => (
+                  <option key={`b-${item.name}`} value={item.name}>{item.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {compareSummary.length > 0 && (
+            <div className="perf-cards" style={{ marginBottom: '16px' }}>
+              {compareSummary.map((item) => {
+                const text = item.loading ? '…' : (formatPercent(item.value) || '—');
+                const cls = item.loading ? 'na' : (item.value === null || item.value === undefined ? 'na' : (item.value >= 0 ? 'positive' : 'negative'));
+                return (
+                  <div key={item.id} className="perf-card">
+                    <div className="perf-card-label">{item.label}</div>
+                    <div className={`perf-card-value ${cls}`}>{text}</div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
           <PerformanceChart
             series={perfState.series}
+            compareSeries={compareSeries}
             loading={perfState.loading}
             error={perfState.error}
             t={t}
+            primaryLabel={`${fund?.name || t('perf.fundPerf')} (${topTicker || '—'})`}
           />
         </div>
       );
@@ -5413,6 +5766,11 @@
       const { t, language } = useI18n();
       const [mode, setMode] = React.useState('weight');
       const [expandedTicker, setExpandedTicker] = React.useState(null);
+      const [performancePeriod, setPerformancePeriod] = React.useState('3M');
+      const [rankingPerfCache, setRankingPerfCache] = React.useState(new Map());
+      const [rankingLoadingTickers, setRankingLoadingTickers] = React.useState(new Set());
+      const rankingPerfCacheRef = React.useRef(rankingPerfCache);
+      const rankingLoadingTickersRef = React.useRef(rankingLoadingTickers);
 
       if (!funds || funds.length === 0) {
         return (
@@ -5444,7 +5802,89 @@
         }));
       }, [funds]);
 
+      React.useEffect(() => {
+        rankingPerfCacheRef.current = rankingPerfCache;
+      }, [rankingPerfCache]);
+
+      React.useEffect(() => {
+        rankingLoadingTickersRef.current = rankingLoadingTickers;
+      }, [rankingLoadingTickers]);
+
+      const performanceUniverse = React.useMemo(
+        () => [...allData]
+          .sort((a, b) => b.fundCount - a.fundCount || b.totalWeight - a.totalWeight)
+          .slice(0, 120),
+        [allData]
+      );
+
+      React.useEffect(() => {
+        if (mode !== 'performance') return;
+        const settings = getDataSourceSettings();
+        const toLoad = performanceUniverse
+          .map((item) => normalizeTicker(item.ticker))
+          .filter((ticker) =>
+            ticker &&
+            !rankingPerfCacheRef.current.has(ticker) &&
+            !rankingLoadingTickersRef.current.has(ticker)
+          );
+
+        if (toLoad.length === 0) return;
+        setRankingLoadingTickers((prev) => {
+          const next = new Set(prev);
+          toLoad.forEach((ticker) => next.add(ticker));
+          rankingLoadingTickersRef.current = next;
+          return next;
+        });
+
+        let cancelled = false;
+        const queue = [...toLoad];
+        const workers = Array.from({ length: Math.min(6, queue.length) }, async () => {
+          while (!cancelled) {
+            const ticker = queue.shift();
+            if (!ticker) break;
+            const result = await fetchTickerPriceSeries(ticker, settings);
+            if (cancelled) break;
+            const metrics = result.series ? computeMetrics(result.series) : null;
+            const payload = { metrics, error: result.error };
+            tickerMetricsCache.set(ticker, payload);
+            setRankingPerfCache((prev) => {
+              const next = new Map(prev);
+              next.set(ticker, payload);
+              rankingPerfCacheRef.current = next;
+              return next;
+            });
+            setRankingLoadingTickers((prev) => {
+              const next = new Set(prev);
+              next.delete(ticker);
+              rankingLoadingTickersRef.current = next;
+              return next;
+            });
+          }
+        });
+
+        Promise.all(workers).catch(() => {});
+        return () => { cancelled = true; };
+      }, [mode, performanceUniverse]);
+
       const rankingData = React.useMemo(() => {
+        if (mode === 'performance') {
+          const sorted = performanceUniverse.map((item) => {
+            const perf = rankingPerfCache.get(normalizeTicker(item.ticker));
+            const value = perf?.metrics?.totalReturn?.[performancePeriod];
+            return { ...item, performanceValue: value };
+          });
+
+          sorted.sort((a, b) => {
+            const valA = a.performanceValue;
+            const valB = b.performanceValue;
+            if (valA === null || valA === undefined) return 1;
+            if (valB === null || valB === undefined) return -1;
+            if (valB !== valA) return valB - valA;
+            return b.fundCount - a.fundCount || b.totalWeight - a.totalWeight;
+          });
+          return sorted.slice(0, 30);
+        }
+
         const sorted = [...allData];
         if (mode === 'weight') {
           sorted.sort((a, b) => b.totalWeight - a.totalWeight);
@@ -5452,10 +5892,13 @@
           sorted.sort((a, b) => b.fundCount - a.fundCount || b.totalWeight - a.totalWeight);
         }
         return sorted.slice(0, 30);
-      }, [allData, mode]);
+      }, [allData, mode, performanceUniverse, rankingPerfCache, performancePeriod]);
 
       const maxTotal = rankingData.length > 0 ? Math.max(...rankingData.map(d => d.totalWeight)) : 1;
       const maxAvg = rankingData.length > 0 ? Math.max(...rankingData.map(d => d.avgWeight)) : 1;
+      const performanceHeader = mode === 'performance'
+        ? `${t(`perf.period${performancePeriod}`)} ${t('perf.totalReturn')}`
+        : t('perf.totalReturn');
       const fundByName = React.useMemo(() => {
         const map = new Map();
         (funds || []).forEach((fund) => map.set(String(fund.name || '').trim(), fund));
@@ -5468,7 +5911,20 @@
           <div className="ranking-tabs">
             <button className={`ranking-tab ${mode === 'weight' ? 'active' : ''}`} onClick={() => { setMode('weight'); setExpandedTicker(null); }}>{t('ranking.rankByWeight')}</button>
             <button className={`ranking-tab ${mode === 'popularity' ? 'active' : ''}`} onClick={() => { setMode('popularity'); setExpandedTicker(null); }}>{t('ranking.rankByPopularity')}</button>
+            <button className={`ranking-tab ${mode === 'performance' ? 'active' : ''}`} onClick={() => { setMode('performance'); setExpandedTicker(null); }}>{t('ranking.rankByPerformance')}</button>
           </div>
+          {mode === 'performance' && (
+            <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--primary-teal)' }}>{t('perf.sortBy')}</span>
+              <select className="perf-sort-select" value={performancePeriod} onChange={(e) => setPerformancePeriod(e.target.value)}>
+                <option value="1M">{t('perf.period1M')}</option>
+                <option value="3M">{t('perf.period3M')}</option>
+                <option value="6M">{t('perf.period6M')}</option>
+                <option value="1Y">{t('perf.period1Y')}</option>
+                <option value="YTD">{t('perf.periodYTD')}</option>
+              </select>
+            </div>
+          )}
           <div className="ranking-table-container">
             <table className="ranking-table">
               <thead>
@@ -5480,6 +5936,7 @@
                   <th>{t('common.avgWeight')}</th>
                   <th>{t('common.totalWeight')}</th>
                   <th>{t('common.funds')}</th>
+                  <th>{performanceHeader}</th>
                   <th>★</th>
                 </tr>
               </thead>
@@ -5490,6 +5947,13 @@
                   const totalBarWidth = (item.totalWeight / maxTotal) * 100;
                   const avgBarWidth = (item.avgWeight / maxAvg) * 100;
                   const isExpanded = expandedTicker === item.ticker;
+                  const perfValue = item.performanceValue;
+                  const perfText = perfValue === null || perfValue === undefined
+                    ? (rankingLoadingTickers.has(normalizeTicker(item.ticker)) ? '…' : '—')
+                    : formatPercent(perfValue);
+                  const perfClass = perfValue === null || perfValue === undefined
+                    ? 'na'
+                    : (perfValue >= 0 ? 'positive' : 'negative');
                   return (
                     <React.Fragment key={item.ticker}>
                       <tr className="clickable" onClick={() => setExpandedTicker(isExpanded ? null : item.ticker)}>
@@ -5506,6 +5970,7 @@
                           <span className="weight-value">{item.totalWeight.toFixed(1)}%</span>
                         </td>
                         <td><span className="ranking-funds-count">{item.fundCount}</span></td>
+                        <td><span className={`perf-inline ${perfClass}`}>{perfText}</span></td>
                         <td>
                           <button
                             className={`watch-btn compact ${watchedTickerSet?.has(normalizeTicker(item.ticker)) ? 'active' : ''}`}
@@ -5521,7 +5986,7 @@
                       </tr>
                       {isExpanded && (
                         <tr className="ticker-funds-panel">
-                          <td colSpan="8">
+                          <td colSpan="9">
                             <div className="ticker-funds-inner">
                               <div className="ticker-funds-label">{t('common.holdingFunds')}</div>
                               <div className="ticker-fund-list">
