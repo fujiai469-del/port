@@ -89,6 +89,13 @@
       padding-right: 6px;
     }
 
+    .tabs-area {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
     .tabs::-webkit-scrollbar {
       display: none;
     }
@@ -135,6 +142,10 @@
       overflow-x: auto;
       margin: 0;
       padding-right: 0;
+    }
+
+    .app-shell.mode-mobile .tabs-area {
+      width: 100%;
     }
 
     .app-shell.mode-mobile .tab {
@@ -414,6 +425,40 @@
       display: grid;
       grid-template-columns: 1fr 200px;
       gap: 32px;
+    }
+
+    .home-main {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .home-summary {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      width: fit-content;
+      background: #fff;
+      border-radius: 999px;
+      padding: 8px 14px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(38, 70, 83, 0.08);
+    }
+
+    .home-summary-label {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(38, 70, 83, 0.72);
+      font-weight: 700;
+    }
+
+    .home-summary-value {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary-teal);
+      line-height: 1;
     }
 
     .list-layout-wrapper {
@@ -1679,6 +1724,9 @@
       en: {
         app: { title: 'Portfolio Visualizer' },
         nav: { home: 'Home', list: 'List', ranking: 'Ranking', overlap: 'Overlap', flow: 'Flow', watch: 'Watch' },
+        home: {
+          totalFunds: 'Funds'
+        },
         search: {
           placeholder: 'Search funds or tickers...',
           placeholderFund: 'Search fund name...',
@@ -1828,6 +1876,9 @@
       ja: {
         app: { title: 'Portfolio Visualizer' },
         nav: { home: 'ホーム', list: 'リスト', ranking: 'ランキング', overlap: '重複分析', flow: 'フロー', watch: 'ウォッチ' },
+        home: {
+          totalFunds: 'ファンド数'
+        },
         search: {
           placeholder: 'ファンド名・ティッカーで検索...',
           placeholderFund: 'ファンド名で検索...',
@@ -2975,15 +3026,17 @@
             <header className="header">
               <div className="header-content">
                 <div className="logo">{t('app.title')}</div>
-                <div className="tabs">
-                  <button className={`tab ${tab === 'home' || tab === 'detail' ? 'active' : ''}`} onClick={() => { setTab('home'); setSelected(null); }}>{t('nav.home')}</button>
-                  <button className={`tab ${tab === 'list' ? 'active' : ''}`} onClick={() => setTab('list')}>{t('nav.list')}</button>
-                  <button className={`tab ${tab === 'ranking' ? 'active' : ''}`} onClick={() => setTab('ranking')}>{t('nav.ranking')}</button>
-                  <button className={`tab ${tab === 'overlap' ? 'active' : ''}`} onClick={() => setTab('overlap')}>{t('nav.overlap')}</button>
-                  <button className={`tab ${tab === 'flow' ? 'active' : ''}`} onClick={() => setTab('flow')}>{t('nav.flow')}</button>
-                  <button className={`tab ${tab === 'watch' ? 'active' : ''}`} onClick={() => setTab('watch')}>{t('nav.watch')}</button>
+                <div className="tabs-area">
+                  <div className="tabs">
+                    <button className={`tab ${tab === 'home' || tab === 'detail' ? 'active' : ''}`} onClick={() => { setTab('home'); setSelected(null); }}>{t('nav.home')}</button>
+                    <button className={`tab ${tab === 'list' ? 'active' : ''}`} onClick={() => setTab('list')}>{t('nav.list')}</button>
+                    <button className={`tab ${tab === 'ranking' ? 'active' : ''}`} onClick={() => setTab('ranking')}>{t('nav.ranking')}</button>
+                    <button className={`tab ${tab === 'overlap' ? 'active' : ''}`} onClick={() => setTab('overlap')}>{t('nav.overlap')}</button>
+                    <button className={`tab ${tab === 'flow' ? 'active' : ''}`} onClick={() => setTab('flow')}>{t('nav.flow')}</button>
+                    <button className={`tab ${tab === 'watch' ? 'active' : ''}`} onClick={() => setTab('watch')}>{t('nav.watch')}</button>
+                  </div>
                   <button
-                    className="tab tab-refresh-btn"
+                    className="tab-refresh-btn"
                     onClick={triggerDataRefresh}
                     disabled={refreshState === 'requesting' || refreshState === 'queued'}
                     title={t('refresh.button')}
@@ -3115,16 +3168,22 @@
 
       return (
         <div className="home-layout">
-          <div className="funds-grid">
-            {sortedFunds.map((fund, i) => (
-              <FundCard
-                key={fund.name}
-                fund={fund}
-                onClick={() => onSelect(fund)}
-                isWatched={watchedFundSet.has(fund.name)}
-                onToggleWatch={onToggleFundWatch}
-              />
-            ))}
+          <div className="home-main">
+            <div className="home-summary">
+              <span className="home-summary-label">{t('home.totalFunds')}</span>
+              <span className="home-summary-value">{sortedFunds.length}</span>
+            </div>
+            <div className="funds-grid">
+              {sortedFunds.map((fund) => (
+                <FundCard
+                  key={fund.name}
+                  fund={fund}
+                  onClick={() => onSelect(fund)}
+                  isWatched={watchedFundSet.has(fund.name)}
+                  onToggleWatch={onToggleFundWatch}
+                />
+              ))}
+            </div>
           </div>
           <SectorLegend activeSector={activeSector} onSectorClick={setActiveSector} />
         </div>
