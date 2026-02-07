@@ -4574,13 +4574,15 @@
         }
       }, [dataGeneratedAt, refreshState, t]);
 
-      const filtered = funds.filter(f => {
+      const filtered = React.useMemo(() => {
         const query = normalizeSearchText(search);
-        if (!query) return true;
-        const nameMatch = matchesFundName(f.name, query, searchMode);
-        const tickerMatch = (f.holdings || []).some(h => matchesTicker(h.ticker, query, searchMode));
-        return nameMatch || tickerMatch;
-      });
+        return (funds || []).filter((f) => {
+          if (!query) return true;
+          const nameMatch = matchesFundName(f.name, query, searchMode);
+          const tickerMatch = (f.holdings || []).some((h) => matchesTicker(h.ticker, query, searchMode));
+          return nameMatch || tickerMatch;
+        });
+      }, [funds, search, searchMode]);
 
       const searchPlaceholder = React.useMemo(() => {
         if (searchMode === 'ticker') return t('search.placeholderTicker');
