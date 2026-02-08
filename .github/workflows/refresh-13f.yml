@@ -37,6 +37,7 @@ jobs:
           mkdir -p /tmp/refresh-data
           cp data/funds.json /tmp/refresh-data/funds.json
           cp data/meta.json /tmp/refresh-data/meta.json
+          git checkout -- data/funds.json data/meta.json
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
