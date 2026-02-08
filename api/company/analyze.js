@@ -397,6 +397,50 @@ function companySimilarity(left, right) {
   return intersection / (a.size + b.size - intersection);
 }
 
+function companyCoreString(value) {
+  return companyTokens(value).join('');
+}
+
+function ngramSet(text, size = 2) {
+  const normalized = String(text || '');
+  const grams = new Set();
+  if (!normalized) return grams;
+  if (normalized.length <= size) {
+    grams.add(normalized);
+    return grams;
+  }
+  for (let i = 0; i <= normalized.length - size; i += 1) {
+    grams.add(normalized.slice(i, i + size));
+  }
+  return grams;
+}
+
+function ngramSimilarity(left, right) {
+  const a = ngramSet(left, 2);
+  const b = ngramSet(right, 2);
+  if (a.size === 0 || b.size === 0) return 0;
+  let intersection = 0;
+  a.forEach((token) => {
+    if (b.has(token)) intersection += 1;
+  });
+  return intersection / (a.size + b.size - intersection);
+}
+
+function companyMatchesHint(hint, actual) {
+  const hintCore = companyCoreString(hint);
+  const actualCore = companyCoreString(actual);
+  if (!hintCore || !actualCore) return true;
+  if (hintCore === actualCore) return true;
+  if (hintCore.length >= 5 && actualCore.includes(hintCore)) return true;
+  if (actualCore.length >= 5 && hintCore.includes(actualCore)) return true;
+
+  const tokenScore = companySimilarity(hint, actual);
+  if (tokenScore >= 0.2) return true;
+
+  const gramScore = ngramSimilarity(hintCore, actualCore);
+  return gramScore >= 0.45;
+}
+
 function normalizeSummary3(summary3, summary, lang) {
   const lines = String(summary3 || '')
     .split(/\r?\n/)
@@ -474,8 +518,7 @@ function validateDisambiguation(result, query, lang, hints = {}) {
   }
 
   if (tickerHint && companyHint) {
-    const score = companySimilarity(companyHint, result?.companyName || '');
-    if (score < 0.2) {
+    if (!companyMatchesHint(companyHint, result?.companyName || '')) {
       throw new AnalyzeError('NOT_FOUND', `${message(lang, 'notFound')}: ${query}`, 404, false);
     }
   }
@@ -679,10 +722,31 @@ export default async function handler(req, res) {
   if (cached) return success(res, cached);
 
   try {
+    const primaryQuery = query.trim();
+    const fallbackQuery = (hints.tickerHint && hints.companyHint)
+      ? `${hints.tickerHint} ${hints.companyHint}`.trim()
+      : '';
+    let triedFallbackQuery = false;
+
     const analyzed = await runWithRetries(
       async () => {
-        const base = await callGemini(geminiApiKey, query.trim(), lang, hints);
-        return enrichImages(base);
+        try {
+          const base = await callGemini(geminiApiKey, primaryQuery, lang, hints);
+          return enrichImages(base);
+        } catch (error) {
+          const typed = toAnalyzeError(error, lang);
+          const canRetryWithFallback =
+            !triedFallbackQuery &&
+            typed.code === 'NOT_FOUND' &&
+            fallbackQuery &&
+            normalizeQuery(fallbackQuery) !== normalizeQuery(primaryQuery);
+
+          if (!canRetryWithFallback) throw typed;
+
+          triedFallbackQuery = true;
+          const fallbackBase = await callGemini(geminiApiKey, fallbackQuery, lang, hints);
+          return enrichImages(fallbackBase);
+        }
       },
       RETRY_COUNT,
       lang
