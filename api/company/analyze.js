@@ -12,13 +12,9 @@ const CACHE_TTL_MS = 30 * 60 * 1000;
 const CACHE_MAX_ENTRIES = 120;
 const REQUEST_TIMEOUT_MS = 15_000;
 const IMAGE_TIMEOUT_MS = 2_800;
-const DAILY_QUOTA_TZ = process.env.COMPANY_ANALYZE_QUOTA_TZ || 'Asia/Tokyo';
-const parsedDailyLimit = Number(process.env.COMPANY_ANALYZE_DAILY_LIMIT);
-const DAILY_QUOTA_LIMIT = Number.isFinite(parsedDailyLimit) ? Math.max(0, Math.floor(parsedDailyLimit)) : 120;
 
 const rateStore = new Map();
 const cacheStore = new Map();
-const dailyQuotaStore = new Map();
 
 const AnalyzeInputSchema = z.object({
   query: z.string().trim().min(1).max(120),
@@ -50,7 +46,6 @@ const MESSAGES = {
     badRequest: '企業名またはティッカーを入力してください',
     config: '管理者がAPIキーを設定してください（GEMINI_API_KEY）',
     rateLimit: 'リクエストが集中しています。少し待って再試行してください',
-    dailyLimit: '本日の分析上限に達しました。日付が変わってから再試行してください',
     notFound: '企業を特定できませんでした',
     invalidJson: 'AI応答の解析に失敗しました',
     upstream: '外部AIサービスからの応答取得に失敗しました'
@@ -59,7 +54,6 @@ const MESSAGES = {
     badRequest: 'Please provide a company name or ticker',
     config: 'Administrator must configure GEMINI_API_KEY',
     rateLimit: 'Too many requests. Please wait and try again',
-    dailyLimit: 'Daily analysis limit reached. Please try again after the date changes',
     notFound: 'Company could not be identified',
     invalidJson: 'Failed to parse AI response',
     upstream: 'Failed to get response from upstream AI service'
@@ -81,55 +75,28 @@ function message(lang, key) {
   return MESSAGES[locale][key] || MESSAGES.en[key] || MESSAGES.en.upstream;
 }
 
-function getQuotaHeaders(quota) {
-  if (!quota) return {};
-  return {
-    'x-company-quota-date': String(quota.date || ''),
-    'x-company-quota-limit': quota.unlimited ? '-1' : String(quota.limit),
-    'x-company-quota-used': String(quota.used),
-    'x-company-quota-remaining': quota.unlimited ? '-1' : String(quota.remaining),
-    'x-company-quota-unlimited': quota.unlimited ? '1' : '0'
-  };
-}
-
-function toQuotaPayload(quota) {
-  if (!quota) return null;
-  return {
-    date: quota.date,
-    limit: quota.unlimited ? null : quota.limit,
-    used: quota.used,
-    remaining: quota.unlimited ? null : quota.remaining,
-    unlimited: quota.unlimited
-  };
-}
-
-function json(res, status, payload, extraHeaders = {}) {
+function json(res, status, payload) {
   res.status(status).setHeader('Content-Type', 'application/json; charset=utf-8');
-  Object.entries(extraHeaders).forEach(([key, value]) => {
-    res.setHeader(key, value);
-  });
   res.end(JSON.stringify(payload));
 }
 
-function success(res, data, quota = null) {
+function success(res, data) {
   return json(res, 200, {
     success: true,
     data,
-    error: null,
-    quota: toQuotaPayload(quota)
-  }, getQuotaHeaders(quota));
+    error: null
+  });
 }
 
-function failure(res, status, code, messageText, quota = null) {
+function failure(res, status, code, messageText) {
   return json(res, status, {
     success: false,
     data: null,
     error: {
       code,
       message: messageText
-    },
-    quota: toQuotaPayload(quota)
-  }, getQuotaHeaders(quota));
+    }
+  });
 }
 
 function sleep(ms) {
@@ -177,81 +144,6 @@ function getClientKey(req) {
   const uaHeader = req.headers['user-agent'];
   const ua = Array.isArray(uaHeader) ? uaHeader[0] : String(uaHeader || 'unknown');
   return `${ip}|${ua.slice(0, 140)}`;
-}
-
-function getQuotaDateKey(date = new Date()) {
-  try {
-    const parts = new Intl.DateTimeFormat('en-US', {
-      timeZone: DAILY_QUOTA_TZ,
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    }).formatToParts(date);
-    const year = parts.find((part) => part.type === 'year')?.value;
-    const month = parts.find((part) => part.type === 'month')?.value;
-    const day = parts.find((part) => part.type === 'day')?.value;
-    if (year && month && day) return `${year}-${month}-${day}`;
-  } catch (_error) {
-    // fallback to UTC below
-  }
-  return date.toISOString().slice(0, 10);
-}
-
-function toQuotaSnapshot(entry) {
-  if (!entry) return null;
-  if (DAILY_QUOTA_LIMIT <= 0) {
-    return {
-      date: entry.date,
-      limit: null,
-      used: entry.used,
-      remaining: null,
-      unlimited: true
-    };
-  }
-  return {
-    date: entry.date,
-    limit: DAILY_QUOTA_LIMIT,
-    used: entry.used,
-    remaining: Math.max(DAILY_QUOTA_LIMIT - entry.used, 0),
-    unlimited: false
-  };
-}
-
-function getOrInitDailyEntry(clientKey) {
-  const today = getQuotaDateKey();
-  const current = dailyQuotaStore.get(clientKey);
-  if (!current || current.date !== today) {
-    const next = { date: today, used: 0 };
-    dailyQuotaStore.set(clientKey, next);
-    return next;
-  }
-  return current;
-}
-
-function getDailyQuota(clientKey) {
-  const entry = getOrInitDailyEntry(clientKey);
-  return toQuotaSnapshot(entry);
-}
-
-function consumeDailyQuota(clientKey) {
-  const entry = getOrInitDailyEntry(clientKey);
-  if (DAILY_QUOTA_LIMIT > 0 && entry.used >= DAILY_QUOTA_LIMIT) {
-    return { allowed: false, quota: toQuotaSnapshot(entry) };
-  }
-
-  entry.used += 1;
-  dailyQuotaStore.set(clientKey, entry);
-
-  if (dailyQuotaStore.size > 4000) {
-    const today = getQuotaDateKey();
-    for (const [key, value] of dailyQuotaStore.entries()) {
-      if (value.date !== today && value.used === 0) {
-        dailyQuotaStore.delete(key);
-      }
-    }
-  }
-
-  return { allowed: true, quota: toQuotaSnapshot(entry) };
 }
 
 function isRateLimited(clientKey) {
@@ -699,37 +591,19 @@ async function runWithRetries(task, retries, lang) {
 }
 
 export default async function handler(req, res) {
-  const clientKey = getClientKey(req);
-  let quotaSnapshot = getDailyQuota(clientKey);
-
-  if (req.method === 'GET') {
-    const mode = String(req.query?.mode || '').trim().toLowerCase();
-    if (mode === 'quota') {
-      return json(res, 200, {
-        success: true,
-        data: null,
-        error: null,
-        quota: toQuotaPayload(quotaSnapshot)
-      }, getQuotaHeaders(quotaSnapshot));
-    }
-
-    res.setHeader('Allow', 'POST, GET');
-    return failure(res, 405, 'BAD_REQUEST', 'Method Not Allowed', quotaSnapshot);
-  }
-
   if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST, GET');
-    return failure(res, 405, 'BAD_REQUEST', 'Method Not Allowed', quotaSnapshot);
+    res.setHeader('Allow', 'POST');
+    return failure(res, 405, 'BAD_REQUEST', 'Method Not Allowed');
   }
 
   const body = parseBody(req);
   if (body === null) {
-    return failure(res, 400, 'BAD_REQUEST', message('en', 'badRequest'), quotaSnapshot);
+    return failure(res, 400, 'BAD_REQUEST', message('en', 'badRequest'));
   }
 
   const parsedInput = AnalyzeInputSchema.safeParse(body);
   if (!parsedInput.success) {
-    return failure(res, 400, 'BAD_REQUEST', message('en', 'badRequest'), quotaSnapshot);
+    return failure(res, 400, 'BAD_REQUEST', message('en', 'badRequest'));
   }
 
   const { query, lang } = parsedInput.data;
@@ -740,32 +614,23 @@ export default async function handler(req, res) {
   };
   const normalized = normalizeQuery(query);
   if (!normalized || !/[\p{L}\p{N}]/u.test(normalized)) {
-    return failure(res, 400, 'BAD_REQUEST', message(lang, 'badRequest'), quotaSnapshot);
+    return failure(res, 400, 'BAD_REQUEST', message(lang, 'badRequest'));
   }
 
   const geminiApiKey = process.env.GEMINI_API_KEY;
   if (!geminiApiKey) {
     console.error('[api/company/analyze] GEMINI_API_KEY is missing');
-    return failure(res, 500, 'CONFIG', message(lang, 'config'), quotaSnapshot);
+    return failure(res, 500, 'CONFIG', message(lang, 'config'));
   }
 
+  const clientKey = getClientKey(req);
   if (isRateLimited(clientKey)) {
-    quotaSnapshot = getDailyQuota(clientKey);
-    return failure(res, 429, 'RATE_LIMIT', message(lang, 'rateLimit'), quotaSnapshot);
+    return failure(res, 429, 'RATE_LIMIT', message(lang, 'rateLimit'));
   }
 
   const cacheKey = `${lang}:${normalized}:${normalizeQuery(hints.tickerHint)}:${normalizeQuery(hints.companyHint)}:${normalizeQuery(hints.sectorHint)}`;
   const cached = getCache(cacheKey);
-  if (cached) {
-    quotaSnapshot = getDailyQuota(clientKey);
-    return success(res, cached, quotaSnapshot);
-  }
-
-  const consumed = consumeDailyQuota(clientKey);
-  quotaSnapshot = consumed.quota;
-  if (!consumed.allowed) {
-    return failure(res, 429, 'RATE_LIMIT', message(lang, 'dailyLimit'), quotaSnapshot);
-  }
+  if (cached) return success(res, cached);
 
   try {
     const analyzed = await runWithRetries(
@@ -778,9 +643,9 @@ export default async function handler(req, res) {
     );
 
     setCache(cacheKey, analyzed);
-    return success(res, analyzed, quotaSnapshot);
+    return success(res, analyzed);
   } catch (error) {
     const typed = toAnalyzeError(error, lang);
-    return failure(res, typed.status, typed.code, typed.message, quotaSnapshot);
+    return failure(res, typed.status, typed.code, typed.message);
   }
 }
