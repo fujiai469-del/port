@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -23,14 +25,40 @@ jobs:
         run: npm run refresh-13f
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
-      - name: Commit updates
+      - name: Publish refreshed data to data branch
+        env:
+          TARGET_BRANCH: data-live
         run: |
-          if git diff --quiet; then
+          if git diff --quiet -- data/funds.json data/meta.json; then
             echo "No data changes"
             exit 0
           fi
+
+          mkdir -p /tmp/refresh-data
+          cp data/funds.json /tmp/refresh-data/funds.json
+          cp data/meta.json /tmp/refresh-data/meta.json
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git ls-remote --exit-code --heads origin "${TARGET_BRANCH}" >/dev/null 2>&1; then
+            git fetch origin "${TARGET_BRANCH}:${TARGET_BRANCH}"
+            git checkout "${TARGET_BRANCH}"
+          else
+            git checkout --orphan "${TARGET_BRANCH}"
+            git rm -rf . >/dev/null 2>&1 || true
+            mkdir -p data
+            git checkout main -- data/funds-prev.json data/manual-funds.json data/ticker-map.json
+          fi
+
+          cp /tmp/refresh-data/funds.json data/funds.json
+          cp /tmp/refresh-data/meta.json data/meta.json
+
           git add data/funds.json data/meta.json
-          git commit -m "chore: refresh 13F data"
-          git push
+          if git diff --cached --quiet; then
+            echo "No data changes after staging"
+            exit 0
+          fi
+
+          git commit -m "chore(data): refresh 13F data"
+          git push origin HEAD:${TARGET_BRANCH}

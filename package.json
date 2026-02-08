@@ -6,6 +6,7 @@
     "refresh-13f": "node scripts/refresh-13f.mjs"
   },
   "dependencies": {
-    "fast-xml-parser": "^4.4.1"
+    "fast-xml-parser": "^4.4.1",
+    "zod": "^4.3.6"
   }
 }

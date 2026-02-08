@@ -405,6 +405,67 @@
       margin-left: 6px;
     }
 
+    .company-analyze-btn {
+      border: 1px solid rgba(38, 70, 83, 0.18);
+      background: #fff;
+      color: var(--primary-teal);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .company-analyze-btn:hover {
+      border-color: var(--accent-gold);
+      background: rgba(233, 196, 106, 0.2);
+    }
+
+    .company-analyze-btn.compact {
+      padding: 4px 9px;
+      font-size: 10px;
+      margin-left: 8px;
+    }
+
+    .view-mode-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .view-mode-btn {
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.75);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.4px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .view-mode-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .view-mode-btn.active {
+      background: var(--accent-gold);
+      color: var(--primary-teal);
+    }
+
     /* Main Content */
     .main-content {
       max-width: 1400px;
@@ -578,6 +639,13 @@
       border-radius: 12px;
     }
 
+    .fund-card-meta .top-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
     /* List View */
     .list-container {
       display: grid;
@@ -737,11 +805,14 @@
     .table-container {
       background: var(--bg-sand);
       border-radius: 16px;
-      overflow: hidden;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
     }
 
     .holdings-table {
       width: 100%;
+      min-width: 780px;
       border-collapse: collapse;
     }
 
@@ -1909,6 +1980,340 @@
       width: 100%;
     }
 
+    .company-sheet-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(29, 63, 74, 0.5);
+      z-index: 420;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-top: 40px;
+    }
+
+    .company-sheet {
+      width: min(760px, 100%);
+      max-height: 88vh;
+      background: #fff;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.18);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .company-sheet-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid rgba(38, 70, 83, 0.1);
+      background: linear-gradient(180deg, rgba(233, 196, 106, 0.22) 0%, rgba(233, 196, 106, 0.03) 100%);
+    }
+
+    .company-sheet-kicker {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 6px;
+    }
+
+    .company-sheet-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary-teal);
+      line-height: 1.35;
+      word-break: break-word;
+    }
+
+    .company-sheet-close {
+      border: none;
+      background: rgba(38, 70, 83, 0.1);
+      color: var(--primary-teal);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 22px;
+      line-height: 1;
+      font-weight: 400;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .company-sheet-close:hover {
+      background: rgba(38, 70, 83, 0.18);
+    }
+
+    .company-sheet-scroll {
+      overflow-y: auto;
+      padding: 16px 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .company-category {
+      font-size: 24px;
+      line-height: 1.25;
+      color: var(--primary-teal);
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+
+    .company-summary3 {
+      background: rgba(233, 196, 106, 0.12);
+      border: 1px solid rgba(233, 196, 106, 0.45);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 13px;
+      color: var(--primary-teal);
+      line-height: 1.55;
+      white-space: pre-line;
+      font-weight: 600;
+    }
+
+    .company-summary {
+      font-size: 13px;
+      color: var(--primary-teal);
+      line-height: 1.7;
+    }
+
+    .company-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--teal-light);
+    }
+
+    .company-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .company-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(42, 157, 143, 0.12);
+      color: var(--primary-teal);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .company-pillars {
+      display: grid;
+      gap: 10px;
+    }
+
+    .company-pillar-card {
+      border: 1px solid rgba(38, 70, 83, 0.12);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 108px 1fr;
+      min-height: 108px;
+    }
+
+    .company-pillar-media {
+      position: relative;
+      width: 108px;
+      height: 100%;
+      min-height: 108px;
+      overflow: hidden;
+      background: rgba(38, 70, 83, 0.08);
+    }
+
+    .company-pillar-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .company-pillar-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 108px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, rgba(42, 157, 143, 0.35), rgba(38, 70, 83, 0.75));
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .company-pillar-body {
+      padding: 10px 12px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .company-pillar-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .company-pillar-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      background: rgba(38, 70, 83, 0.1);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary-teal);
+      flex-shrink: 0;
+    }
+
+    .company-pillar-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary-teal);
+      min-width: 0;
+    }
+
+    .company-pillar-description {
+      font-size: 12px;
+      line-height: 1.55;
+      color: rgba(38, 70, 83, 0.92);
+      min-width: 0;
+    }
+
+    .company-loading-box {
+      border: 1px solid rgba(38, 70, 83, 0.12);
+      border-radius: 12px;
+      padding: 14px;
+      background: rgba(38, 70, 83, 0.03);
+    }
+
+    .company-loading-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary-teal);
+      margin-bottom: 12px;
+    }
+
+    .company-loading-steps {
+      display: grid;
+      gap: 8px;
+    }
+
+    .company-loading-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: rgba(38, 70, 83, 0.72);
+    }
+
+    .company-loading-step.active,
+    .company-loading-step.done {
+      color: var(--primary-teal);
+      font-weight: 600;
+    }
+
+    .company-loading-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(38, 70, 83, 0.25);
+      flex-shrink: 0;
+    }
+
+    .company-loading-step.active .company-loading-dot {
+      background: var(--accent-gold);
+      box-shadow: 0 0 0 3px rgba(233, 196, 106, 0.22);
+    }
+
+    .company-loading-step.done .company-loading-dot {
+      background: var(--teal-light);
+    }
+
+    .company-error-box {
+      border-radius: 12px;
+      border: 1px solid rgba(231, 111, 81, 0.45);
+      background: rgba(231, 111, 81, 0.1);
+      padding: 14px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .company-error-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #8C2F1C;
+    }
+
+    .company-error-body {
+      font-size: 12px;
+      color: #7D2B1B;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    .company-error-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .company-primary-btn {
+      border: none;
+      border-radius: 10px;
+      padding: 8px 14px;
+      cursor: pointer;
+      background: var(--primary-teal);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .company-primary-btn:hover {
+      opacity: 0.92;
+    }
+
+    .company-disclaimer {
+      border-top: 1px dashed rgba(38, 70, 83, 0.2);
+      padding-top: 12px;
+      font-size: 11px;
+      color: rgba(38, 70, 83, 0.74);
+      line-height: 1.5;
+    }
+
+    .line-clamp-2,
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .line-clamp-2 {
+      -webkit-line-clamp: 2;
+    }
+
+    .line-clamp-3 {
+      -webkit-line-clamp: 3;
+    }
+
     /* Mobile */
     @media (max-width: 768px) {
       .header {
@@ -2037,6 +2442,62 @@
         min-width: 0;
         width: 100%;
       }
+
+      .company-sheet-overlay {
+        padding-top: 0;
+      }
+
+      .company-sheet {
+        max-height: 92vh;
+        border-radius: 16px 16px 0 0;
+      }
+
+      .company-sheet-header {
+        padding: 16px 14px 12px;
+      }
+
+      .company-sheet-title {
+        font-size: 16px;
+      }
+
+      .company-sheet-scroll {
+        padding: 14px 14px 20px;
+      }
+
+      .company-category {
+        font-size: 20px;
+      }
+
+      .company-pillar-card {
+        grid-template-columns: 90px 1fr;
+        min-height: 96px;
+      }
+
+      .company-pillar-media {
+        width: 90px;
+        min-height: 96px;
+      }
+
+      .company-pillar-placeholder {
+        min-height: 96px;
+      }
+
+      .company-analyze-btn {
+        font-size: 9px;
+        padding: 4px 8px;
+      }
+
+      .view-mode-toggle {
+        order: -1;
+      }
+
+      .view-mode-btn {
+        min-height: 34px;
+      }
+
+      .holdings-table {
+        min-width: 860px;
+      }
     }
 
     @media (min-width: 1024px) {
@@ -2094,16 +2555,18 @@
   <div id="root"></div>
   <script type="text/babel">
     const FALLBACK_AS_OF = '2026-02-01';
-    const DATA_URL = 'data/funds.json';
-    const META_URL = 'data/meta.json';
-    const FALLBACK_URL = 'data/manual-funds.json';
-    const PREVIOUS_DATA_URL = 'data/funds-prev.json';
-    const TICKER_MAP_URL = 'data/ticker-map.json';
+    const LIVE_DATA_BASE = '/api/live-data';
+    const DATA_URL = `${LIVE_DATA_BASE}?name=funds`;
+    const META_URL = `${LIVE_DATA_BASE}?name=meta`;
+    const FALLBACK_URL = `${LIVE_DATA_BASE}?name=manual-funds`;
+    const PREVIOUS_DATA_URL = `${LIVE_DATA_BASE}?name=funds-prev`;
+    const TICKER_MAP_URL = `${LIVE_DATA_BASE}?name=ticker-map`;
     const MANUAL_CUSIP_THRESHOLD = 0.4;
     let TICKER_MAP = {};
     const BREAKPOINTS = { mobile: 768, desktop: 1024 };
     const WATCHLIST_STORAGE_KEY = 'pv_watchlist_v1';
     const ALERT_READ_STORAGE_KEY = 'pv_alert_read_v1';
+    const VIEW_MODE_STORAGE_KEY = 'pv_view_mode_v1';
 
     // Sector colors
     const SECTOR_COLORS = {
@@ -2123,6 +2586,7 @@
       en: {
         app: { title: 'Portfolio Visualizer' },
         nav: { home: 'Home', list: 'List', ranking: 'Ranking', overlap: 'Overlap', flow: 'Flow', watch: 'Watch' },
+        viewMode: { desktop: 'Desktop', mobile: 'Mobile' },
         home: {
           totalFunds: 'Funds'
         },
@@ -2338,11 +2802,42 @@
           csvClear: 'Clear imported data',
           csvNote: 'This is your personal performance data, stored locally in your browser only.',
           back: 'Back'
+        },
+        company: {
+          analyze: 'Company Analysis',
+          analyzeShort: 'Analyze',
+          loadingTitle: 'AI is analyzing this company',
+          loadingIdentify: 'Identifying company',
+          loadingUnderstand: 'Understanding revenue structure',
+          loadingPillars: 'Extracting business pillars',
+          loadingFormat: 'Formatting final response',
+          summary3: '3-line summary',
+          summary: 'Overview',
+          pillars: 'Business Pillars',
+          tags: 'Business Tags',
+          retry: 'Retry',
+          close: 'Close',
+          inputHint: 'Try: AAPL / Apple / TSLA / TM',
+          disclaimer: 'AI-generated reference. Investment decisions are your responsibility. Verify official information.',
+          unavailable: 'Unavailable',
+          errorBadRequestTitle: 'Invalid input',
+          errorBadRequestBody: 'Please enter a valid company name or ticker.',
+          errorNotFoundTitle: 'Company not found',
+          errorNotFoundBody: 'Could not identify the company from input.',
+          errorRateLimitTitle: 'Rate limit reached',
+          errorRateLimitBody: 'Please wait a moment and try again.',
+          errorConfigTitle: 'API key is not configured',
+          errorConfigBody: 'Administrator needs to configure the server API key.',
+          errorInvalidTitle: 'Failed to parse analysis',
+          errorInvalidBody: 'The model response was invalid. Please retry.',
+          errorUpstreamTitle: 'Upstream service error',
+          errorUpstreamBody: 'Failed to fetch analysis from AI service.'
         }
       },
       ja: {
         app: { title: 'Portfolio Visualizer' },
         nav: { home: 'ホーム', list: 'リスト', ranking: 'ランキング', overlap: '重複分析', flow: 'フロー', watch: 'ウォッチ' },
+        viewMode: { desktop: 'デスクトップ', mobile: 'スマホ' },
         home: {
           totalFunds: 'ファンド数'
         },
@@ -2558,6 +3053,36 @@
           csvClear: '取込データをクリア',
           csvNote: 'このデータはブラウザのローカルストレージにのみ保存されます。',
           back: '戻る'
+        },
+        company: {
+          analyze: '企業分析',
+          analyzeShort: '分析',
+          loadingTitle: 'AIが企業を分析しています',
+          loadingIdentify: '企業を特定中',
+          loadingUnderstand: '収益構造を把握中',
+          loadingPillars: '事業の柱を抽出中',
+          loadingFormat: '表示形式を整形中',
+          summary3: '3行要約',
+          summary: '概要',
+          pillars: '事業の柱',
+          tags: '事業タグ',
+          retry: '再試行',
+          close: '閉じる',
+          inputHint: '例: AAPL / Apple / TSLA / TM',
+          disclaimer: 'AIによる参考情報です。投資判断は自己責任で、必ず公式情報を確認してください。',
+          unavailable: '取得不可',
+          errorBadRequestTitle: '入力が不正です',
+          errorBadRequestBody: '企業名またはティッカーを正しく入力してください。',
+          errorNotFoundTitle: '企業を特定できません',
+          errorNotFoundBody: '入力内容から企業を特定できませんでした。',
+          errorRateLimitTitle: 'アクセスが集中しています',
+          errorRateLimitBody: '少し待ってから再試行してください。',
+          errorConfigTitle: 'APIキー未設定',
+          errorConfigBody: '管理者がサーバーのAPIキーを設定してください。',
+          errorInvalidTitle: '解析結果の整形に失敗',
+          errorInvalidBody: 'AI応答の形式が不正でした。再試行してください。',
+          errorUpstreamTitle: '外部サービスエラー',
+          errorUpstreamBody: 'AIサービスから分析結果を取得できませんでした。'
         }
       }
     };
@@ -2587,6 +3112,13 @@
       if (stored === 'en' || stored === 'ja') return stored;
       const browser = (navigator.language || '').toLowerCase();
       return browser.startsWith('ja') ? 'ja' : 'en';
+    }
+
+    function getInitialViewMode() {
+      if (typeof window === 'undefined') return 'desktop';
+      const stored = window.localStorage.getItem(VIEW_MODE_STORAGE_KEY);
+      if (stored === 'desktop' || stored === 'mobile') return stored;
+      return window.innerWidth <= BREAKPOINTS.mobile ? 'mobile' : 'desktop';
     }
 
     function getInitialWatchlist() {
@@ -2633,11 +3165,62 @@
     }
 
     function normalizeTicker(value) {
-      return String(value || '').trim().toUpperCase();
+      return String(value || '').normalize('NFKC').trim().toUpperCase();
+    }
+
+    function withCacheBust(url, token) {
+      if (!token) return url;
+      return url.includes('?') ? `${url}&${token}` : `${url}?${token}`;
     }
 
     function normalizeSearchText(value) {
       return String(value || '').trim();
+    }
+
+    function normalizeCompanyQuery(value) {
+      const normalized = String(value || '').normalize('NFKC').trim();
+      if (!normalized) return '';
+      if (/^[A-Za-z][A-Za-z0-9.\-]{0,9}$/.test(normalized)) return normalized.toUpperCase();
+      return normalized;
+    }
+
+    function normalizeCompanyError(rawError) {
+      if (!rawError) return { code: 'UPSTREAM', message: '' };
+      if (typeof rawError === 'string') return { code: 'UPSTREAM', message: rawError };
+      return {
+        code: String(rawError.code || 'UPSTREAM').toUpperCase(),
+        message: String(rawError.message || '')
+      };
+    }
+
+    function getCompanyErrorContent(error, t) {
+      const code = String(error?.code || 'UPSTREAM').toUpperCase();
+      if (code === 'BAD_REQUEST') {
+        return { title: t('company.errorBadRequestTitle'), body: t('company.errorBadRequestBody'), showRetry: false };
+      }
+      if (code === 'NOT_FOUND') {
+        return {
+          title: t('company.errorNotFoundTitle'),
+          body: `${t('company.errorNotFoundBody')}\n${t('company.inputHint')}`,
+          showRetry: false
+        };
+      }
+      if (code === 'RATE_LIMIT') {
+        return { title: t('company.errorRateLimitTitle'), body: t('company.errorRateLimitBody'), showRetry: true };
+      }
+      if (code === 'CONFIG') {
+        return { title: t('company.errorConfigTitle'), body: t('company.errorConfigBody'), showRetry: false };
+      }
+      if (code === 'INVALID_JSON') {
+        return { title: t('company.errorInvalidTitle'), body: t('company.errorInvalidBody'), showRetry: true };
+      }
+      return { title: t('company.errorUpstreamTitle'), body: t('company.errorUpstreamBody'), showRetry: true };
+    }
+
+    function getCompanyIconBadge(iconName) {
+      const token = String(iconName || '').replace(/[^A-Za-z0-9]/g, '');
+      if (!token) return 'AI';
+      return token.slice(0, 2).toUpperCase();
     }
 
     function normalizeTickerMap(raw) {
@@ -2727,11 +3310,77 @@
       return aggregated;
     }
 
+    function normalizeHoldingName(value) {
+      return String(value || '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function scoreHoldingName(name, count) {
+      const text = normalizeHoldingName(name);
+      if (!text) return -Infinity;
+
+      let score = 0;
+      score += Math.min(text.length, 48) / 4;
+      if (/[a-z]/.test(text)) score += 24;
+      if (/^[A-Z0-9 .,&'\/-]+$/.test(text) && !/[a-z]/.test(text)) score -= 10;
+      if (/\//.test(text)) score -= 8;
+      if (/\bHLDGS\b/i.test(text)) score -= 5;
+      if (/\b(ISLAND|ISLANDS)\b/i.test(text)) score -= 4;
+      if (/\b(LTD|INC|CORP|PLC)\b\.?/i.test(text)) score += 2;
+      score += Math.min(Number(count) || 0, 12) * 1.5;
+      return score;
+    }
+
+    function buildCanonicalHoldingNameMap(funds) {
+      const byTicker = new Map();
+      (funds || []).forEach((fund) => {
+        (fund?.holdings || []).forEach((holding) => {
+          const ticker = normalizeTicker(holding?.ticker);
+          const name = normalizeHoldingName(holding?.name);
+          if (!ticker || !name) return;
+          if (!byTicker.has(ticker)) byTicker.set(ticker, new Map());
+          const nameCounts = byTicker.get(ticker);
+          nameCounts.set(name, (nameCounts.get(name) || 0) + 1);
+        });
+      });
+
+      const canonicalMap = new Map();
+      byTicker.forEach((nameCounts, ticker) => {
+        let bestName = '';
+        let bestScore = -Infinity;
+        let bestCount = -1;
+        nameCounts.forEach((count, name) => {
+          const score = scoreHoldingName(name, count);
+          if (score > bestScore || (score === bestScore && count > bestCount)) {
+            bestName = name;
+            bestScore = score;
+            bestCount = count;
+          }
+        });
+        if (bestName) canonicalMap.set(ticker, bestName);
+      });
+      return canonicalMap;
+    }
+
     function normalizeFunds(rawFunds) {
       if (!Array.isArray(rawFunds)) return [];
-      return rawFunds.map(fund => ({
+      const normalized = rawFunds.map(fund => ({
         ...fund,
         holdings: normalizeHoldings(fund?.holdings)
+      }));
+
+      const canonicalNameMap = buildCanonicalHoldingNameMap(normalized);
+      if (canonicalNameMap.size === 0) return normalized;
+
+      return normalized.map((fund) => ({
+        ...fund,
+        holdings: (fund?.holdings || []).map((holding) => {
+          const ticker = normalizeTicker(holding?.ticker);
+          const canonicalName = canonicalNameMap.get(ticker);
+          if (!canonicalName || canonicalName === holding?.name) return holding;
+          return { ...holding, name: canonicalName };
+        })
       }));
     }
 
@@ -3537,29 +4186,299 @@
       return series.sort((a, b) => new Date(a.date) - new Date(b.date));
     }
 
+    const CSV_HEADER_PATTERNS = {
+      date: [
+        /date/i, /日付/i, /年月日/i, /約定日/i, /約定.*日/i, /取引日/i, /受渡日/i, /受渡.*日/i
+      ],
+      price: [
+        /price/i, /nav/i, /基準価額/i, /終値/i, /単価/i, /価格/i, /約定単価/i, /取得単価/i, /約定代金/i
+      ],
+      ticker: [
+        /ticker/i, /symbol/i, /銘柄コード/i, /銘柄/i, /ティッカー/i, /ファンド/i, /fund/i, /コード/i
+      ]
+    };
+
+    function normalizeCsvHeaderLabel(value) {
+      return String(value || '')
+        .replace(/^\uFEFF/, '')
+        .normalize('NFKC')
+        .trim();
+    }
+
+    function matchesCsvHeader(header, key) {
+      const text = normalizeCsvHeaderLabel(header);
+      if (!text) return false;
+      const patterns = CSV_HEADER_PATTERNS[key] || [];
+      return patterns.some((re) => re.test(text));
+    }
+
+    function detectCsvMapping(headers) {
+      const mapping = {};
+      (headers || []).forEach((header) => {
+        if (!mapping.date && matchesCsvHeader(header, 'date')) mapping.date = normalizeCsvHeaderLabel(header);
+        if (!mapping.price && matchesCsvHeader(header, 'price')) mapping.price = normalizeCsvHeaderLabel(header);
+        if (!mapping.ticker && matchesCsvHeader(header, 'ticker')) mapping.ticker = normalizeCsvHeaderLabel(header);
+      });
+      return mapping;
+    }
+
+    function parseCsvRows(csvText) {
+      const text = String(csvText || '');
+      const rows = [];
+      let row = [];
+      let cell = '';
+      let inQuotes = false;
+
+      for (let i = 0; i < text.length; i++) {
+        const ch = text[i];
+
+        if (ch === '"') {
+          if (inQuotes && text[i + 1] === '"') {
+            cell += '"';
+            i += 1;
+          } else {
+            inQuotes = !inQuotes;
+          }
+          continue;
+        }
+
+        if (ch === ',' && !inQuotes) {
+          row.push(cell);
+          cell = '';
+          continue;
+        }
+
+        if ((ch === '\n' || ch === '\r') && !inQuotes) {
+          if (ch === '\r' && text[i + 1] === '\n') i += 1;
+          row.push(cell);
+          cell = '';
+          if (row.some((value) => String(value || '').trim() !== '')) rows.push(row);
+          row = [];
+          continue;
+        }
+
+        cell += ch;
+      }
+
+      row.push(cell);
+      if (row.some((value) => String(value || '').trim() !== '')) rows.push(row);
+      return rows;
+    }
+
+    function detectCsvHeaderRow(rows) {
+      if (!rows || rows.length === 0) return 0;
+      const limit = Math.min(rows.length, 25);
+      let bestIndex = 0;
+      let bestScore = -Infinity;
+
+      for (let i = 0; i < limit; i++) {
+        const headers = (rows[i] || []).map(normalizeCsvHeaderLabel);
+        if (headers.length < 2) continue;
+
+        let score = headers.filter(Boolean).length;
+        headers.forEach((header) => {
+          if (matchesCsvHeader(header, 'date')) score += 8;
+          if (matchesCsvHeader(header, 'price')) score += 8;
+          if (matchesCsvHeader(header, 'ticker')) score += 6;
+          if (header.includes('�')) score -= 6;
+        });
+
+        if (score > bestScore) {
+          bestScore = score;
+          bestIndex = i;
+        }
+      }
+
+      return bestIndex;
+    }
+
+    function normalizeCsvDate(value) {
+      let text = String(value || '').normalize('NFKC').trim();
+      if (!text) return '';
+
+      text = text
+        .replace(/（[^）]*）/g, '')
+        .replace(/\([^)]*\)/g, '')
+        .replace(/[　]/g, ' ')
+        .trim();
+
+      const dateOnly = text.split(/[T\s]/)[0];
+      text = dateOnly || text;
+
+      text = text
+        .replace(/年/g, '/')
+        .replace(/月/g, '/')
+        .replace(/日/g, '')
+        .replace(/\./g, '/')
+        .replace(/-/g, '/')
+        .replace(/\s+/g, '');
+
+      let m = text.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
+      if (m) return `${m[1]}-${m[2].padStart(2, '0')}-${m[3].padStart(2, '0')}`;
+
+      m = text.match(/^(\d{4})(\d{2})(\d{2})$/);
+      if (m) return `${m[1]}-${m[2]}-${m[3]}`;
+
+      const parsed = new Date(text);
+      if (Number.isNaN(parsed.getTime())) return '';
+      return `${parsed.getFullYear()}-${String(parsed.getMonth() + 1).padStart(2, '0')}-${String(parsed.getDate()).padStart(2, '0')}`;
+    }
+
+    function parseCsvPrice(value) {
+      let text = String(value ?? '').normalize('NFKC').trim();
+      if (!text) return NaN;
+
+      let negative = false;
+      if (/^\(.*\)$/.test(text)) {
+        negative = true;
+        text = text.slice(1, -1);
+      }
+
+      text = text
+        .replace(/[¥￥,\s]/g, '')
+        .replace(/[^\d.\-]/g, '');
+
+      if (!text) return NaN;
+      let parsed = Number(text);
+      if (!Number.isFinite(parsed)) return NaN;
+      if (negative) parsed = -Math.abs(parsed);
+      return parsed;
+    }
+
+    function inferCsvColumnIndexes(rows, startRowIndex) {
+      if (!rows || rows.length <= startRowIndex + 1) {
+        return { dateIdx: -1, priceIdx: -1, tickerIdx: -1 };
+      }
+
+      const sampleRows = rows.slice(startRowIndex + 1, Math.min(rows.length, startRowIndex + 81));
+      const maxCols = sampleRows.reduce((max, row) => Math.max(max, (row || []).length), 0);
+      if (maxCols === 0) return { dateIdx: -1, priceIdx: -1, tickerIdx: -1 };
+
+      const dateScores = new Array(maxCols).fill(0);
+      const priceScores = new Array(maxCols).fill(0);
+      const tickerScores = new Array(maxCols).fill(0);
+
+      sampleRows.forEach((row) => {
+        for (let i = 0; i < maxCols; i++) {
+          const raw = String((row || [])[i] ?? '').trim();
+          if (!raw) continue;
+
+          const date = normalizeCsvDate(raw);
+          if (date) dateScores[i] += 1;
+
+          const price = parseCsvPrice(raw);
+          if (Number.isFinite(price) && price > 0) priceScores[i] += 1;
+
+          const ticker = normalizeTicker(raw);
+          if (/^[A-Z0-9.\-]{1,12}$/.test(ticker)) tickerScores[i] += 1;
+        }
+      });
+
+      function bestIndex(scores, threshold) {
+        let idx = -1;
+        let best = 0;
+        for (let i = 0; i < scores.length; i++) {
+          if (scores[i] > best) {
+            best = scores[i];
+            idx = i;
+          }
+        }
+        if (best < threshold) return -1;
+        return idx;
+      }
+
+      const minSamples = Math.max(2, Math.floor(sampleRows.length * 0.2));
+      const dateIdx = bestIndex(dateScores, minSamples);
+      const priceIdx = bestIndex(priceScores, minSamples);
+      let tickerIdx = bestIndex(tickerScores, minSamples);
+      if (tickerIdx === dateIdx || tickerIdx === priceIdx) tickerIdx = -1;
+
+      return { dateIdx, priceIdx, tickerIdx };
+    }
+
+    function scoreDecodedCsvText(text) {
+      const csvText = String(text || '');
+      if (!csvText.trim()) return -Infinity;
+
+      const rows = parseCsvRows(csvText);
+      if (rows.length < 2) return -100;
+
+      const replacementCount = (csvText.match(/\uFFFD/g) || []).length;
+      const headerIndex = detectCsvHeaderRow(rows);
+      const headers = (rows[headerIndex] || []).map(normalizeCsvHeaderLabel);
+      const mapping = detectCsvMapping(headers);
+
+      let score = 0;
+      score -= replacementCount * 40;
+      score += rows.length > 1 ? 20 : 0;
+      if (mapping.date) score += 20;
+      if (mapping.price) score += 20;
+      if (mapping.ticker) score += 15;
+      if ((rows[headerIndex] || []).length >= 3) score += 5;
+      return score;
+    }
+
+    function decodeCsvArrayBuffer(buffer) {
+      const bytes = buffer instanceof ArrayBuffer ? buffer : null;
+      if (!bytes) return { text: '', encoding: 'utf-8' };
+
+      const encodings = ['utf-8', 'shift_jis', 'windows-31j'];
+      let best = { text: '', encoding: 'utf-8', score: -Infinity };
+
+      encodings.forEach((encoding) => {
+        try {
+          const text = new TextDecoder(encoding).decode(bytes);
+          const score = scoreDecodedCsvText(text);
+          if (score > best.score) best = { text, encoding, score };
+        } catch (_error) {
+          // continue
+        }
+      });
+
+      if (best.text) return { text: best.text, encoding: best.encoding };
+      return { text: new TextDecoder('utf-8').decode(bytes), encoding: 'utf-8' };
+    }
+
     // --- Broker CSV Parser (generic) ---
     function parseBrokerCsv(csvText, columnMapping) {
-      const lines = csvText.trim().split('\n');
-      if (lines.length < 2) return [];
-      const headers = lines[0].split(',').map(c => c.trim());
-      const dateCol = columnMapping?.date || headers.find(h => /date|日付/i.test(h));
-      const priceCol = columnMapping?.price || headers.find(h => /price|基準価額|nav|終値/i.test(h));
-      const tickerCol = columnMapping?.ticker || headers.find(h => /ticker|銘柄|ファンド|fund/i.test(h));
+      const rows = parseCsvRows(csvText);
+      if (rows.length < 2) return [];
 
-      if (!dateCol || !priceCol) return [];
-      const dateIdx = headers.indexOf(dateCol);
-      const priceIdx = headers.indexOf(priceCol);
-      const tickerIdx = tickerCol ? headers.indexOf(tickerCol) : -1;
+      const headerRowIndex = detectCsvHeaderRow(rows);
+      const headerRow = (rows[headerRowIndex] || []).map(normalizeCsvHeaderLabel);
+      const headerMap = new Map();
+      headerRow.forEach((header, index) => {
+        if (!headerMap.has(header)) headerMap.set(header, index);
+      });
+
+      const fallbackMapping = detectCsvMapping(headerRow);
+      const dateCol = normalizeCsvHeaderLabel(columnMapping?.date || fallbackMapping.date);
+      const priceCol = normalizeCsvHeaderLabel(columnMapping?.price || fallbackMapping.price);
+      const tickerCol = normalizeCsvHeaderLabel(columnMapping?.ticker || fallbackMapping.ticker);
+
+      let dateIdx = headerMap.has(dateCol) ? headerMap.get(dateCol) : -1;
+      let priceIdx = headerMap.has(priceCol) ? headerMap.get(priceCol) : -1;
+      let tickerIdx = tickerCol && headerMap.has(tickerCol) ? headerMap.get(tickerCol) : -1;
+
+      if (dateIdx < 0 || priceIdx < 0) {
+        const inferred = inferCsvColumnIndexes(rows, headerRowIndex);
+        if (dateIdx < 0) dateIdx = inferred.dateIdx;
+        if (priceIdx < 0) priceIdx = inferred.priceIdx;
+        if (tickerIdx < 0) tickerIdx = inferred.tickerIdx;
+      }
+
+      if (dateIdx < 0 || priceIdx < 0) return [];
 
       const records = [];
-      for (let i = 1; i < lines.length; i++) {
-        const parts = lines[i].split(',');
-        const date = parts[dateIdx]?.trim();
-        const price = parseFloat(parts[priceIdx]?.trim());
-        const ticker = tickerIdx >= 0 ? parts[tickerIdx]?.trim() : '';
-        if (!date || isNaN(price) || price <= 0) continue;
+      for (let i = headerRowIndex + 1; i < rows.length; i++) {
+        const parts = rows[i] || [];
+        const date = normalizeCsvDate(parts[dateIdx]);
+        const price = Math.abs(parseCsvPrice(parts[priceIdx]));
+        const ticker = tickerIdx >= 0 ? normalizeTicker(parts[tickerIdx]) : '';
+        if (!date || !Number.isFinite(price) || price <= 0) continue;
         records.push({ date, price, ticker });
       }
+
       return records.sort((a, b) => new Date(a.date) - new Date(b.date));
     }
 
@@ -3651,9 +4570,12 @@
     function getCsvPriceSeries(ticker) {
       const imported = getCsvImportData();
       if (!imported || !imported.records) return { series: null, error: makeDataError(DATA_STATUS.UNSUPPORTED, 'No CSV data imported', 'csv') };
-      const matching = imported.records.filter(r =>
-        !ticker || !r.ticker || r.ticker.toUpperCase() === ticker.toUpperCase()
-      );
+      const normalizedTicker = normalizeTicker(ticker);
+      const matching = imported.records.filter((r) => {
+        if (!normalizedTicker) return true;
+        const rowTicker = normalizeTicker(r?.ticker);
+        return rowTicker && rowTicker === normalizedTicker;
+      });
       if (matching.length < 2) {
         return { series: null, error: makeDataError(DATA_STATUS.FETCH_ERROR, 'Insufficient CSV data for this ticker', 'csv') };
       }
@@ -3675,20 +4597,37 @@
     const tickerMetricsCache = new Map();
 
     async function fetchTickerPriceSeries(ticker, settings) {
-      const cacheKey = `stooq:${ticker}`;
+      const cacheKey = `price:${normalizeTicker(ticker)}`;
       if (priceSeriesCache.has(cacheKey)) return priceSeriesCache.get(cacheKey);
 
       // Try Stooq for equities/ETFs
       const stooqEnabled = settings?.stooqEnabled !== false;
       if (stooqEnabled) {
-        const result = await fetchStooqPriceSeries(ticker);
-        if (result.series) {
-          priceSeriesCache.set(cacheKey, result);
+        const stooqResult = await fetchStooqPriceSeries(ticker);
+        if (stooqResult.series) {
+          priceSeriesCache.set(cacheKey, stooqResult);
+          return stooqResult;
         }
-        return result;
+
+        // Fallback to imported broker CSV when market data API is unavailable for the ticker.
+        const csvResult = getCsvPriceSeries(ticker);
+        if (csvResult.series) {
+          priceSeriesCache.set(cacheKey, csvResult);
+          return csvResult;
+        }
+
+        return stooqResult;
       }
 
-      return { series: null, error: makeDataError(DATA_STATUS.PROVIDER_UNAVAILABLE, 'No provider enabled', null) };
+      const csvResult = getCsvPriceSeries(ticker);
+      if (csvResult.series) {
+        priceSeriesCache.set(cacheKey, csvResult);
+        return csvResult;
+      }
+
+      return csvResult.error
+        ? { series: null, error: csvResult.error }
+        : { series: null, error: makeDataError(DATA_STATUS.PROVIDER_UNAVAILABLE, 'No provider enabled', null) };
     }
 
     // --- Price Series Filtering by Period ---
@@ -4026,31 +4965,43 @@
         saveDataSourceSettings(next);
       };
 
+      React.useEffect(() => {
+        if (!csvData) return;
+        const headers = Array.isArray(csvData.headers) ? csvData.headers : [];
+        setCsvHeaders(headers);
+        if (headers.length > 0 && Object.keys(csvMapping).length === 0) {
+          setCsvMapping(detectCsvMapping(headers));
+        }
+      }, [csvData]);
+
       const handleCsvFile = (file) => {
         if (!file) return;
         const reader = new FileReader();
         reader.onload = (e) => {
-          const text = e.target.result;
-          const lines = text.trim().split('\n');
-          if (lines.length < 2) return;
-          const headers = lines[0].split(',').map(h => h.trim());
+          const buffer = e.target?.result;
+          const { text, encoding } = decodeCsvArrayBuffer(buffer);
+          const rows = parseCsvRows(text);
+          if (rows.length < 2) return;
+          const headerRowIndex = detectCsvHeaderRow(rows);
+          const headers = (rows[headerRowIndex] || []).map(normalizeCsvHeaderLabel).filter(Boolean);
           setCsvHeaders(headers);
 
-          // Auto-detect mapping
-          const autoMapping = {};
-          headers.forEach(h => {
-            if (/date|日付/i.test(h)) autoMapping.date = h;
-            if (/price|基準価額|nav|終値|単価/i.test(h)) autoMapping.price = h;
-            if (/ticker|銘柄|ファンド|fund|コード/i.test(h)) autoMapping.ticker = h;
-          });
+          const autoMapping = detectCsvMapping(headers);
           setCsvMapping(autoMapping);
 
           const records = parseBrokerCsv(text, autoMapping);
-          const data = { records, headers, fileName: file.name, importedAt: new Date().toISOString() };
+          const data = {
+            records,
+            headers,
+            fileName: file.name,
+            importedAt: new Date().toISOString(),
+            encoding,
+            rawText: text
+          };
           saveCsvImportData(data);
           setCsvData(data);
         };
-        reader.readAsText(file);
+        reader.readAsArrayBuffer(file);
       };
 
       const handleDrop = (e) => {
@@ -4163,10 +5114,11 @@
                             onChange={(e) => {
                               const next = { ...csvMapping, [key]: e.target.value };
                               setCsvMapping(next);
-                              // Re-parse with new mapping
-                              if (csvData.records) {
-                                const text = localStorage.getItem(CSV_IMPORT_KEY);
-                                // We already have the records, just update mapping
+                              if (csvData?.rawText) {
+                                const records = parseBrokerCsv(csvData.rawText, next);
+                                const nextData = { ...csvData, records };
+                                setCsvData(nextData);
+                                saveCsvImportData(nextData);
                               }
                             }}
                           >
@@ -4364,9 +5316,7 @@
       const [reloadSeq, setReloadSeq] = React.useState(0);
       const [refreshState, setRefreshState] = React.useState('idle');
       const [refreshLabel, setRefreshLabel] = React.useState('');
-      const [layout, setLayout] = React.useState(
-        getLayoutMode(typeof window !== 'undefined' ? window.innerWidth : BREAKPOINTS.desktop)
-      );
+      const [viewMode, setViewMode] = React.useState(getInitialViewMode);
       const [watchlist, setWatchlist] = React.useState(getInitialWatchlist);
       const [readAlertIds, setReadAlertIds] = React.useState(getInitialReadAlerts);
       const [alertsOpen, setAlertsOpen] = React.useState(false);
@@ -4375,7 +5325,15 @@
         const saved = window.localStorage.getItem(HOME_SORT_KEY_STORAGE);
         return normalizeHomeSortKey(saved);
       });
+      const [companySheetOpen, setCompanySheetOpen] = React.useState(false);
+      const [companySheetQuery, setCompanySheetQuery] = React.useState('');
+      const [companySheetStatus, setCompanySheetStatus] = React.useState('idle');
+      const [companySheetData, setCompanySheetData] = React.useState(null);
+      const [companySheetError, setCompanySheetError] = React.useState(null);
+      const [companyLoadingStage, setCompanyLoadingStage] = React.useState(0);
       const refreshPollRef = React.useRef(null);
+      const companyRequestSeqRef = React.useRef(0);
+      const companyAbortRef = React.useRef(null);
       const t = React.useCallback((key, params) => translate(language, key, params), [language]);
 
       React.useEffect(() => {
@@ -4384,11 +5342,11 @@
           const cacheBust = `ts=${Date.now()}`;
           try {
             const [metaRes, dataRes, prevRes, manualRes, tickerMapRes] = await Promise.all([
-              fetch(`${META_URL}?${cacheBust}`, { cache: 'no-store' }),
-              fetch(`${DATA_URL}?${cacheBust}`, { cache: 'no-store' }),
-              fetch(`${PREVIOUS_DATA_URL}?${cacheBust}`, { cache: 'no-store' }),
-              fetch(`${FALLBACK_URL}?${cacheBust}`, { cache: 'no-store' }),
-              fetch(`${TICKER_MAP_URL}?${cacheBust}`, { cache: 'no-store' })
+              fetch(withCacheBust(META_URL, cacheBust), { cache: 'no-store' }),
+              fetch(withCacheBust(DATA_URL, cacheBust), { cache: 'no-store' }),
+              fetch(withCacheBust(PREVIOUS_DATA_URL, cacheBust), { cache: 'no-store' }),
+              fetch(withCacheBust(FALLBACK_URL, cacheBust), { cache: 'no-store' }),
+              fetch(withCacheBust(TICKER_MAP_URL, cacheBust), { cache: 'no-store' })
             ]);
             const manualData = manualRes.ok ? await manualRes.json() : [];
             if (tickerMapRes.ok) {
@@ -4419,7 +5377,7 @@
           }
 
           try {
-            const fallbackRes = await fetch(FALLBACK_URL, { cache: 'no-store' });
+            const fallbackRes = await fetch(withCacheBust(FALLBACK_URL, cacheBust), { cache: 'no-store' });
             if (fallbackRes.ok) {
               const data = await fallbackRes.json();
               if (!cancelled) setFunds(normalizeFunds(data));
@@ -4471,10 +5429,9 @@
       }, [homeSortKey]);
 
       React.useEffect(() => {
-        const handleResize = () => setLayout(getLayoutMode(window.innerWidth));
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-      }, []);
+        if (typeof window === 'undefined') return;
+        window.localStorage.setItem(VIEW_MODE_STORAGE_KEY, viewMode);
+      }, [viewMode]);
 
       React.useEffect(() => {
         return () => {
@@ -4482,8 +5439,35 @@
             window.clearInterval(refreshPollRef.current);
             refreshPollRef.current = null;
           }
+          if (companyAbortRef.current) {
+            companyAbortRef.current.abort();
+            companyAbortRef.current = null;
+          }
         };
       }, []);
+
+      React.useEffect(() => {
+        if (companySheetStatus !== 'loading') return;
+        setCompanyLoadingStage(0);
+        const timer = window.setInterval(() => {
+          setCompanyLoadingStage((prev) => Math.min(prev + 1, 3));
+        }, 900);
+        return () => window.clearInterval(timer);
+      }, [companySheetStatus, companySheetQuery]);
+
+      React.useEffect(() => {
+        if (!companySheetOpen || typeof document === 'undefined') return;
+        const originalOverflow = document.body.style.overflow;
+        const onKeyDown = (event) => {
+          if (event.key === 'Escape') setCompanySheetOpen(false);
+        };
+        document.body.style.overflow = 'hidden';
+        window.addEventListener('keydown', onKeyDown);
+        return () => {
+          document.body.style.overflow = originalOverflow;
+          window.removeEventListener('keydown', onKeyDown);
+        };
+      }, [companySheetOpen]);
 
       const watchedTickerSet = React.useMemo(
         () => new Set((watchlist.tickers || []).map(normalizeTicker)),
@@ -4654,7 +5638,7 @@
           refreshPollRef.current = window.setInterval(async () => {
             checks += 1;
             try {
-              const metaRes = await fetch(`${META_URL}?ts=${Date.now()}`, { cache: 'no-store' });
+              const metaRes = await fetch(withCacheBust(META_URL, `ts=${Date.now()}`), { cache: 'no-store' });
               if (metaRes.ok) {
                 const meta = await metaRes.json();
                 const nextGeneratedAt = String(meta?.generatedAt || '');
@@ -4699,6 +5683,80 @@
         }
       }, [dataGeneratedAt, refreshState, t]);
 
+      const closeCompanySheet = React.useCallback(() => {
+        if (companyAbortRef.current) {
+          companyAbortRef.current.abort();
+          companyAbortRef.current = null;
+        }
+        setCompanySheetOpen(false);
+        setCompanySheetStatus('idle');
+      }, []);
+
+      const openCompanyAnalysis = React.useCallback(async (rawQuery) => {
+        const query = normalizeCompanyQuery(rawQuery);
+        setCompanySheetOpen(true);
+        setCompanySheetQuery(query);
+        setCompanySheetStatus('loading');
+        setCompanySheetData(null);
+        setCompanySheetError(null);
+
+        if (!query) {
+          setCompanySheetStatus('error');
+          setCompanySheetError({ code: 'BAD_REQUEST', message: '' });
+          return;
+        }
+
+        const requestSeq = companyRequestSeqRef.current + 1;
+        companyRequestSeqRef.current = requestSeq;
+
+        if (companyAbortRef.current) {
+          companyAbortRef.current.abort();
+        }
+
+        const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+        companyAbortRef.current = controller;
+
+        try {
+          const response = await fetch('/api/company/analyze', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query, lang: language }),
+            signal: controller?.signal
+          });
+          const payload = await response.json().catch(() => null);
+          if (requestSeq !== companyRequestSeqRef.current) return;
+
+          if (!response.ok || !payload?.success) {
+            setCompanySheetStatus('error');
+            setCompanySheetError(normalizeCompanyError(payload?.error || payload?.message || payload?.errorText));
+            return;
+          }
+
+          if (!payload?.data) {
+            setCompanySheetStatus('error');
+            setCompanySheetError({ code: 'INVALID_JSON', message: '' });
+            return;
+          }
+
+          setCompanySheetData(payload.data);
+          setCompanySheetStatus('success');
+        } catch (err) {
+          if (requestSeq !== companyRequestSeqRef.current) return;
+          if (err?.name === 'AbortError') return;
+          setCompanySheetStatus('error');
+          setCompanySheetError(normalizeCompanyError({ code: 'UPSTREAM', message: err?.message || String(err || '') }));
+        } finally {
+          if (requestSeq === companyRequestSeqRef.current) {
+            companyAbortRef.current = null;
+          }
+        }
+      }, [language]);
+
+      const retryCompanyAnalysis = React.useCallback(() => {
+        if (!companySheetQuery) return;
+        openCompanyAnalysis(companySheetQuery);
+      }, [companySheetQuery, openCompanyAnalysis]);
+
       const filtered = React.useMemo(() => {
         const query = normalizeSearchText(search);
         return (funds || []).filter((f) => {
@@ -4734,7 +5792,7 @@
 
       return (
         <I18nContext.Provider value={{ language, setLanguage, t }}>
-          <div className={`app-shell mode-${layout}`}>
+          <div className={`app-shell mode-${viewMode}`}>
             <header className="header">
               <div className="header-content">
                 <div className="logo">{t('app.title')}</div>
@@ -4792,6 +5850,22 @@
                       ))}
                     </div>
                   )}
+                  <div className="view-mode-toggle" role="group" aria-label="View mode">
+                    <button
+                      className={`view-mode-btn ${viewMode === 'desktop' ? 'active' : ''}`}
+                      onClick={() => setViewMode('desktop')}
+                      title={t('viewMode.desktop')}
+                    >
+                      {t('viewMode.desktop')}
+                    </button>
+                    <button
+                      className={`view-mode-btn ${viewMode === 'mobile' ? 'active' : ''}`}
+                      onClick={() => setViewMode('mobile')}
+                      title={t('viewMode.mobile')}
+                    >
+                      {t('viewMode.mobile')}
+                    </button>
+                  </div>
                   <div className="lang-toggle">
                     <button className={`lang-btn ${language === 'en' ? 'active' : ''}`} onClick={() => setLanguage('en')}>EN</button>
                     <button className={`lang-btn ${language === 'ja' ? 'active' : ''}`} onClick={() => setLanguage('ja')}>JP</button>
@@ -4824,6 +5898,7 @@
                   watchedFundSet={watchedFundSet}
                   onToggleTickerWatch={toggleWatchTicker}
                   onToggleFundWatch={toggleWatchFund}
+                  onAnalyzeTicker={openCompanyAnalysis}
                 />
               )}
               {tab === 'list' && (
@@ -4838,6 +5913,7 @@
                   watchedFundSet={watchedFundSet}
                   onToggleTickerWatch={toggleWatchTicker}
                   onToggleFundWatch={toggleWatchFund}
+                  onAnalyzeTicker={openCompanyAnalysis}
                 />
               )}
               {tab === 'ranking' && (
@@ -4868,6 +5944,16 @@
                 <SettingsDataSources onBack={() => setTab('home')} />
               )}
             </main>
+            <CompanyAnalysisSheet
+              open={companySheetOpen}
+              query={companySheetQuery}
+              status={companySheetStatus}
+              loadingStage={companyLoadingStage}
+              data={companySheetData}
+              error={companySheetError}
+              onClose={closeCompanySheet}
+              onRetry={retryCompanyAnalysis}
+            />
           </div>
         </I18nContext.Provider>
       );
@@ -4958,6 +6044,7 @@
       const chartRef = React.useRef(null);
       const chartInstance = React.useRef(null);
       const { t } = useI18n();
+      const topTicker = fund.holdings[0]?.ticker;
 
       React.useEffect(() => {
         if (chartInstance.current) chartInstance.current.destroy();
@@ -5013,14 +6100,14 @@
           <div className="fund-card-name">{fund.name}</div>
           <div className="fund-card-meta">
             <span>{t('common.holdingsCount', { count: fund.holdings.length })}</span>
-            <span>{t('common.top')}: {fund.holdings[0]?.ticker}</span>
+            <span className="top-meta">{t('common.top')}: {topTicker || t('common.notAvailable')}</span>
           </div>
           {perfLine}
         </div>
       );
     }
 
-    function ListView({ funds, allFunds, selected, onSelect, searchTerm, searchMode, watchedTickerSet, watchedFundSet, onToggleTickerWatch, onToggleFundWatch }) {
+    function ListView({ funds, allFunds, selected, onSelect, searchTerm, searchMode, watchedTickerSet, watchedFundSet, onToggleTickerWatch, onToggleFundWatch, onAnalyzeTicker }) {
       const { t } = useI18n();
       if (!funds || funds.length === 0) {
         return (
@@ -5050,6 +6137,7 @@
                   watchedFundSet={watchedFundSet}
                   onToggleTickerWatch={onToggleTickerWatch}
                   onToggleFundWatch={onToggleFundWatch}
+                  onAnalyzeTicker={onAnalyzeTicker}
                 />
               ) : <div className="empty-state"><div className="empty-icon">📊</div><h2>{t('common.selectFund')}</h2><p>{t('common.selectFundDesc')}</p></div>}
             </div>
@@ -5059,7 +6147,7 @@
       );
     }
 
-    function DetailView({ fund, allFunds, onBack, searchTerm, searchMode, watchedTickerSet, watchedFundSet, onToggleTickerWatch, onToggleFundWatch }) {
+    function DetailView({ fund, allFunds, onBack, searchTerm, searchMode, watchedTickerSet, watchedFundSet, onToggleTickerWatch, onToggleFundWatch, onAnalyzeTicker }) {
       const chartRef = React.useRef(null);
       const chartInstance = React.useRef(null);
       const matchRowRef = React.useRef(null);
@@ -5293,6 +6381,16 @@
                                 >
                                   ★
                                 </button>
+                                <button
+                                  className="company-analyze-btn compact"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    if (onAnalyzeTicker) onAnalyzeTicker(h.ticker);
+                                  }}
+                                  title={t('company.analyze')}
+                                >
+                                  {t('company.analyzeShort')}
+                                </button>
                               </td>
                               <td>{h.name}</td>
                               <td><span className="sector-badge" style={{ background: SECTOR_COLORS[sector] }}>{sectorLabel}</span></td>
@@ -5354,6 +6452,126 @@
               </div>
             </>
           )}
+        </div>
+      );
+    }
+
+    function CompanyAnalysisSheet({ open, query, status, loadingStage, data, error, onClose, onRetry }) {
+      const { t } = useI18n();
+      if (!open) return null;
+
+      const loadingSteps = [
+        t('company.loadingIdentify'),
+        t('company.loadingUnderstand'),
+        t('company.loadingPillars'),
+        t('company.loadingFormat')
+      ];
+
+      const normalizedError = normalizeCompanyError(error);
+      const errorContent = getCompanyErrorContent(normalizedError, t);
+      const shouldAppendDetail = normalizedError.message && !errorContent.body.includes(normalizedError.message);
+      const errorDetail = shouldAppendDetail ? `${errorContent.body}\n${normalizedError.message}` : errorContent.body;
+      const hasData = status === 'success' && data;
+      const title = hasData
+        ? `${data.companyName} (${data.ticker || query || t('company.unavailable')})`
+        : (query || t('company.analyze'));
+
+      const pillars = hasData && Array.isArray(data.pillars) && data.pillars.length > 0
+        ? data.pillars
+        : [{
+            icon: 'AI',
+            title: t('company.unavailable'),
+            description: t('company.unavailable'),
+            imageUrl: null
+          }];
+      const tags = hasData && Array.isArray(data.tags) && data.tags.length > 0 ? data.tags : [t('company.unavailable')];
+
+      return (
+        <div className="company-sheet-overlay" onClick={onClose}>
+          <div className="company-sheet" onClick={(e) => e.stopPropagation()}>
+            <div className="company-sheet-header">
+              <div>
+                <div className="company-sheet-kicker">{t('company.analyze')}</div>
+                <div className="company-sheet-title">{title}</div>
+              </div>
+              <button className="company-sheet-close" onClick={onClose} aria-label={t('company.close')}>×</button>
+            </div>
+            <div className="company-sheet-scroll">
+              {status === 'loading' && (
+                <div className="company-loading-box">
+                  <div className="company-loading-title">{t('company.loadingTitle')}</div>
+                  <div className="company-loading-steps">
+                    {loadingSteps.map((step, index) => {
+                      const stateClass = index < loadingStage ? 'done' : (index === loadingStage ? 'active' : '');
+                      return (
+                        <div key={step} className={`company-loading-step ${stateClass}`}>
+                          <span className="company-loading-dot"></span>
+                          <span>{step}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {status === 'error' && (
+                <div className="company-error-box">
+                  <div className="company-error-title">{errorContent.title}</div>
+                  <div className="company-error-body">{errorDetail}</div>
+                  <div className="company-error-actions">
+                    {errorContent.showRetry && (
+                      <button className="company-primary-btn" onClick={onRetry}>
+                        {t('company.retry')}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {hasData && (
+                <>
+                  <div className="company-category">{data.categoryTitle || t('company.unavailable')}</div>
+
+                  <div className="company-label">{t('company.summary3')}</div>
+                  <div className="company-summary3">{data.summary3 || t('company.unavailable')}</div>
+
+                  <div className="company-label">{t('company.summary')}</div>
+                  <div className="company-summary">{data.summary || t('company.unavailable')}</div>
+
+                  <div className="company-label">{t('company.tags')}</div>
+                  <div className="company-tags">
+                    {tags.map((tag, idx) => (
+                      <span key={`${tag}-${idx}`} className="company-tag">{tag}</span>
+                    ))}
+                  </div>
+
+                  <div className="company-label">{t('company.pillars')}</div>
+                  <div className="company-pillars">
+                    {pillars.map((pillar, idx) => (
+                      <div key={`${pillar.title || 'pillar'}-${idx}`} className="company-pillar-card">
+                        <div className="company-pillar-media">
+                          {pillar.imageUrl ? (
+                            <img src={pillar.imageUrl} alt={pillar.title || t('company.unavailable')} />
+                          ) : (
+                            <div className="company-pillar-placeholder">{getCompanyIconBadge(pillar.icon)}</div>
+                          )}
+                        </div>
+                        <div className="company-pillar-body">
+                          <div className="company-pillar-top">
+                            <span className="company-pillar-icon">{getCompanyIconBadge(pillar.icon)}</span>
+                            <div className="company-pillar-title line-clamp-2">{pillar.title || t('company.unavailable')}</div>
+                          </div>
+                          <div className="company-pillar-description line-clamp-3">{pillar.description || t('company.unavailable')}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              <div className="company-disclaimer">{t('company.disclaimer')}</div>
+            </div>
+          </div>
         </div>
       );
     }
@@ -5520,14 +6738,14 @@
         [compareTargets, compareDataMap, loadingCompareTickers]
       );
 
-      const handleRetry = () => {
+        const handleRetry = () => {
         if (topTicker) {
-          priceSeriesCache.delete(`stooq:${topTicker}`);
+          priceSeriesCache.delete(`price:${normalizeTicker(topTicker)}`);
           tickerMetricsCache.delete(topTicker);
         }
         compareTargets.forEach((item) => {
           if (!item.ticker) return;
-          priceSeriesCache.delete(`stooq:${item.ticker}`);
+          priceSeriesCache.delete(`price:${normalizeTicker(item.ticker)}`);
           tickerMetricsCache.delete(item.ticker);
         });
         setCompareDataMap(new Map());
