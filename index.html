@@ -3184,6 +3184,40 @@
       return normalized;
     }
 
+    function normalizeCompanyHint(value) {
+      return String(value || '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function normalizeSectorHint(value) {
+      return String(value || '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function normalizeAnalyzeRequest(input) {
+      const isObject = input && typeof input === 'object' && !Array.isArray(input);
+      const rawQuery = isObject
+        ? (input.query || input.ticker || input.companyName || '')
+        : input;
+      const query = normalizeCompanyQuery(rawQuery);
+
+      let tickerHint = '';
+      if (isObject) {
+        tickerHint = normalizeTicker(input.ticker || '');
+      } else if (isTickerLikeQuery(rawQuery)) {
+        tickerHint = normalizeTicker(rawQuery);
+      }
+
+      return {
+        query,
+        tickerHint,
+        companyHint: isObject ? normalizeCompanyHint(input.companyName || '') : '',
+        sectorHint: isObject ? normalizeSectorHint(input.sector || '') : ''
+      };
+    }
+
     function normalizeCompanyError(rawError) {
       if (!rawError) return { code: 'UPSTREAM', message: '' };
       if (typeof rawError === 'string') return { code: 'UPSTREAM', message: rawError };
@@ -5327,6 +5361,7 @@
       });
       const [companySheetOpen, setCompanySheetOpen] = React.useState(false);
       const [companySheetQuery, setCompanySheetQuery] = React.useState('');
+      const [companySheetContext, setCompanySheetContext] = React.useState(null);
       const [companySheetStatus, setCompanySheetStatus] = React.useState('idle');
       const [companySheetData, setCompanySheetData] = React.useState(null);
       const [companySheetError, setCompanySheetError] = React.useState(null);
@@ -5692,10 +5727,12 @@
         setCompanySheetStatus('idle');
       }, []);
 
-      const openCompanyAnalysis = React.useCallback(async (rawQuery) => {
-        const query = normalizeCompanyQuery(rawQuery);
+      const openCompanyAnalysis = React.useCallback(async (rawInput) => {
+        const request = normalizeAnalyzeRequest(rawInput);
+        const query = request.query;
         setCompanySheetOpen(true);
         setCompanySheetQuery(query);
+        setCompanySheetContext(request);
         setCompanySheetStatus('loading');
         setCompanySheetData(null);
         setCompanySheetError(null);
@@ -5720,7 +5757,13 @@
           const response = await fetch('/api/company/analyze', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ query, lang: language }),
+            body: JSON.stringify({
+              query,
+              lang: language,
+              tickerHint: request.tickerHint || undefined,
+              companyHint: request.companyHint || undefined,
+              sectorHint: request.sectorHint || undefined
+            }),
             signal: controller?.signal
           });
           const payload = await response.json().catch(() => null);
@@ -5753,9 +5796,12 @@
       }, [language]);
 
       const retryCompanyAnalysis = React.useCallback(() => {
-        if (!companySheetQuery) return;
-        openCompanyAnalysis(companySheetQuery);
-      }, [companySheetQuery, openCompanyAnalysis]);
+        const retryInput = companySheetContext && (companySheetContext.query || companySheetContext.tickerHint)
+          ? companySheetContext
+          : companySheetQuery;
+        if (!retryInput) return;
+        openCompanyAnalysis(retryInput);
+      }, [companySheetContext, companySheetQuery, openCompanyAnalysis]);
 
       const filtered = React.useMemo(() => {
         const query = normalizeSearchText(search);
@@ -6385,7 +6431,14 @@
                                   className="company-analyze-btn compact"
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    if (onAnalyzeTicker) onAnalyzeTicker(h.ticker);
+                                    if (onAnalyzeTicker) {
+                                      onAnalyzeTicker({
+                                        query: h.ticker,
+                                        ticker: h.ticker,
+                                        companyName: h.name,
+                                        sector: h.sector
+                                      });
+                                    }
                                   }}
                                   title={t('company.analyze')}
                                 >

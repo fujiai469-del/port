@@ -18,7 +18,10 @@ const cacheStore = new Map();
 
 const AnalyzeInputSchema = z.object({
   query: z.string().trim().min(1).max(120),
-  lang: z.enum(['ja', 'en']).default('en')
+  lang: z.enum(['ja', 'en']).default('en'),
+  tickerHint: z.string().trim().min(1).max(20).optional(),
+  companyHint: z.string().trim().min(1).max(220).optional(),
+  sectorHint: z.string().trim().min(1).max(80).optional()
 });
 
 const ModelPillarSchema = z.object({
@@ -104,12 +107,22 @@ function normalizeTicker(value) {
   return String(value || '').trim().toUpperCase();
 }
 
+function normalizeHintText(value) {
+  return String(value || '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function normalizeQuery(value) {
   return String(value || '')
     .normalize('NFKC')
     .trim()
     .replace(/\s+/g, ' ')
     .toLowerCase();
+}
+
+function compactTicker(value) {
+  return normalizeTicker(value).replace(/[^A-Z0-9]/g, '');
 }
 
 function parseBody(req) {
@@ -193,11 +206,25 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = REQUEST_TIMEOUT_M
   }
 }
 
-function buildPrompt(query, lang) {
+function buildPrompt(query, lang, hints = {}) {
+  const tickerHint = normalizeTicker(hints.tickerHint || '');
+  const companyHint = normalizeHintText(hints.companyHint || '');
+  const sectorHint = normalizeHintText(hints.sectorHint || '');
   const inJapanese = lang === 'ja';
   const languageInstruction = inJapanese
     ? '出力は日本語で、自然な投資家向け説明にしてください。'
     : 'Write the output in natural English for investors.';
+
+  const disambiguationLines = [];
+  if (tickerHint) disambiguationLines.push(`- Ticker hint: ${tickerHint}`);
+  if (companyHint) disambiguationLines.push(`- Company label hint from holdings table: ${companyHint}`);
+  if (sectorHint) disambiguationLines.push(`- Sector hint: ${sectorHint}`);
+  if (tickerHint || companyHint || sectorHint) {
+    disambiguationLines.push('- Resolve ambiguity by prioritizing these hints over same-symbol companies on other exchanges.');
+    if (tickerHint) {
+      disambiguationLines.push(`- If ticker is present, returned ticker must match "${tickerHint}" (same symbol, punctuation allowed).`);
+    }
+  }
 
   return `You are a senior equity analyst.
 Analyze the company identified by: ${query}
@@ -208,6 +235,7 @@ ${languageInstruction}
 - No markdown, no commentary, JSON only.
 - Keep "summary3" to exactly 3 short lines separated by "\\n".
 - Return 3 to 5 pillars.
+${disambiguationLines.join('\n')}
 
 Return JSON with this exact schema:
 {
@@ -274,6 +302,53 @@ function extractJsonObject(text) {
   return null;
 }
 
+const COMPANY_STOPWORDS = new Set([
+  'INC',
+  'INCORPORATED',
+  'CORP',
+  'CORPORATION',
+  'CO',
+  'COMPANY',
+  'LTD',
+  'LIMITED',
+  'PLC',
+  'HOLDINGS',
+  'HLDGS',
+  'HOLDING',
+  'GROUP',
+  'CLASS',
+  'THE',
+  'SA',
+  'NV',
+  'N',
+  'NEW',
+  'ADR',
+  'ADS',
+  'COMMON',
+  'STOCK'
+]);
+
+function companyTokens(value) {
+  return normalizeHintText(value)
+    .toUpperCase()
+    .replace(/&/g, ' ')
+    .replace(/[^A-Z0-9 ]+/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean)
+    .filter((token) => token.length >= 2 && !COMPANY_STOPWORDS.has(token));
+}
+
+function companySimilarity(left, right) {
+  const a = new Set(companyTokens(left));
+  const b = new Set(companyTokens(right));
+  if (a.size === 0 || b.size === 0) return 0;
+  let intersection = 0;
+  a.forEach((token) => {
+    if (b.has(token)) intersection += 1;
+  });
+  return intersection / (a.size + b.size - intersection);
+}
+
 function normalizeSummary3(summary3, summary, lang) {
   const lines = String(summary3 || '')
     .split(/\r?\n/)
@@ -294,7 +369,7 @@ function toAnalyzeError(error, lang) {
   return new AnalyzeError('UPSTREAM', message(lang, 'upstream'), 502, true);
 }
 
-function parseGeminiResult(rawText, query, lang) {
+function parseGeminiResult(rawText, query, lang, hints = {}) {
   const cleaned = stripCodeFence(String(rawText || '').trim());
   const jsonText = extractJsonObject(cleaned) || cleaned;
 
@@ -315,9 +390,12 @@ function parseGeminiResult(rawText, query, lang) {
   }
 
   const value = validated.data;
-  const tickerGuess = /^[A-Za-z][A-Za-z0-9.\-]{0,9}$/.test(String(query || '').trim())
-    ? normalizeTicker(query)
-    : '';
+  const explicitTickerHint = normalizeTicker(hints.tickerHint || '');
+  const tickerGuess = explicitTickerHint || (
+    /^[A-Za-z][A-Za-z0-9.\-]{0,9}$/.test(String(query || '').trim())
+      ? normalizeTicker(query)
+      : ''
+  );
 
   return {
     companyName: value.companyName.trim(),
@@ -336,6 +414,27 @@ function parseGeminiResult(rawText, query, lang) {
   };
 }
 
+function validateDisambiguation(result, query, lang, hints = {}) {
+  const tickerHint = normalizeTicker(hints.tickerHint || '');
+  const companyHint = normalizeHintText(hints.companyHint || '');
+  if (!tickerHint && !companyHint) return;
+
+  if (tickerHint) {
+    const expected = compactTicker(tickerHint);
+    const actual = compactTicker(result?.ticker || '');
+    if (expected && actual && expected !== actual) {
+      throw new AnalyzeError('NOT_FOUND', `${message(lang, 'notFound')}: ${query}`, 404, false);
+    }
+  }
+
+  if (tickerHint && companyHint) {
+    const score = companySimilarity(companyHint, result?.companyName || '');
+    if (score < 0.2) {
+      throw new AnalyzeError('NOT_FOUND', `${message(lang, 'notFound')}: ${query}`, 404, false);
+    }
+  }
+}
+
 function extractGeminiText(payload) {
   const parts = payload?.candidates?.[0]?.content?.parts;
   if (Array.isArray(parts)) {
@@ -348,9 +447,9 @@ function extractGeminiText(payload) {
   return '';
 }
 
-async function callGemini(apiKey, query, lang) {
+async function callGemini(apiKey, query, lang, hints = {}) {
   const url = `${GEMINI_BASE_URL}/${encodeURIComponent(GEMINI_MODEL)}:generateContent?key=${encodeURIComponent(apiKey)}`;
-  const prompt = buildPrompt(query, lang);
+  const prompt = buildPrompt(query, lang, hints);
 
   const response = await fetchWithTimeout(
     url,
@@ -390,7 +489,9 @@ async function callGemini(apiKey, query, lang) {
     throw new AnalyzeError('UPSTREAM', message(lang, 'upstream'), 502, true);
   }
 
-  return parseGeminiResult(text, query, lang);
+  const result = parseGeminiResult(text, query, lang, hints);
+  validateDisambiguation(result, query, lang, hints);
+  return result;
 }
 
 function buildImageQueries(result, pillar) {
@@ -506,6 +607,11 @@ export default async function handler(req, res) {
   }
 
   const { query, lang } = parsedInput.data;
+  const hints = {
+    tickerHint: normalizeTicker(parsedInput.data.tickerHint || ''),
+    companyHint: normalizeHintText(parsedInput.data.companyHint || ''),
+    sectorHint: normalizeHintText(parsedInput.data.sectorHint || '')
+  };
   const normalized = normalizeQuery(query);
   if (!normalized || !/[\p{L}\p{N}]/u.test(normalized)) {
     return failure(res, 400, 'BAD_REQUEST', message(lang, 'badRequest'));
@@ -522,14 +628,14 @@ export default async function handler(req, res) {
     return failure(res, 429, 'RATE_LIMIT', message(lang, 'rateLimit'));
   }
 
-  const cacheKey = `${lang}:${normalized}`;
+  const cacheKey = `${lang}:${normalized}:${normalizeQuery(hints.tickerHint)}:${normalizeQuery(hints.companyHint)}:${normalizeQuery(hints.sectorHint)}`;
   const cached = getCache(cacheKey);
   if (cached) return success(res, cached);
 
   try {
     const analyzed = await runWithRetries(
       async () => {
-        const base = await callGemini(geminiApiKey, query.trim(), lang);
+        const base = await callGemini(geminiApiKey, query.trim(), lang, hints);
         return enrichImages(base);
       },
       RETRY_COUNT,
