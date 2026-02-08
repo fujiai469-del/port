@@ -2029,6 +2029,26 @@
       word-break: break-word;
     }
 
+    .company-sheet-quota {
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(38, 70, 83, 0.18);
+      background: rgba(38, 70, 83, 0.06);
+      color: var(--primary-teal);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .company-sheet-quota.warn {
+      border-color: rgba(231, 111, 81, 0.45);
+      background: rgba(231, 111, 81, 0.12);
+      color: #8C2F1C;
+    }
+
     .company-sheet-close {
       border: none;
       background: rgba(38, 70, 83, 0.1);
@@ -2831,7 +2851,9 @@
           errorInvalidTitle: 'Failed to parse analysis',
           errorInvalidBody: 'The model response was invalid. Please retry.',
           errorUpstreamTitle: 'Upstream service error',
-          errorUpstreamBody: 'Failed to fetch analysis from AI service.'
+          errorUpstreamBody: 'Failed to fetch analysis from AI service.',
+          quotaRemaining: 'Daily AI analyses remaining: {{remaining}} / {{limit}}',
+          quotaUnlimited: 'Daily AI analyses: unlimited'
         }
       },
       ja: {
@@ -3082,7 +3104,9 @@
           errorInvalidTitle: '解析結果の整形に失敗',
           errorInvalidBody: 'AI応答の形式が不正でした。再試行してください。',
           errorUpstreamTitle: '外部サービスエラー',
-          errorUpstreamBody: 'AIサービスから分析結果を取得できませんでした。'
+          errorUpstreamBody: 'AIサービスから分析結果を取得できませんでした。',
+          quotaRemaining: '本日のAI分析残り: {{remaining}} / {{limit}}',
+          quotaUnlimited: '本日のAI分析上限: 無制限'
         }
       }
     };
@@ -3225,6 +3249,27 @@
         code: String(rawError.code || 'UPSTREAM').toUpperCase(),
         message: String(rawError.message || '')
       };
+    }
+
+    function normalizeCompanyQuota(rawQuota) {
+      if (!rawQuota || typeof rawQuota !== 'object') return null;
+      const unlimited = rawQuota.unlimited === true || rawQuota.limit === null;
+      const usedValue = Number(rawQuota.used);
+      const used = Number.isFinite(usedValue) ? Math.max(0, Math.floor(usedValue)) : 0;
+      const date = String(rawQuota.date || '').trim();
+
+      if (unlimited) {
+        return { date, used, limit: null, remaining: null, unlimited: true };
+      }
+
+      const limitValue = Number(rawQuota.limit);
+      if (!Number.isFinite(limitValue) || limitValue <= 0) return null;
+      const limit = Math.floor(limitValue);
+      const remainingValue = Number(rawQuota.remaining);
+      const remaining = Number.isFinite(remainingValue)
+        ? Math.max(0, Math.floor(remainingValue))
+        : Math.max(limit - used, 0);
+      return { date, used, limit, remaining, unlimited: false };
     }
 
     function getCompanyErrorContent(error, t) {
@@ -5365,6 +5410,7 @@
       const [companySheetStatus, setCompanySheetStatus] = React.useState('idle');
       const [companySheetData, setCompanySheetData] = React.useState(null);
       const [companySheetError, setCompanySheetError] = React.useState(null);
+      const [companyQuota, setCompanyQuota] = React.useState(null);
       const [companyLoadingStage, setCompanyLoadingStage] = React.useState(0);
       const refreshPollRef = React.useRef(null);
       const companyRequestSeqRef = React.useRef(0);
@@ -5727,9 +5773,21 @@
         setCompanySheetStatus('idle');
       }, []);
 
+      const fetchCompanyQuota = React.useCallback(async () => {
+        try {
+          const response = await fetch(`/api/company/analyze?mode=quota&ts=${Date.now()}`, { cache: 'no-store' });
+          const payload = await response.json().catch(() => null);
+          const quota = normalizeCompanyQuota(payload?.quota);
+          if (quota) setCompanyQuota(quota);
+        } catch (_error) {
+          // ignore
+        }
+      }, []);
+
       const openCompanyAnalysis = React.useCallback(async (rawInput) => {
         const request = normalizeAnalyzeRequest(rawInput);
         const query = request.query;
+        fetchCompanyQuota();
         setCompanySheetOpen(true);
         setCompanySheetQuery(query);
         setCompanySheetContext(request);
@@ -5767,6 +5825,8 @@
             signal: controller?.signal
           });
           const payload = await response.json().catch(() => null);
+          const quota = normalizeCompanyQuota(payload?.quota);
+          if (quota) setCompanyQuota(quota);
           if (requestSeq !== companyRequestSeqRef.current) return;
 
           if (!response.ok || !payload?.success) {
@@ -5793,7 +5853,7 @@
             companyAbortRef.current = null;
           }
         }
-      }, [language]);
+      }, [fetchCompanyQuota, language]);
 
       const retryCompanyAnalysis = React.useCallback(() => {
         const retryInput = companySheetContext && (companySheetContext.query || companySheetContext.tickerHint)
@@ -5997,6 +6057,7 @@
               loadingStage={companyLoadingStage}
               data={companySheetData}
               error={companySheetError}
+              quota={companyQuota}
               onClose={closeCompanySheet}
               onRetry={retryCompanyAnalysis}
             />
@@ -6509,7 +6570,7 @@
       );
     }
 
-    function CompanyAnalysisSheet({ open, query, status, loadingStage, data, error, onClose, onRetry }) {
+    function CompanyAnalysisSheet({ open, query, status, loadingStage, data, error, quota, onClose, onRetry }) {
       const { t } = useI18n();
       if (!open) return null;
 
@@ -6528,6 +6589,12 @@
       const title = hasData
         ? `${data.companyName} (${data.ticker || query || t('company.unavailable')})`
         : (query || t('company.analyze'));
+      const quotaText = quota
+        ? (quota.unlimited
+          ? t('company.quotaUnlimited')
+          : t('company.quotaRemaining', { remaining: quota.remaining, limit: quota.limit }))
+        : '';
+      const quotaLow = quota && !quota.unlimited && Number.isFinite(quota.remaining) && quota.remaining <= 10;
 
       const pillars = hasData && Array.isArray(data.pillars) && data.pillars.length > 0
         ? data.pillars
@@ -6546,6 +6613,7 @@
               <div>
                 <div className="company-sheet-kicker">{t('company.analyze')}</div>
                 <div className="company-sheet-title">{title}</div>
+                {quotaText && <div className={`company-sheet-quota ${quotaLow ? 'warn' : ''}`}>{quotaText}</div>}
               </div>
               <button className="company-sheet-close" onClick={onClose} aria-label={t('company.close')}>×</button>
             </div>
