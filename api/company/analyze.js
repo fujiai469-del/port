@@ -125,6 +125,54 @@ function compactTicker(value) {
   return normalizeTicker(value).replace(/[^A-Z0-9]/g, '');
 }
 
+function tickerCandidates(value) {
+  const raw = normalizeTicker(value);
+  if (!raw) return [];
+
+  const set = new Set();
+  const push = (token) => {
+    const normalized = normalizeTicker(token);
+    if (!normalized) return;
+    set.add(normalized);
+    const compact = compactTicker(normalized);
+    if (compact) set.add(compact);
+  };
+
+  push(raw);
+
+  const colonPart = raw.split(':').pop();
+  if (colonPart) push(colonPart);
+
+  const slashPart = raw.split('/').pop();
+  if (slashPart) push(slashPart);
+
+  if (raw.includes('.')) {
+    const beforeDot = raw.split('.')[0];
+    if (beforeDot) push(beforeDot);
+  }
+
+  raw
+    .replace(/[^A-Z0-9.]/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean)
+    .forEach((token) => {
+      push(token);
+      if (token.includes('.')) {
+        const beforeDot = token.split('.')[0];
+        if (beforeDot) push(beforeDot);
+      }
+    });
+
+  return Array.from(set);
+}
+
+function tickerMatchesHint(actualTicker, tickerHint) {
+  const expected = compactTicker(tickerHint);
+  if (!expected) return true;
+  const variants = tickerCandidates(actualTicker);
+  return variants.some((variant) => compactTicker(variant) === expected);
+}
+
 function parseBody(req) {
   if (req.body && typeof req.body === 'object') return req.body;
   if (typeof req.body === 'string' && req.body.trim()) {
@@ -420,9 +468,7 @@ function validateDisambiguation(result, query, lang, hints = {}) {
   if (!tickerHint && !companyHint) return;
 
   if (tickerHint) {
-    const expected = compactTicker(tickerHint);
-    const actual = compactTicker(result?.ticker || '');
-    if (expected && actual && expected !== actual) {
+    if (!tickerMatchesHint(result?.ticker || '', tickerHint)) {
       throw new AnalyzeError('NOT_FOUND', `${message(lang, 'notFound')}: ${query}`, 404, false);
     }
   }
