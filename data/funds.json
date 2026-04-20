@@ -958,20 +958,20 @@
   {
     "name": "Snow Phipps Group",
     "cik": "0001698661",
-    "reportDate": "2025-12-31",
-    "filingDate": "2026-01-27",
+    "reportDate": "2026-03-31",
+    "filingDate": "2026-04-14",
     "holdings": [
       {
         "ticker": "VEL",
         "name": "Velocity Financial Inc",
         "sector": "Financial",
-        "percent": 79
+        "percent": 76.1
       },
       {
         "ticker": "LAUR",
         "name": "Laureate Education Inc",
         "sector": "Consumer",
-        "percent": 21
+        "percent": 23.9
       }
     ]
   },
