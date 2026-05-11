@@ -759,20 +759,20 @@
   {
     "name": "Washington State Investment Board",
     "cik": "0000943712",
-    "reportDate": "2025-12-31",
-    "filingDate": "2026-02-09",
+    "reportDate": "2026-03-31",
+    "filingDate": "2026-05-05",
     "holdings": [
       {
         "ticker": "FTAI",
         "name": "FTAI AVIATION LTD",
         "sector": "Industrial",
-        "percent": 82.5
+        "percent": 76.8
       },
       {
         "ticker": "FIP",
         "name": "FTAI INFRASTRUCTURE INC",
         "sector": "Industrial",
-        "percent": 17.5
+        "percent": 23.2
       }
     ]
   },
