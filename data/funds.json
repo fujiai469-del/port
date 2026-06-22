@@ -1532,6 +1532,7 @@
       {
         "ticker": "MRVL",
         "name": "MARVELL TECHNOLOGY INC",
+        "sector": "Technology",
         "percent": 0.9
       },
       {
@@ -4286,6 +4287,7 @@
       {
         "ticker": "MRVL",
         "name": "MARVELL TECHNOLOGY INC",
+        "sector": "Technology",
         "percent": 0.5
       },
       {
@@ -6375,6 +6377,7 @@
       {
         "ticker": "MRVL",
         "name": "MARVELL TECHNOLOGY INC",
+        "sector": "Technology",
         "percent": 0.2
       }
     ]
