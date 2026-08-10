@@ -735,20 +735,20 @@
   {
     "name": "Washington State Investment Board",
     "cik": "0000943712",
-    "reportDate": "2026-03-31",
-    "filingDate": "2026-05-05",
+    "reportDate": "2026-06-30",
+    "filingDate": "2026-08-03",
     "holdings": [
       {
         "ticker": "FTAI",
         "name": "FTAI AVIATION LTD",
         "sector": "Industrial",
-        "percent": 76.8
+        "percent": 79.6
       },
       {
         "ticker": "FIP",
         "name": "FTAI INFRASTRUCTURE INC",
         "sector": "Industrial",
-        "percent": 23.2
+        "percent": 20.4
       }
     ]
   },
@@ -1961,7 +1961,7 @@
       {
         "ticker": "APP",
         "name": "APPLOVIN CORP",
-        "sector": "Technology",
+        "sector": "Communication",
         "percent": 0.3
       },
       {
@@ -2637,7 +2637,6 @@
       {
         "ticker": "EA",
         "name": "ELECTRONIC ARTS INC",
-        "sector": "Communication",
         "percent": 2.7
       },
       {
@@ -3633,7 +3632,6 @@
       {
         "ticker": "EA",
         "name": "ELECTRONIC ARTS INC",
-        "sector": "Communication",
         "percent": 0.4
       },
       {
@@ -4242,7 +4240,6 @@
       {
         "ticker": "EA",
         "name": "ELECTRONIC ARTS INC",
-        "sector": "Communication",
         "percent": 0.7
       },
       {
@@ -4929,8 +4926,9 @@
         "percent": 6.6
       },
       {
-        "ticker": "31488V107",
+        "ticker": "FERG",
         "name": "FERGUSON ENTERPRISES INC",
+        "sector": "Industrial",
         "percent": 6.6
       },
       {
@@ -5107,7 +5105,7 @@
       {
         "ticker": "APP",
         "name": "APPLOVIN CORP",
-        "sector": "Technology",
+        "sector": "Communication",
         "percent": 1.7
       },
       {
@@ -5444,7 +5442,7 @@
       {
         "ticker": "APP",
         "name": "APPLOVIN CORP",
-        "sector": "Technology",
+        "sector": "Communication",
         "percent": 1.2
       },
       {
@@ -5552,7 +5550,7 @@
       {
         "ticker": "APP",
         "name": "APPLOVIN CORP",
-        "sector": "Technology",
+        "sector": "Communication",
         "percent": 0.6
       },
       {
@@ -5921,7 +5919,7 @@
       {
         "ticker": "APP",
         "name": "APPLOVIN CORP",
-        "sector": "Technology",
+        "sector": "Communication",
         "percent": 4.6
       },
       {
