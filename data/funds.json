@@ -1991,8 +1991,9 @@
         "percent": 0.3
       },
       {
-        "ticker": "93712107",
+        "ticker": "BE",
         "name": "BLOOM ENERGY CORP",
+        "sector": "Industrial",
         "percent": 0.3
       },
       {
@@ -4080,8 +4081,9 @@
         "percent": 0.6
       },
       {
-        "ticker": "93712107",
+        "ticker": "BE",
         "name": "BLOOM ENERGY CORP",
+        "sector": "Industrial",
         "percent": 0.5
       },
       {
@@ -4311,8 +4313,9 @@
         "percent": 0.6
       },
       {
-        "ticker": "93712107",
+        "ticker": "BE",
         "name": "BLOOM ENERGY CORP",
+        "sector": "Industrial",
         "percent": 0.5
       },
       {
