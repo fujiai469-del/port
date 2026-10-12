@@ -924,20 +924,20 @@
   {
     "name": "Snow Phipps Group",
     "cik": "0001698661",
-    "reportDate": "2026-06-30",
-    "filingDate": "2026-07-09",
+    "reportDate": "2026-09-30",
+    "filingDate": "2026-10-07",
     "holdings": [
       {
         "ticker": "VEL",
         "name": "Velocity Financial Inc",
         "sector": "Financial",
-        "percent": 75.6
+        "percent": 75.9
       },
       {
         "ticker": "LAUR",
         "name": "Laureate Education Inc",
         "sector": "Consumer",
-        "percent": 24.4
+        "percent": 24.1
       }
     ]
   },
@@ -2448,7 +2448,6 @@
       {
         "ticker": "WBD",
         "name": "WARNER BROS DISCOVERY INC",
-        "sector": "Communication",
         "percent": 11.5
       },
       {
@@ -3615,7 +3614,6 @@
       {
         "ticker": "WBD",
         "name": "WARNER BROS DISCOVERY INC",
-        "sector": "Communication",
         "percent": 0.7
       },
       {
@@ -4281,7 +4279,6 @@
       {
         "ticker": "WBD",
         "name": "WARNER BROS DISCOVERY INC",
-        "sector": "Communication",
         "percent": 1
       },
       {
