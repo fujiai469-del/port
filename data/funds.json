@@ -750,42 +750,35 @@
   },
   {
     "name": "Engine No. 1 Llc",
-    "cik": "0001835549",
-    "reportDate": "2025-09-30",
-    "filingDate": "2025-11-14",
     "holdings": [
       {
         "ticker": "POWL",
-        "name": "POWELL INDS INC",
-        "sector": "Industrial",
+        "name": "Powell Industries",
         "percent": 40.9
       },
       {
         "ticker": "VRT",
-        "name": "VERTIV HOLDINGS CO",
-        "sector": "Industrial",
+        "name": "Vertiv Holdings",
         "percent": 27.2
       },
       {
         "ticker": "FSLR",
-        "name": "FIRST SOLAR INC",
-        "sector": "Technology",
+        "name": "First Solar",
         "percent": 11.9
       },
       {
-        "ticker": "42704L104",
-        "name": "HERC HLDGS INC",
-        "percent": 9.7
+        "ticker": "HRI",
+        "name": "Herc Holdings",
+        "percent": 8.7
       },
       {
         "ticker": "GLD",
-        "name": "SPDR GOLD TR",
+        "name": "SPDR Gold Shares",
         "percent": 5.3
       },
       {
         "ticker": "HUBB",
-        "name": "HUBBELL INC",
-        "sector": "Industrial",
+        "name": "Hubbell Inc.",
         "percent": 4.9
       }
     ]
@@ -2912,9 +2905,8 @@
         "percent": 0.8
       },
       {
-        "ticker": "KVUE",
+        "ticker": "49177J102",
         "name": "KENVUE INC",
-        "sector": "Consumer",
         "percent": 0.7
       },
       {
@@ -4327,9 +4319,8 @@
         "percent": 0.5
       },
       {
-        "ticker": "KVUE",
+        "ticker": "49177J102",
         "name": "KENVUE INC",
-        "sector": "Consumer",
         "percent": 0.5
       },
       {
